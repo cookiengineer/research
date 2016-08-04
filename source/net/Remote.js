@@ -1,7 +1,8 @@
 
 lychee.define('app.net.Remote').requires([
 	'app.plugin.Imgur',
-//	'app.plugin.Reddit',
+	'app.plugin.Reddit',
+	'app.plugin.Generic',
 	'lychee.codec.JSON'
 ]).includes([
 	'lychee.net.Tunnel'
@@ -11,7 +12,8 @@ lychee.define('app.net.Remote').requires([
 	const _JSON    = lychee.import('lychee.codec.JSON');
 	const _PLUGINS = [
 		lychee.import('app.plugin.Imgur'),
-		lychee.import('app.plugin.Reddit')
+		lychee.import('app.plugin.Reddit'),
+		lychee.import('app.plugin.Generic')
 	].filter(plugin => plugin !== null);
 
 
@@ -30,6 +32,8 @@ lychee.define('app.net.Remote').requires([
 				let result = plugin.process(remote, headers);
 				if (result === true) {
 					break;
+				} else {
+					console.warn(plugin.displayName + ': Not supported ("' + headers.url + '")');
 				}
 
 			}

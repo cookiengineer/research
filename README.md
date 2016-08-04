@@ -131,7 +131,7 @@ spider/scraper applications.
 ```bash
 cd /opt/lycheejs/projects/machine-proxy;
 
-node ./index.js;
+./bin/machine-proxy.js;
 ```
 
 

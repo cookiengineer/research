@@ -1,7 +1,7 @@
 #!/usr/local/bin/lycheejs-helper env:node
 
 
-const _ROOT = __dirname;
+const _ROOT = __dirname.split('/').slice(0, -1).join('/');
 
 // lychee = require('lycheejs')(_ROOT);
 // lychee.inject(lychee.ENVIRONMENTS['/libraries/lychee/dist']);

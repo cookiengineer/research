@@ -35,6 +35,9 @@
 				"js"
 			],
 			"plugin": {
+				"Generic": [
+					"js"
+				],
 				"Imgur": [
 					"js"
 				],

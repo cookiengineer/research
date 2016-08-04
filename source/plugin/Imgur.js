@@ -8,6 +8,7 @@ lychee.define('app.plugin.Imgur').tags({
 		try {
 
 			require('fetch');
+			require('fast-html-parser');
 
 			return true;
 
@@ -23,12 +24,56 @@ lychee.define('app.plugin.Imgur').tags({
 }).exports(function(lychee, global, attachments) {
 
 	const _fetch = require('fetch');
+	const _html  = require('fast-html-parser');
 
 
 
 	/*
 	 * HELPERS
 	 */
+
+	const _process_view = function(remote, headers) {
+
+		let url = headers.url;
+
+		_fetch.fetchUrl(url, (err, head, body) => {
+
+			let html   = body.toString();
+			let root   = _html.parse(html);
+			let images = root.querySelectorAll('.post-image img').map(element => {
+
+				let str = element.rawAttrs;
+				let src = null;
+				let alt = null;
+
+				let i1  = str.indexOf('src="');
+				let i2  = str.indexOf('"', i1 + 5);
+				let i3  = str.indexOf('alt="');
+				let i4  = str.indexOf('"', i3 + 5);
+
+				if (i2 > i1) {
+					src = str.substr(i1 + 5, i2 - i1 - 5);
+				}
+
+				if (i4 > i3) {
+					alt = str.substr(i3 + 5, i4 - i3 - 5);
+				}
+
+				return {
+					url:       src.substr(0, 2) === '//' ? 'http:' + src : src,
+					title:     alt,
+					content:   null,
+					timestamp: null
+				};
+
+			}).filter(element => element.url !== null);
+
+
+			remote.sendJSON({ images: images });
+
+		});
+
+	};
 
 	const _process_album = function(remote, headers) {
 
@@ -48,13 +93,13 @@ lychee.define('app.plugin.Imgur').tags({
 				let images = json.data.images.map(entry => {
 
 					return {
-						url:         'http://i.imgur.com/' + entry.hash + entry.ext,
-						title:       entry.title,
-						description: entry.description,
-						timestamp:   entry.datetime
+						url:       'http://i.imgur.com/' + entry.hash + entry.ext,
+						title:     entry.title,
+						content:   entry.description,
+						timestamp: entry.datetime
 					};
 
-				});
+				}).filter(element => element.url !== null);
 
 
 				if (!err) {
@@ -124,6 +169,12 @@ lychee.define('app.plugin.Imgur').tags({
 			} else if (/imgur\.com\/a\//g.test(headers.url)) {
 
 				_process_album(remote, headers);
+
+				return true;
+
+			} else if (/imgur\.com\//g.test(headers.url)) {
+
+				_process_view(remote, headers);
 
 				return true;
 
