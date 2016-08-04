@@ -50,7 +50,8 @@ lychee.define('app.plugin.Imgur').tags({
 					return {
 						url:         'http://i.imgur.com/' + entry.hash + entry.ext,
 						title:       entry.title,
-						description: entry.description
+						description: entry.description,
+						timestamp:   entry.datetime
 					};
 
 				});
@@ -114,13 +115,19 @@ lychee.define('app.plugin.Imgur').tags({
 
 		process: function(remote, headers) {
 
-			if (/imgur\.com\/gallery/g.test(headers.url)) {
+			if (/imgur\.com\/gallery\//g.test(headers.url)) {
 
 				_process_album(remote, headers);
 
 				return true;
 
-			} else if (/i\.imgur\.com/g.test(headers.url)) {
+			} else if (/imgur\.com\/a\//g.test(headers.url)) {
+
+				_process_album(remote, headers);
+
+				return true;
+
+			} else if (/i\.imgur\.com\//g.test(headers.url)) {
 
 				_process_image(remote, headers);
 
