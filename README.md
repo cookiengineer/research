@@ -76,33 +76,33 @@ to an unnecessary Imprint page, no Advert modals etc. pp.
 
 ```json
 {
-	images: [{
-		author:    '@username',
-		url:       'http://i.imgur.com/whatever.jpg',
-		title:     'This is the title',
-		content:   'This is the description',
-		timestamp: '2016-07-04 13:33:37'
+	"images": [{
+		"author":    "@username",
+		"url":       "http://i.imgur.com/whatever.jpg",
+		"title":     "This is the title",
+		"content":   "This is the description",
+		"timestamp": "2016-07-04 13:33:37"
 	}],
-	articles: [{
-		author:    '@username',
-		url:       'http://my.blog/whatever.php',
-		title:     'This is the title',
-		content:   'This is the content',
-		timestamp: '2016-07-04 13:33:37'
+	"articles": [{
+		"author":    "@username",
+		"url":       "http://my.blog/whatever.php",
+		"title":     "This is the title",
+		"content":   "This is the content",
+		"timestamp": "2016-07-04 13:33:37"
 	}],
-	comments: [{
-		author:    '@username',
-		url:       'http://reddit.com/r/something/comments/post/whatever',
-		title:     'Title of the post',
-		content:   'This is the content',
-		timestamp: '2016-07-04 13:33:37'
+	"comments": [{
+		"author":    "@username",
+		"url":       "http://reddit.com/r/something/comments/post/whatever",
+		"title":     "Title of the post",
+		"content":   "This is the content",
+		"timestamp": "2016-07-04 13:33:37"
 	}],
-	links: [{
-		author:    '@username',
-		url:       'http://my.blog/is/awesome.php',
-		title:     'This is the title',
-		content:   'This is the description',
-		timestamp: '2016-07-04 13:33:37'
+	"links": [{
+		"author":    "@username",
+		"url":       "http://my.blog/is/awesome.php",
+		"title":     "This is the title",
+		"content":   "This is the description",
+		"timestamp": "2016-07-04 13:33:37"
 	}]
 }
 ```
