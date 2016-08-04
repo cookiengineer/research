@@ -1,7 +1,8 @@
 
 lychee.define('app.Main').requires([
 	'app.net.Remote',
-	'lychee.net.Server'
+	'lychee.net.Server',
+	'lychee.Input'
 ]).includes([
 	'lychee.event.Emitter'
 ]).exports(function(lychee, global, attachments) {

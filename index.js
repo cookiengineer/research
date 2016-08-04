@@ -1,4 +1,5 @@
-#!/usr/bin/env node
+#!/usr/local/bin/lycheejs-helper env:node
+
 
 const _ROOT = __dirname;
 
@@ -44,14 +45,42 @@ setTimeout(function() {
 
 	lychee.debug = true;
 
+	console.info('machine-proxy: BOOTUP SUCCESS (' + process.pid + ')');
 
-	let main = _ENV.global.MAIN;
-	if (main !== undefined) {
-		main.bind('destroy', (code) => process.exit(code));
+
+	let main = _ENV.global.MAIN || null;
+	if (main !== null) {
+
+		main.bind('destroy', (code) => {
+			console.warn('machine-proxy: SHUTDOWN');
+			process.exit(code);
+		});
+
+		process.on('SIGHUP',  () => { main.destroy(); this.exit(1); });
+		process.on('SIGINT',  () => { main.destroy(); this.exit(1); });
+		process.on('SIGQUIT', () => { main.destroy(); this.exit(1); });
+		process.on('SIGABRT', () => { main.destroy(); this.exit(1); });
+		process.on('SIGTERM', () => { main.destroy(); this.exit(1); });
+		process.on('error',   () => { main.destroy(); this.exit(1); });
+		process.on('exit',    () => {});
+
+
+		new lychee.Input({
+			key:         true,
+			keymodifier: true
+		}).bind('escape', function() {
+
+			console.warn('machine-proxy: [ESC] pressed, exiting ...');
+			main.destroy();
+
+		}, this);
+
+	} else {
+
+		console.error('BOOTUP FAILURE');
+		process.exit(1);
+
 	}
-
-	// TODO: Remove this destroy() call
-	setTimeout(() => main.destroy(0), 10000);
 
 }, 500);
 
