@@ -1,0 +1,56 @@
+{
+	"api": {
+		"files": {}
+	},
+	"build": {
+		"environments": {
+			"node/main": {
+				"build": "app.Main",
+				"debug": false,
+				"packages": [
+					[
+						"app",
+						"./lychee.pkg"
+					]
+				],
+				"sandbox": false,
+				"tags": {
+					"platform": [
+						"node"
+					]
+				},
+				"variant": "application",
+				"profile": {
+					"host": null,
+					"port": 1337
+				}
+			}
+		},
+		"files": {}
+	},
+	"source": {
+		"environments": {},
+		"files": {
+			"Main": [
+				"js"
+			],
+			"plugin": {
+				"Imgur": [
+					"js"
+				],
+				"Reddit": [
+					"js"
+				]
+			},
+			"net": {
+				"Remote": [
+					"js"
+				],
+				"Server": [
+					"js"
+				]
+			}
+		},
+		"tags": {}
+	}
+}

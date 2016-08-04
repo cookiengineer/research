@@ -1,0 +1,35 @@
+
+root = true
+
+[*.{html}]
+charset = utf-8
+end_of_line = lf
+indent_style = tab
+indent_size = 4
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{js}]
+charset = utf-8
+end_of_line = lf
+indent_style = tab
+indent_size = 4
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{sh}]
+charset = utf-8
+end_of_line = lf
+indent_style = tab
+indent_size = 4
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[{lychee.pkg}]
+charset = utf-8
+end_of_line = lf
+indent_style = tab
+indent_size = 4
+trim_trailing_whitespace = true
+insert_final_newline = false
+

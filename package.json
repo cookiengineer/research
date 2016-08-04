@@ -1,0 +1,32 @@
+{
+  "name": "machine-proxy",
+  "title": "Machine Proxy",
+  "version": "0.0.1",
+  "main": "index.js",
+  "homepage": "http://artificial.engineering",
+  "description": "Offline-first Proxy translating the Interwebz into JSON for Machines",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Artificial-Engineering/machine-proxy.git"
+  },
+  "scripts": {
+    "build": "./bin/build.sh",
+    "package": "./bin/package.sh"
+  },
+  "ignore": [
+    "**/.*",
+    "package.json"
+  ],
+  "keywords": [
+    "json",
+    "proxy",
+    "scraper",
+    "spider"
+  ],
+  "dependencies": {
+    "fast-html-parser": "^1.0.1",
+    "fetch": "^1.1.0",
+    "lycheejs": "^2016.2.1"
+  }
+}
