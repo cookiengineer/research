@@ -57,7 +57,55 @@ It's basically an easier generic API for the interwebz :)
 
 ## Features
 
-TODO: This section needs to be written and documented.
+The Machine Proxy returns always returns the identical
+response structure, no exceptions.
+
+- If request URL is a media file, return the binary blob.
+- If request URL is a meta site, return the JSON structure.
+
+The JSON structure is always identical and filled incrementally
+as defined in the following format.
+
+Non-plugin websites are parsed based on the `Generic` plugin
+that makes a guessing what the content looks like and chooses
+behaviours based on layouting and content.
+
+In each and every case the idea is to remove noise as far as
+possible. No social suggestion browsing views, no deep links
+to an unnecessary Imprint page, no Advert modals etc. pp.
+
+```json
+{
+	images: [{
+		author:    '@username',
+		url:       'http://i.imgur.com/whatever.jpg',
+		title:     'This is the title',
+		content:   'This is the description',
+		timestamp: '2016-07-04 13:33:37'
+	}],
+	articles: [{
+		author:    '@username',
+		url:       'http://my.blog/whatever.php',
+		title:     'This is the title',
+		content:   'This is the content',
+		timestamp: '2016-07-04 13:33:37'
+	}],
+	comments: [{
+		author:    '@username',
+		url:       'http://reddit.com/r/something/comments/post/whatever',
+		title:     'Title of the post',
+		content:   'This is the content',
+		timestamp: '2016-07-04 13:33:37'
+	}],
+	links: [{
+		author:    '@username',
+		url:       'http://my.blog/is/awesome.php',
+		title:     'This is the title',
+		content:   'This is the description',
+		timestamp: '2016-07-04 13:33:37'
+	}]
+}
+```
 
 
 
