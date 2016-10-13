@@ -1,0 +1,235 @@
+
+body {
+	margin: 0px;
+	padding: 0px;
+	color: #000000;
+	background: #ffffff;
+}
+
+menu {
+	display: block;
+	position: fixed;
+	width: 128px;
+	top: 0px;
+	right: auto;
+	bottom: 0px;
+	left: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+
+menu li {
+	width: 92px;
+	margin: 16px auto;
+	list-style: none;
+	font-size: 16px;
+	line-height: 28px;
+	text-align: center;
+	border: 2px solid transparent;
+	box-sizing: content-box;
+	transition: all 300ms ease-out;
+	cursor: pointer;
+}
+
+menu li:hover,
+menu li.active {
+	transition: all 300ms ease-out;
+}
+
+menu aside {
+	position: absolute;
+	bottom: 0px;
+}
+
+menu aside button {
+	display: block;
+	width: 92px;
+	height: 32px;
+	margin: 16px;
+	padding: 0px;
+	line-height: 16px;
+	font-size: 16px;
+	box-sizing: content-box;
+	transition: all 300ms ease-out;
+	cursor: pointer;
+}
+
+menu aside button:focus,
+menu aside button:hover {
+	transition: all 300ms ease-out;
+}
+
+main {
+	display: block;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 128px;
+	overflow: hidden;
+}
+
+main > section {
+	display: block;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	opacity: 0;
+	transform: translate(0%, -100%);
+	transition: all 300ms ease-out;
+}
+
+main > section.active {
+	opacity: 1;
+	transform: translate(0%, 0%);
+	transition: all 300ms ease-out;
+}
+
+main > section > header {
+	position: fixed;
+	top: 0px;
+	right: 254px;
+	bottom: auto;
+	left: 0px;
+	padding: 16px;
+	z-index: 30;
+}
+
+main > section > header > div {
+	margin: 0px 0px 1em 0px;
+}
+
+main > section > header > div:last-child {
+	margin-bottom: 0px;
+}
+
+main > section > header input[type="text"] {
+	display: block;
+	width: calc(100% - 4px - 16px);
+}
+
+main > section > aside {
+	display: block;
+	position: absolute;
+	width: 254px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	margin: 0px;
+	padding: 0px;
+	left: auto;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	z-index: 20;
+}
+
+main > section > aside::-webkit-scrollbar {
+	width: 16px;
+	background: transparent;
+}
+
+main > section > aside::-webkit-scrollbar-thumb {
+	background: #000000;
+	outline: none;
+}
+
+main > section > aside b {
+	padding: 0px 16px;
+}
+
+main > section > aside a {
+	display: block;
+	height: 32px;
+	text-decoration: none;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+main > section > aside ul {
+	margin: 0px;
+	padding: 0px;
+}
+
+main > section > aside ul li {
+	width: calc(100% - 32px);
+	margin: 16px auto;
+	list-style: none;
+	font-size: 16px;
+	line-height: 32px;
+	text-align: left;
+	box-sizing: content-box;
+}
+
+
+
+/*
+ * USER INTERFACE
+ */
+
+main input[type="text"] {
+	width: 256px;
+	height: 28px;
+	margin: 0px;
+	padding: 0px 8px;
+	line-height: 16px;
+	font-size: 16px;
+	transition: all 300ms ease-out;
+	outline: none;
+	-webkit-appearance: none;
+}
+
+main input[type="text"]:focus,
+main input[type="text"]:hover {
+	transition: all 300ms ease-out;
+}
+
+
+main input[type="checkbox"] {
+	position: relative;
+	width: 28px;
+	height: 28px;
+	margin: 0px 1em 0px 1em;
+	padding: 0px;
+	outline: none;
+	cursor: pointer;
+	transition: all 300ms ease-out;
+	-webkit-appearance: none;
+}
+
+main input[type="checkbox"]:focus,
+main input[type="checkbox"]:hover {
+	transition: all 300ms ease-out;
+}
+
+main input[type="checkbox"]:first-child {
+	margin-left: 0px;
+}
+
+main input[type="checkbox"]:checked:before {
+	opacity: 1;
+	transition: all 300ms ease-out;
+}
+
+main input[type="checkbox"]:before {
+	display: block;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	content: "\2713";
+	font-size: 32px;
+	line-height: 26px;
+	vertical-align: top;
+	opacity: 0;
+	transition: all 300ms ease-out;
+}
+
+main label {
+	height: 32px;
+	line-height: 32px;
+	vertical-align: top;
+}
+
