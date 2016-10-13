@@ -90,24 +90,24 @@ main > section.active {
 main > section > header {
 	position: fixed;
 	top: 0px;
-	right: 254px;
+	right: 0px;
 	bottom: auto;
 	left: 0px;
 	padding: 16px;
 	z-index: 30;
 }
 
-main > section > header > div {
-	margin: 0px 0px 1em 0px;
-}
-
-main > section > header > div:last-child {
-	margin-bottom: 0px;
-}
+/* 
+ * XXX: This is not possible with CSS -_-
+ *
+ * main > section > aside + header {
+ * 	right: 254px;
+ * }
+ *
+ */
 
 main > section > header input[type="text"] {
-	display: block;
-	width: calc(100% - 4px - 16px);
+	width: 300px;
 }
 
 main > section > aside {
@@ -136,6 +136,8 @@ main > section > aside::-webkit-scrollbar-thumb {
 }
 
 main > section > aside b {
+	display: block;
+	margin: 0px;
 	padding: 0px 16px;
 }
 
@@ -179,6 +181,7 @@ main input[type="text"] {
 	font-size: 16px;
 	transition: all 300ms ease-out;
 	outline: none;
+	vertical-align: top;
 	-webkit-appearance: none;
 }
 
@@ -190,13 +193,14 @@ main input[type="text"]:hover {
 
 main input[type="checkbox"] {
 	position: relative;
-	width: 28px;
-	height: 28px;
+	width: 32px;
+	height: 32px;
 	margin: 0px 1em 0px 1em;
 	padding: 0px;
 	outline: none;
 	cursor: pointer;
 	transition: all 300ms ease-out;
+	vertical-align: top;
 	-webkit-appearance: none;
 }
 
@@ -221,7 +225,7 @@ main input[type="checkbox"]:before {
 	left: 0px;
 	content: "\2713";
 	font-size: 32px;
-	line-height: 26px;
+	line-height: 28px;
 	vertical-align: top;
 	opacity: 0;
 	transition: all 300ms ease-out;
@@ -231,5 +235,29 @@ main label {
 	height: 32px;
 	line-height: 32px;
 	vertical-align: top;
+}
+
+
+
+/*
+ * CONTENT
+ */
+
+main h1 {
+	font: normal 32px/32px 'blender-heavy';
+	margin: 0px;
+	text-align: center;
+}
+
+main h2 {
+	font: normal 32px/32px 'blender-heavy';
+	margin: 0px;
+	text-align: center;
+}
+
+main h3 {
+	font: normal 16px/32px 'blender-heavy';
+	margin: 0px;
+	text-align: center;
 }
 

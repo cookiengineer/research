@@ -16,11 +16,12 @@
 <body>
 	<menu class="active">
 		<li class="active">Browse</li>
+		<li>News</li>
 		<li>Search</li>
 		<li>Archive</li>
 		<li>Backup</li>
 		<aside>
-			<button>Settings</button>
+			<button onclick="UI.changeView('settings');">Settings</button>
 			<button onclick="window.location.href='bitcoin:1CamMuvrFU1QAMebPoDsL3JrioVDoxezY2?amount=0.5&label=Offgrid%20Browser%20Support';">Donate</button>
 		</aside>
 	</menu>
@@ -28,62 +29,29 @@
 	<main>
 		<section id="browse" class="active">
 			<header>
-				<div>
-					<input name="browse-url" type="text" placeholder="Enter URL">
-				</div>
-				<div>
-					<input name="browse-images" type="checkbox"><label for="browse-images" title="Download Images">Images</label>
-					<input name="browse-videos" type="checkbox" checked><label for="browse-videos" title="Download Videos">Videos</label>
-				</div>
+				<input name="browse-url" type="text" placeholder="Enter URL to Article">
+				<input name="browse-images" type="checkbox"><label for="browse-images" title="Download Images">Images</label>
+				<input name="browse-videos" type="checkbox" checked><label for="browse-videos" title="Download Videos">Videos</label>
 			</header>
 			<aside class="active">
 				<b>Links</b>
 				<ul id="browse-links">
-					<li><a href="https://lychee.js.org">Next-Gen Isomorphic Engine Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Next-Gen Isomorphic Engine Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Next-Gen Isomorphic Engine Whatever Long Stuff</a></li>
+					<li>- No Links in Content -</li>
 				</ul>
-				<b>Media</b>
-				<ul id="browse-media">
-					<li><a href="https://lychee.js.org">Next-Gen Isomorphic Engine Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Next-Gen Isomorphic Engine Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Next-Gen Isomorphic Engine Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Next-Gen Isomorphic Engine Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
-					<li><a href="https://lychee.js.org">Whatever Long Stuff</a></li>
+				<b>Images</b>
+				<ul id="browse-images">
+					<li>- No Images in Content -</li>
+				</ul>
+				<b>Videos</b>
+				<ul id="browse-videos">
+					<li>- No Videos in Content -</li>
 				</ul>
 			</aside>
+		</section>
+		<section id="news">
+			<header>
+				<h1>News</h1>
+			</header>
 		</section>
 		<section id="search">
 		</section>
@@ -92,6 +60,12 @@
 		<section id="backup">
 		</section>
 		<section id="settings">
+			<header>
+				<h1>Settings</h1>
+			</header>
+			<article>
+				This is the settings view
+			</article>
 		</section>
 	</main>
 

@@ -3,6 +3,7 @@
 
 	const menu  = doc.querySelector('menu');
 	const main  = doc.querySelector('main');
+	const items = [].slice.call(menu.querySelectorAll('li'));
 	const views = [].slice.call(doc.querySelectorAll('main > section'));
 
 
@@ -20,7 +21,6 @@
 
 	if (menu !== null && main !== null) {
 
-		let items = [].slice.call(menu.querySelectorAll('li'));
 		if (items.length > 0) {
 
             items.forEach(item => {
@@ -44,5 +44,42 @@
 		}
 
 	}
+
+
+
+	// XXX: This is not possible with CSS -_-
+
+	views.forEach(view => {
+
+		let header = view.querySelector('header');
+		let aside  = view.querySelector('aside');
+
+		if (header !== null && aside !== null) {
+			header.style.right = '254px';
+		}
+
+	});
+
+
+
+	const UI = {
+
+		changeView: function(id) {
+
+			let item = items.find(el => el.innerText.toLowerCase() === id) || null;
+			let view = views.find(el => el.id === id) || null;
+
+			if (view !== null) {
+
+				views.forEach(other => other.className = (other === view) ? 'active' : '');
+				items.forEach(other => other.className = (other === item) ? 'active' : '');
+
+			}
+
+		}
+
+	};
+
+	global.UI = UI;
 
 })(typeof global !== 'undefined' ? global : this, document);
