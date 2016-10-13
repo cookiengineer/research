@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="./design/theme-cookie.css">
 
 	<!-- BOOTSTRAP -->
+	<script src="/libraries/lychee/build/html/core.js"></script>
 
 	<style>
 	main > section#browse > header input[type="text"],
@@ -78,7 +79,17 @@
 		</section>
 	</main>
 
-	<!-- INIT -->
+	<script>
+	(function(lychee, global) {
+
+		lychee.pkginit('html/main', {
+			debug:   false,
+			sandbox: false
+		}, {
+		});
+
+	})(lychee, typeof global !== 'undefined' ? global : this);
+	</script>
 	<script src="./design/index.js"></script>
 </body>
 </html>

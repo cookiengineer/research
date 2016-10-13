@@ -20,10 +20,7 @@
 					]
 				},
 				"variant": "application",
-				"profile": {
-					"host": null,
-					"port": 1337
-				}
+				"profile": {}
 			}
 		},
 		"files": {}
@@ -42,14 +39,6 @@
 					"js"
 				],
 				"Reddit": [
-					"js"
-				]
-			},
-			"net": {
-				"Remote": [
-					"js"
-				],
-				"Server": [
 					"js"
 				]
 			}

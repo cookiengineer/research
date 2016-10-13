@@ -53,7 +53,9 @@ submit an Issue or a Pull Request. We could use any help :)
 
 - Offline Cache (respond with 302 on no internet connection)
 - Facebook Plugin
+- Gfycat Plugin
 - Instagram Plugin
+- Medium Plugin
 - Reddit Plugin
 
 

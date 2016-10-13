@@ -1,15 +1,19 @@
 
 lychee.define('app.Main').requires([
-	'app.net.Remote',
+//	'app.state.Archive',
+//	'app.state.Backup',
+	'app.state.Browse',
+//	'app.state.News',
+//	'app.state.Search',
 	'lychee.net.Server',
 	'lychee.Input'
 ]).includes([
-	'lychee.event.Emitter'
+	'lychee.app.Main'
 ]).exports(function(lychee, global, attachments) {
 
-	const _Emitter = lychee.import('lychee.event.Emitter');
-	const _Remote  = lychee.import('app.net.Remote');
-	const _Server  = lychee.import('lychee.net.Server');
+	const _app    = lychee.import('app');
+	const _Main   = lychee.import('lychee.app.Main');
+	const _Server = lychee.import('lychee.net.Server');
 
 
 
@@ -19,13 +23,19 @@ lychee.define('app.Main').requires([
 
 	let Composite = function(data) {
 
-		this.settings = Object.assign({}, data);
+		let settings = Object.assign({
+			client:   null,
+			server:   null,
+
+			input:    null,
+			jukebox:  null,
+			loop:     null,
+			renderer: null,
+			viewport: null
+		}, data);
 
 
-		this.server = null;
-
-
-		_Emitter.call(this);
+		_Main.call(this, settings);
 
 
 
@@ -33,18 +43,45 @@ lychee.define('app.Main').requires([
 		 * INITIALIZATION
 		 */
 
+		this.bind('load', function(oncomplete) {
+
+			this.settings.appclient = this.settings.client;
+			this.settings.client    = null;
+
+			this.settings.appserver = this.settings.server;
+			this.settings.server    = null;
+
+
+			// TODO: Integrate an App Cache for Website Index
+
+			// this.cache = new _app.Cache(this);
+
+			// this.cache.bind('complete', function() {
+			// 	oncomplete(true);
+			// }, this);
+
+
+			oncomplete(true);
+
+		}, this, true);
+
 		this.bind('init', function() {
 
-			let settings = this.settings;
+			let appclient = this.settings.appclient || null;
+			if (appclient !== null) {
+				this.client = new _app.net.Client(appclient);
+			}
 
-			this.server = new _Server({
-				host:   settings.host,
-				port:   settings.port,
-				remote: _Remote,
-				type:   _Server.TYPE.HTTP
-			});
+			let appserver = this.settings.appserver || null;
+			if (appserver !== null) {
+				this.server = new _app.net.Server(appserver);
+			}
 
-			this.server.connect();
+
+			this.setState('browse', new _app.state.Browse(this));
+
+
+			this.changeState('browse');
 
 		}, this, true);
 
@@ -54,24 +91,30 @@ lychee.define('app.Main').requires([
 	Composite.prototype = {
 
 		/*
-		 * MAIN API
+		 * ENTITY API
 		 */
 
-		init: function() {
+		// deserialize: function(blob) {},
 
-			lychee.debug = true;
+		serialize: function() {
 
-			this.trigger('init');
-
-		},
-
-		destroy: function(code) {
-
-			code = typeof code === 'number' ? code : 0;
+			let data = _Main.prototype.serialize.call(this);
+			data['constructor'] = 'app.Main';
 
 
-			this.server.disconnect();
-			this.trigger('destroy', [ code ]);
+			let settings = data['arguments'][0] || {};
+			let blob     = data['blob'] || {};
+
+
+			if (this.settings.appclient !== null) settings.client = this.defaults.client;
+			if (this.settings.appserver !== null) settings.server = this.defaults.server;
+
+
+			data['arguments'][0] = settings;
+			data['blob']         = Object.keys(blob).length > 0 ? blob : null;
+
+
+			return data;
 
 		}
 
