@@ -199,6 +199,7 @@ main input[type="checkbox"] {
 	padding: 0px;
 	outline: none;
 	cursor: pointer;
+	font-size: 16px;
 	transition: all 300ms ease-out;
 	vertical-align: top;
 	-webkit-appearance: none;
@@ -232,9 +233,17 @@ main input[type="checkbox"]:before {
 }
 
 main label {
+	display: inline-block;
+	font-size: 16px;
 	height: 32px;
 	line-height: 32px;
 	vertical-align: top;
+	transition: all 300ms ease-out;
+	cursor: pointer;
+}
+
+main label:hover {
+	transition: all 300ms ease-out;
 }
 
 

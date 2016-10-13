@@ -122,3 +122,7 @@ main input[type="checkbox"]:hover:checked:before {
 	color: #0f99cb;
 }
 
+main label:hover {
+	color: #0f99cb;
+}
+

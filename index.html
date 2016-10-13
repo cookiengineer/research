@@ -8,9 +8,16 @@
 
 	<!-- DESIGN -->
 	<link rel="stylesheet" href="./design/index.css">
-	<link rel="stylesheet" href="./design/theme-tron.css">
+	<link rel="stylesheet" href="./design/theme-cookie.css">
 
 	<!-- BOOTSTRAP -->
+
+	<style>
+	main > section#browse > header input[type="text"],
+	main > section#news > header input[type="text"] {
+		width: calc(100% - 128px - 46px - 42px - 28px);
+	}
+	</style>
 
 </head>
 <body>
@@ -29,9 +36,9 @@
 	<main>
 		<section id="browse" class="active">
 			<header>
-				<input name="browse-url" type="text" placeholder="Enter URL to Article">
-				<input name="browse-images" type="checkbox"><label for="browse-images" title="Download Images">Images</label>
-				<input name="browse-videos" type="checkbox" checked><label for="browse-videos" title="Download Videos">Videos</label>
+				<input id="browse-url" type="text" placeholder="Enter URL to Article or Website (e.g. https://stackoverflow.com/questions/10274879/how-to-contribute-on-github-anonymously-via-tor)">
+				<input id="browse-images" type="checkbox"><label for="browse-images" title="Download Images">Images</label>
+				<input id="browse-videos" type="checkbox"><label for="browse-videos" title="Download Videos">Videos</label>
 			</header>
 			<aside class="active">
 				<b>Links</b>
@@ -50,7 +57,9 @@
 		</section>
 		<section id="news">
 			<header>
-				<h1>News</h1>
+				<input id="news-url" type="text" placeholder="Enter URL to News Feed (e.g. https://reddit.com/r/opensource or https://stackoverflow.com/questions/tagged/javascript)">
+				<input id="news-images" type="checkbox"><label for="news-images" title="Download Images">Images</label>
+				<input id="news-videos" type="checkbox"><label for="news-videos" title="Download Videos">Videos</label>
 			</header>
 		</section>
 		<section id="search">

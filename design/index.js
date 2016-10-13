@@ -80,6 +80,12 @@
 
 	};
 
+
+
 	global.UI = UI;
+
+	if (typeof window !== 'undefined') {
+		window.UI = UI;
+	}
 
 })(typeof global !== 'undefined' ? global : this, document);
