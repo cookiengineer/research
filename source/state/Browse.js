@@ -3,7 +3,33 @@ lychee.define('app.state.Browse').includes([
 	'lychee.app.State'
 ]).exports(function(lychee, global, attachments) {
 
-	const _State = lychee.import('lychee.app.State');
+	const _State  = lychee.import('lychee.app.State');
+	const _INPUTS = {
+		url: $.input('#browse-input-url'),
+		img: $.input('#browse-input-img'),
+		vid: $.input('#browse-input-vid')
+	};
+	const _OUTPUTS = {
+		links:  $.output('#browse-links'),
+		images: $.output('#browse-images'),
+		videos: $.output('#browse-videos')
+	};
+
+
+
+	/*
+	 * HELPERS
+	 */
+
+	const _on_change = function(url) {
+
+		let images = _INPUTS.img.getValue();
+		let videos = _INPUTS.vid.getValue();
+
+		console.log('SURF TURF TO', url, images, videos);
+
+
+	};
 
 
 
@@ -42,13 +68,15 @@ lychee.define('app.state.Browse').includes([
 
 		enter: function(oncomplete) {
 
-			console.log('Browse State');
+			_INPUTS.url.bind('change', _on_change, this);
 
 			oncomplete(true);
 
 		},
 
 		leave: function(oncomplete) {
+
+			_INPUTS.url.unbind('change', _on_change, this);
 
 			oncomplete(true);
 
