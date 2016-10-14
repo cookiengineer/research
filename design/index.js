@@ -350,7 +350,7 @@
 				if (view !== null) {
 
 					item.onclick = function() {
-						UI.changeView(name);
+						$.view(name);
 					};
 
 				}
@@ -425,7 +425,7 @@
 
 		},
 
-		changeView: function(id) {
+		view: function(id) {
 
 			let curr = items.find(el => el.className === 'active');
 			let item = items.find(el => el.innerText.toLowerCase() === id) || null;
