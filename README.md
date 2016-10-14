@@ -51,12 +51,23 @@ These are the features that are currently work-in-progress and are known
 to fail right now. If you want to help building these, you are welcome to
 submit an Issue or a Pull Request. We could use any help :)
 
-- Offline Cache (respond with 302 on no internet connection)
 - Facebook Plugin
 - Gfycat Plugin
 - Instagram Plugin
 - Medium Plugin
 - Reddit Plugin
+
+
+## TODO
+
+Do not attempt to use `fetch` or `XHR` again. CORS will not allow us to make
+arbitrary HTTP requests and forbids to access the content afterwards (even in
+`no-cors` mode).
+
+- `app.net.Server` instance with `WS13` sockets
+- `app.net.remote.Archive` service for `index`, `search` and `add`, `remove`
+- `app.net.remote.Scraper` service for `index`, `scrape`
+- `app.data.Reader` to transform HTML content into JSON structure
 
 
 ## Installation

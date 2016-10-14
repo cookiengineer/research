@@ -1,19 +1,42 @@
 
 lychee.define('app.Main').requires([
+//	'app.plugin.Facebook',
+//	'app.plugin.Generic',
+//	'app.plugin.Gfycat',
+//	'app.plugin.Imgur',
+//	'app.plugin.Instagram',
+//	'app.plugin.Medium',
+	'app.plugin.Reddit',
+//	'app.plugin.Storage',
 //	'app.state.Archive',
 //	'app.state.Backup',
 	'app.state.Browse',
 //	'app.state.News',
 //	'app.state.Search',
+	'app.Scraper',
 	'lychee.net.Server',
 	'lychee.Input'
 ]).includes([
 	'lychee.app.Main'
 ]).exports(function(lychee, global, attachments) {
 
-	const _app    = lychee.import('app');
-	const _Main   = lychee.import('lychee.app.Main');
-	const _Server = lychee.import('lychee.net.Server');
+	const _app     = lychee.import('app');
+	const _Main    = lychee.import('lychee.app.Main');
+	const _Server  = lychee.import('lychee.net.Server');
+	const _PLUGINS = [
+
+		lychee.import('app.plugin.Storage'),
+
+		lychee.import('app.plugin.Facebook'),
+		lychee.import('app.plugin.Gfycat'),
+		lychee.import('app.plugin.Imgur'),
+		lychee.import('app.plugin.Instagram'),
+		lychee.import('app.plugin.Medium'),
+		lychee.import('app.plugin.Reddit'),
+
+		lychee.import('app.plugin.Generic')
+
+	];
 
 
 
@@ -115,6 +138,39 @@ lychee.define('app.Main').requires([
 
 
 			return data;
+
+		},
+
+
+
+		/*
+		 * CUSTOM API
+		 */
+
+		getPlugin: function(url) {
+
+			url = typeof url === 'string' ? url : null;
+
+
+			if (url !== null) {
+
+				let found = null;
+
+				for (let p = 0, pl = _PLUGINS.length; p < pl; p++) {
+
+					let plugin = _PLUGINS[p];
+					if (plugin !== null && plugin.can(url) === true) {
+						found = plugin;
+					}
+
+				}
+
+				return found;
+
+			}
+
+
+			return null;
 
 		}
 

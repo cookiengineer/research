@@ -50,6 +50,9 @@
 			"Main": [
 				"js"
 			],
+			"Scraper": [
+				"js"
+			],
 			"plugin": {
 				"Generic": [
 					"js"

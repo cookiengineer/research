@@ -25,6 +25,19 @@ lychee.define('app.state.Browse').includes([
 
 		let images = _INPUTS.img.getValue();
 		let videos = _INPUTS.vid.getValue();
+		let plugin = this.main.getPlugin(url);
+
+		if (plugin !== null) {
+
+			plugin.scrape(url, (data) => {
+				console.log('scrape complete!', data);
+			});
+
+		} else {
+			// TODO: Display error message?
+		}
+
+
 
 		console.log('SURF TURF TO', url, images, videos);
 
