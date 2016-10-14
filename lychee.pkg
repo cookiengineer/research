@@ -4,7 +4,7 @@
 	},
 	"build": {
 		"environments": {
-			"node/main": {
+			"html/main": {
 				"build": "app.Main",
 				"debug": false,
 				"packages": [
@@ -16,7 +16,26 @@
 				"sandbox": false,
 				"tags": {
 					"platform": [
-						"node"
+						"html"
+					]
+				},
+				"variant": "application",
+				"profile": {}
+			},
+			"html-nwjs/main": {
+				"build": "app.Main",
+				"debug": false,
+				"packages": [
+					[
+						"app",
+						"./lychee.pkg"
+					]
+				],
+				"sandbox": false,
+				"tags": {
+					"platform": [
+						"html-nwjs",
+						"html"
 					]
 				},
 				"variant": "application",
@@ -39,6 +58,11 @@
 					"js"
 				],
 				"Reddit": [
+					"js"
+				]
+			},
+			"state": {
+				"Browse": [
 					"js"
 				]
 			}
