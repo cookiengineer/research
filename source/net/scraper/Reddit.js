@@ -1,11 +1,5 @@
 
-lychee.define('app.plugin.Reddit').requires([
-	'app.Scraper'
-]).exports(function(lychee, global, attachments) {
-
-	const _SCRAPER = lychee.import('app.Scraper');
-
-
+lychee.define('app.net.scraper.Reddit').exports(function(lychee, global, attachments) {
 
 	/*
 	 * HELPERS
@@ -17,12 +11,10 @@ lychee.define('app.plugin.Reddit').requires([
 		let subr = tmp[1];
 
 
-		_SCRAPER.scrape({
+		this.scraper.request({
 			url:  'https://www.reddit.com/r/' + subr + '.json',
 			type: 'json'
-		}, (data) => {
-			oncomplete(data);
-		});
+		}, (data) => oncomplete(data));
 
 	};
 
@@ -32,12 +24,10 @@ lychee.define('app.plugin.Reddit').requires([
 		let user = tmp[1];
 
 
-		_SCRAPER.scrape({
+		this.scraper.request({
 			url:  'https://www.reddit.com/user/' + user + '/submitted.json',
 			type: 'json'
-		}, (data) => {
-			oncomplete(data);
-		});
+		}, (data) => oncomplete(data));
 
 	};
 
@@ -47,7 +37,18 @@ lychee.define('app.plugin.Reddit').requires([
 	 * IMPLEMENTATION
 	 */
 
-	let Module = {
+	let Composite = function(scraper) {
+
+		this.scraper = scraper;
+
+	};
+
+
+	Composite.prototype = {
+
+		/*
+		 * CUSTOM API
+		 */
 
 		can: function(url) {
 
@@ -101,59 +102,22 @@ lychee.define('app.plugin.Reddit').requires([
 
 				if (/^r\//g.test(url)) {
 
-					_scrape_subreddit(url, oncomplete);
+					_scrape_subreddit.call(this, url, oncomplete);
 
 				} else if (/^(u|user)\//g.test(url)) {
 
-					_scrape_user(url, oncomplete);
+					_scrape_user.call(this, url, oncomplete);
 
 				}
 
 			}
-
-		},
-
-
-
-
-		process: function(remote, headers) {
-
-			console.log('Reddit plugin', headers);
-
-
-			remote.sendJSON({
-				fuck: 'firefox you shithead'
-			});
-
-			if (/imgur\.com\/gallery\//g.test(headers.url)) {
-
-				_process_album(remote, headers);
-
-				return true;
-
-			} else if (/imgur\.com\/a\//g.test(headers.url)) {
-
-				_process_album(remote, headers);
-
-				return true;
-
-			} else if (/i\.imgur\.com\//g.test(headers.url)) {
-
-				_process_image(remote, headers);
-
-				return true;
-
-			}
-
-
-			return false;
 
 		}
 
 	};
 
 
-	return Module;
+	return Composite;
 
 });
 

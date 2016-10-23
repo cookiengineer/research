@@ -20,7 +20,12 @@
 					]
 				},
 				"variant": "application",
-				"profile": {}
+				"profile": {
+					"client": {
+						"host": "localhost",
+						"port": 13337
+					}
+				}
 			},
 			"html-nwjs/main": {
 				"build": "app.Main",
@@ -39,7 +44,39 @@
 					]
 				},
 				"variant": "application",
-				"profile": {}
+				"profile": {
+					"client": {
+						"host": "localhost",
+						"port": 13337
+					},
+					"server": {
+						"host": "localhost",
+						"port": 13337
+					}
+				}
+			},
+			"node/main": {
+				"build": "app.Main",
+				"debug": false,
+				"packages": [
+					[
+						"app",
+						"./lychee.pkg"
+					]
+				],
+				"sandbox": false,
+				"tags": {
+					"platform": [
+						"node"
+					]
+				},
+				"variant": "application",
+				"profile": {
+					"server": {
+						"host": "localhost",
+						"port": 13337
+					}
+				}
 			}
 		},
 		"files": {}
@@ -50,17 +87,56 @@
 			"Main": [
 				"js"
 			],
-			"Scraper": [
-				"js"
-			],
+			"net": {
+				"Client": [
+					"js"
+				],
+				"Server": [
+					"js"
+				],
+				"client": {
+					"Archive": [
+						"js"
+					],
+					"Control": [
+						"js"
+					]
+				},
+				"remote": {
+					"Archive": [
+						"js"
+					],
+					"Control": [
+						"js"
+					]
+				},
+				"scraper": {
+					"Reddit": [
+						"js"
+					]
+				}
+			},
+			"platform": {
+				"html": {
+					"net": {
+						"Scraper": [
+							"js"
+						]
+					}
+				},
+				"node": {
+					"net": {
+						"Scraper": [
+							"js"
+						]
+					}
+				}
+			},
 			"plugin": {
 				"Generic": [
 					"js"
 				],
 				"Imgur": [
-					"js"
-				],
-				"Reddit": [
 					"js"
 				]
 			},
@@ -70,6 +146,12 @@
 				]
 			}
 		},
-		"tags": {}
+		"tags": {
+			"platform": {
+				"html": "platform/html",
+				"html-nwjs": "platform/html-nwjs",
+				"node": "platform/node"
+			}
+		}
 	}
 }

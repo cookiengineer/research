@@ -37,6 +37,7 @@ menu li:hover,
 menu li.active {
 	border: 2px solid #0f99cb;
 	background: #000000;
+	box-shadow: 0px 0px 12px rgba(21, 171, 195, 1);
 }
 
 menu aside button {
@@ -51,6 +52,7 @@ menu aside button:focus,
 menu aside button:hover {
 	color: #0f99cb;
 	border: 2px solid #0f99cb;
+	box-shadow: 0px 0px 12px rgba(21, 171, 195, 1);
 }
 
 main > section > header {
@@ -101,6 +103,7 @@ main input[type="text"] {
 main input[type="text"]:focus,
 main input[type="text"]:hover {
 	border: 2px solid #0f99cb;
+	box-shadow: 0px 0px 12px rgba(21, 171, 195, 1);
 }
 
 main input[type="checkbox"] {
@@ -111,6 +114,7 @@ main input[type="checkbox"] {
 main input[type="checkbox"]:focus,
 main input[type="checkbox"]:hover {
 	border: 2px solid #0f99cb;
+	box-shadow: 0px 0px 12px rgba(21, 171, 195, 1);
 }
 
 main input[type="checkbox"]:checked:before {
@@ -120,6 +124,7 @@ main input[type="checkbox"]:checked:before {
 main input[type="checkbox"]:focus:checked:before,
 main input[type="checkbox"]:hover:checked:before {
 	color: #0f99cb;
+	box-shadow: 0px 0px 12px rgba(21, 171, 195, 1);
 }
 
 main label:hover {

@@ -21,26 +21,27 @@ lychee.define('app.state.Browse').includes([
 	 * HELPERS
 	 */
 
+	const _on_browse = function(data) {
+
+		console.log('BROWSE', data);
+
+	};
+
 	const _on_change = function(url) {
 
-		let images = _INPUTS.img.getValue();
-		let videos = _INPUTS.vid.getValue();
-		let plugin = this.main.getPlugin(url);
+		let images  = _INPUTS.img.getValue();
+		let videos  = _INPUTS.vid.getValue();
+		let service = this.client.getService('control');
 
-		if (plugin !== null) {
+		if (service !== null) {
 
-			plugin.scrape(url, (data) => {
-				console.log('scrape complete!', data);
+			service.browse({
+				url:    url,
+				images: images === true,
+				videos: videos === true
 			});
 
-		} else {
-			// TODO: Display error message?
 		}
-
-
-
-		console.log('SURF TURF TO', url, images, videos);
-
 
 	};
 
@@ -50,7 +51,7 @@ lychee.define('app.state.Browse').includes([
 	 * IMPLEMENTATION
 	 */
 
-	let Composite = function State(main) {
+	let Composite = function(main) {
 
 		_State.call(this, main);
 
@@ -81,7 +82,21 @@ lychee.define('app.state.Browse').includes([
 
 		enter: function(oncomplete) {
 
-			_INPUTS.url.bind('change', _on_change, this);
+			let client = this.client;
+			if (client !== null) {
+
+				let service = client.getService('control');
+				if (service !== null) {
+					service.bind('browse', _on_browse, this);
+				}
+
+				let url = _INPUTS.url;
+				if (url !== null) {
+					url.bind('change', _on_change, this);
+				}
+
+			}
+
 
 			oncomplete(true);
 
@@ -89,7 +104,21 @@ lychee.define('app.state.Browse').includes([
 
 		leave: function(oncomplete) {
 
-			_INPUTS.url.unbind('change', _on_change, this);
+			let client = this.client;
+			if (client !== null) {
+
+				let url = _INPUTS.url;
+				if (url !== null) {
+					url.unbind('change', _on_change, this);
+				}
+
+				let service = client.getService('control');
+				if (service !== null) {
+					service.unbind('browse', _on_browse, this);
+				}
+
+			}
+
 
 			oncomplete(true);
 
