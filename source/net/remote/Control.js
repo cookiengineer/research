@@ -76,8 +76,6 @@ lychee.define('app.net.remote.Control').requires([
 			_SCRAPER.scrape(data, function(result) {
 
 				let tunnel = this.tunnel || null;
-console.log('scrape successful?', result, tunnel);
-
 				if (tunnel !== null && result !== null) {
 
 					tunnel.send(result, {

@@ -15,6 +15,15 @@ lychee.define('app.net.client.Control').includes([
 
 		_Service.call(this, 'control', client, _Service.TYPE.client);
 
+
+		// TODO: Remove this debugging stuff
+
+		this.bind('browse',  (data) => console.log('browse',  data));
+		this.bind('news',    (data) => console.log('news',    data));
+		this.bind('search',  (data) => console.log('search',  data));
+		this.bind('archive', (data) => console.log('archive', data));
+		this.bind('backup',  (data) => console.log('backup',  data));
+
 	};
 
 
