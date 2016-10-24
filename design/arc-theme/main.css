@@ -36,12 +36,12 @@ main > section {
 }
 
 main > section.inactive {
-	transition: transform 200ms ease-out;
-	transform: translate(100%, 0%);
+	transition: transform 180ms ease-out;
+	transform: translate(0%, -100%);
 }
 
 main > section.active {
-	transition: transform 200ms ease-out;
+	transition: transform 180ms ease-out;
 	transform: translate(0%, 0%);
 }
 

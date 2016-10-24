@@ -14,6 +14,13 @@
 	<!-- BOOTSTRAP -->
 	<script src="/libraries/lychee/build/html/core.js"></script>
 
+	<style>
+	header#wm menu#wm-appstates > li[title] {
+		text-decoration: line-through;
+	}
+	</style>
+
+
 </head>
 <body>
 	<header id="wm" class="active">
@@ -21,7 +28,7 @@
 			<img id="wm-appicon" src="./icon.png">
 		</menu>
 		<menu id="wm-appstates">
-			<li class="active">Browse</li><li>Search</li><li>Archive</li><li>Backup</li>
+			<li class="active">Browse</li><li title="coming soon...">Search</li><li title="coming soon...">Archive</li><li title="coming soon...">Backup</li>
 		</menu>
 		<div id="wm-right">
 			<div id="wm-actions">
@@ -39,9 +46,9 @@
 		<section id="browse" class="active">
 			<header>
 				<input id="browse-url" type="text" placeholder="Enter URL to Article or Website (e.g. https://lychee.js.org)" value="">
-				<input id="browse-img" type="checkbox"><label for="browse-img" title="Download Images">Images</label>
-				<input id="browse-vid" type="checkbox"><label for="browse-vid" title="Download Videos">Videos</label>
-				<ul>
+				<input id="browse-images" type="checkbox"><label for="browse-images" title="Download Images?">Images</label>
+				<input id="browse-videos" type="checkbox"><label for="browse-videos" title="Download Videos?">Videos</label>
+				<ul id="browse-tabs">
 					<li class="active">Empty Tab</li>
 				</ul>
 			</header>
@@ -71,7 +78,10 @@
 
 		<section id="search" class="inactive">
 			<header>
-				<input id="search-input-url" type="text" placeholder="Search for keywords (e.g. stackoverflow bash" value="">
+				<input id="search-keywords" type="text" placeholder="Enter keywords (e.g. stackoverflow bash curl)" value="">
+				<input id="search-archive" type="checkbox"><label for="search-archive" title="Search Archive?">Archive</label>
+				<input id="search-duckduckgo" type="checkbox"><label for="search-duckduckgo" title="Search DuckDuckGo?">DuckDuckGo</label>
+				<input id="search-github" type="checkbox"><label for="search-github" title="Search GitHub?">GitHub</label>
 			</header>
 			<article>
 				Search State
@@ -80,7 +90,7 @@
 
 		<section id="archive" class="inactive">
 			<header>
-				<input id="search-input-url" type="text" placeholder="Search for keywords (e.g. stackoverflow bash" value="">
+				<input id="archive-input" type="text" placeholder="Enter keywords (e.g. stackoverflow bash curl)" value="">
 			</header>
 			<article>
 				Archive State

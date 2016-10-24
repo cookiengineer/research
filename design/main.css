@@ -1,17 +1,19 @@
 
 /*
- * BROWSE STATE
+ * APP STATES
  */
 
 section#browse > header {
 	height: auto;
 }
 
-section#browse > header > * {
+section#browse > header > *,
+section#search > header > * {
 	vertical-align: middle;
 }
 
-section#browse > header > label {
+section#browse > header > label,
+section#search > header > label {
 	vertical-align: top;
 }
 
@@ -23,10 +25,14 @@ section#browse > article {
 	top: 76px;
 }
 
+section#search > header > input[type="text"] {
+	width: calc(100% - 304px);
+}
+
 
 
 /*
- * ALL STATES
+ * APP VIEWS
  */
 
 section > header > input[type="checkbox"] {

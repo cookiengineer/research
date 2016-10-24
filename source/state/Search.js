@@ -1,13 +1,14 @@
 
-lychee.define('app.state.Browse').includes([
+lychee.define('app.state.Search').includes([
 	'lychee.app.State'
 ]).exports(function(lychee, global, attachments) {
 
 	const _State  = lychee.import('lychee.app.State');
 	const _INPUTS = {
-		url:    $.input('#browse-url'),
-		images: $.input('#browse-images'),
-		videos: $.input('#browse-videos')
+		keywords:   $.input('#search-keywords'),
+		archive:    $.input('#search-archive'),
+		duckduckgo: $.input('#search-duckduckgo'),
+		github:     $.input('#search-github'),
 	};
 
 
@@ -62,7 +63,7 @@ lychee.define('app.state.Browse').includes([
 		serialize: function() {
 
 			let data = _State.prototype.serialize.call(this);
-			data['constructor'] = 'app.state.Browse';
+			data['constructor'] = 'app.state.Search';
 
 
 			return data;
@@ -77,43 +78,11 @@ lychee.define('app.state.Browse').includes([
 
 		enter: function(oncomplete) {
 
-			let client = this.client;
-			if (client !== null) {
-
-				let service = client.getService('control');
-				if (service !== null) {
-					service.bind('browse', _on_browse, this);
-				}
-
-				let url = _INPUTS.url;
-				if (url !== null) {
-					url.bind('change', _on_change, this);
-				}
-
-			}
-
-
 			oncomplete(true);
 
 		},
 
 		leave: function(oncomplete) {
-
-			let client = this.client;
-			if (client !== null) {
-
-				let url = _INPUTS.url;
-				if (url !== null) {
-					url.unbind('change', _on_change, this);
-				}
-
-				let service = client.getService('control');
-				if (service !== null) {
-					service.unbind('browse', _on_browse, this);
-				}
-
-			}
-
 
 			oncomplete(true);
 
@@ -125,3 +94,4 @@ lychee.define('app.state.Browse').includes([
 	return Composite;
 
 });
+

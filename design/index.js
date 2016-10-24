@@ -2,9 +2,7 @@
 ((global) => {
 
 	const document = global.document;
-	const menu     = document.querySelector('menu');
-	const main     = document.querySelector('main');
-	const items    = [].slice.call(menu.querySelectorAll('li'));
+	const states   = [].slice.call(document.querySelectorAll('#wm-appstates li'));
 	const views    = [].slice.call(document.querySelectorAll('main > section'));
 
 
@@ -338,43 +336,29 @@
 	 * INITIALIZATION
 	 */
 
-	if (menu !== null && main !== null) {
+	if (states.length > 0 && views.length > 0) {
 
-		if (items.length > 0) {
+		states.forEach(state => {
 
-            items.forEach(item => {
+			state.onclick = function(e) {
 
-				let name = item.innerText.toLowerCase();
-				let view = main.querySelector('#' + name);
+				let main = global.MAIN || null;
+				let id   = this.innerHTML.toLowerCase();
+				if (main !== null) {
 
-				if (view !== null) {
-
-					item.onclick = function() {
-						$.view(name);
-					};
+					let result = main.changeState(id);
+					if (result === true) {
+						states.forEach(other => other.className = other === this ? 'active' : 'inactive');
+						views.forEach(view   => view.className  = view.id === id ? 'active' : 'inactive');
+					}
 
 				}
 
-			});
+			};
 
-		}
+		});
 
 	}
-
-
-
-	// XXX: This is not possible with CSS -_-
-
-	views.forEach(view => {
-
-		let header = view.querySelector('header');
-		let aside  = view.querySelector('aside');
-
-		if (header !== null && aside !== null) {
-			header.style.right = '254px';
-		}
-
-	});
 
 
 
@@ -422,27 +406,6 @@
 
 
 			return null;
-
-		},
-
-		view: function(id) {
-
-			let curr = items.find(el => el.className === 'active');
-			let item = items.find(el => el.innerText.toLowerCase() === id) || null;
-			let view = views.find(el => el.id === id) || null;
-
-			if (view !== null) {
-
-				views.forEach(other => other.className = (other === view) ? 'active' : '');
-				items.forEach(other => other.className = (other === item) ? 'active' : '');
-
-
-				let MAIN = global.MAIN || null;
-				if (MAIN !== null) {
-					MAIN.changeState(id);
-				}
-
-			}
 
 		}
 
