@@ -1,0 +1,11 @@
+
+menu#wm-appmenu > img#wm-appicon {
+	border: 1px solid #242932;
+	background: #404857;
+}
+
+div#wm-actions > button#wm-donate {
+	color: #ffffff;
+	padding: 0px 8px;
+}
+

@@ -62,6 +62,7 @@ header#wm menu#wm-appstates > li {
 	font-family: 'Cantarell';
 	font-size: 16px;
 	font-weight: normal;
+	font-style: normal;
 	cursor: pointer;
 }
 

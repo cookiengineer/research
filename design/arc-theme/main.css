@@ -65,6 +65,49 @@ section > header {
 	border-bottom: 1px solid #272a34;
 }
 
+section > header > ul {
+	display: block;
+	width: auto;
+	height: 26px;
+	margin: 0px;
+	padding: 0px;
+	overflow: visible;
+	box-sizing: border-box;
+}
+
+section > header > ul > li {
+	display: inline-block;
+	width: 128px;
+	height: 30px;
+	line-height: 30px;
+	margin: 0px;
+	padding: 0px 4px;
+	color: #acb7c3;
+	font-family: 'Cantarell';
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	border: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	border-radius: 4px 4px 0px 0px;
+	box-sizing: border-box;
+	list-style: none;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+section > header > ul > li:hover {
+	color: #ffffff;
+}
+
+section > header > ul > li.active {
+	color: #ffffff;
+	border: 1px solid #272a34;
+	border-bottom: 1px solid transparent;
+	background: #404552;
+}
+
 section > article {
 	position: absolute;
 	top: 43px;

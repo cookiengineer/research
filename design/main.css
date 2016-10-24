@@ -1,4 +1,12 @@
 
+/*
+ * BROWSE STATE
+ */
+
+section#browse > header {
+	height: auto;
+}
+
 section#browse > header > * {
 	vertical-align: middle;
 }
@@ -11,6 +19,16 @@ section#browse > header > input[type="text"] {
 	width: calc(100% - 170px);
 }
 
+section#browse > article {
+	top: 76px;
+}
+
+
+
+/*
+ * ALL STATES
+ */
+
 section > header > input[type="checkbox"] {
 	margin: 0px 4px 0px 8px;
 }
@@ -20,5 +38,7 @@ section > footer > input[type="text"] {
 	margin-left: calc(100% - 440px);
 }
 
-section > footer > button:last-child {
+section > article {
+	padding: 4px;
 }
+
