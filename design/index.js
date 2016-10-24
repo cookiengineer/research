@@ -385,6 +385,36 @@
 
 		},
 
+		remove: function(query) {
+
+			query = typeof query === 'string' ? query : null;
+
+
+			if (query !== null) {
+
+				let result = [].slice.call(document.querySelectorAll(query));
+				if (result.length > 0) {
+
+					result.forEach(node => {
+
+						let parent = node.parentNode;
+						if (parent !== null) {
+							parent.removeChild(node);
+						}
+
+					});
+
+					return true;
+
+				}
+
+			}
+
+
+			return false;
+
+		},
+
 		input: function(query) {
 
 			let element = this.query(query);

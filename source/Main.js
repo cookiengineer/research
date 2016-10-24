@@ -71,6 +71,12 @@ lychee.define('app.Main').requires([
 			this.setState('search', new _app.state.Search(this));
 
 
+			let fouc = $.query('figure#fouc');
+			if (fouc !== null) {
+				$.remove('figure#fouc');
+			}
+
+
 			this.changeState('browse');
 
 		}, this, true);
