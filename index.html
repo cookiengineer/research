@@ -7,8 +7,8 @@
 	<link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="64x64 32x32 16x16">
 
 	<!-- DESIGN -->
-	<link rel="stylesheet" href="./design/index.css">
-	<link rel="stylesheet" href="./design/theme-cookie.css">
+	<link rel="stylesheet" href="./design/arc-flatabulous-theme/index.css">
+	<script src="./design/arc-flatabulous-theme/index.js"></script>
 
 	<!-- BOOTSTRAP -->
 	<script src="/libraries/lychee/build/html/core.js"></script>
@@ -18,21 +18,58 @@
 	main > section#news > header input[type="text"] {
 		width: calc(100% - 128px - 46px - 42px - 28px);
 	}
+	menu#wm-appmenu > img#wm-appicon {
+		border: 1px solid #242932;
+		background: #404857;
+	}
+	div#wm-actions > button#wm-donate {
+		color: #ffffff;
+		padding: 0px 8px;
+	}
 	</style>
 
 </head>
 <body>
-	<menu class="active">
-		<li class="active">Browse</li>
-		<li>News</li>
-		<li>Search</li>
-		<li>Archive</li>
-		<li>Backup</li>
-		<aside>
-			<button onclick="$.view('settings');">Settings</button>
-			<button onclick="window.location.href='bitcoin:1CamMuvrFU1QAMebPoDsL3JrioVDoxezY2?amount=0.5&label=Offgrid%20Browser%20Support';">Donate</button>
-		</aside>
-	</menu>
+	<header id="wm" class="active">
+		<menu id="wm-appmenu">
+			<img id="wm-appicon" src="./icon.png">
+		</menu>
+		<menu id="wm-appstates">
+			<li class="active">Browse</li><li>Search</li><li>Archive</li><li>Backup</li>
+		</menu>
+		<div id="wm-right">
+			<div id="wm-actions">
+				<button id="wm-settings"></button>
+				<button id="wm-donate" onclick="window.location.href='bitcoin:1CamMuvrFU1QAMebPoDsL3JrioVDoxezY2?amount=0.5&label=Offgrid%20Browser%20Support';">Donate</button>
+			</div>
+			<div id="wm-buttons">
+				<button id="wm-minimize"></button><button id="wm-maximize"></button><button id="wm-close"></button>
+			</div>
+		</div>
+	</header>
+
+	<main>
+
+		<section id="browse" class="active">
+			Browse State
+		</section>
+
+		<section id="search" class="inactive">
+			Search State
+		</section>
+
+		<section id="archive" class="inactive">
+		</section>
+
+		<section id="backup" class="inactive">
+		</section>
+
+	</main>
+
+
+
+	<!-- TODO: Restructuring -->
+	<!--
 
 	<main>
 		<section id="browse" class="active">
@@ -78,6 +115,7 @@
 			</article>
 		</section>
 	</main>
+	-->
 
 	<script>
 	(function(lychee, global) {

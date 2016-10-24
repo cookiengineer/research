@@ -1,0 +1,25 @@
+
+main {
+	color: #ffffff;
+	font-size: 16px;
+}
+
+main > section {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	border: 1px solid red;
+}
+
+main > section.inactive {
+	transition: transform 200ms ease-out;
+	transform: translate(100%, 0%);
+}
+
+main > section.active {
+	transition: transform 200ms ease-out;
+	transform: translate(0%, 0%);
+}
+

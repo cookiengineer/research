@@ -1,0 +1,203 @@
+
+header#wm {
+	display: block;
+	width: auto;
+	height: 42px;
+	background: #2e333f;
+	border: 1px solid #272a34;
+	border-radius: 4px 4px 0px 0px;
+	text-align: center;
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	bottom: auto;
+	left: 0px;
+}
+
+main {
+	position: fixed;
+	top: 44px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	background: #383c4a;
+	border: 1px solid #272a34;
+	border-top: none;
+	border-radius: 0px 0px 4px 4px;
+}
+
+header#wm.inactive {
+	background: #313743;
+}
+
+header#wm menu#wm-appmenu {
+	display: inline-block;
+	position: absolute;
+	top: 0px;
+	right: auto;
+	bottom: auto;
+	left: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+
+header#wm img#wm-appicon {
+	display: block;
+	width: 20px;
+	height: 20px;
+	border: 1px solid transparent;
+	border-radius: 2px;
+	margin: 10px 0px 0px 10px;
+	cursor: pointer;
+}
+
+header#wm menu#wm-appstates {
+	display: inline-block;
+	margin: 6px auto 6px auto;
+	padding: 0px;
+	border: 1px solid #242932;
+	border-radius: 4px;
+}
+
+header#wm menu#wm-appstates > li {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+	width: 100px;
+	height: 26px;
+	line-height: 26px;
+	color: #acb7c3;
+	background: #404857;
+	list-style: none;
+	cursor: pointer;
+}
+
+header#wm menu#wm-appstates > li:first-child {
+	border-radius: 4px 0px 0px 4px;
+}
+header#wm menu#wm-appstates > li:last-child {
+	border-radius: 0px 4px 4px 0px;
+}
+
+header#wm menu#wm-appstates > li:focus,
+header#wm menu#wm-appstates > li:hover {
+	background: #4e5665;
+}
+
+header#wm menu#wm-appstates > li.active {
+	color: #ffffff;
+	background: #5294e2;
+}
+
+header#wm div#wm-right {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: auto;
+	left: auto;
+}
+
+
+
+div#wm-actions {
+	display: inline-block;
+	margin: 6px 0px 0px 0px;
+	padding: 0px 16px 0px 0px;
+	border-right: 1px solid #414853;
+	vertical-align: top;
+}
+
+div#wm-actions > button {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+	min-width: 36px;
+	height: 30px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background: transparent;
+	box-sizing: border-box;
+	vertical-align: top;
+	cursor: pointer;
+}
+
+div#wm-actions > button:focus,
+div#wm-actions > button:hover {
+	border: 1px solid #242932;
+	border-radius: 4px;
+	background: #404857;
+}
+
+div#wm-actions > button:active {
+	color: #ffffff;
+	border: 1px solid #5294e2;
+	border-radius: 4px;
+	background: #5294e2;
+}
+
+div#wm-actions > button#wm-settings:before {
+	color: #ffffff;
+	content: "☰";
+	display: block;
+	text-align: center;
+}
+
+
+div#wm-buttons {
+	display: inline-block;
+	margin: 12px 12px 0px 0px;
+	vertical-align: top;
+}
+
+div#wm-buttons > button {
+	display: inline-block;
+	margin: 0px 0px 0px 16px;
+	width: 14px;
+	height: 14px;
+	border: 0px solid transparent;
+	border-radius: 14px;
+	background: transparent;
+	cursor: pointer;
+}
+
+div#wm-buttons > button:active,
+div#wm-buttons > button:focus {
+	outline: none;
+}
+
+div#wm-buttons > button#wm-minimize {
+	border: 1px solid #da9e10;
+	background: #fac536;
+}
+
+div#wm-buttons > button#wm-minimize:hover {
+}
+
+div#wm-buttons > button#wm-maximize {
+	border: 1px solid #13c11e;
+	background: #39ea49;
+}
+
+div#wm-buttons > button#wm-close {
+	border: 1px solid #d52735;
+	background: #f25056;
+}
+
+
+/*
+ * INACTIVE WINDOW
+ */
+
+header#wm.inactive menu#wm-appstates > li.active {
+	color: #acb7c3;
+	background: #4878b2;
+}
+
+header#wm.inactive div#wm-buttons button#wm-minimize,
+header#wm.inactive div#wm-buttons button#wm-maximize,
+header#wm.inactive div#wm-buttons button#wm-close {
+	border: 1px solid #b4b4b4;
+	background: #d4d4d4;
+}
+
+
