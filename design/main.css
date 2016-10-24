@@ -25,6 +25,11 @@ section#browse > article {
 	top: 76px;
 }
 
+section#browse > footer > input[type="text"] {
+	width: 256px;
+	margin-left: calc(100% - 440px);
+}
+
 section#search > header > input[type="text"] {
 	width: calc(100% - 304px);
 }
@@ -39,12 +44,18 @@ section > header > input[type="checkbox"] {
 	margin: 0px 4px 0px 8px;
 }
 
-section > footer > input[type="text"] {
-	width: 256px;
-	margin-left: calc(100% - 440px);
-}
-
 section > article {
 	padding: 4px;
+}
+
+
+
+@media (max-width: 545px) {
+
+	section#browse > footer > input[type="text"] {
+		width: calc(100% - 184px);
+		margin: 0px;
+	}
+
 }
 

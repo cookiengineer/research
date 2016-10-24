@@ -9,3 +9,41 @@ div#wm-actions > button#wm-donate {
 	padding: 0px 8px;
 }
 
+@media (max-width: 860px) {
+
+	header#wm {
+		text-align: left;
+	}
+
+	header#wm menu#wm-appstates {
+		margin-left: 42px;
+	}
+
+}
+
+@media (max-width: 670px) {
+
+	header#wm menu#wm-appstates > li {
+		width: auto;
+		padding: 0px 4px;
+	}
+
+}
+
+@media (max-width: 545px) {
+
+	section > footer > input[type="text"] {
+		width: calc(100% - 180px);
+		margin: 0px;
+	}
+
+}
+
+@media (max-width: 525px) {
+
+	header#wm div#wm-right div#wm-actions {
+		display: none;
+	}
+
+}
+
