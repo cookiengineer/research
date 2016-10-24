@@ -1,4 +1,16 @@
 
+*::-webkit-scrollbar {
+	width: 8px;
+	background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+	border: 1px solid #383d48;
+	border-radius: 8px;
+	background: #686e7a;
+	cursor: scroll;
+}
+
 main {
 	color: #ffffff;
 	font-size: 16px;
@@ -40,13 +52,41 @@ section {
 
 section > header {
 	position: absolute;
+	height: 36px;
+	line-height: 36px;
 	top: 0px;
 	right: 0px;
 	bottom: auto;
 	left: 0px;
-	height: 36px;
+	margin: 0px;
+	padding: 3px;
 	background: #383c4a;
 	border: 0px none;
 	border-bottom: 1px solid #272a34;
+}
+
+section > article {
+	position: absolute;
+	top: 43px;
+	right: 0px;
+	bottom: 43px;
+	left: 0px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+section > footer {
+	position: absolute;
+	height: 36px;
+	line-height: 36px;
+	top: auto;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	margin: 0px;
+	padding: 3px;
+	background: #383c4a;
+	border: 0px none;
+	border-top: 1px solid #272a34;
 }
 

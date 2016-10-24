@@ -43,7 +43,7 @@ header#wm img#wm-appicon {
 
 header#wm menu#wm-appstates {
 	display: inline-block;
-	margin: 6px auto 6px auto;
+	margin: 7px auto 7px auto;
 	padding: 0px;
 	border: 1px solid #242932;
 	border-radius: 4px;
@@ -138,7 +138,7 @@ div#wm-actions > button#wm-settings:before {
 
 div#wm-buttons {
 	display: inline-block;
-	margin: 12px 12px 0px 0px;
+	margin: 9px 12px 0px 0px;
 	vertical-align: top;
 }
 

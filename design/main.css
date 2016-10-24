@@ -1,16 +1,24 @@
 
-section > header > input[type="text"],
-section > header > input[type="checkbox"],
-section > header > label {
-	margin: 3px 3px;
+section#browse > header > * {
+	vertical-align: middle;
 }
 
-section > header > input[type="text"] {
-	margin-right: 16px;
+section#browse > header > label {
+	vertical-align: top;
 }
-
 
 section#browse > header > input[type="text"] {
-	width: calc(100% - 192px);
+	width: calc(100% - 170px);
 }
 
+section > header > input[type="checkbox"] {
+	margin: 0px 4px 0px 8px;
+}
+
+section > footer > input[type="text"] {
+	width: 256px;
+	margin-left: calc(100% - 440px);
+}
+
+section > footer > button:last-child {
+}
