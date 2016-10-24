@@ -9,15 +9,12 @@
 	<!-- DESIGN -->
 	<link rel="stylesheet" href="./design/arc-flatabulous-theme/index.css">
 	<script src="./design/arc-flatabulous-theme/index.js"></script>
+	<link rel="stylesheet" href="./design/index.css">
 
 	<!-- BOOTSTRAP -->
 	<script src="/libraries/lychee/build/html/core.js"></script>
 
 	<style>
-	main > section#browse > header input[type="text"],
-	main > section#news > header input[type="text"] {
-		width: calc(100% - 128px - 46px - 42px - 28px);
-	}
 	menu#wm-appmenu > img#wm-appicon {
 		border: 1px solid #242932;
 		background: #404857;
@@ -51,11 +48,23 @@
 	<main>
 
 		<section id="browse" class="active">
-			Browse State
+			<header>
+				<input id="browse-input-url" type="text" placeholder="Enter URL to Article or Website (e.g. https://stackoverflow.com/questions/10274879/how-to-contribute-on-github-anonymously-via-tor)" value="reddit.com/r/whatever">
+				<input id="browse-input-img" type="checkbox"><label for="browse-input-img" title="Download Images">Images</label>
+				<input id="browse-input-vid" type="checkbox"><label for="browse-input-vid" title="Download Videos">Videos</label>
+			</header>
+			<article>
+				Browse State
+			</article>
 		</section>
 
 		<section id="search" class="inactive">
-			Search State
+			<header>
+				<input id="search-input" type="text" placeholder="Search for keywords (e.g. stackoverflow bash" value="">
+			</header>
+			<article>
+				Search State
+			</article>
 		</section>
 
 		<section id="archive" class="inactive">
@@ -64,58 +73,13 @@
 		<section id="backup" class="inactive">
 		</section>
 
-	</main>
-
-
-
-	<!-- TODO: Restructuring -->
-	<!--
-
-	<main>
-		<section id="browse" class="active">
-			<header>
-				<input id="browse-input-url" type="text" placeholder="Enter URL to Article or Website (e.g. https://stackoverflow.com/questions/10274879/how-to-contribute-on-github-anonymously-via-tor)" value="reddit.com/r/programming">
-				<input id="browse-input-img" type="checkbox"><label for="browse-input-img" title="Download Images">Images</label>
-				<input id="browse-input-vid" type="checkbox"><label for="browse-input-vid" title="Download Videos">Videos</label>
-			</header>
-			<aside class="active">
-				<b>Links</b>
-				<ul id="browse-links">
-					<li>- No Links in Content -</li>
-				</ul>
-				<b>Images</b>
-				<ul id="browse-images">
-					<li>- No Images in Content -</li>
-				</ul>
-				<b>Videos</b>
-				<ul id="browse-videos">
-					<li>- No Videos in Content -</li>
-				</ul>
-			</aside>
-		</section>
-		<section id="news">
-			<header>
-				<input id="news-url" type="text" placeholder="Enter URL to News Feed (e.g. https://reddit.com/r/opensource or https://stackoverflow.com/questions/tagged/javascript)">
-				<input id="news-images" type="checkbox"><label for="news-images" title="Download Images">Images</label>
-				<input id="news-videos" type="checkbox"><label for="news-videos" title="Download Videos">Videos</label>
-			</header>
-		</section>
-		<section id="search">
-		</section>
-		<section id="archive">
-		</section>
-		<section id="backup">
-		</section>
-		<section id="settings">
-			<header>
-				<h1>Settings</h1>
-			</header>
+		<section id="settings" class="inactive">
 			<article>
-				This is the settings view
+				Settings State
 			</article>
 		</section>
+
 	</main>
-	-->
 
 	<script>
 	(function(lychee, global) {

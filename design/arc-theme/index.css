@@ -1,3 +1,34 @@
 
 @import url('./main.css');
+@import url('./button.css');
+@import url('./label.css');
+@import url('./input.css');
+
+@font-face {
+	font-family: 'Cantarell';
+	font-weight: normal;
+	font-style: normal;
+	src: url('./cantarell-regular.ttf');
+}
+
+@font-face {
+	font-family: 'Cantarell';
+	font-weight: bold;
+	font-style: normal;
+	src: url('./cantarell-bold.ttf');
+}
+
+@font-face {
+	font-family: 'Cantarell';
+	font-weight: normal;
+	font-style: italic;
+	src: url('./cantarell-italic.ttf');
+}
+
+@font-face {
+	font-family: 'Cantarell';
+	font-weight: bold;
+	font-style: italic;
+	src: url('./cantarell-bolditalic.ttf');
+}
 

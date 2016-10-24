@@ -1,0 +1,16 @@
+
+section > header > input[type="text"],
+section > header > input[type="checkbox"],
+section > header > label {
+	margin: 3px 3px;
+}
+
+section > header > input[type="text"] {
+	margin-right: 16px;
+}
+
+
+section#browse > header > input[type="text"] {
+	width: calc(100% - 192px);
+}
+

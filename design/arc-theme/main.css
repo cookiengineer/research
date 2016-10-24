@@ -2,6 +2,15 @@
 main {
 	color: #ffffff;
 	font-size: 16px;
+	position: fixed;
+	top: 44px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	background: #383c4a;
+	border: 1px solid #272a34;
+	border-top: none;
+	border-radius: 0px 0px 4px 4px;
 }
 
 main > section {
@@ -10,7 +19,8 @@ main > section {
 	right: 0px;
 	bottom: 0px;
 	left: 0px;
-	border: 1px solid red;
+	border: 1px solid #272a34;
+	box-sizing: border-box;
 }
 
 main > section.inactive {
@@ -21,5 +31,22 @@ main > section.inactive {
 main > section.active {
 	transition: transform 200ms ease-out;
 	transform: translate(0%, 0%);
+}
+
+section {
+	background: #404552;
+}
+
+
+section > header {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: auto;
+	left: 0px;
+	height: 36px;
+	background: #383c4a;
+	border: 0px none;
+	border-bottom: 1px solid #272a34;
 }
 

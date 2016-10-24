@@ -5,8 +5,7 @@ lychee.define('app.Main').requires([
 //	'app.state.Archive',
 //	'app.state.Backup',
 	'app.state.Browse',
-//	'app.state.News',
-//	'app.state.Search',
+	'app.state.Search',
 	'lychee.Input'
 ]).includes([
 	'lychee.app.Main'
@@ -69,6 +68,7 @@ lychee.define('app.Main').requires([
 
 
 			this.setState('browse', new _app.state.Browse(this));
+			this.setState('search', new _app.state.Search(this));
 
 
 			this.changeState('browse');

@@ -1,0 +1,32 @@
+
+body {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow: auto;
+}
+
+main {
+	position: fixed;
+	top: 44px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	background: #383c4a;
+	border: 1px solid #272a34;
+	border-top: none;
+	border-radius: 0px 0px 4px 4px;
+}
+
+main > section {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	border: 1px solid #272a34;
+	box-sizing: border-box;
+}
+
