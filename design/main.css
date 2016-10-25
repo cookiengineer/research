@@ -50,6 +50,104 @@ section > article {
 
 
 
+/*
+ * APP CONTENTS
+ */
+
+article {
+	font-family: 'Cantarell';
+	font-weight: normal;
+	font-style: normal;
+}
+
+article a {
+	padding: 0px 4px;
+	color: #5294e2;
+	text-decoration: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+
+article a:focus,
+article a:hover {
+	border: 1px solid #5294e2;
+	background: #4e5665;
+}
+
+article > * {
+	display: block;
+	min-width: 512px;
+	width: 66%;
+}
+
+article > h3 {
+	margin: 3em auto 1em auto;
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+article > img {
+	margin: 1em auto;
+}
+
+article > ol {
+	margin: 1em auto;
+	padding: 0px;
+	list-style-position: inside;
+}
+
+article > p {
+	margin: 1em auto;
+	text-align: justify;
+}
+
+article > pre {
+	width: calc(66% - 2em);
+	margin: 1em auto;
+	padding: 0.5em 1em;
+	border: 1px solid #272a34;
+	background: #383c4a;
+}
+
+article > table {
+	display: table;
+	width: calc(66% + 8px + 2px);
+	margin: 1em auto;
+	border-spacing: 4px;
+}
+
+article > table th {
+	padding: 4px 8px;
+}
+
+article > table td {
+	border: 1px solid #272a34;
+	padding: 4px 8px;
+}
+
+article > table tr:hover td {
+	background: #4e5665;
+}
+
+article > ul {
+	margin: 1em auto;
+	list-style: none;
+	padding: 0px;
+}
+
+article > ul > li {
+	line-height: 1em;
+}
+
+article > ul > li:before {
+	content: "▶";
+	display: inline;
+	margin: 0px 0.3em 0px 2px;
+	line-height: 1.2em;
+	vertical-align: bottom;
+}
+
+
 @media (max-width: 545px) {
 
 	section#browse > footer > input[type="text"] {
