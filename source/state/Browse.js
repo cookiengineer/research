@@ -1,15 +1,23 @@
 
 lychee.define('app.state.Browse').includes([
-	'lychee.app.State'
+	'lychee.app.State',
+	'lychee.event.Emitter'
 ]).exports(function(lychee, global, attachments) {
 
-	const _State  = lychee.import('lychee.app.State');
-	const _INPUTS = {
+	const _Emitter = lychee.import('lychee.event.Emitter');
+	const _State   = lychee.import('lychee.app.State');
+	const _INPUTS  = {
 		url:    $.input('#browse-url'),
 		images: $.input('#browse-images'),
-		videos: $.input('#browse-videos')
+		videos: $.input('#browse-videos'),
+		edit:   $.input('#browse-edit'),
+		reload: $.input('#browse-reload'),
+		tags:   $.input('#browse-tags'),
+		save:   $.input('#browse-save')
 	};
 
+
+	global.__INPUTS = _INPUTS;
 
 
 	/*
@@ -49,6 +57,19 @@ lychee.define('app.state.Browse').includes([
 	let Composite = function(main) {
 
 		_State.call(this, main);
+		_Emitter.call(this);
+
+
+
+		/*
+		 * INITIALIZATION
+		 */
+
+		this.bind('change', function(url) {
+
+			console.log('TAB CHANGE', url);
+
+		}, this);
 
 	};
 

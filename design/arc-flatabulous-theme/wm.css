@@ -17,6 +17,11 @@ header#wm {
 	z-index: 1000;
 	-webkit-user-select: none;
 	user-select: none;
+	-webkit-app-region: drag;
+}
+
+header#wm > * {
+	-webkit-app-region: no-drag;
 }
 
 header#wm.inactive {

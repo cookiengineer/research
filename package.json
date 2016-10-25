@@ -1,16 +1,20 @@
 {
-	"main":         "./index.html",
-	"name":         "offgrid-browser",
-	"description":  "Offgrid Browser (powered by lychee.js)",
-	"version":      "${version}",
+	"main":            "./index.html",
+	"name":            "offgrid-browser",
+	"description":     "Offgrid Browser (powered by lychee.js)",
+	"version":         "${version}",
 	"window": {
-		"title":    "Offgrid Browser (powered by lychee.js)",
-		"icon":     "./icon.png",
-		"toolbar":  true,
-		"frame":    true,
-		"width":    640,
-		"height":   480,
-		"position": "center"
+		"title":       "Offgrid Browser (powered by lychee.js)",
+		"icon":        "./icon.png",
+		"toolbar":     false,
+		"frame":       false,
+		"show":        true,
+		"transparent": true,
+		"width":       640,
+		"height":      512,
+		"position":    "center",
+		"min_width":   400,
+		"min_height":  512
 	},
 	"webkit": {
 		"plugin": false

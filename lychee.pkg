@@ -50,7 +50,7 @@
 						"port": 13337
 					},
 					"server": {
-						"host": "localhost",
+						"host": null,
 						"port": 13337
 					}
 				}

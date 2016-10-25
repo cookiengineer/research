@@ -1,4 +1,12 @@
 
+header#wm {
+	border-radius: 0px;
+}
+
+main {
+	border-radius: 0px;
+}
+
 menu#wm-appmenu > img#wm-appicon {
 	border: 1px solid #242932;
 	background: #404857;

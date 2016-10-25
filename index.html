@@ -2,8 +2,9 @@
 <html>
 <head>
 	<title>Offgrid Browser</title>
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.25, maximum-scale=2, user-scalable=yes">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="64x64 32x32 16x16">
 
 	<!-- DESIGN -->
@@ -12,7 +13,10 @@
 	<link rel="stylesheet" href="./design/index.css">
 
 	<!-- BOOTSTRAP -->
-	<script src="/libraries/lychee/build/html/core.js"></script>
+	<script src="/libraries/lychee/build/html-nwjs/core.js"></script>
+
+	<!-- TODO: REMOVE THIS -->
+	<script src="file:///opt/lycheejs/libraries/lychee/build/html-nwjs/core.js"></script>
 
 	<style>
 	header#wm menu#wm-appstates > li[title] {
@@ -22,7 +26,7 @@
 	/* FOUC PREVENTION */
 	figure#fouc {
 		position: absolute;
-		top: 0px;
+		top: 42px;
 		right: 0px;
 		bottom: 0px;
 		left: 0px;
@@ -158,7 +162,14 @@
 	<script>
 	(function(lychee, global) {
 
-		lychee.pkginit('html/main', {
+		// TODO: Remove this crap to somewhere else
+		if (typeof process !== 'undefined') {
+			lychee.ROOT.lychee  = 'file:///opt/lycheejs';
+			lychee.ROOT.project = lychee.ROOT.lychee + '/projects/offgrid-browser';
+		}
+
+
+		lychee.pkginit('html-nwjs/main', {
 			debug:   false,
 			sandbox: false
 		}, {

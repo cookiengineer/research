@@ -1,50 +1,58 @@
 
 (function(global) {
 
-	if (typeof require === 'function') {
-
-		let gui     = require('nw.gui');
-		let win     = gui.Window.get();
-		let state   = 'normal';
-		let buttons = {
-			minimize: document.querySelector('#wm-minimize'),
-			maximize: document.querySelector('#wm-minimize'),
-			close:    document.querySelector('#wm-close')
-		};
-
-		if (buttons.minimize !== null) {
-
-			win.on('minimize', (e) => state = 'minimize');
-			win.on('restore',  (e) => state = 'normal');
-
-			buttons.minimize.onclick = (e) => {
-				win.minimize();
-			};
-
-		}
-
-		if (buttons.maximize !== null) {
-
-			win.on('maximize', (e) => state = 'maximize');
-
-			buttons.maximize.onclick = (e) => {
-
-				if (state !== 'maximize') {
-					win.maximize();
-					state = 'maximize';
-				} else if (state === 'maximize') {
-					win.unmaximize();
-					state = 'normal';
-				}
-
-			};
-
-		}
-
-	}
-
-
 	global.addEventListener('load', (e) => {
+
+		if (typeof require === 'function') {
+
+			let gui     = require('nw.gui');
+			let win     = gui.Window.get();
+			let state   = 'normal';
+			let buttons = {
+				minimize: document.querySelector('#wm-minimize'),
+				maximize: document.querySelector('#wm-maximize'),
+				close:    document.querySelector('#wm-close')
+			};
+
+			if (buttons.minimize !== null) {
+
+				win.on('minimize', (e) => state = 'minimize');
+				win.on('restore',  (e) => state = 'normal');
+
+				buttons.minimize.onclick = (e) => {
+					win.minimize();
+				};
+
+			}
+
+			if (buttons.maximize !== null) {
+
+				win.on('maximize', (e) => state = 'maximize');
+
+				buttons.maximize.onclick = (e) => {
+
+					if (state !== 'maximize') {
+						win.maximize();
+						state = 'maximize';
+					} else if (state === 'maximize') {
+						win.unmaximize();
+						state = 'normal';
+					}
+
+				};
+
+			}
+
+			if (buttons.close !== null) {
+
+				buttons.close.onclick = (e) => {
+					win.close();
+				};
+
+			}
+
+		}
+
 
 		let header = document.querySelector('header#wm');
 		if (header !== null) {

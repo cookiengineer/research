@@ -4,6 +4,7 @@
 	const document = global.document;
 	const states   = [].slice.call(document.querySelectorAll('#wm-appstates li'));
 	const views    = [].slice.call(document.querySelectorAll('main > section'));
+	const tabmenus = [].slice.call(document.querySelectorAll('main > section > header > ul'));
 
 
 
@@ -279,7 +280,7 @@
 
 		} else {
 
-			this.__elements.forEach((element, e) => {
+			this.__elements.forEach(element => {
 
 				let el_name = element.tagName.toLowerCase();
 				let el_type = element.getAttribute('type');
@@ -306,6 +307,22 @@
 	};
 
 	_Input.prototype = Object.assign({}, _Emitter.prototype, {
+
+		enable: function() {
+
+			this.__elements.forEach(element => {
+				element.removeAttribute('disabled');
+			});
+
+		},
+
+		disable: function() {
+
+			this.__elements.forEach(element => {
+				element.setAttribute('disabled', true);
+			});
+
+		},
 
 		getValue: function() {
 			return _get_value.call(this);
@@ -355,6 +372,28 @@
 				}
 
 			};
+
+		});
+
+	}
+
+
+	if (tabmenus.length > 0) {
+
+		tabmenus.forEach(tabmenu => {
+
+			tabmenu.addEventListener('click', function(e) {
+
+				let type = e.target.tagName.toLowerCase();
+				let url  = e.target.innerHTML || null;
+
+				if (type === 'li' && url !== null) {
+
+					console.log('TAB', type, url);
+
+				}
+
+			}, true);
 
 		});
 
@@ -449,5 +488,5 @@
 		window.$ = $;
 	}
 
-})(typeof global !== 'undefined' ? global : this);
+})(typeof window !== 'undefined' ? window : global);
 
