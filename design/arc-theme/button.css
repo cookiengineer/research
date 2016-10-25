@@ -13,13 +13,25 @@ button {
 	font-weight: normal;
 	font-style: normal;
 	cursor: pointer;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
-button:hover {
+button:hover,
+button:focus {
 	background: #4e5665;
 }
 
 button:active {
 	background: #5294e2;
+}
+
+button[disabled],
+button[disabled]:focus,
+button[disabled]:hover {
+	color: #68818c;
+	background: #3e4351;
+	border: 1px solid #303440;
+	cursor: not-allowed;
 }
 

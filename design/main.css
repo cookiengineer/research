@@ -27,7 +27,7 @@ section#browse > article {
 
 section#browse > footer > input[type="text"] {
 	width: 256px;
-	margin-left: calc(100% - 440px);
+	margin-left: calc(100% - 418px);
 }
 
 section#search > header > input[type="text"] {

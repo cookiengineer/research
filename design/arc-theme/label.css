@@ -3,5 +3,7 @@ label {
 	font-family: 'Cantarell';
 	font-weight: normal;
 	font-style: normal;
+	-webkit-user-select: none;
+	user-select: none;
 }
 

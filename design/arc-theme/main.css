@@ -65,6 +65,8 @@ section > header {
 	background: #383c4a;
 	border: 0px none;
 	border-bottom: 1px solid #272a34;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 section > header > ul {
@@ -133,5 +135,11 @@ section > footer {
 	background: #383c4a;
 	border: 0px none;
 	border-top: 1px solid #272a34;
+}
+
+section > footer,
+section > footer > * {
+	-webkit-user-select: none;
+	user-select: none;
 }
 
