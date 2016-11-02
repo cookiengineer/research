@@ -5,6 +5,52 @@ lychee.define('app.net.scraper.Reddit').exports(function(lychee, global, attachm
 	 * HELPERS
 	 */
 
+	const _transform = function(raw) {
+
+		let data = [];
+
+		if (raw instanceof Object) {
+
+			if (raw.data instanceof Object && raw.data.children instanceof Array) {
+
+				raw.data.children.forEach(function(post) {
+
+					let code = [];
+					let type = 'link';
+
+					if (post.data.selftext !== '') {
+						type = 'article';
+					}
+
+
+					if (type === 'link') {
+
+						code.push('### ' + post.data.title);
+						code.push('**author**: [' + post.data.author + '](reddit.com/u/' + post.data.author + ')');
+						code.push('[' + post.data.url + '](' + post.data.url + ')');
+
+					} else if (type === 'article') {
+
+						code.push('### ' + post.data.title);
+						code.push('**author**: [' + post.data.author + '](reddit.com/u/' + post.data.author + ')');
+						code.push(post.data.selftext);
+
+					}
+
+					data.push(code.join('\n'));
+
+				});
+
+			}
+
+		}
+
+
+		return data;
+
+	};
+
+	// r/<subreddit>
 	const _scrape_subreddit = function(url, oncomplete) {
 
 		let tmp  = url.split('/');
@@ -14,10 +60,15 @@ lychee.define('app.net.scraper.Reddit').exports(function(lychee, global, attachm
 		this.scraper.request({
 			url:  'https://www.reddit.com/r/' + subr + '.json',
 			type: 'json'
-		}, (data) => oncomplete(data));
+		}, function(raw) {
+
+			oncomplete(_transform(raw));
+
+		});
 
 	};
 
+	// u/<user>
 	const _scrape_user = function(url, oncomplete) {
 
 		let tmp  = url.split('/');
@@ -27,7 +78,11 @@ lychee.define('app.net.scraper.Reddit').exports(function(lychee, global, attachm
 		this.scraper.request({
 			url:  'https://www.reddit.com/user/' + user + '/submitted.json',
 			type: 'json'
-		}, (data) => oncomplete(data));
+		}, function(raw) {
+
+			oncomplete(_transform(raw));
+
+		});
 
 	};
 
@@ -52,10 +107,7 @@ lychee.define('app.net.scraper.Reddit').exports(function(lychee, global, attachm
 
 		can: function(url) {
 
-			// TODO: reddit.com/r/programming
 			// TODO: reddit.com/r/programming/comments/id/title
-			// TODO: reddit.com/u/username
-			// TODO: reddit.com/user/username
 
 			if (url.substr(0, 8) === 'https://') {
 				url = url.substr(8);
@@ -63,6 +115,7 @@ lychee.define('app.net.scraper.Reddit').exports(function(lychee, global, attachm
 				url = url.substr(7);
 			}
 
+			console.log(url);
 
 			if (url.substr(0, 11) === 'reddit.com/') {
 
@@ -78,6 +131,14 @@ lychee.define('app.net.scraper.Reddit').exports(function(lychee, global, attachm
 					return true;
 
 				}
+
+			} else if (url.substr(0, 3) === '/r/') {
+
+				return true;
+
+			} else if (url.substr(0, 3) === '/u/') {
+
+				return true;
 
 			}
 
@@ -109,6 +170,14 @@ lychee.define('app.net.scraper.Reddit').exports(function(lychee, global, attachm
 					_scrape_user.call(this, url, oncomplete);
 
 				}
+
+			} else if (url.substr(0, 3) === '/r/') {
+
+				_scrape_subreddit.call(this, url.substr(1), oncomplete);
+
+			} else if (url.substr(0, 3) === '/u/') {
+
+				_scrape_user.call(this, url.substr(1), oncomplete);
 
 			}
 

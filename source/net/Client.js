@@ -1,7 +1,8 @@
 
 lychee.define('app.net.Client').requires([
 	'app.net.client.Archive',
-	'app.net.client.Control'
+	'app.net.client.Control',
+	'lychee.codec.JSON'
 ]).includes([
 	'lychee.net.Client'
 ]).exports(function(lychee, global, attachments) {
@@ -9,6 +10,7 @@ lychee.define('app.net.Client').requires([
 	const _Client  = lychee.import('lychee.net.Client');
 	const _Archive = lychee.import('app.net.client.Archive');
 	const _Control = lychee.import('app.net.client.Control');
+	const _JSON    = lychee.import('lychee.codec.JSON');
 
 
 
@@ -19,6 +21,7 @@ lychee.define('app.net.Client').requires([
 	let Composite = function(data) {
 
 		let settings = Object.assign({
+			codec:     _JSON,
 			reconnect: 10000
 		}, data);
 
@@ -26,12 +29,6 @@ lychee.define('app.net.Client').requires([
 		_Client.call(this, settings);
 
 		settings = null;
-
-
-		this.codec = {
-			encode: (data) => new Buffer(JSON.stringify(data), 'utf8'),
-			decode: (data) => JSON.parse(data.toString('utf8'))
-		};
 
 
 

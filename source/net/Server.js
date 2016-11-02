@@ -1,7 +1,8 @@
 
 lychee.define('app.net.Server').requires([
 	'app.net.remote.Archive',
-	'app.net.remote.Control'
+	'app.net.remote.Control',
+	'lychee.codec.JSON'
 ]).includes([
 	'lychee.net.Server'
 ]).exports(function(lychee, global, attachments) {
@@ -9,6 +10,7 @@ lychee.define('app.net.Server').requires([
 	const _Archive = lychee.import('app.net.remote.Archive');
 	const _Control = lychee.import('app.net.remote.Control');
 	const _Server  = lychee.import('lychee.net.Server');
+	const _JSON    = lychee.import('lychee.codec.JSON');
 
 
 
@@ -19,16 +21,11 @@ lychee.define('app.net.Server').requires([
 	let Composite = function(data) {
 
 		let settings = Object.assign({
+			codec: _JSON
 		}, data);
 
 
 		_Server.call(this, settings);
-
-
-		this.codec = {
-			encode: (data) => new Buffer(JSON.stringify(data), 'utf8'),
-			decode: (data) => JSON.parse(data.toString('utf8'))
-		};
 
 
 
@@ -42,6 +39,8 @@ lychee.define('app.net.Server').requires([
 
 			remote.addService(new _Archive(remote));
 			remote.addService(new _Control(remote));
+
+console.log(remote);
 
 		}, this);
 

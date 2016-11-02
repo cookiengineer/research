@@ -5,12 +5,72 @@ lychee.define('app.net.Scraper').tags({
 	'app.net.scraper.Reddit'
 ]).supports(function(lychee, global) {
 
+	if (typeof global.XMLHttpRequest === 'function') {
+		return true;
+	}
+
 	return true;
+	// return false;
 
 }).exports(function(lychee, global, attachments) {
 
+	const _XHR     = global.XMLHttpRequest;
 	const _scraper = lychee.import('app.net.scraper');
 	const _PLUGINS = {};
+
+
+
+	/*
+	 * HELPERS
+	 */
+
+	const _request_html = function(url, callback) {
+
+		let xhr = new _XHR();
+
+		xhr.open('GET', url);
+
+		xhr.responseType = 'text';
+		xhr.setRequestHeader('Content-Type', 'text/html');
+
+		xhr.onload = function() {
+
+			let data = xhr.response;
+			if (data !== null) {
+				callback(data);
+			} else {
+				callback(null);
+			}
+
+		};
+
+		xhr.send(null);
+
+	};
+
+	const _request_json = function(url, callback) {
+
+		let xhr = new _XHR();
+
+		xhr.open('GET', url);
+
+		xhr.responseType = 'json';
+		xhr.setRequestHeader('Content-Type', 'application/json');
+
+		xhr.onload = function() {
+
+			let data = xhr.response;
+			if (data !== null) {
+				callback(data);
+			} else {
+				callback(null);
+			}
+
+		};
+
+		xhr.send(null);
+
+	};
 
 
 
@@ -29,9 +89,13 @@ lychee.define('app.net.Scraper').tags({
 
 			if (data !== null && callback !== null) {
 
-console.log('REQUESTING URL', data);
-
-callback.call(scope, null);
+				if (data.type === 'json') {
+					_request_json(data.url, callback.bind(scope));
+				} else if (data.type === 'html') {
+					_request_html(data.url, callback.bind(scope));
+				} else {
+					callback.call(scope, null);
+				}
 
 			}
 

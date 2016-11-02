@@ -32,9 +32,11 @@ lychee.define('app.state.Browse').includes([
 
 	const _on_change = function(url) {
 
-		let images  = _INPUTS.img.getValue();
-		let videos  = _INPUTS.vid.getValue();
+		let images  = _INPUTS.images.getValue();
+		let videos  = _INPUTS.videos.getValue();
 		let service = this.client.getService('control');
+
+console.log(service, url, images, videos);
 
 		if (service !== null) {
 

@@ -44,11 +44,12 @@ lychee.define('app.Main').requires([
 
 		this.bind('load', function(oncomplete) {
 
+			this.settings.appserver = this.settings.server;
+			this.settings.server    = null;
+
 			this.settings.appclient = this.settings.client;
 			this.settings.client    = null;
 
-			this.settings.appserver = this.settings.server;
-			this.settings.server    = null;
 
 			oncomplete(true);
 
@@ -56,28 +57,33 @@ lychee.define('app.Main').requires([
 
 		this.bind('init', function() {
 
-			let appclient = this.settings.appclient || null;
-			if (appclient !== null) {
-				this.client = new _app.net.Client(appclient);
-			}
-
 			let appserver = this.settings.appserver || null;
 			if (appserver !== null) {
 				this.server = new _app.net.Server(appserver);
 			}
 
+			let appclient = this.settings.appclient || null;
+			if (appclient !== null) {
 
-			this.setState('browse', new _app.state.Browse(this));
-			this.setState('search', new _app.state.Search(this));
+				setTimeout(function() {
+
+					this.client = new _app.net.Client(appclient);
+
+					this.setState('browse', new _app.state.Browse(this));
+					this.setState('search', new _app.state.Search(this));
 
 
-			let fouc = $.query('figure#fouc');
-			if (fouc !== null) {
-				$.remove('figure#fouc');
+					let fouc = $.query('figure#fouc');
+					if (fouc !== null) {
+						$.remove('figure#fouc');
+					}
+
+
+					this.changeState('browse');
+
+				}.bind(this), 500);
+
 			}
-
-
-			this.changeState('browse');
 
 		}, this, true);
 
