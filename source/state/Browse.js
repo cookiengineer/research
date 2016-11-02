@@ -6,6 +6,8 @@ lychee.define('app.state.Browse').includes([
 
 	const _Emitter = lychee.import('lychee.event.Emitter');
 	const _State   = lychee.import('lychee.app.State');
+	const _ARTICLE = $.output('#browse > article');
+	const _NEW_TAB = _ARTICLE.value();
 	const _INPUTS  = {
 		url:    $.input('#browse-url'),
 		images: $.input('#browse-images'),
@@ -16,8 +18,6 @@ lychee.define('app.state.Browse').includes([
 		save:   $.input('#browse-save')
 	};
 
-
-	global.__INPUTS = _INPUTS;
 
 
 	/*
@@ -32,11 +32,9 @@ lychee.define('app.state.Browse').includes([
 
 	const _on_change = function(url) {
 
-		let images  = _INPUTS.images.getValue();
-		let videos  = _INPUTS.videos.getValue();
+		let images  = _INPUTS.images.value();
+		let videos  = _INPUTS.videos.value();
 		let service = this.client.getService('control');
-
-console.log(service, url, images, videos);
 
 		if (service !== null) {
 

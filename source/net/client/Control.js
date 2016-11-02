@@ -18,11 +18,11 @@ lychee.define('app.net.client.Control').includes([
 
 		// TODO: Remove this debugging stuff
 
-		this.bind('browse',  (data) => console.log('browse',  data));
-		this.bind('news',    (data) => console.log('news',    data));
-		this.bind('search',  (data) => console.log('search',  data));
-		this.bind('archive', (data) => console.log('archive', data));
-		this.bind('backup',  (data) => console.log('backup',  data));
+		this.bind('browse',  (data) => console.info('browse',  data));
+		this.bind('news',    (data) => console.info('news',    data));
+		this.bind('search',  (data) => console.info('search',  data));
+		this.bind('archive', (data) => console.info('archive', data));
+		this.bind('backup',  (data) => console.info('backup',  data));
 
 	};
 
@@ -53,6 +53,7 @@ lychee.define('app.net.client.Control').includes([
 		 */
 
 		archive: function() {},
+		backup: function() {},
 
 		browse: function(data) {
 
@@ -76,9 +77,7 @@ lychee.define('app.net.client.Control').includes([
 
 		},
 
-		news: function() {},
-		search: function() {},
-		backup: function() {}
+		search: function() {}
 
 	};
 

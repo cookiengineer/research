@@ -79,9 +79,12 @@ lychee.define('app.Main').requires([
 					}
 
 
-					this.changeState('browse');
+					// XXX: Services need some sync time
+					setTimeout(function() {
+						this.changeState('browse');
+					}.bind(this), 250);
 
-				}.bind(this), 500);
+				}.bind(this), 250);
 
 			}
 

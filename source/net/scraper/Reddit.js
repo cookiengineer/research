@@ -9,6 +9,7 @@ lychee.define('app.net.scraper.Reddit').exports(function(lychee, global, attachm
 
 		let data = [];
 
+
 		if (raw instanceof Object) {
 
 			if (raw.data instanceof Object && raw.data.children instanceof Array) {
@@ -51,7 +52,7 @@ lychee.define('app.net.scraper.Reddit').exports(function(lychee, global, attachm
 	};
 
 	// r/<subreddit>
-	const _scrape_subreddit = function(url, oncomplete) {
+	const _scrape_subreddit = function(url, callback, scope) {
 
 		let tmp  = url.split('/');
 		let subr = tmp[1];
@@ -62,14 +63,14 @@ lychee.define('app.net.scraper.Reddit').exports(function(lychee, global, attachm
 			type: 'json'
 		}, function(raw) {
 
-			oncomplete(_transform(raw));
+			callback.call(scope, _transform(raw));
 
 		});
 
 	};
 
 	// u/<user>
-	const _scrape_user = function(url, oncomplete) {
+	const _scrape_user = function(url, callback, scope) {
 
 		let tmp  = url.split('/');
 		let user = tmp[1];
@@ -80,7 +81,7 @@ lychee.define('app.net.scraper.Reddit').exports(function(lychee, global, attachm
 			type: 'json'
 		}, function(raw) {
 
-			oncomplete(_transform(raw));
+			callback.call(scope, _transform(raw));
 
 		});
 
@@ -115,7 +116,6 @@ lychee.define('app.net.scraper.Reddit').exports(function(lychee, global, attachm
 				url = url.substr(7);
 			}
 
-			console.log(url);
 
 			if (url.substr(0, 11) === 'reddit.com/') {
 
@@ -147,7 +147,12 @@ lychee.define('app.net.scraper.Reddit').exports(function(lychee, global, attachm
 
 		},
 
-		scrape: function(url, oncomplete) {
+		scrape: function(url, callback, scope) {
+
+			url      = typeof url === 'string'      ? url      : '';
+			callback = callback instanceof Function ? callback : null;
+			scope    = scope !== undefined          ? scope    : this;
+
 
 			if (url.substr(0, 8) === 'https://') {
 				url = url.substr(8);
@@ -163,21 +168,21 @@ lychee.define('app.net.scraper.Reddit').exports(function(lychee, global, attachm
 
 				if (/^r\//g.test(url)) {
 
-					_scrape_subreddit.call(this, url, oncomplete);
+					_scrape_subreddit.call(this, url, callback, scope);
 
 				} else if (/^(u|user)\//g.test(url)) {
 
-					_scrape_user.call(this, url, oncomplete);
+					_scrape_user.call(this, url, callback, scope);
 
 				}
 
 			} else if (url.substr(0, 3) === '/r/') {
 
-				_scrape_subreddit.call(this, url.substr(1), oncomplete);
+				_scrape_subreddit.call(this, url.substr(1), callback, scope);
 
 			} else if (url.substr(0, 3) === '/u/') {
 
-				_scrape_user.call(this, url.substr(1), oncomplete);
+				_scrape_user.call(this, url.substr(1), callback, scope);
 
 			}
 

@@ -241,6 +241,8 @@
 				values.push(element.value);
 			} else if (el_name === 'input' && el_type === 'checkbox') {
 				values.push(element.checked);
+			} else {
+				values.push(element.innerHTML);
 			}
 
 		});
@@ -259,6 +261,11 @@
 
 	const _set_value = function(values) {
 
+		if (!(values instanceof Array)) {
+			values = [ values ];
+		}
+
+
 		if (values.length > 1) {
 
 			if (this.__elements.length === values.length) {
@@ -272,6 +279,8 @@
 						element.value = values[e];
 					} else if (el_name === 'input' && el_type === 'checkbox') {
 						element.checked = values[e] === true;
+					} else {
+						element.innerHTML = values[e];
 					}
 
 				});
@@ -289,6 +298,8 @@
 					element.value = values;
 				} else if (el_name === 'input' && el_type === 'checkbox') {
 					element.checked = values === true;
+				} else {
+					element.innerHTML = values;
 				}
 
 			});
@@ -324,12 +335,14 @@
 
 		},
 
-		getValue: function() {
-			return _get_value.call(this);
-		},
+		value: function(val) {
 
-		setValue: function(value) {
-			return _set_value.call(this, value);
+			if (val !== undefined) {
+				return _set_value.call(this, val);
+			} else {
+				return _get_value.call(this);
+			}
+
 		}
 
 	});
@@ -344,7 +357,17 @@
 	};
 
 	_Output.prototype = Object.assign({}, _Emitter.prototype, {
-		whatever: () => console.log('whatever')
+
+		value: function(val) {
+
+			if (val !== undefined) {
+				return _set_value.call(this, val);
+			} else {
+				return _get_value.call(this);
+			}
+
+		}
+
 	});
 
 
