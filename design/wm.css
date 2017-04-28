@@ -8,8 +8,8 @@ main {
 }
 
 menu#wm-appmenu > img#wm-appicon {
-	border: 1px solid #242932;
-	background: #404857;
+	/* background: #404857; */
+	background: transparent;
 }
 
 div#wm-actions > button#wm-donate {

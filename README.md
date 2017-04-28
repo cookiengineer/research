@@ -1,5 +1,5 @@
 
-# Offgrid Browser (Work in Progress)
+# Research (Work in Progress)
 
 brought to you as libre software with joy and pride by [Artificial Engineering](http://artificial.engineering).
 
@@ -9,14 +9,33 @@ Support our libre Bot Cloud via BTC [1CamMuvrFU1QAMebPoDsL3JrioVDoxezY2](bitcoin
 
 ## Overview
 
-Did you ever find yourself opening the exact same links on the internet
-because you forgot something? Worry no more, the Offgrid Browser is here
-to save you bandwidth!
+Project Research is a tool that helps you understand the internet more
+easily.
 
-The Offgrid Browser is made for slow internet connections and allows
-archiving articles in a local library that can be shared with others
-in your local network ([LAN](https://en.wikipedia.org/wiki/Local_area_network))
-to reduce further bandwidth usage by others.
+It has no support for cookies or logins of any kind. It is a
+privacy-respecting and content-agnostic web browser that is made for
+off-the-grid scenarios and won't load unnecessary content of websites
+that you don't need to read them.
+
+It saves bandwidth - it loads no JS, no Ads, no CSS, no Flash, no
+iframes, no analytics redirects. It loads only the type of content
+that you have chosen to load - which can be either of text (default),
+images or audio/video.
+
+It can archive ANY kind of content to a simple shareable offline
+archive folder on your hard drive that you can share via USB and reuse
+with other Research installations.
+
+It is peer-to-peer and allows sharing your offline archive of websites
+with other local instances, so that you don't waste bandwidth on a
+shared internet connection.
+
+It is easily customizable and hackable and embraces the hacking community
+rather than offloading it with a gigantic compiling toolchain!
+
+Under the hood it uses [nw.js](https://nwjs.io), [polyfillr](https://polyfillr.github.io)
+and [lychee.js](https://lychee.js) and has a zero-unnecessary-dependency
+philosophy.
 
 
 The Offgrid Browser is a project made with [lychee.js](https://lychee.js.org).
@@ -29,28 +48,15 @@ It is automatically built and deployed to GitHub using the following
 - `bin/publish.sh` publishes the binaries to a new GitHub Release.
 
 
-## Features
-
-The Offgrid Browser always downloads *no* JavaScript, *no* CSS, *no* Flash. Its
-main focus is back on the content, not on the interaction or the animated stuff
-around it:
-
-- Offline-first: Offgrid Browser always uses a local peer-to-peer connected LAN cache *before* requesting content again.
-- Privacy-first: Offgrid Browser respects your privacy and has *no cookie or login support* at all.
-- Content-first: Offgrid Browser makes all content extractable and readable.
-- Archive-first: Offgrid Browser can archive *any* downloaded content.
-- Opinion-first: Offgrid Browser lets you decide what to download: `Text`, `Images` and/or `Videos`.
-
-In order to have a smoother internet usage without bloat, the Offgrid Browser
-also blocks all known advertisement providers (in case they were requested).
-
-
 ## Work-in-Progress (aka not working)
 
 These are the features that are currently work-in-progress and are known
 to fail right now. If you want to help building these, you are welcome to
 submit an Issue or a Pull Request. We could use any help :)
 
+- Fallback Reader Functionality
+- Reddit Plugin
+- Imgur Plugin
 - Facebook Plugin
 - Gfycat Plugin
 - Instagram Plugin

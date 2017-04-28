@@ -7,7 +7,7 @@ lychee.define('app.state.Browse').includes([
 	const _Emitter = lychee.import('lychee.event.Emitter');
 	const _State   = lychee.import('lychee.app.State');
 	const _ARTICLE = $.output('#browse > article');
-	const _NEW_TAB = _ARTICLE.value();
+	const _NEW_TAB = _ARTICLE && _ARTICLE.value();
 	const _INPUTS  = {
 		url:    $.input('#browse-url'),
 		images: $.input('#browse-images'),

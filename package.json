@@ -5,13 +5,13 @@
 	"version":         "${version}",
 	"window": {
 		"title":       "Offgrid Browser (powered by lychee.js)",
-		"icon":        "./icon.png",
+		"icon":        "./icon.svg",
 		"toolbar":     false,
 		"frame":       false,
 		"show":        true,
 		"transparent": true,
-		"width":       640,
-		"height":      512,
+		"width":       1280,
+		"height":      800,
 		"position":    "center",
 		"min_width":   400,
 		"min_height":  512

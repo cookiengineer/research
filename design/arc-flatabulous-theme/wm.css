@@ -41,11 +41,11 @@ header#wm menu#wm-appmenu {
 
 header#wm img#wm-appicon {
 	display: block;
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 30px;
 	border: 1px solid transparent;
 	border-radius: 2px;
-	margin: 10px 0px 0px 10px;
+	margin: 5px 0px 0px 5px;
 	cursor: pointer;
 }
 
@@ -54,7 +54,7 @@ header#wm menu#wm-appstates {
 	margin: 7px auto 7px auto;
 	padding: 0px;
 	border: 1px solid #242932;
-	border-radius: 4px;
+	border-radius: 2px;
 }
 
 header#wm menu#wm-appstates > li {
@@ -68,7 +68,7 @@ header#wm menu#wm-appstates > li {
 	background: #404857;
 	list-style: none;
 	font-family: 'Cantarell';
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: normal;
 	font-style: normal;
 	text-align: center;
@@ -76,10 +76,10 @@ header#wm menu#wm-appstates > li {
 }
 
 header#wm menu#wm-appstates > li:first-child {
-	border-radius: 4px 0px 0px 4px;
+	border-radius: 2px 0px 0px 2px;
 }
 header#wm menu#wm-appstates > li:last-child {
-	border-radius: 0px 4px 4px 0px;
+	border-radius: 0px 2px 2px 0px;
 }
 
 header#wm menu#wm-appstates > li:focus,
@@ -118,24 +118,25 @@ div#wm-actions > button {
 	min-width: 36px;
 	height: 30px;
 	border: 1px solid transparent;
-	border-radius: 4px;
+	border-radius: 2px;
 	background: transparent;
 	box-sizing: border-box;
 	vertical-align: top;
+	outline: none;
 	cursor: pointer;
 }
 
 div#wm-actions > button:focus,
 div#wm-actions > button:hover {
 	border: 1px solid #242932;
-	border-radius: 4px;
+	border-radius: 2px;
 	background: #404857;
 }
 
 div#wm-actions > button:active {
 	color: #ffffff;
 	border: 1px solid #5294e2;
-	border-radius: 4px;
+	border-radius: 2px;
 	background: #5294e2;
 }
 
@@ -161,6 +162,7 @@ div#wm-buttons > button {
 	border: 0px solid transparent;
 	border-radius: 14px;
 	background: transparent;
+	outline: none;
 	cursor: pointer;
 }
 
