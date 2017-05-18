@@ -10,35 +10,50 @@ Support our libre Bot Cloud via BTC [1CamMuvrFU1QAMebPoDsL3JrioVDoxezY2](bitcoin
 ## Overview
 
 Project Research is a tool that helps you understand the internet more
-easily.
+easily and comes with an easy natural language interface. It is not
+a stupid assistant, but more of an "internet buddy" to ease up your
+web browsing experience and support you as far as possible.
 
-It has no support for cookies or logins of any kind. It is a
-privacy-respecting and content-agnostic web browser that is made for
-off-the-grid scenarios and won't load unnecessary content of websites
-that you don't need to read them.
+![dialog](./guides/screenshot/dialog.png)
 
-It saves bandwidth - it loads no JS, no Ads, no CSS, no Flash, no
-iframes, no analytics redirects. It loads only the type of content
-that you have chosen to load - which can be either of text (default),
-images or audio/video.
+
+## Features
+
+- does not load Cookies
+- does not load Flash
+- does not load JS
+- does not load CSS
+- does not load Advertisements
+- does not load iFrames
+
+You have full control over what content is requested. There's even a
+`Tethering Mode` that will allow you to _only_ load text content and
+will not load images or videos until you say so.
+
+Project Research also saves you bandwidth. By default, it will prefer
+the local remembered content and not request anything until you say so.
+You have full control about what content is loaded.
 
 It can archive ANY kind of content to a simple shareable offline
 archive folder on your hard drive that you can share via USB and reuse
-with other Research installations.
+with other Project Research installations on other computers.
 
 It is peer-to-peer and allows sharing your offline archive of websites
 with other local instances, so that you don't waste bandwidth on a
 shared internet connection.
 
-It is easily customizable and hackable and embraces the hacking community
-rather than offloading it with a gigantic compiling toolchain!
-
-Under the hood it uses [nw.js](https://nwjs.io), [polyfillr](https://polyfillr.github.io)
-and [lychee.js](https://lychee.js) and has a zero-unnecessary-dependency
-philosophy.
+Under the hood it uses [nw.js](https://nwjs.io) and [lychee.js](https://lychee.js)
+and has a zero-unnecessary-dependency philosophy.
 
 
-The Offgrid Browser is a project made with [lychee.js](https://lychee.js.org).
+## Installation
+
+For now, we don't have ready-to-use binaries. This project is still in
+alpha, but soon we may have some ready for you in the
+[releases](https://github.com/Artificial-Engineering/research/releases)
+section.
+
+Research is a project made with [lychee.js](https://lychee.js.org).
 
 It is automatically built and deployed to GitHub using the following
 `lycheejs-fertilizer` integration scripts:
@@ -47,6 +62,7 @@ It is automatically built and deployed to GitHub using the following
 - `bin/package.sh` bundles the project into binaries (`nwjs` platform)
 - `bin/publish.sh` publishes the binaries to a new GitHub Release.
 
+----------
 
 ## Work-in-Progress (aka not working)
 
@@ -62,13 +78,6 @@ submit an Issue or a Pull Request. We could use any help :)
 - Instagram Plugin
 - Medium Plugin
 
-
-## Installation
-
-This is to be done. There might be some prototypical releases
-in the [releases section](https://github.com/Artificial-Engineering/offgrid-browser/releases).
-
-
 ## Scraper Plugins
 
 [app.net.scraper.Reddit](./source/net/scraper/Reddit.js) supports the following URL schemes:
@@ -82,5 +91,5 @@ in the [releases section](https://github.com/Artificial-Engineering/offgrid-brow
 
 ## License
 
-The Offgrid Browser is released under [GNU GPL 3](./LICENSE_GPL3.txt) license.
+Project Research is released under [GNU GPL 3](./LICENSE_GPL3.txt) license.
 
