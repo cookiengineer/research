@@ -2,10 +2,11 @@
 lychee.define('app.Main').requires([
 	'app.net.Client',
 	'app.net.Server',
+	'app.state.Dialog',
 //	'app.state.Archive',
 //	'app.state.Backup',
-	'app.state.Browse',
-	'app.state.Search',
+//	'app.state.Browse',
+//	'app.state.Search',
 	'lychee.Input'
 ]).includes([
 	'lychee.app.Main'
@@ -57,6 +58,9 @@ lychee.define('app.Main').requires([
 
 		this.bind('init', function() {
 
+			this.setState('dialog', new _app.state.Dialog(this));
+
+
 			let appserver = this.settings.appserver || null;
 			if (appserver !== null) {
 				this.server = new _app.net.Server(appserver);
@@ -65,26 +69,14 @@ lychee.define('app.Main').requires([
 			let appclient = this.settings.appclient || null;
 			if (appclient !== null) {
 
-				setTimeout(function() {
+				this.client = new _app.net.Client(appclient);
+				this.client.bind('connect', function() {
+					this.changeState('dialog');
+				}, this);
 
-					this.client = new _app.net.Client(appclient);
+			} else {
 
-					this.setState('browse', new _app.state.Browse(this));
-					this.setState('search', new _app.state.Search(this));
-
-
-					let fouc = $.query('figure#fouc');
-					if (fouc !== null) {
-						$.remove('figure#fouc');
-					}
-
-
-					// XXX: Services need some sync time
-					setTimeout(function() {
-						this.changeState('browse');
-					}.bind(this), 250);
-
-				}.bind(this), 250);
+				this.changeState('dialog');
 
 			}
 

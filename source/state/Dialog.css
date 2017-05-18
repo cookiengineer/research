@@ -1,7 +1,12 @@
 
-figure#dialog {
+:host header,
+:host footer {
+	display: none;
+}
+
+:host article {
 	position: absolute;
-	top: 42px;
+	top: 0px;
 	right: 0px;
 	bottom: 0px;
 	left: 0px;
@@ -13,26 +18,27 @@ figure#dialog {
 	font-style: normal;
 	text-align: center;
 	background: #383c4a;
-	z-index: 1001;
 	user-select: none;
 	-webkit-user-select: none;
 	cursor: default;
 }
 
-figure#dialog div {
+:host article > figure {
 	position: absolute;
+	width: 50%;
 	top: 50%;
 	left: 50%;
-	width: 50%;
+	margin: 0px;
+	padding: 0px;
 	transform: translate(-50%, -50%);
 }
 
-figure#dialog p.response {
+:host article > figure p.response {
 	font-size: 32px;
 	margin: 0px 0px 32px 0px;
 }
 
-figure#dialog input.command {
+:host article > figure input.command {
 	width: 100%;
 	font-size: 32px;
 	height: 32px;
@@ -41,10 +47,6 @@ figure#dialog input.command {
 	background: transparent;
 	border-color: transparent;
 }
-
-
-
-
 
 
 

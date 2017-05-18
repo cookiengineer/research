@@ -4,6 +4,10 @@ lychee.define('app.state.Browse').includes([
 	'lychee.event.Emitter'
 ]).exports(function(lychee, global, attachments) {
 
+	const _DESIGN  = attachments["css"].buffer;
+
+	console.log(_DESIGN);
+
 	const _Emitter = lychee.import('lychee.event.Emitter');
 	const _State   = lychee.import('lychee.app.State');
 	const _ARTICLE = $.output('#browse > article');

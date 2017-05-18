@@ -1,10 +1,9 @@
 
-((global) => {
+(function(global) {
 
-	const document = global.document;
-	const states   = [].slice.call(document.querySelectorAll('#wm-appstates li'));
-	const views    = [].slice.call(document.querySelectorAll('main > section'));
-	const tabmenus = [].slice.call(document.querySelectorAll('main > section > header > ul'));
+	const _STYLES   = {};
+	const _document = global.document;
+	const _main     = _document.querySelector('main');
 
 
 
@@ -12,492 +11,35 @@
 	 * HELPERS
 	 */
 
-	const _unbind_event = function(event, callback, scope) {
+	const _Wrapper = function(element) {
 
-		if (this.___events !== undefined && this.___events[event] !== undefined) {
-
-			let found = false;
-
-			for (let e = 0, el = this.___events[event].length; e < el; e++) {
-
-				let entry = this.___events[event][e];
-
-				if ((callback === null || entry.callback === callback) && (scope === null || entry.scope === scope)) {
-
-					found = true;
-
-					this.___events[event].splice(e, 1);
-					el--;
-					e--;
-
-				}
-
-			}
-
-
-			return found;
-
-		}
-
-
-		return false;
+		this.element = element;
 
 	};
 
-	const _Emitter = function() {
+	_Wrapper.prototype = {
 
-		this.___events = [];
-
-	};
-
-	_Emitter.prototype = {
-
-		bind: function(event, callback, scope, once) {
-
-			event    = typeof event === 'string'    ? event    : null;
-			callback = callback instanceof Function ? callback : null;
-			scope    = scope !== undefined          ? scope    : this;
-			once     = once === true;
-
-
-			if (event === null || callback === null) {
-				return false;
-			}
-
-
-			let pass_event = false;
-			let pass_self  = false;
-
-			let modifier = event.charAt(0);
-			if (modifier === '@') {
-
-				event      = event.substr(1, event.length - 1);
-				pass_event = true;
-
-			} else if (modifier === '#') {
-
-				event     = event.substr(1, event.length - 1);
-				pass_self = true;
-
-			}
-
-
-			if (this.___events[event] === undefined) {
-				this.___events[event] = [];
-			}
-
-
-			this.___events[event].push({
-				pass_event: pass_event,
-				pass_self:  pass_self,
-				callback:   callback,
-				scope:      scope,
-				once:       once
-			});
-
-
-			return true;
-
+		state: function(state) {
+			this.element.className = state;
 		},
 
-		trigger: function(event, data) {
+		set: function(attribute, value) {
 
-			event = typeof event === 'string' ? event : null;
-			data  = data instanceof Array     ? data : null;
-
-
-			if (this.___events !== undefined && this.___events[event] !== undefined) {
-
-				let value = undefined;
-
-				for (let e = 0; e < this.___events[event].length; e++) {
-
-					let args  = [];
-					let entry = this.___events[event][e];
-
-					if (entry.pass_event === true) {
-
-						args.push(event);
-
-					} else if (entry.pass_self === true) {
-
-						args.push(this);
-
-					}
-
-
-					if (data !== null) {
-						args.push.apply(args, data);
-					}
-
-
-					let result = entry.callback.apply(entry.scope, args);
-					if (result !== undefined) {
-						value = result;
-					}
-
-
-					if (entry.once === true) {
-
-						if (this.unbind(event, entry.callback, entry.scope) === true) {
-							e--;
-						}
-
-					}
-
-				}
-
-
-				if (value !== undefined) {
-					return value;
-				} else {
-					return true;
-				}
-
+			let element = this.element;
+			if (element[attribute] !== undefined) {
+				element[attribute] = value;
+			} else {
+				element.setAttribute(attribute, value);
 			}
-
-
-			return false;
 
 		},
-
-		unbind: function(event, callback, scope) {
-
-			event    = typeof event === 'string'    ? event    : null;
-			callback = callback instanceof Function ? callback : null;
-			scope    = scope !== undefined          ? scope    : null;
-
-
-			let found = false;
-
-			if (event !== null) {
-
-				found = _unbind_event.call(this, event, callback, scope);
-
-			} else {
-
-				for (event in this.___events) {
-
-					let result = _unbind_event.call(this, event, callback, scope);
-					if (result === true) {
-						found = true;
-					}
-
-				}
-
-			}
-
-
-			return found;
-
-		}
-
-	};
-
-
-
-	/*
-	 * STREAMS
-	 */
-
-	const _bind_input = function() {
-
-		let that = this;
-
-
-		this.__elements.forEach((element) => {
-
-			let el_name = element.tagName.toLowerCase();
-			let el_type = element.getAttribute('type');
-
-			if (el_name === 'input' && el_type === 'text') {
-
-				element.onchange = function() {
-					that.trigger('change', [ this.value ]);
-				};
-
-			} else if (el_name === 'input' && el_type === 'checkbox') {
-
-				element.onchange = function() {
-					that.trigger('change', [ this.value === 'on' ]);
-				};
-
-			}
-
-		});
-
-	};
-
-	const _get_value = function() {
-
-		let values = [];
-
-		this.__elements.forEach((element) => {
-
-			let el_name = element.tagName.toLowerCase();
-			let el_type = element.getAttribute('type');
-
-			if (el_name === 'input' && el_type === 'text') {
-				values.push(element.value);
-			} else if (el_name === 'input' && el_type === 'checkbox') {
-				values.push(element.checked);
-			} else {
-				values.push(element.innerHTML);
-			}
-
-		});
-
-
-		if (values.length > 1) {
-			return values;
-		} else if (values[0] !== undefined) {
-			return values[0];
-		}
-
-
-		return null;
-
-	};
-
-	const _set_value = function(values) {
-
-		if (!(values instanceof Array)) {
-			values = [ values ];
-		}
-
-
-		if (values.length > 1) {
-
-			if (this.__elements.length === values.length) {
-
-				this.__elements.forEach((element, e) => {
-
-					let el_name = element.tagName.toLowerCase();
-					let el_type = element.getAttribute('type');
-
-					if (el_name === 'input' && el_type === 'text') {
-						element.value = values[e];
-					} else if (el_name === 'input' && el_type === 'checkbox') {
-						element.checked = values[e] === true;
-					} else {
-						element.innerHTML = values[e];
-					}
-
-				});
-
-			}
-
-		} else {
-
-			this.__elements.forEach(element => {
-
-				let el_name = element.tagName.toLowerCase();
-				let el_type = element.getAttribute('type');
-
-				if (el_name === 'input' && el_type === 'text') {
-					element.value = values;
-				} else if (el_name === 'input' && el_type === 'checkbox') {
-					element.checked = values === true;
-				} else {
-					element.innerHTML = values;
-				}
-
-			});
-
-		}
-
-	};
-
-	const _Input = function(raw) {
-
-		this.__elements = raw instanceof Array ? raw : [ raw ];
-
-		_Emitter.call(this);
-		_bind_input.call(this);
-
-	};
-
-	_Input.prototype = Object.assign({}, _Emitter.prototype, {
-
-		enable: function() {
-
-			this.__elements.forEach(element => {
-				element.removeAttribute('disabled');
-			});
-
-		},
-
-		disable: function() {
-
-			this.__elements.forEach(element => {
-				element.setAttribute('disabled', true);
-			});
-
-		},
-
-		value: function(val) {
-
-			if (val !== undefined) {
-				return _set_value.call(this, val);
-			} else {
-				return _get_value.call(this);
-			}
-
-		}
-
-	});
-
-
-	const _Output = function(raw) {
-
-		this.__elements = raw instanceof Array ? raw : [ raw ];
-
-		_Emitter.call(this);
-
-	};
-
-	_Output.prototype = Object.assign({}, _Emitter.prototype, {
-
-		value: function(val) {
-
-			if (val !== undefined) {
-				return _set_value.call(this, val);
-			} else {
-				return _get_value.call(this);
-			}
-
-		}
-
-	});
-
-
-
-	/*
-	 * INITIALIZATION
-	 */
-
-	if (states.length > 0 && views.length > 0) {
-
-		states.forEach(state => {
-
-			state.onclick = function(e) {
-
-				let main = global.MAIN || null;
-				let id   = this.innerHTML.toLowerCase();
-				if (main !== null) {
-
-					let result = main.changeState(id);
-					if (result === true) {
-						states.forEach(other => other.className = other === this ? 'active' : 'inactive');
-						views.forEach(view   => view.className  = view.id === id ? 'active' : 'inactive');
-					}
-
-				}
-
-			};
-
-		});
-
-	}
-
-
-	if (tabmenus.length > 0) {
-
-		tabmenus.forEach(tabmenu => {
-
-			tabmenu.addEventListener('click', function(e) {
-
-				let type = e.target.tagName.toLowerCase();
-				let url  = e.target.innerHTML || null;
-
-				if (type === 'li' && url !== null) {
-
-					console.log('TAB', type, url);
-
-				}
-
-			}, true);
-
-		});
-
-	}
-
-
-
-	const $ = {
 
 		query: function(query) {
 
-			query = typeof query === 'string' ? query : null;
-
-
-			if (query !== null) {
-
-				let result = [].slice.call(document.querySelectorAll(query));
-				if (result.length > 1) {
-					return result;
-				} else if (result.length === 1) {
-					return result[0];
-				}
-
+			let result = this.element.querySelector(query);
+			if (result !== null) {
+				return new _Wrapper(result);
 			}
-
-
-			return null;
-
-		},
-
-		remove: function(query) {
-
-			query = typeof query === 'string' ? query : null;
-
-
-			if (query !== null) {
-
-				let result = [].slice.call(document.querySelectorAll(query));
-				if (result.length > 0) {
-
-					result.forEach(node => {
-
-						let parent = node.parentNode;
-						if (parent !== null) {
-							parent.removeChild(node);
-						}
-
-					});
-
-					return true;
-
-				}
-
-			}
-
-
-			return false;
-
-		},
-
-		input: function(query) {
-
-			let element = this.query(query);
-			if (element !== null) {
-				return new _Input(element);
-			}
-
-
-			return null;
-
-		},
-
-		output: function(query) {
-
-			let element = this.query(query);
-			if (element !== null) {
-				return new _Output(element);
-			}
-
-
-			return null;
 
 		}
 
@@ -505,42 +47,90 @@
 
 
 
-	global.$ = $;
-
-	if (typeof window !== 'undefined') {
-		window.$ = $;
-	}
-
-
-
 	/*
-	 * EASTER EGGS
+	 * FUCKED STUFF
 	 */
 
-	const _COMMANDS = [
-		'search reddit for samaritan',
-		'find sameen shaw',
-		'locate harold finch',
-		'browse /r/machinelearning',
-		'investigate the machine',
-		'explain artificial intelligence',
-		'find samantha groves'
-	];
+	const _render_stylesheet = function(identifier, buffer) {
 
-	setTimeout(function() {
+		return buffer.split('\n').map(function(line) {
 
-		let input = $.query('#dialog input.command');
-    	if (input !== null) {
+			let tmp = line.trim();
+			if (tmp.substr(0, 6) === ':host(') {
 
-			let cmd = _COMMANDS[(Math.random() * _COMMANDS.length) | 0] || null;
-			if (cmd !== null) {
-				input.setAttribute('placeholder', cmd);
+				let i1 = tmp.indexOf(')', 6);
+				let i2 = tmp.indexOf(' ', 6);
+				if (i1 !== -1 && i1 < i2) {
+					return identifier + tmp.substr(6, i1 - 6) + tmp.substr(i1 + 1);
+				}
+
+			} else if (tmp.substr(0, 5) === ':host') {
+				return identifier + tmp.substr(5);
+			} else if (tmp.indexOf(':host') !== -1) {
+				return tmp.split(':host').join(identifier);
 			}
+
+			return tmp;
+
+		}).map(function(line) {
+
+			let tmp = line.trim();
+			if (tmp.substr(0, 9) === '::content') {
+				return identifier + tmp.substr(9);
+			} else if (tmp.indexOf(' ::content') !== -1) {
+				return tmp.split(' ::content').join('');
+			}
+
+			return tmp;
+
+		}).join('\n');
+
+	};
+
+
+
+	let _id = 0;
+
+	const $ = {
+
+		state: function(identifier, html, css) {
+
+			let element = document.createElement('section');
+
+			element.id        = identifier;
+			element.className = 'inactive';
+
+			_main.appendChild(element);
+
+
+			if (html instanceof Stuff) {
+				element.innerHTML = html.buffer || '';
+			}
+
+			if (css instanceof Stuff) {
+
+				let style = _STYLES[css.url] || null;
+				if (style === null) {
+
+					style = _STYLES[css.url] = document.createElement('style');
+					style.innerHTML = _render_stylesheet('section#' + identifier, css.buffer || '');
+					style.setAttribute('data-url', css.url);
+
+					document.head.appendChild(style);
+
+				}
+
+			}
+
+
+			return new _Wrapper(element);
 
 		}
 
-	}, 100);
+	};
 
+
+	global.$ = $;
 
 })(typeof window !== 'undefined' ? window : global);
 

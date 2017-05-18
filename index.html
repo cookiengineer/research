@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Offgrid Browser</title>
+	<title>Research</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.25, maximum-scale=2, user-scalable=yes">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,28 +14,17 @@
 
 	<!-- BOOTSTRAP -->
 	<script src="./libraries/lychee/build/html-nwjs/core.js"></script>
-
-	<style>
-	header#wm menu#wm-appstates > li[title] {
-		text-decoration: line-through;
-	}
-	</style>
+	<script src="./libraries/lychee/build/html-nwjs/dist/index.js"></script>
 
 </head>
 <body>
-	<figure id="dialog">
-		<div>
-			<img src="/design/icon.png">
-			<p class="response">What are your commands?</p>
-			<input class="command" type="text" placeholder="search reddit for samaritan">
-		</div>
-	</figure>
+
 	<header id="wm" class="active">
 		<menu id="wm-appmenu">
 			<img id="wm-appicon" src="/design/icon.png">
 		</menu>
 		<menu id="wm-appstates">
-			<li class="active">Browse</li><li>Search</li><li title="coming soon...">Archive</li><li title="coming soon...">Backup</li>
+			<!-- <li class="active">Browse</li><li>Search</li><li title="coming soon...">Archive</li><li title="coming soon...">Backup</li> -->
 		</menu>
 		<div id="wm-right">
 			<div id="wm-actions">
@@ -48,95 +37,17 @@
 		</div>
 	</header>
 
-	<main>
-
-		<section id="browse" class="active">
-			<header>
-				<input id="browse-url" type="text" placeholder="Enter URL to Article or Website (e.g. https://lychee.js.org)" value="">
-				<input id="browse-images" type="checkbox"><label for="browse-images" title="Download Images?">Images</label>
-				<input id="browse-videos" type="checkbox"><label for="browse-videos" title="Download Videos?">Videos</label>
-				<ul id="browse-tabs">
-					<li class="active">Empty Tab</li>
-				</ul>
-			</header>
-			<article>
-				<h3>Empty Tab Page</h3>
-				<p>
-					Please enter your URL in the above Textfield.
-				</p>
-				<p>
-					Choose optionally what kind of media you want
-					to load with the article. By default, only
-					Text will be loaded.
-				</p>
-				<p>
-					Don't worry: If you already saved an Article
-					to the Archive, the Article itself and its
-					Media won't be loaded again.
-					You can always Edit, Save or Reload any Article
-					(see the bottom bar below).
-				</p>
-				<p>
-					<b>Further Notes:</b>
-				</p>
-				<ul>
-					<li>JPG/PNG files count as Images</li>
-					<li>GIF files count as Videos</li>
-					<li>Audio streams count as Videos</li>
-				</ul>
-			</article>
-			<footer>
-				<button id="browse-edit" disabled>Edit</button>
-				<button id="browse-reload" disabled>Reload</button>
-				<input id="browse-tags" disabled type="text" placeholder="Enter Tags (e.g. stackoverflow bash curl)" value="">
-				<button id="browse-save" disabled>Save</button>
-			</footer>
-		</section>
-
-		<section id="search" class="inactive">
-			<header>
-				<input id="search-keywords" type="text" placeholder="Enter keywords (e.g. stackoverflow bash curl)" value="">
-				<input id="search-archive" type="checkbox" checked><label for="search-archive" title="Search Archive?">Archive</label>
-				<input id="search-duckduckgo" type="checkbox"><label for="search-duckduckgo" title="Search DuckDuckGo?">DuckDuckGo</label>
-				<input id="search-github" type="checkbox"><label for="search-github" title="Search GitHub?">GitHub</label>
-			</header>
-			<article>
-				Search State
-			</article>
-		</section>
-
-		<section id="archive" class="inactive">
-			<header>
-				<input id="archive-input" type="text" placeholder="Enter keywords (e.g. stackoverflow bash curl)" value="">
-			</header>
-			<article>
-				Archive State
-			</article>
-		</section>
-
-		<section id="backup" class="inactive">
-			<article>
-				Backup State
-			</article>
-		</section>
-
-		<section id="settings" class="inactive">
-			<article>
-				Settings State
-			</article>
-		</section>
-
-	</main>
+	<main><!-- APP STATES --></main>
 
 	<script>
 	(function(lychee, global) {
 
-		// TODO: Remove this crap to somewhere else
 		if (typeof process !== 'undefined') {
-			lychee.ROOT.lychee  = 'file:///opt/lycheejs';
+			lychee.ROOT.lychee  = '';
 			lychee.ROOT.project = '';
 		}
 
+		lychee.inject(lychee.ENVIRONMENTS['/libraries/lychee/dist']);
 
 		lychee.pkginit('html-nwjs/main', {
 			debug:   false,
