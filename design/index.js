@@ -511,5 +511,36 @@
 		window.$ = $;
 	}
 
+
+
+	/*
+	 * EASTER EGGS
+	 */
+
+	const _COMMANDS = [
+		'search reddit for samaritan',
+		'find sameen shaw',
+		'locate harold finch',
+		'browse /r/machinelearning',
+		'investigate the machine',
+		'explain artificial intelligence',
+		'find samantha groves'
+	];
+
+	setTimeout(function() {
+
+		let input = $.query('#dialog input.command');
+    	if (input !== null) {
+
+			let cmd = _COMMANDS[(Math.random() * _COMMANDS.length) | 0] || null;
+			if (cmd !== null) {
+				input.setAttribute('placeholder', cmd);
+			}
+
+		}
+
+	}, 100);
+
+
 })(typeof window !== 'undefined' ? window : global);
 

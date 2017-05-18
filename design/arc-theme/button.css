@@ -12,6 +12,7 @@ button {
 	font-family: 'Cantarell';
 	font-weight: normal;
 	font-style: normal;
+	outline: none;
 	cursor: pointer;
 	-webkit-user-select: none;
 	user-select: none;

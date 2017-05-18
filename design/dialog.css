@@ -1,0 +1,52 @@
+
+figure#dialog {
+	position: absolute;
+	top: 42px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	margin: 0px;
+	padding: 0px;
+	color: #ffffff;
+	font-family: 'Cantarell';
+	font-weight: normal;
+	font-style: normal;
+	text-align: center;
+	background: #383c4a;
+	z-index: 1001;
+	user-select: none;
+	-webkit-user-select: none;
+	cursor: default;
+}
+
+figure#dialog div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 50%;
+	transform: translate(-50%, -50%);
+}
+
+figure#dialog p.response {
+	font-size: 32px;
+	margin: 0px 0px 32px 0px;
+}
+
+figure#dialog input.command {
+	width: 100%;
+	font-size: 32px;
+	height: 32px;
+	line-height: 32px;
+	text-align: center;
+	background: transparent;
+	border-color: transparent;
+}
+
+
+
+
+
+
+
+
+

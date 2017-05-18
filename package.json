@@ -5,7 +5,7 @@
 	"version":         "${version}",
 	"window": {
 		"title":       "Offgrid Browser (powered by lychee.js)",
-		"icon":        "./icon.svg",
+		"icon":        "./design/icon.png",
 		"toolbar":     false,
 		"frame":       false,
 		"show":        true,

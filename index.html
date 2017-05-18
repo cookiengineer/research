@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.25, maximum-scale=2, user-scalable=yes">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="64x64 32x32 16x16">
+	<link rel="icon" type="image/x-icon" href="/design/favicon.ico" sizes="64x64 32x32 16x16">
 
 	<!-- DESIGN -->
 	<link rel="stylesheet" href="./design/arc-flatabulous-theme/index.css">
@@ -13,60 +13,26 @@
 	<link rel="stylesheet" href="./design/index.css">
 
 	<!-- BOOTSTRAP -->
-	<script src="/libraries/lychee/build/html-nwjs/core.js"></script>
-
-	<!-- TODO: REMOVE THIS -->
-	<script src="file:///opt/lycheejs/libraries/lychee/build/html-nwjs/core.js"></script>
+	<script src="./libraries/lychee/build/html-nwjs/core.js"></script>
 
 	<style>
 	header#wm menu#wm-appstates > li[title] {
 		text-decoration: line-through;
 	}
-
-	/* FOUC PREVENTION */
-	figure#fouc {
-		position: absolute;
-		top: 42px;
-		right: 0px;
-		bottom: 0px;
-		left: 0px;
-		margin: 0px;
-		padding: 0px;
-		color: #ffffff;
-		font-family: 'Cantarell';
-		font-weight: normal;
-		font-style: normal;
-		text-align: center;
-		background: rgba(0,0,0,0.25);
-		z-index: 1001;
-	}
-	figure#fouc div {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-	}
-	figure#fouc h3 {
-		font-size: 32px;
-		margin: 0px;
-	}
-	figure#fouc p {
-		font-size: 18px;
-		margin: 1em 0px 0px 0px;
-	}
 	</style>
 
 </head>
 <body>
-	<figure id="fouc">
+	<figure id="dialog">
 		<div>
-			<h3>Booting up...</h3>
-			<p>Please enjoy responsibly.</p>
+			<img src="/design/icon.png">
+			<p class="response">What are your commands?</p>
+			<input class="command" type="text" placeholder="search reddit for samaritan">
 		</div>
 	</figure>
 	<header id="wm" class="active">
 		<menu id="wm-appmenu">
-			<img id="wm-appicon" src="./icon.png">
+			<img id="wm-appicon" src="/design/icon.png">
 		</menu>
 		<menu id="wm-appstates">
 			<li class="active">Browse</li><li>Search</li><li title="coming soon...">Archive</li><li title="coming soon...">Backup</li>
@@ -149,6 +115,9 @@
 		</section>
 
 		<section id="backup" class="inactive">
+			<article>
+				Backup State
+			</article>
 		</section>
 
 		<section id="settings" class="inactive">
@@ -165,7 +134,7 @@
 		// TODO: Remove this crap to somewhere else
 		if (typeof process !== 'undefined') {
 			lychee.ROOT.lychee  = 'file:///opt/lycheejs';
-			lychee.ROOT.project = lychee.ROOT.lychee + '/projects/offgrid-browser';
+			lychee.ROOT.project = '';
 		}
 
 
