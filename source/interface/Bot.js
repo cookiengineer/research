@@ -61,11 +61,15 @@ lychee.define('app.interface.Bot').requires([
 				});
 
 
-				// XXX: If first intent is likely, skip the rest
-				if (filtered[0].probability > 0.9) {
-					return filtered.slice(0, 1);
-				} else {
-					return filtered;
+				if (filtered.length > 0) {
+
+					// XXX: If first intent is likely, skip the rest
+					if (filtered[0].probability > 0.9) {
+						return filtered.slice(0, 1);
+					} else {
+						return filtered;
+					}
+
 				}
 
 			}

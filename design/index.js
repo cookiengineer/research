@@ -58,6 +58,17 @@
 
 		},
 
+		value: function(value) {
+
+			let element = this.element;
+			if (element.value !== undefined) {
+				element.value = value;
+			} else {
+				element.innerHTML = value;
+			}
+
+		},
+
 		state: function(state) {
 			this.element.className = state;
 		},

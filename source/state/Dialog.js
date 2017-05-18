@@ -5,8 +5,9 @@ lychee.define('app.state.Dialog').requires([
 ]).exports(function(lychee, global, attachments) {
 
 	const _COMPONENT = $.state('dialog', attachments["html"], attachments["css"]);
-	const _OUTPUT    = _COMPONENT.query('p.response');
+	const _ICON      = _COMPONENT.query('div');
 	const _INPUT     = _COMPONENT.query('input.command');
+	const _OUTPUT    = _COMPONENT.query('p.response');
 	const _State     = lychee.import('lychee.app.State');
 
 
@@ -27,10 +28,9 @@ lychee.define('app.state.Dialog').requires([
 		'find sameen shaw',
 		'locate harold finch',
 		'browse /r/machinelearning',
-		'investigate the machine',
+		'locate the machine',
 		'explain artificial intelligence',
-		'find samantha groves',
-		'show the news'
+		'find samantha groves'
 	], _INPUT);
 
 
@@ -50,32 +50,51 @@ lychee.define('app.state.Dialog').requires([
 				return word.replace(/(\?|\!|\.)/g, '').trim();
 			}).filter(function(word) {
 				return word !== '';
-			}).join(' ')) || [];
+			}).join(' '));
 
-			for (let s = 0, sl = suggestions.length; s < sl; s++) {
+			if (suggestions !== null) {
 
-				let suggestion  = suggestions[s];
-				let probability = suggestion.probability;
-				let intent      = suggestion.intent;
+				for (let s = 0, sl = suggestions.length; s < sl; s++) {
 
-				let action = intent.action || null;
-				if (action !== null) {
+					let suggestion  = suggestions[s];
+					let probability = suggestion.probability;
+					let intent      = suggestion.intent;
 
-					let check = main.getState(action);
-					if (check !== null) {
+					let action = intent.action || null;
+					if (action !== null) {
 
-						main.changeState(action, intent);
+						let check = main.getState(action);
+						if (check !== null) {
 
-						break;
+							main.changeState(action, intent);
 
-					} else {
+							break;
 
-						console.warn('Unknown Action "' + action + '" (' + probability.toFixed(2) + ')');
-						console.warn(intent);
+						} else {
+
+							console.warn('Unknown Action "' + action + '" (' + probability.toFixed(2) + ')');
+							console.warn(intent);
+
+						}
 
 					}
 
 				}
+
+			} else {
+
+				_ICON.state('deny');
+				_OUTPUT.value('Please rephrase command.');
+
+				setTimeout(function() {
+
+					_ICON.state('wait');
+
+					setTimeout(function() {
+						_OUTPUT.value('What are your commands?');
+					}, 1000);
+
+				}, 500);
 
 			}
 
