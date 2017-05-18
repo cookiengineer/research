@@ -33,7 +33,16 @@ lychee.define('app.state.Dialog').includes([
 	], _INPUT);
 
 
-	_COMPONENT.state('active');
+
+	/*
+	 * HELPERS
+	 */
+
+	const _on_change = function(value) {
+
+		console.log('WHAT', value);
+
+	};
 
 
 
@@ -49,6 +58,39 @@ lychee.define('app.state.Dialog').includes([
 
 
 	Composite.prototype = {
+
+		/*
+		 * ENTITY API
+		 */
+
+		serialize: function() {
+
+			let data = _State.prototype.serialize.call(this);
+			data['constructor'] = 'app.state.Dialog';
+
+
+			return data;
+
+		},
+
+		enter: function(oncomplete) {
+
+			_COMPONENT.state('active');
+			_INPUT.bind('change', _on_change, this);
+
+			_State.prototype.enter.call(this, oncomplete);
+
+		},
+
+		leave: function(oncomplete) {
+
+			_INPUT.unbind('change', _on_change, this);
+			_COMPONENT.state('inactive');
+
+			_State.prototype.leave.call(this, oncomplete);
+
+		}
+
 	};
 
 

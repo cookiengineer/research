@@ -40,24 +40,36 @@
 	<main><!-- APP STATES --></main>
 
 	<script>
-	(function(lychee, global) {
+		(function(lychee, global) {
 
-		if (typeof process !== 'undefined') {
-			lychee.ROOT.lychee  = '';
-			lychee.ROOT.project = '';
-		}
+			lychee.inject(lychee.ENVIRONMENTS['/libraries/lychee/dist']);
 
-		lychee.inject(lychee.ENVIRONMENTS['/libraries/lychee/dist']);
+			if (typeof process !== 'undefined') {
+				lychee.ROOT.lychee  = '';
+				lychee.ROOT.project = '';
+			}
 
-		lychee.pkginit('html-nwjs/main', {
-			debug:   false,
-			sandbox: false
-		}, {
-		});
 
-	})(lychee, typeof global !== 'undefined' ? global : this);
+			setTimeout(function() {
+
+				let ui = new Stuff('./design/index.js');
+
+				ui.onload = function() {
+
+					lychee.pkginit('html-nwjs/main', {
+						debug:   false,
+						sandbox: false
+					}, {
+					});
+
+				};
+
+				ui.load();
+
+			}, 500);
+
+		})(lychee, typeof global !== 'undefined' ? global : this);
 	</script>
-	<script src="./design/index.js"></script>
 </body>
 </html>
 

@@ -68,17 +68,10 @@ lychee.define('app.Main').requires([
 
 			let appclient = this.settings.appclient || null;
 			if (appclient !== null) {
-
 				this.client = new _app.net.Client(appclient);
-				this.client.bind('connect', function() {
-					this.changeState('dialog');
-				}, this);
-
-			} else {
-
-				this.changeState('dialog');
-
 			}
+
+			this.changeState('dialog');
 
 		}, this, true);
 

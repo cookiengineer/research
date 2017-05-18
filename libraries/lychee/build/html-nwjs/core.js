@@ -919,7 +919,7 @@ lychee = typeof lychee !== 'undefined' ? lychee : (function(global) {
 				definition.exports = function(callback) {
 
 					lychee.Definition.prototype.exports.call(this, callback);
-					that.environment.define(this);
+					that.environment.define(this, false);
 
 				};
 
@@ -1013,7 +1013,7 @@ lychee = typeof lychee !== 'undefined' ? lychee : (function(global) {
 				if (_environment !== null) {
 
 					Object.values(_environment.definitions).forEach(function(definition) {
-						environment.define(definition);
+						environment.define(definition, true);
 					});
 
 				}
@@ -1088,7 +1088,7 @@ lychee = typeof lychee !== 'undefined' ? lychee : (function(global) {
 								if (_environment !== null) {
 
 									Object.values(_environment.definitions).forEach(function(definition) {
-										environment.define(definition);
+										environment.define(definition, true);
 									});
 
 								}
@@ -1162,7 +1162,7 @@ lychee = typeof lychee !== 'undefined' ? lychee : (function(global) {
 					let that = this;
 
 					Object.values(environment.definitions).forEach(function(definition) {
-						that.environment.define(definition);
+						that.environment.define(definition, true);
 					});
 
 					let build_old = this.environment.definitions[this.environment.build] || null;
@@ -3073,80 +3073,85 @@ lychee.Environment = typeof lychee.Environment !== 'undefined' ? lychee.Environm
 
 		},
 
-		define: function(definition) {
+		define: function(definition, inject) {
+
+			definition = definition instanceof lychee.Definition ? definition : null;
+			inject     = inject === true;
+
+
 
 			let filename = Composite.__FILENAME || null;
-			if (filename !== null) {
+			if (inject === false && filename !== null) {
 
-				if (definition instanceof lychee.Definition) {
+				let oldPackageId = definition.packageId;
+				let newPackageId = null;
 
-					let oldPackageId = definition.packageId;
-					let newPackageId = null;
+				for (let p = 0, pl = this.packages.length; p < pl; p++) {
 
-					for (let p = 0, pl = this.packages.length; p < pl; p++) {
+					let root = this.packages[p].root;
+					if (filename.substr(0, root.length) === root) {
+						newPackageId = this.packages[p].id;
+						break;
+					}
 
-						let root = this.packages[p].root;
-						if (filename.substr(0, root.length) === root) {
-							newPackageId = this.packages[p].id;
-							break;
+				}
+
+
+				let assimilation = true;
+
+				for (let p = 0, pl = this.packages.length; p < pl; p++) {
+
+					let id = this.packages[p].id;
+					if (id === oldPackageId || id === newPackageId) {
+						assimilation = false;
+						break;
+					}
+
+				}
+
+
+				if (assimilation === true) {
+
+					if (this.debug === true) {
+						this.global.console.log('lychee-Environment (' + this.id + '): Assimilating Definition "' + definition.id + '"');
+					}
+
+
+					this.__cache.assimilations.push(definition.id);
+
+				} else if (newPackageId !== null && newPackageId !== oldPackageId) {
+
+					if (this.debug === true) {
+						this.global.console.log('lychee-Environment (' + this.id + '): Injecting Definition "' + definition.id + '" as "' + newPackageId + '.' + definition.classId + '"');
+					}
+
+
+					definition.packageId = newPackageId;
+					definition.id        = definition.packageId + '.' + definition.classId;
+
+					for (let i = 0, il = definition._includes.length; i < il; i++) {
+
+						let inc = definition._includes[i];
+						if (inc.substr(0, oldPackageId.length) === oldPackageId) {
+							definition._includes[i] = newPackageId + inc.substr(oldPackageId.length);
 						}
 
 					}
 
+					for (let r = 0, rl = definition._requires.length; r < rl; r++) {
 
-					let assimilation = true;
-
-					for (let p = 0, pl = this.packages.length; p < pl; p++) {
-
-						let id = this.packages[p].id;
-						if (id === oldPackageId || id === newPackageId) {
-							assimilation = false;
-							break;
-						}
-
-					}
-
-
-					if (assimilation === true) {
-
-						if (this.debug === true) {
-							this.global.console.log('lychee-Environment (' + this.id + '): Assimilating Definition "' + definition.id + '"');
-						}
-
-
-						this.__cache.assimilations.push(definition.id);
-
-					} else if (newPackageId !== null && newPackageId !== oldPackageId) {
-
-						if (this.debug === true) {
-							this.global.console.log('lychee-Environment (' + this.id + '): Injecting Definition "' + definition.id + '" as "' + newPackageId + '.' + definition.classId + '"');
-						}
-
-
-						definition.packageId = newPackageId;
-						definition.id        = definition.packageId + '.' + definition.classId;
-
-						for (let i = 0, il = definition._includes.length; i < il; i++) {
-
-							let inc = definition._includes[i];
-							if (inc.substr(0, oldPackageId.length) === oldPackageId) {
-								definition._includes[i] = newPackageId + inc.substr(oldPackageId.length);
-							}
-
-						}
-
-						for (let r = 0, rl = definition._requires.length; r < rl; r++) {
-
-							let req = definition._requires[r];
-							if (req.substr(0, oldPackageId.length) === oldPackageId) {
-								definition._requires[r] = newPackageId + req.substr(oldPackageId.length);
-							}
-
+						let req = definition._requires[r];
+						if (req.substr(0, oldPackageId.length) === oldPackageId) {
+							definition._requires[r] = newPackageId + req.substr(oldPackageId.length);
 						}
 
 					}
 
 				}
+
+			} else {
+
+				// XXX: Injection has no safe guard
 
 			}
 

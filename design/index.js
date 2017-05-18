@@ -1,6 +1,7 @@
 
 (function(global) {
 
+	const _Emitter  = lychee.import('lychee.event.Emitter');
 	const _STYLES   = {};
 	const _document = global.document;
 	const _main     = _document.querySelector('main');
@@ -15,9 +16,29 @@
 
 		this.element = element;
 
+		_Emitter.call(this);
+
 	};
 
-	_Wrapper.prototype = {
+	_Wrapper.prototype = Object.assign({}, _Emitter.prototype, {
+
+		bind: function(event, callback, scope, once) {
+
+			this.element.addEventListener(event, function(data) {
+				this.trigger(event, [ this.element.value || this.element.innerHTML ]);
+			}.bind(this), true);
+
+			return _Emitter.prototype.bind.call(this, event, callback, scope, once);
+
+		},
+
+		unbind: function(event, callback, scope) {
+
+			this.element.removeEventListener(event);
+
+			return _Emitter.prototype.bind.call(this, event, callback, scope);
+
+		},
 
 		state: function(state) {
 			this.element.className = state;
@@ -43,7 +64,7 @@
 
 		}
 
-	};
+	});
 
 
 
