@@ -1,0 +1,64 @@
+{
+	"intentions": [
+		{
+			"action": "search",
+			"format": "search reddit for <input>",
+			"data": {
+				"plugin": "reddit",
+				"topic": "all"
+			}
+		}, {
+			"action": "search",
+			"format": "search <input> on reddit",
+			"data": {
+				"plugin": "reddit",
+				"topic": "all"
+			}
+		}, {
+			"action": "search",
+			"format": "search /r/<topic> for <input>",
+			"data": {
+				"plugin": "reddit"
+			}
+		}, {
+			"action": "search",
+			"format": "search <input> on /r/<topic>",
+			"data": {
+				"plugin": "reddit"
+			}
+		}, {
+			"action": "search",
+			"format": "find <input> on reddit",
+			"data": {
+				"plugin": "reddit",
+				"topic": "all"
+			}
+		}, {
+			"action": "search",
+			"format": "find <input> on /r/<topic>",
+			"data": {
+				"plugin": "reddit"
+			}
+		}, {
+			"action": "browse",
+			"format": "browse /r/<topic>",
+			"data": {
+				"plugin": "reddit"
+			}
+		}, {
+			"action": "browse",
+			"format": "browse reddit frontpage",
+			"data": {
+				"plugin": "reddit",
+				"topic": "all"
+			}
+		}, {
+			"action": "browse",
+			"format": "browse frontpage",
+			"data": {
+				"plugin": "reddit",
+				"topic": "all"
+			}
+		}
+	]
+}

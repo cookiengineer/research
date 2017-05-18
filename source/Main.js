@@ -1,18 +1,21 @@
 
 lychee.define('app.Main').requires([
+	'app.interface.Bot',
 	'app.net.Client',
 	'app.net.Server',
+	'app.plugin.Reddit',
 	'app.state.Dialog',
 //	'app.state.Archive',
 //	'app.state.Backup',
 //	'app.state.Browse',
-//	'app.state.Search',
+	'app.state.Search',
 	'lychee.Input'
 ]).includes([
 	'lychee.app.Main'
 ]).exports(function(lychee, global, attachments) {
 
 	const _app  = lychee.import('app');
+	const _Bot  = lychee.import('app.interface.Bot');
 	const _Main = lychee.import('lychee.app.Main');
 
 
@@ -33,6 +36,10 @@ lychee.define('app.Main').requires([
 			renderer: null,
 			viewport: null
 		}, data);
+
+
+		this.bot     = new _Bot();
+		this.plugins = {};
 
 
 		_Main.call(this, settings);
@@ -58,9 +65,6 @@ lychee.define('app.Main').requires([
 
 		this.bind('init', function() {
 
-			this.setState('dialog', new _app.state.Dialog(this));
-
-
 			let appserver = this.settings.appserver || null;
 			if (appserver !== null) {
 				this.server = new _app.net.Server(appserver);
@@ -71,6 +75,10 @@ lychee.define('app.Main').requires([
 				this.client = new _app.net.Client(appclient);
 			}
 
+
+			this.setPlugin('reddit', new _app.plugin.Reddit(this));
+
+			this.setState('dialog', new _app.state.Dialog(this));
 			this.changeState('dialog');
 
 		}, this, true);
@@ -105,6 +113,25 @@ lychee.define('app.Main').requires([
 
 
 			return data;
+
+		},
+
+		setPlugin: function(id, plugin) {
+
+			id     = typeof id === 'string'   ? id     : null;
+			plugin = plugin instanceof Object ? plugin : null;
+
+
+			if (id !== null) {
+
+				this.plugins[id] = plugin;
+
+				return true;
+
+			}
+
+
+			return false;
 
 		}
 

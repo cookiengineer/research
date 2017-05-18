@@ -132,12 +132,24 @@
 					}
 				}
 			},
+			"interface": {
+				"Bot": [
+					"js"
+				],
+				"Intention": [
+					"js"
+				]
+			},
 			"plugin": {
 				"Generic": [
 					"js"
 				],
 				"Imgur": [
 					"js"
+				],
+				"Reddit": [
+					"js",
+					"json"
 				]
 			},
 			"state": {

@@ -1,5 +1,6 @@
 
-lychee.define('app.state.Dialog').includes([
+lychee.define('app.state.Dialog').requires([
+]).includes([
 	'lychee.app.State'
 ]).exports(function(lychee, global, attachments) {
 
@@ -40,7 +41,33 @@ lychee.define('app.state.Dialog').includes([
 
 	const _on_change = function(value) {
 
-		console.log('WHAT', value);
+		let bot = this.bot || null;
+		if (bot !== null) {
+
+			let intentions = bot.command(value.split(' ').map(function(word) {
+				return word.replace(/(\?|\!|\.)/g, '').trim();
+			}).filter(function(word) {
+				return word !== '';
+			}).join(' ')) || null;
+
+			if (intentions.length > 0) {
+
+				console.log('Intentions are', intentions);
+
+				// if (intention.state === 'dialog') {
+				// 	// TODO: Respond with response
+				// } else {
+
+				// 	let main = this.main;
+				// 	if (main !== null) {
+				// 		main.changeState(intention.state, intention.data);
+				// 	}
+
+				// }
+
+			}
+
+		}
 
 	};
 
@@ -51,6 +78,9 @@ lychee.define('app.state.Dialog').includes([
 	 */
 
 	let Composite = function(main) {
+
+		this.bot = main.bot || null;
+
 
 		_State.call(this, main);
 
