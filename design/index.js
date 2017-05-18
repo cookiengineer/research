@@ -12,9 +12,14 @@
 	 * HELPERS
 	 */
 
+	const _proxy_callback = function(event, data) {
+		this.trigger(event, [ this.element.value || this.element.innerHTML ]);
+	};
+
 	const _Wrapper = function(element) {
 
-		this.element = element;
+		this.element   = element;
+		this.listeners = {};
 
 		_Emitter.call(this);
 
@@ -24,9 +29,15 @@
 
 		bind: function(event, callback, scope, once) {
 
-			this.element.addEventListener(event, function(data) {
-				this.trigger(event, [ this.element.value || this.element.innerHTML ]);
-			}.bind(this), true);
+			let listener = this.listeners[event] || null;
+			if (listener === null) {
+
+				listener = _proxy_callback.bind(this, event);
+				this.element.addEventListener(event, listener, true);
+				this.listeners[event] = listener;
+
+			}
+
 
 			return _Emitter.prototype.bind.call(this, event, callback, scope, once);
 
@@ -34,9 +45,16 @@
 
 		unbind: function(event, callback, scope) {
 
-			this.element.removeEventListener(event);
+			let listener = this.listeners[event] || null;
+			if (listener !== null) {
 
-			return _Emitter.prototype.bind.call(this, event, callback, scope);
+				this.element.removeEventListener(event, listener);
+				delete this.listeners[event];
+
+			}
+
+
+			return _Emitter.prototype.unbind.call(this, event, callback, scope);
 
 		},
 

@@ -1,5 +1,5 @@
 
-lychee.define('app.interface.Intention').exports(function(lychee, global, attachments) {
+lychee.define('app.interface.Intent').exports(function(lychee, global, attachments) {
 
 	/*
 	 * HELPERS
@@ -121,7 +121,7 @@ lychee.define('app.interface.Intention').exports(function(lychee, global, attach
 
 
 			return {
-				'constructor': 'app.interface.Intention',
+				'constructor': 'app.interface.Intent',
 				'arguments':   [ settings ],
 				'blob':        Object.keys(blob).length > 0 ? blob : null
 			};

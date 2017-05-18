@@ -1,5 +1,5 @@
 {
-	"intentions": [
+	"intents": [
 		{
 			"action": "search",
 			"format": "search reddit for <input>",

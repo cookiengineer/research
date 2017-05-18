@@ -78,7 +78,10 @@ lychee.define('app.Main').requires([
 
 			this.setPlugin('reddit', new _app.plugin.Reddit(this));
 
+
 			this.setState('dialog', new _app.state.Dialog(this));
+			this.setState('search', new _app.state.Search(this));
+
 			this.changeState('dialog');
 
 		}, this, true);

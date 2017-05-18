@@ -41,29 +41,41 @@ lychee.define('app.state.Dialog').requires([
 
 	const _on_change = function(value) {
 
-		let bot = this.bot || null;
-		if (bot !== null) {
+		let main = this.main || null;
+		let bot  = this.bot  || null;
 
-			let intentions = bot.command(value.split(' ').map(function(word) {
+		if (main !== null && bot !== null) {
+
+			let suggestions = bot.command(value.split(' ').map(function(word) {
 				return word.replace(/(\?|\!|\.)/g, '').trim();
 			}).filter(function(word) {
 				return word !== '';
-			}).join(' ')) || null;
+			}).join(' ')) || [];
 
-			if (intentions.length > 0) {
+			for (let s = 0, sl = suggestions.length; s < sl; s++) {
 
-				console.log('Intentions are', intentions);
+				let suggestion  = suggestions[s];
+				let probability = suggestion.probability;
+				let intent      = suggestion.intent;
 
-				// if (intention.state === 'dialog') {
-				// 	// TODO: Respond with response
-				// } else {
+				let action = intent.action || null;
+				if (action !== null) {
 
-				// 	let main = this.main;
-				// 	if (main !== null) {
-				// 		main.changeState(intention.state, intention.data);
-				// 	}
+					let check = main.getState(action);
+					if (check !== null) {
 
-				// }
+						main.changeState(action, intent);
+
+						break;
+
+					} else {
+
+						console.warn('Unknown Action "' + action + '" (' + probability.toFixed(2) + ')');
+						console.warn(intent);
+
+					}
+
+				}
 
 			}
 

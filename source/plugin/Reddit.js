@@ -1,10 +1,10 @@
 
 lychee.define('app.plugin.Reddit').requires([
-	'app.interface.Intention'
+	'app.interface.Intent'
 ]).exports(function(lychee, global, attachments) {
 
-	const _Intention = lychee.import('app.interface.Intention');
-	const _BLOB      = attachments["json"].buffer;
+	const _Intent = lychee.import('app.interface.Intent');
+	const _BLOB   = attachments["json"].buffer;
 
 
 
@@ -31,13 +31,13 @@ lychee.define('app.plugin.Reddit').requires([
 
 		deserialize: function(blob) {
 
-			if (blob.intentions instanceof Array) {
+			if (blob.intents instanceof Array) {
 
 				let bot = this.bot || null;
 				if (bot !== null) {
 
-					for (let i = 0, il = blob.intentions.length; i < il; i++) {
-						bot.addIntention(new _Intention(blob.intentions[i]));
+					for (let i = 0, il = blob.intents.length; i < il; i++) {
+						bot.addIntent(new _Intent(blob.intents[i]));
 					}
 
 				}

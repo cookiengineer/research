@@ -1,9 +1,9 @@
 
 lychee.define('app.interface.Bot').requires([
-	'app.interface.Intention'
+	'app.interface.Intent'
 ]).exports(function(lychee, global, attachments) {
 
-	const _Intention = lychee.import('app.interface.Intention');
+	const _Intent = lychee.import('app.interface.Intent');
 
 
 
@@ -13,7 +13,7 @@ lychee.define('app.interface.Bot').requires([
 
 	let Composite = function() {
 
-		this.intentions = [];
+		this.intents = [];
 
 	};
 
@@ -33,18 +33,18 @@ lychee.define('app.interface.Bot').requires([
 
 			if (sentence !== null) {
 
-				let filtered   = [];
-				let intentions = this.intentions;
+				let filtered = [];
+				let intents  = this.intents;
 
-				for (let i = 0, il = intentions.length; i < il; i++) {
+				for (let i = 0, il = intents.length; i < il; i++) {
 
-					let intention   = intentions[i];
-					let probability = intention.analyze(sentence);
+					let intent      = intents[i];
+					let probability = intent.analyze(sentence);
 					if (probability > 0.5) {
 
 						filtered.push({
 							probability: probability,
-							intention:   intention.clone(sentence)
+							intent:      intent.clone(sentence)
 						});
 
 					}
@@ -61,7 +61,7 @@ lychee.define('app.interface.Bot').requires([
 				});
 
 
-				// XXX: If first intention is likely, skip the rest
+				// XXX: If first intent is likely, skip the rest
 				if (filtered[0].probability > 0.9) {
 					return filtered.slice(0, 1);
 				} else {
@@ -80,14 +80,14 @@ lychee.define('app.interface.Bot').requires([
 		 * CUSTOM API
 		 */
 
-		addIntention: function(intention) {
+		addIntent: function(intent) {
 
-			intention = intention instanceof _Intention ? intention : null;
+			intent = intent instanceof _Intent ? intent : null;
 
 
-			if (intention !== null) {
+			if (intent !== null) {
 
-				this.intentions.push(intention);
+				this.intents.push(intent);
 
 				return true;
 
@@ -98,16 +98,16 @@ lychee.define('app.interface.Bot').requires([
 
 		},
 
-		removeIntention: function(intention) {
+		removeIntent: function(intent) {
 
-			intention = intention instanceof _Intention ? intention : null;
+			intent = intent instanceof _Intent ? intent : null;
 
 
-			if (intention !== null) {
+			if (intent !== null) {
 
-				let index = this.intentions.indexOf(intention);
+				let index = this.intents.indexOf(intent);
 				if (index !== -1) {
-					this.intentions.splice(index, 1);
+					this.intents.splice(index, 1);
 				}
 
 				return true;

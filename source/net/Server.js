@@ -40,8 +40,6 @@ lychee.define('app.net.Server').requires([
 			remote.addService(new _Archive(remote));
 			remote.addService(new _Control(remote));
 
-console.log(remote);
-
 		}, this);
 
 		this.bind('disconnect', function(remote) {
