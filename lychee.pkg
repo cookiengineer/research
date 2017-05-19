@@ -163,6 +163,8 @@
 					"js"
 				],
 				"Search": [
+					"css",
+					"html",
 					"js"
 				]
 			}

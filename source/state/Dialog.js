@@ -1,6 +1,5 @@
 
-lychee.define('app.state.Dialog').requires([
-]).includes([
+lychee.define('app.state.Dialog').includes([
 	'lychee.app.State'
 ]).exports(function(lychee, global, attachments) {
 
@@ -20,7 +19,7 @@ lychee.define('app.state.Dialog').requires([
 
 		let cmd = commands[(Math.random() * commands.length) | 0] || null;
 		if (cmd !== null) {
-			input.set('placeholder', cmd);
+			input.attr('placeholder', cmd);
 		}
 
 	})([

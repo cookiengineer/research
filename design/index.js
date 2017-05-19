@@ -27,6 +27,26 @@
 
 	_Wrapper.prototype = Object.assign({}, _Emitter.prototype, {
 
+		add: function(wrapper) {
+
+			if (wrapper !== undefined && wrapper.element) {
+				this.element.appendChild(wrapper.element);
+			}
+
+		},
+
+		remove: function(wrapper) {
+
+			if (wrapper !== undefined && wrapper.element) {
+
+				if (this.element === wrapper.element.parentNode) {
+					this.element.removeChild(wrapper.element);
+				}
+
+			}
+
+		},
+
 		bind: function(event, callback, scope, once) {
 
 			let listener = this.listeners[event] || null;
@@ -60,26 +80,58 @@
 
 		value: function(value) {
 
-			let element = this.element;
-			if (element.value !== undefined) {
-				element.value = value;
+			if (value !== undefined) {
+
+				let element = this.element;
+				if (element.value !== undefined) {
+					element.value = value;
+				} else {
+					element.innerHTML = value;
+				}
+
 			} else {
-				element.innerHTML = value;
+
+				let element = this.element;
+				if (element.value !== undefined) {
+					return element.value;
+				} else {
+					return element.innerHTML;
+				}
+
 			}
 
 		},
 
 		state: function(state) {
-			this.element.className = state;
+
+			if (state !== undefined) {
+				this.element.className = state;
+			} else {
+				return this.element.className;
+			}
+
 		},
 
-		set: function(attribute, value) {
+		attr: function(attribute, value) {
 
-			let element = this.element;
-			if (element[attribute] !== undefined) {
-				element[attribute] = value;
+			if (value !== undefined) {
+
+				let element = this.element;
+				if (element[attribute] !== undefined) {
+					element[attribute] = value;
+				} else {
+					element.setAttribute(attribute, value);
+				}
+
 			} else {
-				element.setAttribute(attribute, value);
+
+				let element = this.element;
+				if (element[attribute] !== undefined) {
+					return element[attribute];
+				} else {
+					return element.getAttribute(attribute);
+				}
+
 			}
 
 		},
@@ -142,6 +194,16 @@
 	let _id = 0;
 
 	const $ = {
+
+		render: function(type, html) {
+
+			let element = document.createElement(type);
+
+			element.innerHTML = html || '';
+
+			return new _Wrapper(element);
+
+		},
 
 		state: function(identifier, html, css) {
 

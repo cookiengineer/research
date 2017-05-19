@@ -3,7 +3,9 @@ lychee.define('app.state.Search').includes([
 	'lychee.app.State'
 ]).exports(function(lychee, global, attachments) {
 
-	const _State = lychee.import('lychee.app.State');
+	const _COMPONENT = $.state('search', attachments["html"], attachments["css"]);
+	const _ARTICLE   = _COMPONENT.query('article');
+	const _State     = lychee.import('lychee.app.State');
 
 
 
@@ -34,23 +36,20 @@ lychee.define('app.state.Search').includes([
 
 		},
 
-		deserialize: function(blob) {
-
-			_State.prototype.deserialize.call(this, blob);
-
-		},
-
 		enter: function(oncomplete, data) {
 
+			_COMPONENT.state('active');
 			console.log('SEARCH', data);
 
-			oncomplete(true);
+			_State.prototype.enter.call(this, oncomplete);
 
 		},
 
 		leave: function(oncomplete) {
 
-			oncomplete(true);
+			_COMPONENT.state('active');
+
+			_State.prototype.leave.call(this, oncomplete);
 
 		}
 
