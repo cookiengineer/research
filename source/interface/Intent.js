@@ -5,6 +5,36 @@ lychee.define('app.interface.Intent').exports(function(lychee, global, attachmen
 	 * HELPERS
 	 */
 
+	const _push_word = function(name, word, weight) {
+
+		name   = typeof name === 'string'   ? name   : null;
+		word   = typeof word === 'string'   ? word   : null;
+		weight = typeof weight === 'number' ? weight : 0.5;
+
+
+		if (name !== null && word !== null) {
+
+			if (this[name] === undefined) {
+				this[name] = [];
+			}
+
+			let found = this[name].find(function(value) {
+				return value.word === word;
+			}) || null;
+
+			if (found === null) {
+
+				this[name].push({
+					word:   word,
+					weight: weight
+				});
+
+			}
+
+		}
+
+	};
+
 	const _parse_result = function() {
 
 		if (this.format === null || this.sentence === null) {
@@ -33,7 +63,7 @@ lychee.define('app.interface.Intent').exports(function(lychee, global, attachmen
 
 				let name = temp.split(/<|>/g)[1] || null;
 				if (name !== null) {
-					data[name] = word;
+					_push_word.call(data, name, word, 0.5);
 				}
 
 			} else if (temp.includes('<') && temp.includes('>')) {
@@ -45,7 +75,7 @@ lychee.define('app.interface.Intent').exports(function(lychee, global, attachmen
 
 						let name = temp.substr(temp.indexOf('<') + 1, temp.indexOf('>') - temp.indexOf('<') - 1) || null;
 						if (name !== null) {
-							data[name] = word.substr(prefix.length);
+							_push_word.call(data, name, word.substr(prefix.length), 0.5);
 						}
 
 					}
@@ -57,7 +87,7 @@ lychee.define('app.interface.Intent').exports(function(lychee, global, attachmen
 
 						let name = temp.substr(temp.indexOf('<') + 1, temp.indexOf('>') - temp.indexOf('<') - 1) || null;
 						if (name !== null) {
-							data[name] = word.substr(0, word.length - suffix.length);
+							_push_word.call(data, name, word.substr(0, word.length - suffix.length), 0.5);
 						}
 
 					}
