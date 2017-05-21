@@ -9,6 +9,7 @@ lychee.define('app.Main').requires([
 //	'app.state.Backup',
 //	'app.state.Browse',
 	'app.state.Search',
+	'app.state.Settings',
 	'lychee.Input'
 ]).includes([
 	'lychee.app.Main'
@@ -80,8 +81,9 @@ lychee.define('app.Main').requires([
 			this.setPlugin('reddit', new _app.plugin.Reddit(this));
 
 
-			this.setState('dialog', new _app.state.Dialog(this));
-			this.setState('search', new _app.state.Search(this));
+			this.setState('dialog',   new _app.state.Dialog(this));
+			this.setState('search',   new _app.state.Search(this));
+			this.setState('settings', new _app.state.Settings(this));
 
 			this.changeState('dialog');
 

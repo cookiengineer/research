@@ -28,6 +28,14 @@
 
 	_Wrapper.prototype = Object.assign({}, _Emitter.prototype, {
 
+		enter: function() {
+			this.element.className = 'active';
+		},
+
+		leave: function() {
+			this.element.className = 'inactive';
+		},
+
 		add: function(wrapper) {
 
 			if (wrapper !== undefined && wrapper.element) {

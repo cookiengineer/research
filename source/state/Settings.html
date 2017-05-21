@@ -1,0 +1,60 @@
+<header>
+</header>
+<article>
+	<fieldset>
+		<legend><h3>Networking</h3></legend>
+		<div id="settings-tethering">
+			<h4><input type="checkbox"> Tethering Mode</h4>
+			<p class="info-dual inactive">
+				<span>
+					Research will load no images, no videos
+					and no other media until explicitely
+					instructed to do so.
+				</span>
+				<span>
+					Research will load images, videos and
+					other media automatically.
+				</span>
+			</p>
+		</div>
+		<div id="settings-stealth">
+			<h4><input type="checkbox" checked> Stealth Mode</h4>
+			<p class="info-dual active">
+				<span>
+					Research will use the local <abbr title="The Onion Router">TOR</abbr>
+					Proxy and randomize the user agent string.
+				</span>
+				<span>
+					Research will respect system-wide Proxy
+					settings and use a proper user agent string.
+				</span>
+			</p>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend><h3>Cache</h3></legend>
+		<div id="settings-cache-folder">
+			<h4>Cache Folder</h4>
+			<p class="info-single">
+				<input type="text" placeholder="~/Research" value="~/Research"/>
+				<br><br>
+				Research will automatically store its memory
+				into the cache folder. Absolute paths must
+				begin with <q><abbr title="/ is the system's root folder">/</abbr></q>
+				and relative paths with <q><abbr title="~ is the user's profile folder">~</abbr></q>.
+			</p>
+		</div>
+		<div id="settings-cache-clear">
+			<h4>Cache Memory</h4>
+			<p class="info-single">
+				<input placeholder="Dashwood" type="password" />
+				<button>Erase Memory</button>
+				<br><br>
+				Eight letters. It's your decision.
+			</p>
+		</div>
+	</fieldset>
+</article>
+<footer>
+	Project Research is &copy; 2017 by Artificial Engineering. Find out more at <a href="http://artificial.engineering">artificial.engineering</a>.
+</footer>

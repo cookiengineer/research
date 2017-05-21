@@ -23,7 +23,8 @@ article {
 	font-style: normal;
 }
 
-article a {
+article a,
+footer a {
 	padding: 0px 4px;
 	color: #5294e2;
 	text-decoration: none;
@@ -32,9 +33,32 @@ article a {
 }
 
 article a:focus,
-article a:hover {
+article a:hover,
+footer a:focus,
+footer a:hover {
 	border: 1px solid #5294e2;
 	background: #4e5665;
+}
+
+article abbr {
+	margin: 0px;
+	padding: 0px 0.25em;
+	text-decoration: none;
+	border-bottom: 1px solid #5294e2;
+	cursor: help;
+}
+
+article q {
+	margin: 0px;
+	padding: 0px 0.25em;
+	background: #2d323d;
+	font-family: 'monospace';
+	font-size: 1em;
+}
+
+article q:before,
+article q:after {
+	content: '';
 }
 
 article > * {
@@ -109,12 +133,15 @@ article > ul > li:before {
 }
 
 
-@media (max-width: 545px) {
 
-	section#browse > footer > input[type="text"] {
-		width: calc(100% - 184px);
-		margin: 0px;
-	}
+/*
+ * APP FOOTER
+ */
 
+footer {
+	font-family: 'Cantarell';
+	font-weight: normal;
+	font-style: normal;
+	text-align: center;
 }
 

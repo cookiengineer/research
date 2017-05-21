@@ -3,11 +3,11 @@ lychee.define('app.state.Dialog').includes([
 	'lychee.app.State'
 ]).exports(function(lychee, global, attachments) {
 
-	const _COMPONENT = $.state('dialog', attachments["html"], attachments["css"]);
-	const _ICON      = _COMPONENT.query('div');
-	const _INPUT     = _COMPONENT.query('input.command');
-	const _OUTPUT    = _COMPONENT.query('p.response');
-	const _State     = lychee.import('lychee.app.State');
+	const _STATE  = $.state('dialog', attachments["html"], attachments["css"]);
+	const _ICON   = _STATE.query('div');
+	const _INPUT  = _STATE.query('input.command');
+	const _OUTPUT = _STATE.query('p.response');
+	const _State  = lychee.import('lychee.app.State');
 
 
 
@@ -135,7 +135,7 @@ lychee.define('app.state.Dialog').includes([
 
 		enter: function(oncomplete) {
 
-			_COMPONENT.state('active');
+			_STATE.enter();
 			_INPUT.bind('change', _on_change, this);
 
 			_State.prototype.enter.call(this, oncomplete);
@@ -146,7 +146,7 @@ lychee.define('app.state.Dialog').includes([
 
 			_INPUT.unbind('change', _on_change, this);
 			_INPUT.value('');
-			_COMPONENT.state('inactive');
+			_STATE.leave();
 
 			_State.prototype.leave.call(this, oncomplete);
 

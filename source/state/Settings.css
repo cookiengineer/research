@@ -1,0 +1,103 @@
+
+:host header {
+	display: none;
+}
+
+:host article {
+	top: 0px;
+	background: #383c4a;
+}
+
+:host article fieldset {
+	min-width: 256px;
+	max-width: 512px;
+	margin: 0px auto 16px auto;
+	padding: 16px;
+	background: #404552;
+	border: 1px solid #272a34;
+}
+
+:host article fieldset:last-of-type {
+	margin-bottom: 0px;
+}
+
+:host article fieldset > legend {
+	height: 32px;
+	line-height: 30px;
+	margin: 0px;
+	padding: 0px 8px;
+	font-family: 'Cantarell';
+	font-size: 20px;
+	font-weight: normal;
+	background: #383c4a;
+	border: 1px solid #272a34;
+	border-radius: 2px;
+	box-sizing: border-box;
+}
+
+:host article fieldset > legend > h3 {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+}
+
+:host article fieldset div {
+	margin: 0px 0px 32px 0px;
+}
+
+:host article fieldset div:last-of-type {
+	margin-bottom: 0px;
+}
+
+:host article fieldset div h4 {
+	margin: 0px;
+	padding: 0px;
+	font-size: 20px;
+	font-weight: normal;
+	vertical-align: top;
+}
+
+:host article fieldset div h4 > input[type="checkbox"] {
+	vertical-align: bottom;
+}
+
+:host article fieldset div p {
+	min-height: 3em;
+	line-height: 1.5em;
+	margin: 1em 0px 0px 0px;
+	padding: 0px;
+}
+
+:host article fieldset p.info-dual {
+	display: block;
+	position: relative;
+}
+
+:host article fieldset p.info-dual > span {
+	display: block;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 32px;
+}
+
+:host article fieldset p.info-dual > span:nth-of-type(2),
+:host article fieldset p.info-dual.active > span:nth-of-type(1) {
+	opacity: 1;
+	z-index: 2;
+}
+
+
+:host article fieldset p.info-dual > span:nth-of-type(1),
+:host article fieldset p.info-dual.active > span:nth-of-type(2) {
+	opacity: 0;
+	z-index: 1;
+}
+
+:host article fieldset p.info-single {
+	display: block;
+	position: static;
+	padding-left: 32px;
+}
+

@@ -1,9 +1,9 @@
 
-lychee.define('app.state.Search').includes([
+lychee.define('app.state.Settings').includes([
 	'lychee.app.State'
 ]).exports(function(lychee, global, attachments) {
 
-	const _STATE   = $.state('search', attachments["html"], attachments["css"]);
+	const _STATE   = $.state('settings', attachments["html"], attachments["css"]);
 	const _ARTICLE = _STATE.query('article');
 	const _State   = lychee.import('lychee.app.State');
 
@@ -29,7 +29,7 @@ lychee.define('app.state.Search').includes([
 		serialize: function() {
 
 			let data = _State.prototype.serialize.call(this);
-			data['constructor'] = 'app.state.Search';
+			data['constructor'] = 'app.state.Settings';
 
 
 			return data;
@@ -39,7 +39,7 @@ lychee.define('app.state.Search').includes([
 		enter: function(oncomplete, data) {
 
 			_STATE.enter();
-			console.log('SEARCH', data);
+			console.log('SETTINGS', data);
 
 			_State.prototype.enter.call(this, oncomplete);
 
