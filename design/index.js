@@ -14,7 +14,7 @@
 	 */
 
 	const _proxy_callback = function(event, data) {
-		this.trigger(event, [ this.element.value || this.element.innerHTML ]);
+		return this.trigger(event, [ this.element.value || this.element.innerHTML ]);
 	};
 
 	const _Wrapper = function(element) {
@@ -64,6 +64,14 @@
 				listener = _proxy_callback.bind(this, event);
 				this.element.addEventListener(event, listener, true);
 				this.listeners[event] = listener;
+
+			}
+
+			if (event === 'click') {
+
+				this.element.onclick = function() {
+					return false;
+				};
 
 			}
 

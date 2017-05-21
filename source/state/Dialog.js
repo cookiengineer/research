@@ -3,26 +3,12 @@ lychee.define('app.state.Dialog').includes([
 	'lychee.app.State'
 ]).exports(function(lychee, global, attachments) {
 
-	const _STATE  = $.state('dialog', attachments["html"], attachments["css"]);
-	const _ICON   = _STATE.query('div');
-	const _INPUT  = _STATE.query('input.command');
-	const _OUTPUT = _STATE.query('p.response');
-	const _State  = lychee.import('lychee.app.State');
-
-
-
-	/*
-	 * EASTER EGGS
-	 */
-
-	(function(commands, input) {
-
-		let cmd = commands[(Math.random() * commands.length) | 0] || null;
-		if (cmd !== null) {
-			input.attr('placeholder', cmd);
-		}
-
-	})([
+	const _State       = lychee.import('lychee.app.State');
+	const _STATE       = $.state('dialog', attachments["html"], attachments["css"]);
+	const _ICON        = _STATE.query('div');
+	const _INPUT       = _STATE.query('input.command');
+	const _OUTPUT      = _STATE.query('p.response');
+	const _SUGGESTIONS = [
 		'search reddit for samaritan',
 		'find sameen shaw',
 		'locate harold finch',
@@ -30,7 +16,7 @@ lychee.define('app.state.Dialog').includes([
 		'locate the machine',
 		'explain artificial intelligence',
 		'find samantha groves'
-	], _INPUT);
+	];
 
 
 
@@ -136,6 +122,13 @@ lychee.define('app.state.Dialog').includes([
 		enter: function(oncomplete) {
 
 			_STATE.enter();
+			_INPUT.value('');
+
+			let suggestion = _SUGGESTIONS[(Math.random() * _SUGGESTIONS.length) | 0] || null;
+			if (suggestion !== null) {
+				_INPUT.attr('placeholder', suggestion);
+			}
+
 			_INPUT.bind('change', _on_change, this);
 
 			_State.prototype.enter.call(this, oncomplete);

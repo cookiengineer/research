@@ -5,7 +5,32 @@ lychee.define('app.state.Settings').includes([
 
 	const _STATE   = $.state('settings', attachments["html"], attachments["css"]);
 	const _ARTICLE = _STATE.query('article');
+	const _FOOTER  = _STATE.query('footer');
 	const _State   = lychee.import('lychee.app.State');
+
+
+	(function(footer) {
+
+		let link = footer.query('a');
+		if (link !== null) {
+
+			link.bind('click', function(value) {
+
+				let main = global.MAIN || null;
+				if (main !== null) {
+
+					main.changeState('browse', {
+						plugin: 'generic',
+						url:    value
+					});
+
+				}
+
+			}, this);
+
+		}
+
+	})(_FOOTER);
 
 
 
