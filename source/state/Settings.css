@@ -49,7 +49,7 @@
 	margin-bottom: 0px;
 }
 
-:host article fieldset div h4 {
+:host fieldset h4 {
 	margin: 0px;
 	padding: 0px;
 	font-size: 20px;
@@ -57,47 +57,53 @@
 	vertical-align: top;
 }
 
-:host article fieldset div h4 > input[type="checkbox"] {
+:host fieldset h4 > input[type="checkbox"] {
 	vertical-align: bottom;
 }
 
-:host article fieldset div p {
+:host fieldset p {
+	display: block;
+	position: static;
 	min-height: 3em;
 	line-height: 1.5em;
 	margin: 1em 0px 0px 0px;
+	padding: 0px 0px 0px 32px;
+}
+
+:host #settings-stealth p,
+:host #settings-tethering p {
+	display: block;
+	position: relative;
 	padding: 0px;
 }
 
-:host article fieldset p.info-dual {
-	display: block;
-	position: relative;
-}
-
-:host article fieldset p.info-dual > span {
+:host #settings-stealth p > span,
+:host #settings-tethering p > span {
 	display: block;
 	position: absolute;
 	top: 0px;
 	right: 0px;
 	bottom: 0px;
 	left: 32px;
+	transition: 250ms all ease-out;
 }
 
-:host article fieldset p.info-dual > span:nth-of-type(2),
-:host article fieldset p.info-dual.active > span:nth-of-type(1) {
+:host #settings-stealth p > span:nth-of-type(2),
+:host #settings-stealth p.active > span:nth-of-type(1),
+:host #settings-tethering p > span:nth-of-type(2),
+:host #settings-tethering p.active > span:nth-of-type(1) {
 	opacity: 1;
 	z-index: 2;
+	transition: 250ms 250ms all ease-out;
 }
 
 
-:host article fieldset p.info-dual > span:nth-of-type(1),
-:host article fieldset p.info-dual.active > span:nth-of-type(2) {
+:host #settings-stealth p > span:nth-of-type(1),
+:host #settings-stealth p.active > span:nth-of-type(2),
+:host #settings-tethering p > span:nth-of-type(1),
+:host #settings-tethering p.active > span:nth-of-type(2) {
 	opacity: 0;
 	z-index: 1;
-}
-
-:host article fieldset p.info-single {
-	display: block;
-	position: static;
-	padding-left: 32px;
+	transition: 250ms all ease-out;
 }
 

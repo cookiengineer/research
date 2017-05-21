@@ -36,7 +36,13 @@ lychee.define('app.Main').requires([
 			jukebox:  null,
 			loop:     null,
 			renderer: null,
-			viewport: null
+			viewport: null,
+
+			// Custom Settings
+			tethering: false,
+			stealth:   true,
+			cache:     '~/Research'
+
 		}, data);
 
 

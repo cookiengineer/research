@@ -14,7 +14,26 @@
 	 */
 
 	const _proxy_callback = function(event, data) {
-		return this.trigger(event, [ this.element.value || this.element.innerHTML ]);
+
+		let element = this.element;
+		let tagname = element.tagName.toLowerCase();
+		let value   = null;
+
+		if (/input/g.test(tagname)) {
+
+			let type = element.type;
+			if (type === 'text' || type === 'password') {
+				value = element.value;
+			} else if (type === 'checkbox') {
+				value = element.checked === true ? 'on' : 'off';
+			}
+
+		} else {
+			value = element.innerHTML;
+		}
+
+		return this.trigger(event, [ value ]);
+
 	};
 
 	const _Wrapper = function(element) {
