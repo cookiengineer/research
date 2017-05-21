@@ -54,17 +54,18 @@ section {
 
 section > header {
 	position: absolute;
-	height: 36px;
-	line-height: 36px;
+	height: 48px;
+	line-height: 48px;
 	top: 0px;
 	right: 0px;
 	bottom: auto;
 	left: 0px;
 	margin: 0px;
-	padding: 3px;
+	padding: 0px 8px;
 	background: #383c4a;
 	border: 0px none;
 	border-bottom: 1px solid #272a34;
+	box-sizing: border-box;
 	-webkit-user-select: none;
 	user-select: none;
 }
@@ -72,7 +73,7 @@ section > header {
 section > header > ul {
 	display: block;
 	width: auto;
-	height: 26px;
+	height: 30px;
 	margin: 0px;
 	padding: 0px;
 	overflow: visible;
@@ -114,9 +115,9 @@ section > header > ul > li.active {
 
 section > article {
 	position: absolute;
-	top: 43px;
+	top: 48px;
 	right: 0px;
-	bottom: 43px;
+	bottom: 48px;
 	left: 0px;
 	overflow-x: hidden;
 	overflow-y: scroll;
@@ -124,17 +125,18 @@ section > article {
 
 section > footer {
 	position: absolute;
-	height: 36px;
-	line-height: 36px;
+	height: 48px;
+	line-height: 48px;
 	top: auto;
 	right: 0px;
 	bottom: 0px;
 	left: 0px;
 	margin: 0px;
-	padding: 3px;
+	padding: 0px 8px;
 	background: #383c4a;
 	border: 0px none;
 	border-top: 1px solid #272a34;
+	box-sizing: border-box;
 }
 
 section > footer,

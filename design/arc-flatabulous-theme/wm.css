@@ -2,10 +2,11 @@
 header#wm {
 	display: block;
 	width: auto;
-	height: 42px;
+	height: 32px;
 	background: #2e333f;
 	border: 1px solid #272a34;
 	border-radius: 4px 4px 0px 0px;
+	box-sizing: border-box;
 	text-align: center;
 	position: fixed;
 	top: 0px;
@@ -28,7 +29,7 @@ header#wm.inactive {
 	background: #313743;
 }
 
-header#wm menu#wm-appmenu {
+header#wm div#wm-left {
 	display: inline-block;
 	position: absolute;
 	top: 0px;
@@ -39,58 +40,23 @@ header#wm menu#wm-appmenu {
 	padding: 0px;
 }
 
-header#wm img#wm-appicon {
+header#wm img#wm-icon {
 	display: block;
-	width: 30px;
+	width: 36px;
 	height: 30px;
+	margin: 0px;
+	padding: 0px 3px;
+	background: transparent;
 	border: 1px solid transparent;
 	border-radius: 2px;
-	margin: 5px 0px 0px 5px;
+	box-sizing: border-box;
 	cursor: pointer;
 }
 
-header#wm menu#wm-appstates {
-	display: inline-block;
-	margin: 7px auto 7px auto;
-	padding: 0px;
+header#wm img#wm-icon:hover {
 	border: 1px solid #242932;
 	border-radius: 2px;
-}
-
-header#wm menu#wm-appstates > li {
-	display: inline-block;
-	margin: 0px;
-	padding: 0px;
-	width: 100px;
-	height: 26px;
-	line-height: 26px;
-	color: #acb7c3;
 	background: #404857;
-	list-style: none;
-	font-family: 'Cantarell';
-	font-size: 14px;
-	font-weight: normal;
-	font-style: normal;
-	text-align: center;
-	cursor: pointer;
-}
-
-header#wm menu#wm-appstates > li:first-child {
-	border-radius: 2px 0px 0px 2px;
-}
-header#wm menu#wm-appstates > li:last-child {
-	border-radius: 0px 2px 2px 0px;
-}
-
-header#wm menu#wm-appstates > li:focus,
-header#wm menu#wm-appstates > li:hover {
-	background: #4e5665;
-}
-
-header#wm menu#wm-appstates > li.active {
-	color: #ffffff;
-	background: #5294e2;
-	font-weight: bold;
 }
 
 header#wm div#wm-right {
@@ -101,11 +67,9 @@ header#wm div#wm-right {
 	left: auto;
 }
 
-
-
 div#wm-actions {
 	display: inline-block;
-	margin: 6px 0px 0px 0px;
+	margin: 0px;
 	padding: 0px 16px 0px 0px;
 	border-right: 1px solid #414853;
 	vertical-align: top;
@@ -149,7 +113,7 @@ div#wm-actions > button#wm-settings:before {
 
 div#wm-buttons {
 	display: inline-block;
-	margin: 9px 12px 0px 0px;
+	margin: 3px 8px 0px 0px;
 	vertical-align: top;
 }
 
@@ -176,9 +140,6 @@ div#wm-buttons > button#wm-minimize {
 	background: #fac536;
 }
 
-div#wm-buttons > button#wm-minimize:hover {
-}
-
 div#wm-buttons > button#wm-maximize {
 	border: 1px solid #13c11e;
 	background: #39ea49;
@@ -194,16 +155,25 @@ div#wm-buttons > button#wm-close {
  * INACTIVE WINDOW
  */
 
-header#wm.inactive menu#wm-appstates > li.active {
-	color: #acb7c3;
-	background: #4878b2;
-}
-
-header#wm.inactive div#wm-buttons button#wm-minimize,
-header#wm.inactive div#wm-buttons button#wm-maximize,
-header#wm.inactive div#wm-buttons button#wm-close {
+header#wm.inactive div#wm-buttons > button#wm-minimize,
+header#wm.inactive div#wm-buttons > button#wm-maximize,
+header#wm.inactive div#wm-buttons > button#wm-close {
 	border: 1px solid #b4b4b4;
 	background: #d4d4d4;
 }
 
+header#wm.inactive div#wm-buttons > button#wm-minimize:hover {
+	border: 1px solid #da9e10;
+	background: #fac536;
+}
+
+header#wm.inactive div#wm-buttons > button#wm-maximize:hover {
+	border: 1px solid #13c11e;
+	background: #39ea49;
+}
+
+header#wm.inactive div#wm-buttons > button#wm-close:hover {
+	border: 1px solid #d52735;
+	background: #f25056;
+}
 

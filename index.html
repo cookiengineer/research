@@ -20,16 +20,17 @@
 <body>
 
 	<header id="wm" class="active">
-		<menu id="wm-appmenu">
-			<img id="wm-appicon" src="/design/icon.png">
-		</menu>
-		<menu id="wm-appstates">
+		<div id="wm-left">
+			<img id="wm-icon" src="/design/icon.png" onclick="MAIN.changeState('dialog')">
+		</div>
+		<menu id="wm-center">
+			<!-- was: appstates -->
 			<!-- <li class="active">Browse</li><li>Search</li><li title="coming soon...">Archive</li><li title="coming soon...">Backup</li> -->
 		</menu>
 		<div id="wm-right">
 			<div id="wm-actions">
 				<button id="wm-settings"></button>
-				<button id="wm-donate" onclick="window.location.href='bitcoin:1CamMuvrFU1QAMebPoDsL3JrioVDoxezY2?amount=0.5&label=Offgrid%20Browser%20Support';">Donate</button>
+				<button id="wm-donate" onclick="window.location.href='bitcoin:1CamMuvrFU1QAMebPoDsL3JrioVDoxezY2?amount=0.5&label=Research%20Support';">Donate</button>
 			</div>
 			<div id="wm-buttons">
 				<button id="wm-minimize"></button><button id="wm-maximize"></button><button id="wm-close"></button>

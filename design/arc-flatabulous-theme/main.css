@@ -11,7 +11,7 @@ body {
 
 main {
 	position: fixed;
-	top: 44px;
+	top: 32px;
 	right: 0px;
 	bottom: 0px;
 	left: 0px;
@@ -19,6 +19,7 @@ main {
 	border: 1px solid #272a34;
 	border-top: none;
 	border-radius: 0px 0px 4px 4px;
+	box-sizing: border-box;
 	z-index: 500;
 }
 

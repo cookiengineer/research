@@ -2,6 +2,7 @@
 (function(global) {
 
 	const _Emitter  = lychee.import('lychee.event.Emitter');
+	const _STATES   = {};
 	const _STYLES   = {};
 	const _document = global.document;
 	const _main     = _document.querySelector('main');
@@ -207,35 +208,42 @@
 
 		state: function(identifier, html, css) {
 
-			let element = document.createElement('section');
+			let state = _STATES[identifier] || null;
+			if (state === null) {
 
-			element.id        = identifier;
-			element.className = 'inactive';
+				let element = document.createElement('section');
 
-			_main.appendChild(element);
+				element.id        = identifier;
+				element.className = 'inactive';
+
+				_main.appendChild(element);
 
 
-			if (html instanceof Stuff) {
-				element.innerHTML = html.buffer || '';
-			}
+				if (html instanceof Stuff) {
+					element.innerHTML = html.buffer || '';
+				}
 
-			if (css instanceof Stuff) {
+				if (css instanceof Stuff) {
 
-				let style = _STYLES[css.url] || null;
-				if (style === null) {
+					let style = _STYLES[css.url] || null;
+					if (style === null) {
 
-					style = _STYLES[css.url] = document.createElement('style');
-					style.innerHTML = _render_stylesheet('section#' + identifier, css.buffer || '');
-					style.setAttribute('data-url', css.url);
+						style = _STYLES[css.url] = document.createElement('style');
+						style.innerHTML = _render_stylesheet('section#' + identifier, css.buffer || '');
+						style.setAttribute('data-url', css.url);
 
-					document.head.appendChild(style);
+						document.head.appendChild(style);
+
+					}
 
 				}
 
+				state = _STATES[identifier] = new _Wrapper(element);
+
 			}
 
 
-			return new _Wrapper(element);
+			return state;
 
 		}
 

@@ -8,7 +8,7 @@ section > header > input[type="checkbox"] {
 }
 
 section > article {
-	padding: 4px;
+	padding: 16px;
 }
 
 
@@ -39,8 +39,6 @@ article a:hover {
 
 article > * {
 	display: block;
-	min-width: 512px;
-	width: 66%;
 }
 
 article > h3 {
