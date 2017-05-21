@@ -5,7 +5,6 @@ header#wm {
 	height: 32px;
 	background: #2e333f;
 	border: 1px solid #272a34;
-	border-radius: 4px 4px 0px 0px;
 	box-sizing: border-box;
 	text-align: center;
 	position: fixed;
@@ -28,6 +27,11 @@ header#wm > * {
 header#wm.inactive {
 	background: #313743;
 }
+
+
+/*
+ * LEFT
+ */
 
 header#wm div#wm-left {
 	display: inline-block;
@@ -59,6 +63,85 @@ header#wm img#wm-icon:hover {
 	background: #404857;
 }
 
+
+
+/*
+ * CENTER
+ */
+
+div#wm-center {
+	position: absolute;
+	text-align: left;
+	top: 0px;
+	left: 48px;
+	right: auto;
+	bottom: auto;
+	margin: 0px;
+	padding: 0px;
+	height: 30px;
+	line-height: 30px;
+}
+
+ul.wm-history {
+	display: inline-block;
+	height: 30px;
+	margin: 0px 16px 0px 0px;
+	padding: 0px 0px 0px 16px;
+	border-left: 1px solid #414853;
+}
+
+ul.wm-history > li {
+	display: inline-block;
+	width: auto;
+	height: 30px;
+	margin: 0px 1px;
+	padding: 0px;
+	list-style: none;
+	border: 1px solid transparent;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+
+ul.wm-history > li:last-of-type {
+	margin: 0px;
+}
+
+ul.wm-history > li:hover {
+	border: 1px solid #242932;
+	border-radius: 2px;
+}
+
+ul.wm-history > li > img {
+	width: 36px;
+	height: 30px;
+	margin: 0px;
+	padding: 0px 3px;
+	background: transparent;
+	box-sizing: border-box;
+}
+
+ul.wm-history:nth-child(1)  > li:hover { background-color: rgba(208,  73,  75, 0.5); }
+ul.wm-history:nth-child(2)  > li:hover { background-color: rgba(243, 119, 122, 0.5); }
+ul.wm-history:nth-child(3)  > li:hover { background-color: rgba(253, 167, 169, 0.5); }
+
+ul.wm-history:nth-child(4)  > li:hover { background-color: rgba(210, 186,  74, 0.5); }
+ul.wm-history:nth-child(5)  > li:hover { background-color: rgba(245, 223, 120, 0.5); }
+ul.wm-history:nth-child(6)  > li:hover { background-color: rgba(255, 240, 168, 0.5); }
+
+ul.wm-history:nth-child(7)  > li:hover { background-color: #41aa3c; }
+ul.wm-history:nth-child(8)  > li:hover { background-color: #66c761; }
+ul.wm-history:nth-child(9)  > li:hover { background-color: #96de92; }
+
+ul.wm-history:nth-child(10) > li:hover { background-color: #503e91; }
+ul.wm-history:nth-child(11) > li:hover { background-color: #6e5da9; }
+ul.wm-history:nth-child(12) > li:hover { background-color: #998cc9; }
+
+
+
+/*
+ * RIGHT
+ */
+
 header#wm div#wm-right {
 	position: absolute;
 	top: 0px;
@@ -81,6 +164,7 @@ div#wm-actions > button {
 	padding: 0px;
 	min-width: 36px;
 	height: 30px;
+	color: #ffffff;
 	border: 1px solid transparent;
 	border-radius: 2px;
 	background: transparent;
@@ -88,6 +172,10 @@ div#wm-actions > button {
 	vertical-align: top;
 	outline: none;
 	cursor: pointer;
+}
+
+div#wm-actions > button#wm-donate {
+	padding: 0px 8px;
 }
 
 div#wm-actions > button:focus,
@@ -113,8 +201,9 @@ div#wm-actions > button#wm-settings:before {
 
 div#wm-buttons {
 	display: inline-block;
-	margin: 3px 8px 0px 0px;
-	vertical-align: top;
+	margin: 0px 8px 0px 0px;
+	vertical-align: middle;
+	line-height: 30px;
 }
 
 div#wm-buttons > button {
@@ -123,9 +212,10 @@ div#wm-buttons > button {
 	height: 14px;
 	margin: 0px 0px 0px 16px;
 	padding: 0px;
-	border: 0px solid transparent;
-	border-radius: 14px;
 	background: transparent;
+	border: 1px solid transparent;
+	border-radius: 16px;
+	box-sizing: border-box;
 	outline: none;
 	cursor: pointer;
 }
@@ -155,6 +245,22 @@ div#wm-buttons > button#wm-close {
  * INACTIVE WINDOW
  */
 
+header#wm.inactive img#wm-icon {
+	opacity: 0.5;
+}
+
+header#wm.inactive img#wm-icon:hover {
+	opacity: 1;
+}
+
+header#wm.inactive div#wm-center > ul.wm-history li img {
+	opacity: 0.5;
+}
+
+header#wm.inactive div#wm-center > ul.wm-history li:hover img {
+	opacity: 1;
+}
+
 header#wm.inactive div#wm-buttons > button#wm-minimize,
 header#wm.inactive div#wm-buttons > button#wm-maximize,
 header#wm.inactive div#wm-buttons > button#wm-close {
@@ -175,5 +281,19 @@ header#wm.inactive div#wm-buttons > button#wm-maximize:hover {
 header#wm.inactive div#wm-buttons > button#wm-close:hover {
 	border: 1px solid #d52735;
 	background: #f25056;
+}
+
+
+
+/*
+ * SMALL WINDOW FIXES
+ */
+
+@media (max-width: 525px) {
+
+	header#wm div#wm-right div#wm-actions {
+		display: none;
+	}
+
 }
 

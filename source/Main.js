@@ -17,6 +17,7 @@ lychee.define('app.Main').requires([
 	const _app  = lychee.import('app');
 	const _Bot  = lychee.import('app.interface.Bot');
 	const _Main = lychee.import('lychee.app.Main');
+	const _WM   = lychee.import('WM');
 
 
 
@@ -116,6 +117,28 @@ lychee.define('app.Main').requires([
 
 
 			return data;
+
+		},
+
+
+
+		/*
+		 * CUSTOM API
+		 */
+
+		changeState: function(id, data) {
+
+			let oldstate = this.state;
+
+
+			let result = _Main.prototype.changeState.call(this, id, data);
+			if (result === true) {
+
+				if (_WM !== null) {
+					_WM.changeState(id, data);
+				}
+
+			}
 
 		},
 

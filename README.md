@@ -77,16 +77,28 @@ submit an Issue or a Pull Request. We could use any help :)
 - Gfycat Plugin
 - Instagram Plugin
 - Medium Plugin
+- DuckDuckGo Plugin
 
-## Scraper Plugins
 
-[app.net.scraper.Reddit](./source/net/scraper/Reddit.js) supports the following URL schemes:
+----------
 
-- `/r/<subreddit>`
-- `/u/<username>`
-- `reddit.com/r/<subreddit>`
-- `reddit.com/u/<user>`
-- `reddit.com/user/<user>`
+
+## Usage / How To Test (for now)
+
+- Have a UNIX machine (Linux, OSX, BSD, whatever)
+- Install nw.js SDK on your machine
+- Do this in your Terminal:
+
+```bash
+git clone https://github.com/Artificial-Engineering/research.git;
+
+cd ./research;
+
+npm install;
+
+# If nw is not in your $PATH, use /path/to/nw binary
+nw .;
+```
 
 
 ## License

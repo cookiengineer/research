@@ -7,26 +7,28 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="icon" type="image/x-icon" href="/design/favicon.ico" sizes="64x64 32x32 16x16">
 
-	<!-- DESIGN -->
-	<link rel="stylesheet" href="./design/arc-flatabulous-theme/index.css">
-	<script src="./design/arc-flatabulous-theme/index.js"></script>
-	<link rel="stylesheet" href="./design/index.css">
+	<!-- BOOTSTRAP DESIGN -->
+	<link rel="stylesheet" href="./design/window/index.css">
+	<script src="./design/window/index.js"></script>
+	<link rel="stylesheet" href="./design/content/index.css">
+	<script src="./design/content/index.js"></script>
 
 	<!-- BOOTSTRAP -->
 	<script src="./libraries/lychee/build/html-nwjs/core.js"></script>
 	<script src="./libraries/lychee/build/html-nwjs/dist/index.js"></script>
+
+	<!-- APP DESIGN -->
+	<link rel="stylesheet" href="./design/index.css">
 
 </head>
 <body>
 
 	<header id="wm" class="active">
 		<div id="wm-left">
-			<img id="wm-icon" src="/design/icon.png" onclick="MAIN.changeState('dialog')">
+			<img id="wm-icon" src="/design/icon.png">
 		</div>
-		<menu id="wm-center">
-			<!-- was: appstates -->
-			<!-- <li class="active">Browse</li><li>Search</li><li title="coming soon...">Archive</li><li title="coming soon...">Backup</li> -->
-		</menu>
+		<div id="wm-center">
+		</div>
 		<div id="wm-right">
 			<div id="wm-actions">
 				<button id="wm-settings"></button>
@@ -41,6 +43,7 @@
 	<main><!-- APP STATES --></main>
 
 	<script>
+
 		(function(lychee, global) {
 
 			lychee.inject(lychee.ENVIRONMENTS['/libraries/lychee/dist']);
@@ -71,6 +74,7 @@
 
 		})(lychee, typeof global !== 'undefined' ? global : this);
 	</script>
+	<!-- <script src="flow/search-reddit.js"></script> -->
 </body>
 </html>
 

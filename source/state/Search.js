@@ -47,7 +47,7 @@ lychee.define('app.state.Search').includes([
 
 		leave: function(oncomplete) {
 
-			_COMPONENT.state('active');
+			_COMPONENT.state('inactive');
 
 			_State.prototype.leave.call(this, oncomplete);
 

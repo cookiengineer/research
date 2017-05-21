@@ -14,15 +14,9 @@
 main {
 	color: #ffffff;
 	font-size: 16px;
-	position: fixed;
-	top: 44px;
-	right: 0px;
-	bottom: 0px;
-	left: 0px;
 	background: #383c4a;
 	border: 1px solid #272a34;
 	border-top: none;
-	border-radius: 0px 0px 4px 4px;
 }
 
 main > section {

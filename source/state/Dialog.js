@@ -145,6 +145,7 @@ lychee.define('app.state.Dialog').includes([
 		leave: function(oncomplete) {
 
 			_INPUT.unbind('change', _on_change, this);
+			_INPUT.value('');
 			_COMPONENT.state('inactive');
 
 			_State.prototype.leave.call(this, oncomplete);
