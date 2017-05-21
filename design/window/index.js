@@ -5,6 +5,23 @@
 	 * HISTORY API
 	 */
 
+	const _set_active_tab = function(tab) {
+
+		let history = document.querySelector('header#wm #wm-center');
+		if (history !== null) {
+
+			Array.from(history.querySelectorAll('ul.wm-history')).forEach(function(list) {
+
+				Array.from(list.querySelectorAll('li')).forEach(function(other) {
+					other.className = other === tab.element ? 'active' : '';
+				});
+
+			});
+
+		}
+
+	};
+
 	const _Tab = function(state, data) {
 
 		let tab = document.createElement('li');
@@ -13,7 +30,20 @@
 		// TODO: Favicon support!?
 		img.src = '/design/icon.png';
 		tab.title = 'State: ' + state;
+
+		tab.onclick = function() {
+
+			let main = global.MAIN;
+			if (main.state !== main.__states[state]) {
+				main.changeState(state, data, true);
+			}
+
+			_set_active_tab(this);
+
+		}.bind(this);
+
 		tab.appendChild(img);
+
 
 		this.element = tab;
 
@@ -183,28 +213,39 @@
 
 		changeState: function(state, data) {
 
+			let tab = null;
+
 			if (state === 'dialog') {
 
+				tab = new _Tab(state, data);
 				WM.history = new _History();
-				WM.history.add(new _Tab(state, data));
+				WM.history.add(tab);
 				WM.state = state;
 
 			} else if (state === 'browse') {
 
-				WM.history.add(new _Tab(state, data));
+				tab = new _Tab(state, data);
+				WM.history.add(tab);
 				WM.state = state;
 
 			} else if (state === WM.state || WM.state === 'dialog') {
 
-				WM.history.add(new _Tab(state, data));
+				tab = new _Tab(state, data);
+				WM.history.add(tab);
 				WM.state = state;
 
 			} else if (state !== WM.state) {
 
+				tab = new _Tab(state, data);
 				WM.history = new _History();
-				WM.history.add(new _Tab(state, data));
+				WM.history.add(tab);
 				WM.state = state;
 
+			}
+
+
+			if (tab !== null) {
+				_set_active_tab(tab);
 			}
 
 		}

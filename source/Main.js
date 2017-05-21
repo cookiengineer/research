@@ -126,16 +126,22 @@ lychee.define('app.Main').requires([
 		 * CUSTOM API
 		 */
 
-		changeState: function(id, data) {
+		changeState: function(id, data, silent) {
 
-			let oldstate = this.state;
+			id     = typeof id === 'string' ? id   : null;
+			data   = data !== undefined     ? data : null;
+			silent = silent === true;
 
 
-			let result = _Main.prototype.changeState.call(this, id, data);
-			if (result === true) {
+			if (id !== null) {
 
-				if (_WM !== null) {
-					_WM.changeState(id, data);
+				let result = _Main.prototype.changeState.call(this, id, data);
+				if (result === true && silent === false) {
+
+					if (_WM !== null) {
+						_WM.changeState(id, data);
+					}
+
 				}
 
 			}

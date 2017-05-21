@@ -106,7 +106,8 @@ ul.wm-history > li:last-of-type {
 	margin: 0px;
 }
 
-ul.wm-history > li:hover {
+ul.wm-history > li:hover,
+ul.wm-history > li.active {
 	border: 1px solid #242932;
 	border-radius: 2px;
 }
@@ -126,27 +127,76 @@ ul.wm-history > li > img {
  * which is hsla(359, 59.0%, 55.1%, 1)
  */
 
-ul.wm-history:nth-child(1)  > li:hover { background: hsla(359, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(2)  > li:hover { background: hsla( 35, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(3)  > li:hover { background: hsla( 71, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(4)  > li:hover { background: hsla(107, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(5)  > li:hover { background: hsla(143, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(6)  > li:hover { background: hsla(179, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(7)  > li:hover { background: hsla(215, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(8)  > li:hover { background: hsla(251, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(9)  > li:hover { background: hsla(287, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(10) > li:hover { background: hsla(323, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(1) > li:hover,
+ul.wm-history:nth-child(1) > li.active,
+ul.wm-history:nth-child(11) > li:hover,
+ul.wm-history:nth-child(11) > li.active {
+	background: hsla(359, 59%, 55%, 0.5);
+}
 
-ul.wm-history:nth-child(11) > li:hover { background: hsla(359, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(12) > li:hover { background: hsla( 35, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(13) > li:hover { background: hsla( 71, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(14) > li:hover { background: hsla(107, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(15) > li:hover { background: hsla(143, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(16) > li:hover { background: hsla(179, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(17) > li:hover { background: hsla(215, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(18) > li:hover { background: hsla(251, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(19) > li:hover { background: hsla(287, 59%, 55%, 0.5); }
-ul.wm-history:nth-child(20) > li:hover { background: hsla(323, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(2) > li:hover,
+ul.wm-history:nth-child(2) > li.active,
+ul.wm-history:nth-child(12) > li:hover,
+ul.wm-history:nth-child(12) > li.active {
+	background: hsla( 35, 59%, 55%, 0.5);
+}
+
+ul.wm-history:nth-child(3) > li:hover,
+ul.wm-history:nth-child(3) > li.active,
+ul.wm-history:nth-child(13) > li:hover,
+ul.wm-history:nth-child(13) > li.active {
+	background: hsla( 71, 59%, 55%, 0.5);
+}
+
+ul.wm-history:nth-child(4) > li:hover,
+ul.wm-history:nth-child(4) > li.active,
+ul.wm-history:nth-child(14) > li:hover,
+ul.wm-history:nth-child(14) > li.active {
+	background: hsla(107, 59%, 55%, 0.5);
+}
+
+ul.wm-history:nth-child(5) > li:hover,
+ul.wm-history:nth-child(5) > li.active,
+ul.wm-history:nth-child(15) > li:hover,
+ul.wm-history:nth-child(15) > li.active {
+	background: hsla(143, 59%, 55%, 0.5);
+}
+
+ul.wm-history:nth-child(6) > li:hover,
+ul.wm-history:nth-child(6) > li.active,
+ul.wm-history:nth-child(16) > li:hover,
+ul.wm-history:nth-child(16) > li.active {
+	background: hsla(179, 59%, 55%, 0.5);
+}
+
+ul.wm-history:nth-child(7) > li:hover,
+ul.wm-history:nth-child(7) > li.active,
+ul.wm-history:nth-child(17) > li:hover,
+ul.wm-history:nth-child(17) > li.active {
+	background: hsla(215, 59%, 55%, 0.5);
+}
+
+ul.wm-history:nth-child(8) > li:hover,
+ul.wm-history:nth-child(8) > li.active,
+ul.wm-history:nth-child(18) > li:hover,
+ul.wm-history:nth-child(18) > li.active {
+	background: hsla(251, 59%, 55%, 0.5);
+}
+
+ul.wm-history:nth-child(9) > li:hover,
+ul.wm-history:nth-child(9) > li.active,
+ul.wm-history:nth-child(19) > li:hover,
+ul.wm-history:nth-child(19) > li.active {
+	background: hsla(287, 59%, 55%, 0.5);
+}
+
+ul.wm-history:nth-child(10) > li:hover,
+ul.wm-history:nth-child(10) > li.active,
+ul.wm-history:nth-child(20) > li:hover,
+ul.wm-history:nth-child(20) > li.active {
+	background: hsla(323, 59%, 55%, 0.5);
+}
+
 
 
 /*
