@@ -7,13 +7,22 @@
 
 	const _set_active_tab = function(tab) {
 
+		tab = tab instanceof _Tab ? tab : null;
+
+
 		let history = document.querySelector('header#wm #wm-center');
 		if (history !== null) {
 
 			Array.from(history.querySelectorAll('ul.wm-history')).forEach(function(list) {
 
 				Array.from(list.querySelectorAll('li')).forEach(function(other) {
-					other.className = other === tab.element ? 'active' : '';
+
+					if (tab !== null && other === tab.element) {
+						other.className = 'active';
+					} else {
+						other.className = '';
+					}
+
 				});
 
 			});
@@ -46,6 +55,8 @@
 
 
 		this.element = tab;
+		this.state   = state;
+		this.data    = data;
 
 	};
 
@@ -177,7 +188,22 @@
 
 				let main = global.MAIN;
 				if (main.state !== main.__states.dialog) {
-					main.changeState('dialog');
+
+					let history = WM.history;
+					if (history !== null) {
+
+						let tab = history.tabs[history.tabs.length - 1] || null;
+						if (tab !== null && tab.state === 'dialog') {
+							main.changeState('dialog', null, true);
+							_set_active_tab(tab);
+						} else {
+							main.changeState('dialog');
+						}
+
+					} else {
+						main.changeState('dialog');
+					}
+
 				}
 
 			}, true);
@@ -191,8 +217,10 @@
 
 				let main = global.MAIN;
 				if (main.state !== main.__states.settings) {
-					main.changeState('settings');
+					main.changeState('settings', null, true);
 				}
+
+				_set_active_tab(null);
 
 			}, true);
 
