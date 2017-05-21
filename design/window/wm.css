@@ -120,22 +120,33 @@ ul.wm-history > li > img {
 	box-sizing: border-box;
 }
 
-ul.wm-history:nth-child(1)  > li:hover { background-color: rgba(208,  73,  75, 0.5); }
-ul.wm-history:nth-child(2)  > li:hover { background-color: rgba(243, 119, 122, 0.5); }
-ul.wm-history:nth-child(3)  > li:hover { background-color: rgba(253, 167, 169, 0.5); }
+/*
+ * base color is #d0494b
+ * which is rgb(208, 73, 75)
+ * which is hsla(359, 59.0%, 55.1%, 1)
+ */
 
-ul.wm-history:nth-child(4)  > li:hover { background-color: rgba(210, 186,  74, 0.5); }
-ul.wm-history:nth-child(5)  > li:hover { background-color: rgba(245, 223, 120, 0.5); }
-ul.wm-history:nth-child(6)  > li:hover { background-color: rgba(255, 240, 168, 0.5); }
+ul.wm-history:nth-child(1)  > li:hover { background: hsla(359, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(2)  > li:hover { background: hsla( 35, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(3)  > li:hover { background: hsla( 71, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(4)  > li:hover { background: hsla(107, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(5)  > li:hover { background: hsla(143, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(6)  > li:hover { background: hsla(179, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(7)  > li:hover { background: hsla(215, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(8)  > li:hover { background: hsla(251, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(9)  > li:hover { background: hsla(287, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(10) > li:hover { background: hsla(323, 59%, 55%, 0.5); }
 
-ul.wm-history:nth-child(7)  > li:hover { background-color: #41aa3c; }
-ul.wm-history:nth-child(8)  > li:hover { background-color: #66c761; }
-ul.wm-history:nth-child(9)  > li:hover { background-color: #96de92; }
-
-ul.wm-history:nth-child(10) > li:hover { background-color: #503e91; }
-ul.wm-history:nth-child(11) > li:hover { background-color: #6e5da9; }
-ul.wm-history:nth-child(12) > li:hover { background-color: #998cc9; }
-
+ul.wm-history:nth-child(11) > li:hover { background: hsla(359, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(12) > li:hover { background: hsla( 35, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(13) > li:hover { background: hsla( 71, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(14) > li:hover { background: hsla(107, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(15) > li:hover { background: hsla(143, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(16) > li:hover { background: hsla(179, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(17) > li:hover { background: hsla(215, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(18) > li:hover { background: hsla(251, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(19) > li:hover { background: hsla(287, 59%, 55%, 0.5); }
+ul.wm-history:nth-child(20) > li:hover { background: hsla(323, 59%, 55%, 0.5); }
 
 
 /*
