@@ -1,10 +1,10 @@
 {
 	"main":            "./index.html",
-	"name":            "offgrid-browser",
-	"description":     "Offgrid Browser (powered by lychee.js)",
+	"name":            "research",
+	"description":     "Resarch (by Artificial Engineering)",
 	"version":         "${version}",
 	"window": {
-		"title":       "Offgrid Browser (powered by lychee.js)",
+		"title":       "Research (by Artificial Engineering)",
 		"icon":        "./design/icon.png",
 		"toolbar":     false,
 		"frame":       false,

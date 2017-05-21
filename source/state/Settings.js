@@ -159,7 +159,7 @@ lychee.define('app.state.Settings').includes([
 
 	let Composite = function(main) {
 
-		this.settings = main.settings || {};
+		this.settings = main.settings;
 
 
 		_State.call(this, main);
@@ -191,26 +191,15 @@ lychee.define('app.state.Settings').includes([
 			_STATE.enter();
 
 
-			for (let name in _ELEMENTS) {
+			let settings = this.settings;
 
-				let value = this.settings[name];
-				if (value !== undefined) {
-
-					if (typeof value === 'boolean') {
-
-						_ELEMENTS[name][0].attr('checked', value);
-						_ELEMENTS[name][1].state(value ? 'active' : 'inactive');
-
-					} else if (typeof value === 'string') {
-
-						_ELEMENTS[name][0].value(value);
-
-					}
-
-				}
-
-			}
-
+			_ELEMENTS.tethering[0].attr('checked', settings.tethering);
+			_ELEMENTS.tethering[1].state(settings.tethering ? 'active' : 'inactive');
+			_ELEMENTS.stealth[0].attr('checked', settings.stealth);
+			_ELEMENTS.stealth[1].state(settings.stealth ? 'active' : 'inactive');
+			_ELEMENTS.cache[0].value(settings.cache);
+			_ELEMENTS.cache_erase[0].value('');
+			_ELEMENTS.cache_erase[1].attr('disabled', true);
 
 
 			_State.prototype.enter.call(this, oncomplete);
