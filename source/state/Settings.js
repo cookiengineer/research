@@ -19,7 +19,8 @@ lychee.define('app.state.Settings').includes([
 			_STATE.query('#settings-stealth p')
 		],
 		cache: [
-			_STATE.query('#settings-cache-folder input')
+			_STATE.query('#settings-cache-folder input[type="text"]'),
+			_STATE.query('#settings-cache-folder input[type="file"]')
 		],
 		cache_erase:  [
 			_STATE.query('#settings-cache-clear input'),
@@ -87,6 +88,17 @@ lychee.define('app.state.Settings').includes([
 
 		});
 
+		_ELEMENTS.cache[1].bind('change', function(value) {
+
+			if (value.startsWith('/home/')) {
+				value = '~/' + value.split('/').slice(3).join('/');
+			}
+
+			_ELEMENTS.cache[0].value(value);
+			settings.cache = value;
+
+		});
+
 		_ELEMENTS.cache_erase[1].attr('disabled', true);
 		_ELEMENTS.cache_erase[0].bind('change', function(value) {
 
@@ -110,6 +122,7 @@ lychee.define('app.state.Settings').includes([
 		_ELEMENTS.tethering[0].unbind();
 		_ELEMENTS.stealth[0].unbind();
 		_ELEMENTS.cache[0].unbind();
+		_ELEMENTS.cache[1].unbind();
 		_ELEMENTS.cache_erase[0].unbind();
 		_ELEMENTS.cache_erase[1].unbind();
 

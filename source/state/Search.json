@@ -1,0 +1,30 @@
+
+{
+	"intents": [
+		{
+			"action": "search",
+			"format": "search the internet for <topic>",
+			"data": {
+				"plugin": "all"
+			}
+		}, {
+			"action": "search",
+			"format": "search <topic> on the internet",
+			"data": {
+				"plugin": "all"
+			}
+		}, {
+			"action": "search",
+			"format": "search the clearnet for <topic>",
+			"data": {
+				"plugin": "all"
+			}
+		}, {
+			"action": "search",
+			"format": "search <topic> on the clearnet",
+			"data": {
+				"plugin": "all"
+			}
+		}
+	]
+}

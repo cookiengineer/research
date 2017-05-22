@@ -6,6 +6,7 @@ lychee.define('app.state.Dialog').includes([
 	const _State       = lychee.import('lychee.app.State');
 	const _STATE       = $.state('dialog', attachments["html"], attachments["css"]);
 	const _ICON        = _STATE.query('div');
+	const _HELP        = _STATE.query('small');
 	const _INPUT       = _STATE.query('input.command');
 	const _OUTPUT      = _STATE.query('p.response');
 	const _SUGGESTIONS = [
@@ -129,7 +130,16 @@ lychee.define('app.state.Dialog').includes([
 				_INPUT.attr('placeholder', suggestion);
 			}
 
+			_HELP.state('inactive');
 			_INPUT.bind('change', _on_change, this);
+
+			setTimeout(function() {
+
+				if (_INPUT.value() === '') {
+					_HELP.state('active');
+				}
+
+			}, 5000);
 
 			_State.prototype.enter.call(this, oncomplete);
 

@@ -250,7 +250,7 @@ lychee.define('app.interface.Intent').exports(function(lychee, global, attachmen
 									} else {
 
 										offset--;
-										count++;
+										count += 0.5;
 										w++;
 
 									}
@@ -262,7 +262,7 @@ lychee.define('app.interface.Intent').exports(function(lychee, global, attachmen
 						} else {
 
 							for (let w2 = w + 1; w2 < wl; w2++) {
-								count++;
+								count += 0.5;
 							}
 
 						}

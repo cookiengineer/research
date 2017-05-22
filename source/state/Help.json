@@ -1,0 +1,26 @@
+{
+	"intents": [
+		{
+			"action": "help",
+			"format": "help me",
+			"data": {
+				"topic": "all"
+			}
+		}, {
+			"action": "help",
+			"format": "show help",
+			"data": {
+			}
+		}, {
+			"action": "help",
+			"format": "search help for <topic>",
+			"data": {
+			}
+		}, {
+			"action": "help",
+			"format": "search <topic> in help",
+			"data": {
+			}
+		}
+	]
+}

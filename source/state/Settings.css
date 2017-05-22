@@ -107,3 +107,12 @@
 	transition: 250ms all ease-out;
 }
 
+:host #settings-cache-folder-select {
+	display: none;
+}
+
+:host #settings-cache-folder label.button {
+	display: inline-block;
+	vertical-align: top;
+}
+

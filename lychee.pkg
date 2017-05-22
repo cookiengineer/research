@@ -162,10 +162,17 @@
 					"html",
 					"js"
 				],
+				"Help": [
+					"css",
+					"html",
+					"js",
+					"json"
+				],
 				"Search": [
 					"css",
 					"html",
-					"js"
+					"js",
+					"json"
 				],
 				"Settings": [
 					"css",

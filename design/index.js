@@ -22,10 +22,10 @@
 		if (/input/g.test(tagname)) {
 
 			let type = element.type;
-			if (type === 'text' || type === 'password') {
-				value = element.value;
-			} else if (type === 'checkbox') {
+			if (type === 'checkbox') {
 				value = element.checked === true ? 'on' : 'off';
+			} else if (/^(file|text|password)$/g.test(type)) {
+				value = element.value;
 			}
 
 		} else {

@@ -1,5 +1,5 @@
 
-lychee.define('app.state.Search').requires([
+lychee.define('app.state.Help').requires([
 	'app.interface.Intent'
 ]).includes([
 	'lychee.app.State'
@@ -8,7 +8,7 @@ lychee.define('app.state.Search').requires([
 	const _Intent  = lychee.import('app.interface.Intent');
 	const _State   = lychee.import('lychee.app.State');
 	const _BLOB    = attachments["json"].buffer;
-	const _STATE   = $.state('search', attachments["html"], attachments["css"]);
+	const _STATE   = $.state('help', attachments["html"], attachments["css"]);
 	const _ARTICLE = _STATE.query('article');
 
 
@@ -38,7 +38,7 @@ lychee.define('app.state.Search').requires([
 		serialize: function() {
 
 			let data = _State.prototype.serialize.call(this);
-			data['constructor'] = 'app.state.Search';
+			data['constructor'] = 'app.state.Help';
 
 
 			return data;
@@ -66,7 +66,8 @@ lychee.define('app.state.Search').requires([
 
 			_STATE.enter();
 
-			console.log('SEARCH', data);
+			console.log('HELP', data);
+
 
 			_State.prototype.enter.call(this, oncomplete);
 
@@ -75,6 +76,7 @@ lychee.define('app.state.Search').requires([
 		leave: function(oncomplete) {
 
 			_STATE.leave();
+
 
 			_State.prototype.leave.call(this, oncomplete);
 
@@ -86,4 +88,3 @@ lychee.define('app.state.Search').requires([
 	return Composite;
 
 });
-

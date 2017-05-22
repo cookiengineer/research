@@ -1,9 +1,12 @@
 
-button {
+button,
+label.button {
 	display: inline-block;
 	margin: 0px;
 	padding: 0px 8px;
 	height: 28px;
+	line-height: 28px;
+	vertical-align: top;
 	border: 1px solid #2b2e39;
 	border-radius: 4px;
 	box-sizing: border-box;
@@ -19,11 +22,14 @@ button {
 }
 
 button:hover,
-button:focus {
+button:focus,
+label.button:hover,
+label.button:focus {
 	background: #4e5665;
 }
 
-button:active {
+button:active,
+label.button:active {
 	background: #5294e2;
 }
 
