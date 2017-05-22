@@ -13,18 +13,17 @@
 	 * HELPERS
 	 */
 
-	const _proxy_callback = function(event, data) {
+	const _get_value = function(element) {
 
-		let element = this.element;
-		let tagname = element.tagName.toLowerCase();
-		let value   = null;
+		let name  = element.tagName.toLowerCase();
+		let value = null;
 
-		if (/input/g.test(tagname)) {
+		if (/input/g.test(name)) {
 
 			let type = element.type;
 			if (type === 'checkbox') {
 
-				value = element.checked === true ? 'on' : 'off';
+				value = element.checked === true;
 
 			} else if (type === 'number') {
 
@@ -58,9 +57,73 @@
 
 		}
 
+		return value;
 
-		return this.trigger(event, [ value ]);
+	};
 
+	const _set_value = function(element, value) {
+
+		let name = element.tagName.toLowerCase();
+
+		if (/input/g.test(name)) {
+
+			let type = element.type;
+			if (type === 'checkbox') {
+
+				element.checked = value === true;
+
+			} else if (type === 'number') {
+
+				value = typeof value === 'number' ? value : parseInt(value, 10);
+
+
+				let tmp_min = parseInt(element.getAttribute('min'), 10);
+				let tmp_max = parseInt(element.getAttribute('max'), 10);
+
+				if (!isNaN(value)) {
+
+					let result = true;
+
+					if (!isNaN(tmp_max) && value > tmp_max) {
+						result = false;
+						value  = tmp_max;
+					}
+
+					if (!isNaN(tmp_min) && value < tmp_min) {
+						result = false;
+						value  = tmp_min;
+					}
+
+					element.value = value;
+
+					return result;
+
+				} else {
+
+					return false;
+
+				}
+
+
+			} else if (/^(file|text|password)$/g.test(type)) {
+
+				element.value = value;
+
+			}
+
+		} else {
+
+			element.innerHTML = value;
+
+		}
+
+
+		return true;
+
+	};
+
+	const _proxy_callback = function(event, data) {
+		return this.trigger(event, [ _get_value(this.element) ]);
 	};
 
 	const _Wrapper = function(element) {
@@ -144,23 +207,9 @@
 		value: function(value) {
 
 			if (value !== undefined) {
-
-				let element = this.element;
-				if (element.value !== undefined) {
-					element.value = value;
-				} else {
-					element.innerHTML = value;
-				}
-
+				return _set_value(this.element, value);
 			} else {
-
-				let element = this.element;
-				if (element.value !== undefined) {
-					return element.value;
-				} else {
-					return element.innerHTML;
-				}
-
+				return _get_value(this.element);
 			}
 
 		},

@@ -263,8 +263,9 @@ div#wm-actions > button#wm-settings:before {
 div#wm-buttons {
 	display: inline-block;
 	margin: 0px 8px 0px 0px;
-	vertical-align: middle;
-	line-height: 30px;
+	vertical-align: top;
+	height: 30px;
+	line-height: 26px;
 }
 
 div#wm-buttons > button {
