@@ -10,6 +10,7 @@ lychee.define('app.state.Search').requires([
 	const _BLOB    = attachments["json"].buffer;
 	const _STATE   = $.state('search', attachments["html"], attachments["css"]);
 	const _ARTICLE = _STATE.query('article');
+	const _INPUT   = _STATE.query('header input');
 
 
 
@@ -62,11 +63,18 @@ lychee.define('app.state.Search').requires([
 
 		},
 
+		update: function(data) {
+
+			console.log('update with data', data);
+
+		},
+
 		enter: function(oncomplete, data) {
 
 			_STATE.enter();
+			_INPUT.value(data.sentence);
+			_INPUT.bind('change', this.main.command, this.main);
 
-			console.log('SEARCH', data);
 
 			_State.prototype.enter.call(this, oncomplete);
 
@@ -74,7 +82,10 @@ lychee.define('app.state.Search').requires([
 
 		leave: function(oncomplete) {
 
+			_INPUT.unbind('change');
+			_INPUT.value('');
 			_STATE.leave();
+
 
 			_State.prototype.leave.call(this, oncomplete);
 

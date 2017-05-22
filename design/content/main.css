@@ -49,7 +49,7 @@ section {
 section > header {
 	position: absolute;
 	height: 48px;
-	line-height: 48px;
+	line-height: 46px;
 	top: 0px;
 	right: 0px;
 	bottom: auto;
@@ -120,7 +120,7 @@ section > article {
 section > footer {
 	position: absolute;
 	height: 48px;
-	line-height: 48px;
+	line-height: 46px;
 	top: auto;
 	right: 0px;
 	bottom: 0px;

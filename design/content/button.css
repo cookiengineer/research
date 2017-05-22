@@ -6,7 +6,7 @@ label.button {
 	padding: 0px 8px;
 	height: 28px;
 	line-height: 28px;
-	vertical-align: top;
+	vertical-align: middle;
 	border: 1px solid #2b2e39;
 	border-radius: 4px;
 	box-sizing: border-box;

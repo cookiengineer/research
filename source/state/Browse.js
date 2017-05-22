@@ -1,26 +1,12 @@
 
 lychee.define('app.state.Browse').includes([
-	'lychee.app.State',
-	'lychee.event.Emitter'
+	'lychee.app.State'
 ]).exports(function(lychee, global, attachments) {
 
-	const _DESIGN  = attachments["css"].buffer;
-
-	console.log(_DESIGN);
-
-	const _Emitter = lychee.import('lychee.event.Emitter');
 	const _State   = lychee.import('lychee.app.State');
-	const _ARTICLE = $.output('#browse > article');
-	const _NEW_TAB = _ARTICLE && _ARTICLE.value();
-	const _INPUTS  = {
-		url:    $.input('#browse-url'),
-		images: $.input('#browse-images'),
-		videos: $.input('#browse-videos'),
-		edit:   $.input('#browse-edit'),
-		reload: $.input('#browse-reload'),
-		tags:   $.input('#browse-tags'),
-		save:   $.input('#browse-save')
-	};
+	const _STATE   = $.state('browse', attachments["html"], attachments["css"]);
+	const _ARTICLE = _STATE.query('article');
+	const _INPUT   = _STATE.query('header input');
 
 
 
@@ -34,24 +20,6 @@ lychee.define('app.state.Browse').includes([
 
 	};
 
-	const _on_change = function(url) {
-
-		let images  = _INPUTS.images.value();
-		let videos  = _INPUTS.videos.value();
-		let service = this.client.getService('control');
-
-		if (service !== null) {
-
-			service.browse({
-				url:    url,
-				images: images === true,
-				videos: videos === true
-			});
-
-		}
-
-	};
-
 
 
 	/*
@@ -61,19 +29,6 @@ lychee.define('app.state.Browse').includes([
 	let Composite = function(main) {
 
 		_State.call(this, main);
-		_Emitter.call(this);
-
-
-
-		/*
-		 * INITIALIZATION
-		 */
-
-		this.bind('change', function(url) {
-
-			console.log('TAB CHANGE', url);
-
-		}, this);
 
 	};
 
@@ -94,13 +49,18 @@ lychee.define('app.state.Browse').includes([
 
 		},
 
-		deserialize: function(blob) {
+		update: function(data) {
 
-			_State.prototype.deserialize.call(this, blob);
+			console.log('update with data', data);
 
 		},
 
-		enter: function(oncomplete) {
+		enter: function(oncomplete, data) {
+
+			_STATE.enter();
+			_INPUT.value(data.sentence);
+			_INPUT.bind('change', this.main.command, this.main);
+
 
 			let client = this.client;
 			if (client !== null) {
@@ -110,27 +70,22 @@ lychee.define('app.state.Browse').includes([
 					service.bind('browse', _on_browse, this);
 				}
 
-				let url = _INPUTS.url;
-				if (url !== null) {
-					url.bind('change', _on_change, this);
-				}
-
 			}
 
 
-			oncomplete(true);
+			_State.prototype.enter.call(this, oncomplete);
 
 		},
 
 		leave: function(oncomplete) {
 
+			_INPUT.unbind('change');
+			_INPUT.value('');
+			_STATE.leave();
+
+
 			let client = this.client;
 			if (client !== null) {
-
-				let url = _INPUTS.url;
-				if (url !== null) {
-					url.unbind('change', _on_change, this);
-				}
 
 				let service = client.getService('control');
 				if (service !== null) {
@@ -140,7 +95,7 @@ lychee.define('app.state.Browse').includes([
 			}
 
 
-			oncomplete(true);
+			_State.prototype.leave.call(this, oncomplete);
 
 		}
 

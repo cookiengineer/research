@@ -1,12 +1,13 @@
 
-:host header input {
-	width: 50%;
+:host header > input[type="text"] {
+	display: inline-block;
+	width: 100%;
 }
 
 :host article {
 	position: absolute;
 	display: block;
-	width: 33%;
+	width: 33.333%;
 	height: auto;
 	padding: 0px;
 	overflow: auto;
@@ -19,11 +20,11 @@
 }
 
 :host article:nth-of-type(2) {
-	left: 33%;
+	left: 33.333%;
 }
 
 :host article:nth-of-type(3) {
-	left: 66%;
+	left: 66.666%;
 }
 
 :host article:last-of-type {
