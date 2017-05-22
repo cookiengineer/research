@@ -45,10 +45,11 @@ lychee.define('app.interface.Intent').exports(function(lychee, global, attachmen
 		let data   = Object.assign({}, this.data);
 		let format = this.format.split(' ');
 		let words  = this.sentence.split(' ');
+		let offset = 0;
 
 		for (let w = 0, wl = words.length; w < wl; w++) {
 
-			let temp = format[w];
+			let temp = format[w + offset];
 			let word = words[w];
 
 			if (temp === undefined) {
@@ -64,6 +65,42 @@ lychee.define('app.interface.Intent').exports(function(lychee, global, attachmen
 				let name = temp.split(/<|>/g)[1] || null;
 				if (name !== null) {
 					_push_word.call(data, name, word, 0.5);
+				}
+
+
+				let next_temp = format[w + offset + 1];
+				if (next_temp !== undefined) {
+
+					if (next_temp.includes('<') === false && next_temp.includes('>') === false) {
+
+						for (let w2 = w + 1; w2 < wl; w2++) {
+
+							let next_word = words[w2];
+							if (next_word === next_temp) {
+
+								break;
+
+							} else {
+
+								_push_word.call(data, name, next_word, 0.5);
+
+								offset--;
+								w++;
+
+							}
+
+						}
+
+					}
+
+				} else if (words.length > format.length) {
+
+					for (let w2 = w + 1; w2 < wl; w2++) {
+						_push_word.call(data, name, words[w2], 0.5);
+					}
+
+					break;
+
 				}
 
 			} else if (temp.includes('<') && temp.includes('>')) {
@@ -177,10 +214,11 @@ lychee.define('app.interface.Intent').exports(function(lychee, global, attachmen
 				let count  = 0;
 				let format = this.format.split(' ');
 				let words  = sentence.split(' ');
+				let offset = 0;
 
 				for (let w = 0, wl = words.length; w < wl; w++) {
 
-					let temp = format[w];
+					let temp = format[w + offset];
 					let word = words[w];
 
 					if (temp === undefined) {
@@ -195,6 +233,39 @@ lychee.define('app.interface.Intent').exports(function(lychee, global, attachmen
 					} else if (temp.startsWith('<') && temp.endsWith('>')) {
 
 						count++;
+
+
+						let next_temp = format[w + offset + 1];
+						if (next_temp !== undefined) {
+
+							if (next_temp.includes('<') === false && next_temp.includes('>') === false) {
+
+								for (let w2 = w + 1; w2 < wl; w2++) {
+
+									let next_word = words[w2];
+									if (next_word === next_temp) {
+
+										break;
+
+									} else {
+
+										offset--;
+										count++;
+										w++;
+
+									}
+
+								}
+
+							}
+
+						} else {
+
+							for (let w2 = w + 1; w2 < wl; w2++) {
+								count++;
+							}
+
+						}
 
 					} else if (temp.includes('<') && temp.includes('>')) {
 
