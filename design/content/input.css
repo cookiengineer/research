@@ -17,8 +17,8 @@ input[type="checkbox"] {
 	cursor: pointer;
 	-webkit-user-select: none;
 	user-select: none;
-	outline: none;
 	transition: 250ms all ease-out;
+	outline: none;
 }
 
 input[type="checkbox"]:checked {
@@ -33,7 +33,8 @@ input[type="checkbox"]:before {
 	text-align: center;
 }
 
-input[type="text"] {
+
+input[type="number"] {
 	display: inline-block;
 	margin: 0px;
 	padding: 0px 8px;
@@ -46,24 +47,30 @@ input[type="text"] {
 	font-family: 'Cantarell';
 	font-weight: normal;
 	font-style: normal;
+	cursor: default;
 	-webkit-user-select: none;
 	user-select: none;
-}
-
-input[type="text"]:focus {
-	border: 1px solid #5294e2;
+	transition: 250ms all ease-out;
 	outline: none;
 }
 
-input[type="text"][disabled] {
+input[type="number"]:focus {
+	border: 1px solid #5294e2;
+}
+
+input[type="number"][disabled] {
 	color: #68818c;
 	background: #3e4351;
 	border: 1px solid #303440;
 	cursor: not-allowed;
 }
 
-input[type="text"]::-webkit-input-placeholder {
+input[type="number"]::-webkit-input-placeholder {
 	color: #68818c;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+	display: none;
 }
 
 input[type="password"] {
@@ -81,11 +88,12 @@ input[type="password"] {
 	font-style: normal;
 	-webkit-user-select: none;
 	user-select: none;
+	transition: 250ms all ease-out;
+	outline: none;
 }
 
 input[type="password"]:focus {
 	border: 1px solid #5294e2;
-	outline: none;
 }
 
 input[type="password"][disabled] {
@@ -96,6 +104,40 @@ input[type="password"][disabled] {
 }
 
 input[type="password"]::-webkit-input-placeholder {
+	color: #68818c;
+}
+
+input[type="text"] {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px 8px;
+	height: 28px;
+	border: 1px solid #2b2e39;
+	border-radius: 4px;
+	box-sizing: border-box;
+	color: #ffffff;
+	background: #444a58;
+	font-family: 'Cantarell';
+	font-weight: normal;
+	font-style: normal;
+	-webkit-user-select: none;
+	user-select: none;
+	transition: 250ms all ease-out;
+	outline: none;
+}
+
+input[type="text"]:focus {
+	border: 1px solid #5294e2;
+}
+
+input[type="text"][disabled] {
+	color: #68818c;
+	background: #3e4351;
+	border: 1px solid #303440;
+	cursor: not-allowed;
+}
+
+input[type="text"]::-webkit-input-placeholder {
 	color: #68818c;
 }
 

@@ -70,6 +70,13 @@
 	padding: 0px 0px 0px 32px;
 }
 
+:host fieldset ul {
+	display: block;
+	position: static;
+	margin: 1em 0px 0px 0px;
+	padding: 0px 0px 0px 32px;
+}
+
 :host #settings-stealth p,
 :host #settings-tethering p {
 	display: block;

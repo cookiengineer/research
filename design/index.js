@@ -23,14 +23,41 @@
 
 			let type = element.type;
 			if (type === 'checkbox') {
+
 				value = element.checked === true ? 'on' : 'off';
+
+			} else if (type === 'number') {
+
+				let tmp_val = parseInt(element.value, 10);
+				let tmp_min = parseInt(element.getAttribute('min'), 10);
+				let tmp_max = parseInt(element.getAttribute('max'), 10);
+
+				if (!isNaN(tmp_val)) {
+
+					if (!isNaN(tmp_max) && tmp_val > tmp_max) {
+						tmp_val = tmp_max;
+					}
+
+					if (!isNaN(tmp_min) && tmp_val < tmp_min) {
+						tmp_val = tmp_min;
+					}
+
+					value = tmp_val;
+
+				}
+
 			} else if (/^(file|text|password)$/g.test(type)) {
+
 				value = element.value;
+
 			}
 
 		} else {
+
 			value = element.innerHTML;
+
 		}
+
 
 		return this.trigger(event, [ value ]);
 

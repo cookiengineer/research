@@ -40,9 +40,10 @@ lychee.define('app.Main').requires([
 			viewport: null,
 
 			// Custom Settings
-			tethering: false,
-			stealth:   true,
-			cache:     '~/Research'
+			tethering:   false,
+			stealth:     true,
+			connections: 8,
+			cache:       '~/Research'
 
 		}, data);
 

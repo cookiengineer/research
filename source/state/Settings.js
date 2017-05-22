@@ -10,19 +10,22 @@ lychee.define('app.state.Settings').includes([
 	const _FOOTER   = _STATE.query('footer');
 	const _State    = lychee.import('lychee.app.State');
 	const _ELEMENTS = {
-		tethering:    [
+		tethering: [
 			_STATE.query('#settings-tethering input'),
 			_STATE.query('#settings-tethering p')
 		],
-		stealth:      [
+		stealth: [
 			_STATE.query('#settings-stealth input'),
 			_STATE.query('#settings-stealth p')
+		],
+		connections: [
+			_STATE.query('#settings-connections input')
 		],
 		cache: [
 			_STATE.query('#settings-cache-folder input[type="text"]'),
 			_STATE.query('#settings-cache-folder input[type="file"]')
 		],
-		cache_erase:  [
+		cache_erase: [
 			_STATE.query('#settings-cache-clear input'),
 			_STATE.query('#settings-cache-clear button')
 		]
@@ -70,6 +73,13 @@ lychee.define('app.state.Settings').includes([
 		_ELEMENTS.stealth[0].bind('change', function(value) {
 			settings.stealth = value === 'on';
 			_ELEMENTS.stealth[1].state(value === 'on' ? 'active' : 'inactive');
+		});
+
+		_ELEMENTS.connections[0].bind('change', function(value) {
+
+			_ELEMENTS.connections[0].value(value);
+			settings.connections = value;
+
 		});
 
 		_ELEMENTS.cache[0].bind('change', function(value) {
@@ -121,6 +131,7 @@ lychee.define('app.state.Settings').includes([
 
 		_ELEMENTS.tethering[0].unbind();
 		_ELEMENTS.stealth[0].unbind();
+		_ELEMENTS.connections[0].unbind();
 		_ELEMENTS.cache[0].unbind();
 		_ELEMENTS.cache[1].unbind();
 		_ELEMENTS.cache_erase[0].unbind();
@@ -140,9 +151,10 @@ lychee.define('app.state.Settings').includes([
 
 		if (data !== null) {
 
-			settings.tethering = typeof data.tethering === 'boolean' ? data.tethering : settings.tethering;
-			settings.stealth   = typeof data.stealth === 'boolean'   ? data.stealth   : settings.stealth;
-			settings.cache     = typeof data.cache === 'string'      ? data.cache     : settings.cache;
+			settings.tethering   = typeof data.tethering === 'boolean'  ? data.tethering   : settings.tethering;
+			settings.stealth     = typeof data.stealth === 'boolean'    ? data.stealth     : settings.stealth;
+			settings.connections = typeof data.connections === 'number' ? data.connections : settings.connections;
+			settings.cache       = typeof data.cache === 'string'       ? data.cache       : settings.cache;
 
 		}
 
@@ -152,9 +164,10 @@ lychee.define('app.state.Settings').includes([
 
 		let settings = this.settings;
 		let data     = {
-			tethering: settings.tethering,
-			stealth:   settings.stealth,
-			cache:     settings.cache
+			tethering:   settings.tethering,
+			stealth:     settings.stealth,
+			connections: settings.connections,
+			cache:       settings.cache
 		};
 
 		try {
@@ -210,6 +223,7 @@ lychee.define('app.state.Settings').includes([
 			_ELEMENTS.tethering[1].state(settings.tethering ? 'active' : 'inactive');
 			_ELEMENTS.stealth[0].attr('checked', settings.stealth);
 			_ELEMENTS.stealth[1].state(settings.stealth ? 'active' : 'inactive');
+			_ELEMENTS.connections[0].value(settings.connections);
 			_ELEMENTS.cache[0].value(settings.cache);
 			_ELEMENTS.cache_erase[0].value('');
 			_ELEMENTS.cache_erase[1].attr('disabled', true);
