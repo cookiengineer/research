@@ -4,15 +4,25 @@
 			"action": "search",
 			"format": "search reddit for <input>",
 			"data": {
-				"plugin": "reddit",
-				"topic": "all"
+				"plugin": "reddit"
+			}
+		}, {
+			"action": "search",
+			"format": "search @<person> on reddit",
+			"data": {
+				"plugin": "reddit"
+			}
+		}, {
+			"action": "search",
+			"format": "search #<topic> on reddit",
+			"data": {
+				"plugin": "reddit"
 			}
 		}, {
 			"action": "search",
 			"format": "search <input> on reddit",
 			"data": {
-				"plugin": "reddit",
-				"topic": "all"
+				"plugin": "reddit"
 			}
 		}, {
 			"action": "search",
@@ -28,10 +38,21 @@
 			}
 		}, {
 			"action": "search",
+			"format": "find @<person> on reddit",
+			"data": {
+				"plugin": "reddit"
+			}
+		}, {
+			"action": "search",
+			"format": "find #<topic> on reddit",
+			"data": {
+				"plugin": "reddit"
+			}
+		}, {
+			"action": "search",
 			"format": "find <input> on reddit",
 			"data": {
-				"plugin": "reddit",
-				"topic": "all"
+				"plugin": "reddit"
 			}
 		}, {
 			"action": "search",
@@ -47,17 +68,21 @@
 			}
 		}, {
 			"action": "browse",
+			"format": "browse /u/<person>",
+			"data": {
+				"plugin": "reddit"
+			}
+		}, {
+			"action": "browse",
 			"format": "browse reddit frontpage",
 			"data": {
-				"plugin": "reddit",
-				"topic": "all"
+				"plugin": "reddit"
 			}
 		}, {
 			"action": "browse",
 			"format": "browse frontpage",
 			"data": {
-				"plugin": "reddit",
-				"topic": "all"
+				"plugin": "reddit"
 			}
 		}
 	]

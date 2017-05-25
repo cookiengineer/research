@@ -88,49 +88,9 @@
 				"js"
 			],
 			"net": {
-				"Client": [
+				"Scraper": [
 					"js"
-				],
-				"Server": [
-					"js"
-				],
-				"client": {
-					"Archive": [
-						"js"
-					],
-					"Control": [
-						"js"
-					]
-				},
-				"remote": {
-					"Archive": [
-						"js"
-					],
-					"Control": [
-						"js"
-					]
-				},
-				"scraper": {
-					"Reddit": [
-						"js"
-					]
-				}
-			},
-			"platform": {
-				"html": {
-					"net": {
-						"Scraper": [
-							"js"
-						]
-					}
-				},
-				"node": {
-					"net": {
-						"Scraper": [
-							"js"
-						]
-					}
-				}
+				]
 			},
 			"interface": {
 				"Bot": [
@@ -141,12 +101,6 @@
 				]
 			},
 			"plugin": {
-				"Generic": [
-					"js"
-				],
-				"Imgur": [
-					"js"
-				],
 				"Reddit": [
 					"js",
 					"json"

@@ -19,12 +19,12 @@ web browsing experience and support you as far as possible.
 
 ## Features
 
-- does not load Cookies
-- does not load Flash
-- does not load JS
-- does not load CSS
-- does not load Advertisements
-- does not load iFrames
+- does not load Cookies, JS or CSS
+- does not load Flash, Advertisements, iFrames or trackable resources
+- totally anonymous, saves much bandwidth and re-uses offline cache
+- sweet NLP interface that eases up indexing, crawling and scraping tasks
+- reproducible history, allowing forward/backward modifications in time
+- cache uses markdown to represent results (and saves storage space)
 
 You have full control over what content is requested. There's even a
 `Tethering Mode` that will allow you to _only_ load text content and
@@ -85,6 +85,10 @@ submit an Issue or a Pull Request. We could use any help :)
 
 ## Usage / How To Test (for now)
 
+Builds are released once we get into public beta and have above
+plugins implemented. For now, you manually have to download the
+nw.js SDK and execute it in Project Research's root folder:
+
 - Have a UNIX machine (Linux, OSX, BSD, whatever)
 - Install nw.js SDK on your machine
 - Do this in your Terminal:
@@ -93,13 +97,27 @@ submit an Issue or a Pull Request. We could use any help :)
 git clone https://github.com/Artificial-Engineering/research.git;
 
 cd ./research;
-
-npm install;
-
-# If nw is not in your $PATH, use /path/to/nw binary
 nw .;
 ```
 
+
+## Schema
+
+- `@<person>` for person related search
+- `#<topic>` for topic related search
+- `<input>` for generic search
+
+## Incremental Schema
+
+- `sort by relevance`
+- `sort by votes` or `sort by likes`
+- `sort by time` or `sort by date`
+
+
+## TODO
+
+- app.interface.Intent needs `time` support (from x to y? from the last x weeks/days/months?)
+- app.plugin.Reddit needs `time` support
 
 ## License
 

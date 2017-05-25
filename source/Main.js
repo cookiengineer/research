@@ -1,8 +1,9 @@
 
 lychee.define('app.Main').requires([
 	'app.interface.Bot',
-	'app.net.Client',
-	'app.net.Server',
+//	'app.net.Client',
+//	'app.net.Server',
+	'app.net.Scraper',
 	'app.plugin.Reddit',
 	'app.state.Browse',
 	'app.state.Dialog',
@@ -17,10 +18,11 @@ lychee.define('app.Main').requires([
 	'lychee.app.Main'
 ]).exports(function(lychee, global, attachments) {
 
-	const _app  = lychee.import('app');
-	const _Bot  = lychee.import('app.interface.Bot');
-	const _Main = lychee.import('lychee.app.Main');
-	const _WM   = lychee.import('WM');
+	const _app     = lychee.import('app');
+	const _Bot     = lychee.import('app.interface.Bot');
+	const _Main    = lychee.import('lychee.app.Main');
+	const _Scraper = lychee.import('app.net.Scraper');
+	const _WM      = lychee.import('WM');
 
 
 
@@ -49,6 +51,7 @@ lychee.define('app.Main').requires([
 
 
 		this.bot     = new _Bot();
+		this.scraper = new _Scraper(this);
 		this.plugins = {};
 
 
@@ -75,15 +78,15 @@ lychee.define('app.Main').requires([
 
 		this.bind('init', function() {
 
-			let appserver = this.settings.appserver || null;
-			if (appserver !== null) {
-				this.server = new _app.net.Server(appserver);
-			}
+			// let appserver = this.settings.appserver || null;
+			// if (appserver !== null) {
+			// 	this.server = new _app.net.Server(appserver);
+			// }
 
-			let appclient = this.settings.appclient || null;
-			if (appclient !== null) {
-				this.client = new _app.net.Client(appclient);
-			}
+			// let appclient = this.settings.appclient || null;
+			// if (appclient !== null) {
+			// 	this.client = new _app.net.Client(appclient);
+			// }
 
 			let loop = this.loop;
 			if (loop !== null) {
@@ -128,6 +131,10 @@ lychee.define('app.Main').requires([
 
 			if (this.settings.appclient !== null) settings.client = this.defaults.client;
 			if (this.settings.appserver !== null) settings.server = this.defaults.server;
+
+
+			if (this.bot !== null)     blob.bot     = lychee.serialize(this.bot);
+			if (this.scraper !== null) blob.scraper = lychee.serialize(this.scraper);
 
 
 			data['arguments'][0] = settings;
@@ -227,6 +234,42 @@ lychee.define('app.Main').requires([
 				}
 
 			}
+
+		},
+
+		findPlugin: function(url) {
+
+			let found = null;
+
+			for (let p in this.plugins) {
+
+				if (p === 'generic') continue;
+
+				let plugin = this.plugins[p];
+				if (plugin.can(url) === true) {
+					found = p;
+					break;
+				}
+
+			}
+
+			return found;
+
+		},
+
+		getPlugin: function(id) {
+
+			id = typeof id === 'string' ? id : null;
+
+
+			if (id !== null && this.plugins[id] !== undefined) {
+
+				return this.plugins[id];
+
+			}
+
+
+			return null;
 
 		},
 

@@ -4,7 +4,6 @@
 			"action": "help",
 			"format": "help me",
 			"data": {
-				"topic": "all"
 			}
 		}, {
 			"action": "help",

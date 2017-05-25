@@ -14,9 +14,52 @@ lychee.define('app.state.Browse').includes([
 	 * HELPERS
 	 */
 
-	const _on_browse = function(data) {
+	const _get_404 = function(entry) {
 
-		console.log('BROWSE', data);
+		let html = [];
+
+		html.push('<h3>' + entry.query.url + '</h3>');
+		html.push('<p>');
+		html.push('\tNo results');
+		html.push('</p>');
+
+		return html.join('\n');
+
+	};
+
+	const _on_browse = function(array) {
+
+		let html = [];
+
+		array.forEach(entry => {
+
+			html.push('<article>');
+			html.push(entry.html || _get_404(entry));
+			html.push('</article>');
+
+		});
+
+		_ARTICLE.value(html.join('\n'));
+
+	};
+
+	const _browse = function(data) {
+
+		let main   = this.main;
+		let plugin = main.getPlugin(data.plugin || 'generic');
+		if (plugin !== null) {
+
+			plugin.browse(data).then(_on_browse.bind(this));
+
+		} else if (typeof data.url === 'string') {
+
+			plugin = main.getPlugin(main.findPlugin(data.url) || 'generic');
+
+			if (plugin !== null) {
+				plugin.browse(data).then(_on_browse.bind(this));
+			}
+
+		}
 
 	};
 
@@ -49,28 +92,19 @@ lychee.define('app.state.Browse').includes([
 
 		},
 
-		update: function(data) {
+		update: function(intent) {
 
-			console.log('update with data', data);
+			_browse.call(this, intent._result);
 
 		},
 
-		enter: function(oncomplete, data) {
+		enter: function(oncomplete, intent) {
 
 			_STATE.enter();
-			_INPUT.value(data.sentence);
+			_INPUT.value(intent.sentence);
 			_INPUT.bind('change', this.main.command, this.main);
 
-
-			let client = this.client;
-			if (client !== null) {
-
-				let service = client.getService('control');
-				if (service !== null) {
-					service.bind('browse', _on_browse, this);
-				}
-
-			}
+			_browse.call(this, intent._result);
 
 
 			_State.prototype.enter.call(this, oncomplete);
@@ -82,17 +116,6 @@ lychee.define('app.state.Browse').includes([
 			_INPUT.unbind('change');
 			_INPUT.value('');
 			_STATE.leave();
-
-
-			let client = this.client;
-			if (client !== null) {
-
-				let service = client.getService('control');
-				if (service !== null) {
-					service.unbind('browse', _on_browse, this);
-				}
-
-			}
 
 
 			_State.prototype.leave.call(this, oncomplete);

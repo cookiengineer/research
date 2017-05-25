@@ -15,6 +15,38 @@ lychee.define('app.state.Search').requires([
 
 
 	/*
+	 * HELPERS
+	 */
+
+	const _on_search = function(data) {
+
+		console.log('on search', data);
+
+	};
+
+	const _search = function(data) {
+
+		let main   = this.main;
+		let plugin = main.getPlugin(data.plugin || 'generic');
+		if (plugin !== null) {
+
+			plugin.search(data).then(_on_search.bind(this));
+
+		} else {
+
+			plugin = main.getPlugin('generic');
+
+			if (plugin !== null) {
+				plugin.search(data).then(_on_search.bind(this));
+			}
+
+		}
+
+	};
+
+
+
+	/*
 	 * IMPLEMENTATION
 	 */
 
@@ -63,17 +95,19 @@ lychee.define('app.state.Search').requires([
 
 		},
 
-		update: function(data) {
+		update: function(intent) {
 
-			console.log('update with data', data);
+			_search.call(this, intent._result);
 
 		},
 
-		enter: function(oncomplete, data) {
+		enter: function(oncomplete, intent) {
 
 			_STATE.enter();
-			_INPUT.value(data.sentence);
+			_INPUT.value(intent.sentence);
 			_INPUT.bind('change', this.main.command, this.main);
+
+			_search.call(this, intent._result);
 
 
 			_State.prototype.enter.call(this, oncomplete);
