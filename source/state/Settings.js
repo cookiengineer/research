@@ -34,6 +34,11 @@ lychee.define('app.state.Settings').includes([
 	};
 
 
+
+	/*
+	 * FEATURE DETECTION
+	 */
+
 	(function(footer) {
 
 		let link = footer.query('a');

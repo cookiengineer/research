@@ -248,6 +248,23 @@
 
 		},
 
+		queries: function(query) {
+
+			let filtered = [];
+
+			let result = Array.from(this.element.querySelectorAll(query));
+			if (result.length > 0) {
+
+				result.forEach(element => {
+					filtered.push(new _Wrapper(element));
+				});
+
+			}
+
+			return filtered;
+
+		},
+
 		query: function(query) {
 
 			let result = this.element.querySelector(query);

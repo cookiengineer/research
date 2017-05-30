@@ -87,10 +87,23 @@ lychee.define('app.plugin.Reddit').requires([
 				}).forEach(person => {
 
 					queries.push({
-						title:  '/u/' + person.word,
-						url:    'https://www.reddit.com/u/' + person.word,
+						title:  '/u/' + person.word + '\'s links',
+						url:    'https://www.reddit.com/user/' + person.word + '/submitted.json',
 						method: 'GET',
-						params: {}
+						params: {
+							limit: 100,
+							t:     'all'
+						}
+					});
+
+					queries.push({
+						title:  '/u/' + person.word + '\'s comments',
+						url:    'https://www.reddit.com/user/' + person.word + '/comments.json',
+						method: 'GET',
+						params: {
+							limit: 100,
+							t:     'all'
+						}
 					});
 
 				});
@@ -153,17 +166,66 @@ lychee.define('app.plugin.Reddit').requires([
 
 		if (children !== null) {
 
-			children.forEach(function(entry) {
+			children.map(function(entry) {
 
-				filtered.push({
-					title:       (entry.data.title    || '').trim(),
-					author:      (entry.data.author   || '').trim(),
-					description: (entry.data.selftext || '').trim(),
-					relevance:   entry.data.score     || 0,
-					time:        entry.data.utc       || null,
-					url:         entry.data.url       || null,
-					detail:      entry.data.permalink || null
-				});
+				let kind = entry.kind || null;
+				if (kind === 't1') {
+
+					return {
+						type:        'comment',
+						title:       'Comment',
+						url:         null,
+						author:      (entry.data.author         || '').trim(),
+						description: (entry.data.body           || '').trim(),
+						relevance:   (entry.data.score          || 0),
+						time:        (entry.data.created_utc    || null),
+						detail:      (entry.data.link_permalink || null),
+						preview:     null
+					};
+
+				} else if (kind === 't3') {
+
+					let img = null;
+					let url = entry.data.thumbnail || '';
+
+					if (url.startsWith('https://') || url.startsWith('http://')) {
+
+						img = {
+							url:    url,
+							width:  entry.data.thumbnail_width  || 128,
+							height: entry.data.thumbnail_height || 128
+						};
+
+					}
+
+					return {
+						type:        'link',
+						title:       (entry.data.title       || '').trim(),
+						url:         (entry.data.url         || null),
+						author:      (entry.data.author      || '').trim(),
+						description: (entry.data.selftext    || '').trim(),
+						relevance:   (entry.data.score       || 0),
+						time:        (entry.data.created_utc || null),
+						detail:      (entry.data.permalink   || null),
+						preview:     img
+					};
+
+				}
+
+			}).filter(function(entry) {
+
+				if (entry.url !== null) {
+
+					let found = filtered.find(other => other.url === entry.url);
+					if (found === undefined) {
+						filtered.push(entry);
+					}
+
+				} else {
+
+					filtered.push(entry);
+
+				}
 
 			});
 
@@ -188,6 +250,11 @@ lychee.define('app.plugin.Reddit').requires([
 
 			chunk.push('<li>');
 			chunk.push('<b>');
+
+			let preview = entry.preview || null;
+			if (preview !== null) {
+				chunk.push('\t<img src="' + preview.url + '" width="' + preview.width + '" height="' + preview.height + '">');
+			}
 
 			if (entry.url !== null) {
 				chunk.push('\t<a href="' + entry.url + '">' + entry.title + '</a>');
@@ -230,8 +297,8 @@ lychee.define('app.plugin.Reddit').requires([
 
 	let Composite = function(main) {
 
-		this.main    = main     || null;
-		this.bot     = main.bot || null;
+		this.main    = main         || null;
+		this.bot     = main.bot     || null;
 		this.scraper = main.scraper || null;
 
 
@@ -317,7 +384,6 @@ lychee.define('app.plugin.Reddit').requires([
 		search: function(data) {
 
 			data = data instanceof Object ? data : {};
-
 
 
 			let scraper = this.scraper;

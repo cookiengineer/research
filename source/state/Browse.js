@@ -3,10 +3,10 @@ lychee.define('app.state.Browse').includes([
 	'lychee.app.State'
 ]).exports(function(lychee, global, attachments) {
 
-	const _State   = lychee.import('lychee.app.State');
-	const _STATE   = $.state('browse', attachments["html"], attachments["css"]);
-	const _ARTICLE = _STATE.query('article');
-	const _INPUT   = _STATE.query('header input');
+	const _State  = lychee.import('lychee.app.State');
+	const _STATE  = $.state('browse', attachments["html"], attachments["css"]);
+	const _HEADER = _STATE.query('header');
+	const _FOOTER = _STATE.query('footer');
 
 
 
@@ -14,36 +14,58 @@ lychee.define('app.state.Browse').includes([
 	 * HELPERS
 	 */
 
-	const _get_404 = function(entry) {
+	const _get_500 = function(entry) {
 
 		let html = [];
 
-		html.push('<h3>' + entry.query.url + '</h3>');
+		html.push('<h3>No results</h3>');
 		html.push('<p>');
-		html.push('\tNo results');
+		html.push('\tNo results matched your query.');
+		html.push('</p>');
+		html.push('<p>');
+		html.push('\tTry a different query.');
 		html.push('</p>');
 
 		return html.join('\n');
 
 	};
 
-	const _on_browse = function(array) {
+	const _on_browse = function(results) {
 
-		let html = [];
+		let articles = [];
 
-		array.forEach(entry => {
+		if (results.length > 0) {
 
-			html.push('<article>');
-			html.push(entry.html || _get_404(entry));
-			html.push('</article>');
+			results.forEach(entry => {
 
-		});
+				if (typeof entry.html === 'string') {
+					articles.push($.render('article', entry.html));
+				}
 
-		_ARTICLE.value(html.join('\n'));
+			});
+
+		}
+
+		if (articles.length === 0) {
+			articles.push($.render('article', _get_500()));
+		}
+
+
+		_STATE.queries('article').forEach(other => _STATE.remove(other));
+		articles.forEach(article => _STATE.add(article));
+
+
+		if (_FOOTER !== null) {
+			_STATE.remove(_FOOTER);
+			_STATE.add(_FOOTER);
+		}
 
 	};
 
 	const _browse = function(data) {
+
+		console.info('browse', data);
+
 
 		let main   = this.main;
 		let plugin = main.getPlugin(data.plugin || 'generic');
@@ -101,8 +123,12 @@ lychee.define('app.state.Browse').includes([
 		enter: function(oncomplete, intent) {
 
 			_STATE.enter();
-			_INPUT.value(intent.sentence);
-			_INPUT.bind('change', this.main.command, this.main);
+
+			let input = _HEADER.query('input');
+			if (input !== null) {
+				input.value(intent.sentence);
+				input.bind('change', this.main.command, this.main);
+			}
 
 			_browse.call(this, intent._result);
 
@@ -113,8 +139,12 @@ lychee.define('app.state.Browse').includes([
 
 		leave: function(oncomplete) {
 
-			_INPUT.unbind('change');
-			_INPUT.value('');
+			let input = _HEADER.query('input');
+			if (input !== null) {
+				input.unbind('change');
+				input.value('');
+			}
+
 			_STATE.leave();
 
 

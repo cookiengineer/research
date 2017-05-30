@@ -71,7 +71,6 @@ to fail right now. If you want to help building these, you are welcome to
 submit an Issue or a Pull Request. We could use any help :)
 
 - Fallback Reader Functionality
-- Reddit Plugin
 - Imgur Plugin
 - Facebook Plugin
 - Gfycat Plugin
@@ -105,6 +104,7 @@ nw .;
 
 - `@<person>` for person related search
 - `#<topic>` for topic related search
+- `~<location>` for location related search
 - `<input>` for generic search
 
 ## Incremental Schema
@@ -118,6 +118,12 @@ nw .;
 
 - app.interface.Intent needs `time` support (from x to y? from the last x weeks/days/months?)
 - app.plugin.Reddit needs `time` support
+- Figure out how to influence Rendering
+
+- Browse State > Reddit Plugin > Reddit Result?
+- Maybe some article class="reddit" or so?
+- Better architecture would be using Polyfillr Components, so `<reddit-article>` would just inherit correctly
+
 
 ## License
 

@@ -68,6 +68,12 @@
 			}
 		}, {
 			"action": "browse",
+			"format": "browse /r/<topic> and /r/<topic>",
+			"data": {
+				"plugin": "reddit"
+			}
+		}, {
+			"action": "browse",
 			"format": "browse /u/<person>",
 			"data": {
 				"plugin": "reddit"
