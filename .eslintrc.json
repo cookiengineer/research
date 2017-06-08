@@ -17,6 +17,7 @@
 		"Config": true,
 		"Font": true,
 		"Music": true,
+		"Polyfillr": true,
 		"Sound": true,
 		"Stuff": true,
 		"Texture": true,

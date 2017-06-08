@@ -1,11 +1,69 @@
-<header>
-	<input type="text" placeholder="browse /r/programming" value="">
-</header>
-<article>
-	<h3>Empty Tab Page</h3>
-	<p>Please enter your command above.</p>
-</article>
-<footer>
-	<input type="text" placeholder="reddit programming curl" value="">
-	<button>Memorize This</button>
-</footer>
+<!DOCTYPE html>
+<body>
+<template id="template">
+	<style>
+	:host header > input[type="text"] {
+		display: inline-block;
+		width: 100%;
+	}
+	:host footer > input[type="text"] {
+		width: 256px;
+	}
+	</style>
+	<content>
+		<header>
+			<input type="text" placeholder="browse /r/programming" value="">
+		</header>
+		<article>
+			<h3>Empty Tab Page</h3>
+			<p>Please enter your command above.</p>
+		</article>
+		<footer>
+			<input type="text" placeholder="reddit programming curl" value="">
+			<button>Memorize This</button>
+		</footer>
+	</content>
+</template>
+<script>
+(function(doc) {
+
+	let template  = doc.querySelector('#template');
+	let component = Polyfillr.define('state-browse', template);
+	if (component !== null) {
+
+		component.addEventListener('create', function(e) {
+
+			let element = e.target;
+			let article = element.querySelector('article');
+
+			console.log('created browse', element, article);
+
+		}, true);
+
+		component.addEventListener('destroy', function(e) {
+
+			let element = e.target;
+
+			console.log('destroyed browse', element);
+
+		}, true);
+
+		component.addEventListener('render', function(e) {
+
+			let model = e.detail;
+
+			console.log('render browse model', model);
+
+		}, true);
+
+		component.addEventListener('change', function(e) {
+
+			console.log('changed browse attribute', e.detail);
+
+		}, true);
+
+	}
+
+})(document.currentScript.ownerDocument);
+</script>
+</body>

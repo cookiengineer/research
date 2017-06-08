@@ -556,6 +556,7 @@ if (typeof Polyfillr === 'undefined') {
 
 	const _import_html = function(url, html) {
 
+		let data = {};
 		let doc  = _document.implementation.createHTMLDocument(url);
 		let meta = doc.createElement('meta');
 
@@ -590,7 +591,8 @@ if (typeof Polyfillr === 'undefined') {
 
 				let code  = script.innerHTML;
 				let scope = {
-					document: {
+					Polyfillr: Object.assign({}, Polyfillr),
+					document:  {
 						querySelector: function(selectors) {
 							return _document.querySelector(selectors);
 						},
@@ -601,6 +603,12 @@ if (typeof Polyfillr === 'undefined') {
 							ownerDocument: doc
 						}
 					}
+				};
+
+				scope.Polyfillr.define = function(identifier, template) {
+					let value = Polyfillr.define(identifier, template);
+					data[identifier] = value;
+					return value;
 				};
 
 
@@ -623,6 +631,9 @@ if (typeof Polyfillr === 'undefined') {
 			});
 
 		}
+
+
+		return data;
 
 	};
 
@@ -737,15 +748,11 @@ if (typeof Polyfillr === 'undefined') {
 
 
 		if (url !== null && html !== null) {
-
-			_import_html(url, html);
-
-			return true;
-
+			return _import_html(url, html);
 		}
 
 
-		return false;
+		return null;
 
 	};
 
