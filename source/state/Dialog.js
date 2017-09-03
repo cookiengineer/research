@@ -3,21 +3,9 @@ lychee.define('app.state.Dialog').includes([
 	'lychee.app.State'
 ]).exports(function(lychee, global, attachments) {
 
-	const _State       = lychee.import('lychee.app.State');
-	const _STATE       = $.state('dialog', attachments["html"], attachments["css"]);
-	const _ICON        = _STATE.query('div');
-	const _HELP        = _STATE.query('small');
-	const _INPUT       = _STATE.query('input.command');
-	const _OUTPUT      = _STATE.query('p.response');
-	const _SUGGESTIONS = [
-		'search reddit for samaritan',
-		'find sameen shaw',
-		'locate harold finch',
-		'browse /r/machinelearning',
-		'locate the machine',
-		'explain artificial intelligence',
-		'find samantha groves'
-	];
+	const _State     = lychee.import('lychee.app.State');
+	const _component = Polyfillr.import(attachments["html"].url, attachments["html"].buffer)['state-dialog'];
+	const _main      = global.document.querySelector('main');
 
 
 
@@ -27,23 +15,19 @@ lychee.define('app.state.Dialog').includes([
 
 	const _on_change = function(value) {
 
-		let result = this.main.command(value);
+		let result   = this.main.command(value);
+		let response = this.element.querySelector('p.response');
+
 		if (result === false) {
 
-			_ICON.state('deny');
-			_OUTPUT.value('Please rephrase command.');
-
-			setTimeout(function() {
-
-				_ICON.state('wait');
-
-				setTimeout(function() {
-					_OUTPUT.value('What are your commands?');
-				}, 1000);
-
-			}, 500);
+			this.element.fireEventListener('error', {
+				message: 'Whatever error message'
+			});
 
 		}
+
+
+		console.log(result, value);
 
 	};
 
@@ -54,6 +38,11 @@ lychee.define('app.state.Dialog').includes([
 	 */
 
 	let Composite = function(main) {
+
+		this.element    = _component.create();
+		this.__listener = null;
+
+		_main.appendChild(this.element);
 
 		_State.call(this, main);
 
@@ -84,25 +73,12 @@ lychee.define('app.state.Dialog').includes([
 
 		enter: function(oncomplete) {
 
-			_STATE.enter();
-			_INPUT.value('');
+			this.__listener = function(e) {
+				_on_change.call(this, e.detail);
+			}.bind(this);
 
-			let suggestion = _SUGGESTIONS[(Math.random() * _SUGGESTIONS.length) | 0] || null;
-			if (suggestion !== null) {
-				_INPUT.attr('placeholder', suggestion);
-			}
-
-			_HELP.state('inactive');
-			_INPUT.bind('change', _on_change, this);
-
-			setTimeout(function() {
-
-				if (_INPUT.value() === '') {
-					_HELP.state('active');
-				}
-
-			}, 5000);
-
+			this.element.fireEventListener('enter', null);
+			this.element.addEventListener('change', this.__listener, true);
 
 			_State.prototype.enter.call(this, oncomplete);
 
@@ -110,10 +86,12 @@ lychee.define('app.state.Dialog').includes([
 
 		leave: function(oncomplete) {
 
-			_INPUT.unbind('change', _on_change, this);
-			_INPUT.value('');
-			_STATE.leave();
+			let that = this;
 
+			this.element.removeEventListener(this.__listener, true);
+			this.element.fireEventListener('leave', null);
+
+			this.__listener = null;
 
 			_State.prototype.leave.call(this, oncomplete);
 

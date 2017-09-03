@@ -8,7 +8,7 @@ setTimeout(function() {
 	let input = _dialog.querySelector('input.command');
 	if (input !== null) {
 
-		input.value = 'search /r/programming for samaritan';
+		input.value = 'browse /r/programming';
 		input.onchange();
 
 	}

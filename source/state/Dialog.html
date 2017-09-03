@@ -1,13 +1,203 @@
-<header>
-</header>
-<article>
-	<figure>
-		<div class="waiting"></div>
-		<p class="response">What are your commands?</p>
-		<input class="command" type="text" placeholder="search reddit for samaritan" autofocus>
-		<br><br><br>
-		<small class="inactive">Need help? Enter <q>help me</q>.</small>
-	</figure>
-</article>
-<footer>
-</footer>
+<!DOCTYPE html>
+<template id="template">
+	<style>
+		:host header,
+		:host footer {
+			display: none;
+		}
+
+		:host article {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			bottom: 0px;
+			left: 0px;
+			margin: 0px;
+			padding: 16px;
+			color: #ffffff;
+			font-family: 'Cantarell';
+			font-weight: normal;
+			font-style: normal;
+			text-align: center;
+			background: #383c4a;
+			user-select: none;
+			-webkit-user-select: none;
+			cursor: default;
+		}
+
+		:host article > figure {
+			position: absolute;
+			width: 50%;
+			top: 50%;
+			left: 50%;
+			margin: 0px;
+			padding: 0px;
+			transform: translate(-50%, -50%);
+		}
+
+		:host article > figure > div {
+			display: block;
+			width: 0px;
+			height: 0px;
+			margin: 0px auto 32px auto;
+			border: 0px solid transparent;
+			border-left: 64px solid transparent;
+			border-right: 64px solid transparent;
+			border-top: 96px solid #d0494b;
+			transform: scale(1, 1) translate(0, 0);
+		}
+
+		@keyframes wait {
+			0%   { transform: scale(1, 1); }
+			50%  { transform: scale(1.1, 1.1); }
+			100% { transform: scale(1, 1); }
+		}
+
+		@keyframes deny {
+			0%   { transform: translate(-10%, 0); }
+			25%  { transform: translate( 10%, 0); }
+			50%  { transform: translate(-10%, 0); }
+			75%  { transform: translate( 10%, 0); }
+			100% { transform: translate(  0%, 0); }
+		}
+
+		:host article > figure > div.deny {
+			animation: 500ms ease-out 1 deny;
+		}
+
+		:host article > figure p.response {
+			font-size: 32px;
+			margin: 0px;
+			padding: 0px;
+		}
+
+		:host article > figure input.command {
+			width: 100%;
+			font-size: 32px;
+			height: 64px;
+			line-height: 64px;
+			text-align: center;
+			background: transparent;
+			border-color: transparent;
+		}
+
+		:host article > figure small {
+			font-size: 16px;
+			transition: 1000ms opacity ease-out;
+		}
+
+		:host article > figure small.inactive {
+			opacity: 0;
+		}
+
+		:host article > figure small.active {
+			opacity: 1;
+		}
+	</style>
+	<content>
+		<header>
+		</header>
+		<article>
+			<figure>
+				<div class="wait"></div>
+				<p class="response">What are your commands?</p>
+				<input class="command" type="text" placeholder="search reddit for samaritan" autofocus>
+				<br><br><br>
+				<small class="inactive">Need help? Enter <q>help me</q>.</small>
+			</figure>
+		</article>
+		<footer>
+		</footer>
+	</content>
+</template>
+<script>
+(function(doc) {
+
+	const _SUGGESTIONS = [
+		'search reddit for samaritan',
+		'find sameen shaw',
+		'locate harold finch',
+		'browse /r/machinelearning',
+		'locate the machine',
+		'explain artificial intelligence',
+		'find samantha groves'
+	];
+
+
+
+	let template  = doc.querySelector('#template');
+	let component = Polyfillr.define('state-dialog', template);
+	if (component !== null) {
+
+		component.addEventListener('create', function(e) {
+
+			let element = e.target;
+			let input   = element.querySelector('input.command');
+
+			input.onchange = function() {
+				this.fireEventListener('change', input.value);
+			}.bind(this);
+
+		}, true);
+
+		component.addEventListener('destroy', function(e) {
+
+			let element = e.target;
+			if (element.parentNode !== null) {
+				element.parentNode.removeChild(element);
+			}
+
+		}, true);
+
+		component.addEventListener('reset', function(e) {
+
+			let element = e.target;
+			let input   = element.querySelector('input.command');
+			let help    = element.querySelector('small');
+
+			input.value    = '';
+			help.className = 'inactive';
+
+			let suggestion = _SUGGESTIONS[(Math.random() * _SUGGESTIONS.length) | 0] || null;
+			if (suggestion !== null) {
+				input.setAttribute('placeholder', suggestion);
+			}
+
+
+			setTimeout(_ => {
+
+				if (input.value === '') {
+					help.className = 'active';
+				}
+
+			}, 5000);
+
+		}, true);
+
+		component.addEventListener('error', function(e) {
+
+			let element = e.target;
+			let message = e.detail.message || 'Please rephrase command.';
+			let icon    = element.querySelector('figure > div');
+			let input   = element.querySelector('input.command');
+			let output  = element.querySelector('p.response');
+
+			icon.className   = 'deny';
+			output.innerHTML = message;
+
+			setTimeout(_ => {
+
+				icon.className = 'wait';
+
+				setTimeout(_ => {
+					output.innerHTML = 'What are your commands?';
+				}, 500);
+
+			}, 500);
+
+		}, true);
+
+	}
+
+})(document.currentScript.ownerDocument);
+</script>
