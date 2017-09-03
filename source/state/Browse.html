@@ -11,7 +11,7 @@
 	</style>
 	<content>
 		<header>
-			<input type="text" placeholder="browse /r/programming" value="">
+			<input class="command" type="text" placeholder="browse /r/programming" value="">
 		</header>
 		<article>
 			<h3>Empty Tab Page</h3>
@@ -26,6 +26,11 @@
 <script>
 (function(doc) {
 
+	const _EMPTY_TAB = [
+		'<h3>Empty Tab Page</h3>',
+		'<p>Please enter your command above.</p>'
+	].join('\n');
+
 	let template  = doc.querySelector('#template');
 	let component = Polyfillr.define('state-browse', template);
 	if (component !== null) {
@@ -33,25 +38,29 @@
 		component.addEventListener('create', function(e) {
 
 			let element = e.target;
-			let article = element.querySelector('article');
+			let input   = element.querySelector('input.command');
 
-			console.log('created browse', element, article);
+			input.onchange = function() {
+				this.fireEventListener('command', input.value);
+			}.bind(this);
 
 		}, true);
 
 		component.addEventListener('destroy', function(e) {
 
 			let element = e.target;
-
-			console.log('destroyed browse', element);
+			if (element.parentNode !== null) {
+				element.parentNode.removeChild(element);
+			}
 
 		}, true);
 
-		component.addEventListener('render', function(e) {
+		component.addEventListener('reset', function(e) {
 
-			let model = e.detail;
+			let element = e.target;
+			let article = element.querySelector('article');
 
-			console.log('render browse model', model);
+			article.innerHTML = _EMPTY_TAB;
 
 		}, true);
 

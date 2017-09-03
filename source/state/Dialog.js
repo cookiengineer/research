@@ -15,21 +15,14 @@ lychee.define('app.state.Dialog').includes([
 
 	const _on_change = function(value) {
 
-		let result   = this.main.command(value);
-		let response = this.element.querySelector('p.response');
-
+		let result = this.main.command(value);
 		if (result === false) {
 
-			console.log(value);
-
 			this.element.fireEventListener('error', {
-				message: 'Whatever error message'
+				message: 'Please rephrase command.'
 			});
 
 		}
-
-
-		console.log(result, value);
 
 	};
 
@@ -79,7 +72,7 @@ lychee.define('app.state.Dialog').includes([
 				_on_change.call(this, e.detail);
 			}.bind(this);
 
-			this.element.fireEventListener('enter', null);
+			this.element.fireEventListener('reset', null);
 			this.element.addEventListener('command', this.__listener, true);
 
 			_State.prototype.enter.call(this, oncomplete);
@@ -88,10 +81,7 @@ lychee.define('app.state.Dialog').includes([
 
 		leave: function(oncomplete) {
 
-			let that = this;
-
-			this.element.removeEventListener('change', this.__listener, true);
-			this.element.fireEventListener('leave', null);
+			this.element.removeEventListener('command', this.__listener, true);
 
 			this.__listener = null;
 

@@ -132,8 +132,8 @@ lychee.define('app.state.Browse').includes([
 				this.main.command(e.detail);
 			}.bind(this);
 
-			this.element.fireEventListener('enter', null);
-			this.element.addEventListener('change', this.__listener, true);
+			this.element.fireEventListener('reset', null);
+			this.element.addEventListener('command', this.__listener, true);
 
 
 			_browse.call(this, intent);
@@ -144,8 +144,7 @@ lychee.define('app.state.Browse').includes([
 
 		leave: function(oncomplete) {
 
-			this.element.removeEventListener('change', this.__listener, true);
-			this.element.fireEventListener('leave', null);
+			this.element.removeEventListener('command', this.__listener, true);
 
 			_State.prototype.leave.call(this, oncomplete);
 
