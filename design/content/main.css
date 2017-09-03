@@ -19,7 +19,7 @@ main {
 	border-top: none;
 }
 
-main > section {
+main > * {
 	position: absolute;
 	top: 0px;
 	right: 0px;
@@ -27,26 +27,27 @@ main > section {
 	left: 0px;
 	border: 1px solid #272a34;
 	box-sizing: border-box;
+	z-index: 500;
 }
 
-main > section.inactive {
+main > *.inactive {
 	opacity: 0;
 	transition: all 200ms ease-out;
 	z-index: 510;
 }
 
-main > section.active {
+main > *.active {
 	opacity: 1;
 	transition: all 200ms ease-out;
 	z-index: 520;
 }
 
-section {
+main > * {
 	background: #404552;
 }
 
 
-section > header {
+main > * > header {
 	position: absolute;
 	height: 48px;
 	line-height: 46px;
@@ -64,7 +65,7 @@ section > header {
 	user-select: none;
 }
 
-section > header > ul {
+main > * > header > ul {
 	display: block;
 	width: auto;
 	height: 30px;
@@ -74,7 +75,7 @@ section > header > ul {
 	box-sizing: border-box;
 }
 
-section > header > ul > li {
+main > * > header > ul > li {
 	display: inline-block;
 	width: 128px;
 	height: 30px;
@@ -96,18 +97,18 @@ section > header > ul > li {
 	cursor: pointer;
 }
 
-section > header > ul > li:hover {
+main > * > header > ul > li:hover {
 	color: #ffffff;
 }
 
-section > header > ul > li.active {
+main > * > header > ul > li.active {
 	color: #ffffff;
 	border: 1px solid #272a34;
 	border-bottom: 1px solid transparent;
 	background: #404552;
 }
 
-section > article {
+main > * > article {
 	position: absolute;
 	top: 48px;
 	right: 0px;
@@ -117,7 +118,7 @@ section > article {
 	overflow-y: scroll;
 }
 
-section > footer {
+main > * > footer {
 	position: absolute;
 	height: 48px;
 	line-height: 46px;
@@ -133,8 +134,8 @@ section > footer {
 	box-sizing: border-box;
 }
 
-section > footer,
-section > footer > * {
+main > * > footer,
+main > * > footer > * {
 	-webkit-user-select: none;
 	user-select: none;
 }

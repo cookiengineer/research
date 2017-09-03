@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<body>
 <template id="template">
 	<style>
 	:host header > input[type="text"] {
@@ -56,14 +55,15 @@
 
 		}, true);
 
-		component.addEventListener('change', function(e) {
+		component.addEventListener('enter', function(e) {
+			e.target.className = 'active';
+		}, true);
 
-			console.log('changed browse attribute', e.detail);
-
+		component.addEventListener('leave', function(e) {
+			e.target.className = 'inactive';
 		}, true);
 
 	}
 
 })(document.currentScript.ownerDocument);
 </script>
-</body>

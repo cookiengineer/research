@@ -135,7 +135,7 @@
 			let input   = element.querySelector('input.command');
 
 			input.onchange = function() {
-				this.fireEventListener('change', input.value);
+				this.fireEventListener('command', input.value);
 			}.bind(this);
 
 		}, true);
@@ -195,6 +195,14 @@
 
 			}, 500);
 
+		}, true);
+
+		component.addEventListener('enter', function(e) {
+			e.target.className = 'active';
+		}, true);
+
+		component.addEventListener('leave', function(e) {
+			e.target.className = 'inactive';
 		}, true);
 
 	}

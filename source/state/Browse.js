@@ -3,8 +3,9 @@ lychee.define('app.state.Browse').includes([
 	'lychee.app.State'
 ]).exports(function(lychee, global, attachments) {
 
-	const _State = lychee.import('lychee.app.State');
-	const _STATE = Polyfillr.import(attachments["html"].url, attachments["html"].buffer)['browse'] || null;
+	const _State     = lychee.import('lychee.app.State');
+	const _COMPONENT = Polyfillr.import(attachments["html"].url, attachments["html"].buffer)['state-browse'];
+	const _main      = global.document.querySelector('main');
 
 
 
@@ -44,13 +45,17 @@ lychee.define('app.state.Browse').includes([
 
 		}
 
+		console.log('on browse', articles);
+
 		if (articles.length === 0) {
 			articles.push($.render('article', _get_500()));
 		}
 
 
-		_STATE.queries('article').forEach(other => _STATE.remove(other));
-		articles.forEach(article => _STATE.add(article));
+		// Array.from(_state.querySelectorAll('article')).forEach(other => other.parentNode.removeChild(other));
+
+		// _STATE.queries('article').forEach(other => _STATE.remove(other));
+		// articles.forEach(article => _STATE.add(article));
 
 
 		// if (_FOOTER !== null) {
@@ -60,11 +65,9 @@ lychee.define('app.state.Browse').includes([
 
 	};
 
-	const _browse = function(data) {
+	const _browse = function(intent) {
 
-		console.info('browse', data);
-
-
+		let data   = intent._result;
 		let main   = this.main;
 		let plugin = main.getPlugin(data.plugin || 'generic');
 		if (plugin !== null) {
@@ -91,6 +94,11 @@ lychee.define('app.state.Browse').includes([
 
 	let Composite = function(main) {
 
+		this.element    = _COMPONENT.create();
+		this.__listener = null;
+
+		_main.appendChild(this.element);
+
 		_State.call(this, main);
 
 	};
@@ -114,25 +122,21 @@ lychee.define('app.state.Browse').includes([
 
 		update: function(intent) {
 
-			_browse.call(this, intent._result);
+			_browse.call(this, intent);
 
 		},
 
 		enter: function(oncomplete, intent) {
 
-			global.__STATE = _STATE;
-			console.log(_STATE);
+			this.__listener = function(e) {
+				this.main.command(e.detail);
+			}.bind(this);
 
-			// _STATE.enter();
+			this.element.fireEventListener('enter', null);
+			this.element.addEventListener('change', this.__listener, true);
 
-			// let input = _HEADER.query('input');
-			// if (input !== null) {
-			// 	input.value(intent.sentence);
-			// 	input.bind('change', this.main.command, this.main);
-			// }
 
-			_browse.call(this, intent._result);
-
+			_browse.call(this, intent);
 
 			_State.prototype.enter.call(this, oncomplete);
 
@@ -140,14 +144,8 @@ lychee.define('app.state.Browse').includes([
 
 		leave: function(oncomplete) {
 
-			// let input = _HEADER.query('input');
-			// if (input !== null) {
-			// 	input.unbind('change');
-			// 	input.value('');
-			// }
-
-			// _STATE.leave();
-
+			this.element.removeEventListener('change', this.__listener, true);
+			this.element.fireEventListener('leave', null);
 
 			_State.prototype.leave.call(this, oncomplete);
 

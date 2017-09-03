@@ -3,11 +3,11 @@
  * APP VIEWS
  */
 
-section > header > input[type="checkbox"] {
+main > * > header > input[type="checkbox"] {
 	margin: 0px 4px 0px 8px;
 }
 
-section > article {
+main > * > article {
 	padding: 16px;
 }
 
