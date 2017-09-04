@@ -1,76 +1,430 @@
-<header>
-</header>
-<article>
-	<fieldset>
-		<legend><h3>Networking</h3></legend>
-		<div id="settings-tethering">
-			<h4><input type="checkbox"> Tethering Mode</h4>
-			<p class="inactive">
-				<span>
-					Research will load no images, no videos
-					and no other media until explicitely
-					instructed to do so.
-				</span>
-				<span>
-					Research will load images, videos and
-					other media automatically.
-				</span>
-			</p>
-		</div>
-		<div id="settings-stealth">
-			<h4><input type="checkbox" checked> Stealth Mode</h4>
-			<p class="active">
-				<span>
-					Research will use the local <abbr title="The Onion Router">TOR</abbr>
-					Proxy and randomize the user agent string.
-				</span>
-				<span>
-					Research will respect system-wide Proxy
-					settings and use a proper user agent string.
-				</span>
-			</p>
-		</div>
-		<div id="settings-connections">
-			<h4>Parallel Connections</h4>
-			<p>
-				<input type="number" value="8" placeholder="8" min="1" max="32"/>
-				<label class="button">-</label><label class="button">+</label>
-				<br><br>
-				Research will automatically parallelize download
-				and scrape tasks based on the amount of maximum
-				connections available.
-				<br><br>
-				Be careful with this, some ISPs lock accounts when
-				you cause too much momentary peak traffic.
-			</p>
-		</div>
-	</fieldset>
-	<fieldset>
-		<legend><h3>Cache</h3></legend>
-		<div id="settings-cache-folder">
-			<h4>Cache Folder</h4>
-			<p>
-				<input type="text" placeholder="~/Research" value="~/Research"/>
-				<input id="settings-cache-folder-select" type="file" nwdirectory/>
-				<label for="settings-cache-folder-select" class="button">Choose</label>
-				<br><br>
-				Research will automatically store its memory
-				into the cache folder. Absolute paths must
-				begin with <q><abbr title="/ is the system's root folder">/</abbr></q>
-				and relative paths with <q><abbr title="~ is the user's profile folder">~</abbr></q>.
-			</p>
-		</div>
-		<div id="settings-cache-clear">
-			<h4>Cache Memory</h4>
-			<p>
-				<input placeholder="Dashwood" type="password" />
-				<button>Erase Memory</button>
-				<br><br>
-				Eight letters. It's your decision.
-			</p>
-		</div>
-	</fieldset>
-</article>
-<footer>
-	Project Research is &copy; 2017 by Artificial Engineering. Find out more at <a href="http://artificial.engineering" target="_blank">artificial.engineering</a>.
-</footer>
+<!DOCTYPE html>
+<template id="template">
+	<style>
+		:host header {
+			display: none;
+		}
+
+		:host article {
+			top: 0px;
+			background: #383c4a;
+		}
+
+		:host article fieldset {
+			min-width: 256px;
+			max-width: 512px;
+			margin: 0px auto 16px auto;
+			padding: 16px;
+			background: #404552;
+			border: 1px solid #272a34;
+		}
+
+		:host article fieldset:last-of-type {
+			margin-bottom: 0px;
+		}
+
+		:host article fieldset > legend {
+			height: 32px;
+			line-height: 30px;
+			margin: 0px;
+			padding: 0px 8px;
+			font-family: 'Cantarell';
+			font-size: 20px;
+			font-weight: normal;
+			background: #383c4a;
+			border: 1px solid #272a34;
+			border-radius: 2px;
+			box-sizing: border-box;
+		}
+
+		:host article fieldset > legend > h3 {
+			display: inline-block;
+			margin: 0px;
+			padding: 0px;
+		}
+
+		:host article fieldset div {
+			margin: 0px 0px 32px 0px;
+		}
+
+		:host article fieldset div:last-of-type {
+			margin-bottom: 0px;
+		}
+
+		:host fieldset h4 {
+			margin: 0px;
+			padding: 0px;
+			font-size: 20px;
+			font-weight: normal;
+			vertical-align: top;
+		}
+
+		:host fieldset h4 > input[type="checkbox"] {
+			vertical-align: bottom;
+		}
+
+		:host fieldset p {
+			display: block;
+			position: static;
+			min-height: 3em;
+			line-height: 1.5em;
+			margin: 1em 0px 0px 0px;
+			padding: 0px 0px 0px 32px;
+		}
+
+		:host fieldset ul {
+			display: block;
+			position: static;
+			margin: 1em 0px 0px 0px;
+			padding: 0px 0px 0px 32px;
+		}
+
+		:host #settings-stealth p,
+		:host #settings-tethering p {
+			display: block;
+			position: relative;
+			padding: 0px;
+		}
+
+		:host #settings-stealth p > span,
+		:host #settings-tethering p > span {
+			display: block;
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			bottom: 0px;
+			left: 32px;
+			transition: 250ms all ease-out;
+		}
+
+		:host #settings-stealth p > span:nth-of-type(2),
+		:host #settings-stealth p.active > span:nth-of-type(1),
+		:host #settings-tethering p > span:nth-of-type(2),
+		:host #settings-tethering p.active > span:nth-of-type(1) {
+			opacity: 1;
+			z-index: 2;
+			transition: 250ms 250ms all ease-out;
+		}
+
+
+		:host #settings-stealth p > span:nth-of-type(1),
+		:host #settings-stealth p.active > span:nth-of-type(2),
+		:host #settings-tethering p > span:nth-of-type(1),
+		:host #settings-tethering p.active > span:nth-of-type(2) {
+			opacity: 0;
+			z-index: 1;
+			transition: 250ms all ease-out;
+		}
+
+		:host #settings-cache-folder-select {
+			display: none;
+		}
+
+		:host #settings-cache-folder label.button {
+			display: inline-block;
+			vertical-align: top;
+		}
+	</style>
+	<content>
+		<header>
+		</header>
+		<article>
+			<fieldset>
+				<legend><h3>Networking</h3></legend>
+				<div id="settings-tethering">
+					<h4><input type="checkbox"> Tethering Mode</h4>
+					<p class="inactive">
+						<span>
+							Research will load no images, no videos
+							and no other media until explicitely
+							instructed to do so.
+						</span>
+						<span>
+							Research will load images, videos and
+							other media automatically.
+						</span>
+					</p>
+				</div>
+				<div id="settings-stealth">
+					<h4><input type="checkbox" checked> Stealth Mode</h4>
+					<p class="active">
+						<span>
+							Research will use the local <abbr title="The Onion Router">TOR</abbr>
+							Proxy and randomize the user agent string.
+						</span>
+						<span>
+							Research will respect system-wide Proxy
+							settings and use a proper user agent string.
+						</span>
+					</p>
+				</div>
+				<div id="settings-connections">
+					<h4>Parallel Connections</h4>
+					<p>
+						<input type="number" value="8" placeholder="8" min="1" max="32"/>
+						<label class="button">-</label><label class="button">+</label>
+						<br><br>
+						Research will automatically parallelize download
+						and scrape tasks based on the amount of maximum
+						connections available.
+						<br><br>
+						Be careful with this, some ISPs lock accounts when
+						you cause too much momentary peak traffic.
+					</p>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend><h3>Cache</h3></legend>
+				<div id="settings-cache-folder">
+					<h4>Cache Folder</h4>
+					<p>
+						<input type="text" placeholder="~/Research" value="~/Research"/>
+						<input id="settings-cache-folder-select" type="file" nwdirectory/>
+						<label for="settings-cache-folder-select" class="button">Choose</label>
+						<br><br>
+						Research will automatically store its memory
+						into the cache folder. Absolute paths must
+						begin with <q><abbr title="/ is the system's root folder">/</abbr></q>
+						and relative paths with <q><abbr title="~ is the user's profile folder">~</abbr></q>.
+					</p>
+				</div>
+				<div id="settings-cache-erase">
+					<h4>Cache Memory</h4>
+					<p>
+						<input placeholder="Dashwood" type="password" />
+						<button>Erase Memory</button>
+						<br><br>
+						Eight letters. It's your decision.
+					</p>
+				</div>
+			</fieldset>
+		</article>
+		<footer>
+			Project Research is &copy; 2017 by Artificial Engineering. Find out more at <a href="http://artificial.engineering" target="_blank">artificial.engineering</a>.
+		</footer>
+	</content>
+</template>
+<script>
+(function(doc) {
+
+	const _get_elements = function(element) {
+
+		return {
+			tethering: [
+				element.querySelector('#settings-tethering input'),
+				element.querySelector('#settings-tethering p')
+			],
+			stealth: [
+				element.querySelector('#settings-stealth input'),
+				element.querySelector('#settings-stealth p')
+			],
+			connections: [
+				element.querySelector('#settings-connections input'),
+				element.querySelector('#settings-connections label.button:nth-of-type(1)'),
+				element.querySelector('#settings-connections label.button:nth-of-type(2)')
+			],
+			cache: [
+				element.querySelector('#settings-cache-folder input[type="text"]'),
+				element.querySelector('#settings-cache-folder input[type="file"]')
+			],
+			cache_erase: [
+				element.querySelector('#settings-cache-erase input'),
+				element.querySelector('#settings-cache-erase button')
+			]
+		};
+
+	};
+
+	const _get_settings = function(element) {
+
+		let elements = _get_elements(element);
+		let settings = {
+			tethering:   elements.tethering[0].checked === true,
+			stealth:     elements.stealth[0].checked === true,
+			connections: parseInt(elements.connections[0].value, 10),
+			cache:       elements.cache[0].value
+		};
+
+		return settings;
+
+	};
+
+
+
+	let template  = doc.querySelector('#template');
+	let component = Polyfillr.define('state-settings', template);
+	if (component !== null) {
+
+		component.addEventListener('create', function(e) {
+
+			let element  = e.target;
+			let elements = _get_elements(element);
+
+
+			elements.tethering[0].onchange = function() {
+				elements.tethering[1].className = this.checked ? 'active' : 'inactive';
+				element.fireEventListener('settings', _get_settings(element));
+			};
+
+			elements.stealth[0].onchange = function() {
+				elements.stealth[1].className = this.checked ? 'active' : 'inactive';
+				element.fireEventListener('settings', _get_settings(element));
+			};
+
+
+			elements.connections[1].onclick = function() {
+
+				let input = elements.connections[0];
+				let value = parseInt(input.value, 10) - 1;
+				let min   = parseInt(input.min, 10);
+				let max   = parseInt(input.max, 10);
+
+				if (value >= max) {
+					value = max;
+				} else if (value <= min) {
+					value = min;
+				}
+
+				let strval = '' + value;
+				if (input.value !== strval) {
+					input.value = value;
+					input.onchange();
+				}
+
+			};
+
+			elements.connections[2].onclick = function() {
+
+				let input = elements.connections[0];
+				let value = parseInt(input.value, 10) + 1;
+				let min   = parseInt(input.min, 10);
+				let max   = parseInt(input.max, 10);
+
+				if (value >= max) {
+					value = max;
+				} else if (value <= min) {
+					value = min;
+				}
+
+				let strval = '' + value;
+				if (input.value !== strval) {
+					input.value = value;
+					input.onchange();
+				}
+
+			};
+
+			elements.connections[0].onchange = function() {
+
+				let input = elements.connections[0];
+				let value = parseInt(input.value, 10);
+				let min   = parseInt(input.min, 10);
+				let max   = parseInt(input.max, 10);
+
+				if (value >= min && value <= max) {
+					input.value = value;
+				} else if (value >= max) {
+					input.value = max;
+				} else if (value <= min) {
+					input.value = min;
+				}
+
+				element.fireEventListener('settings', _get_settings(element));
+
+			};
+
+
+			elements.cache[1].onchange = function() {
+
+				let input = elements.cache[0];
+				let value = this.value;
+
+				if (value.startsWith('/home/')) {
+					value = '~/' + value.split('/').slice(3).join('/');
+				}
+
+				if (input.value !== value) {
+					input.value = value;
+					input.onchange();
+				}
+
+			};
+
+			elements.cache[0].onchange = function() {
+
+				let value = this.value;
+				if (value.startsWith('~') || value.startsWith('/')) {
+
+					let check = value.split('/').filter(v => (v !== '.' && v !== '..')).join('/');
+					if (check !== value) {
+						this.value = '~/Research';
+					}
+
+				} else {
+
+					this.value = '~/Research';
+
+				}
+
+				element.fireEventListener('settings', _get_settings(element));
+
+			};
+
+
+			elements.cache_erase[1].setAttribute('disabled', true);
+			elements.cache_erase[0].onchange = function() {
+
+				let value = this.value;
+				if (value === 'Dashwood') {
+					elements.cache_erase[1].removeAttribute('disabled');
+				} else {
+					elements.cache_erase[1].setAttribute('disabled', true);
+					this.value = '';
+				}
+
+			};
+
+			elements.cache_erase[1].onclick = function() {
+				element.fireEventListener('memory', null);
+			};
+
+		}, true);
+
+		component.addEventListener('destroy', function(e) {
+
+			let element = e.target;
+			if (element.parentNode !== null) {
+				element.parentNode.removeChild(element);
+			}
+
+		}, true);
+
+		component.addEventListener('enter', function(e) {
+
+			let element  = e.target;
+			let settings = e.detail;
+			let elements = _get_elements(element);
+
+			elements.tethering[0].checked   = settings.tethering;
+			elements.tethering[1].className = settings.tethering ? 'active' : 'inactive';
+			elements.stealth[0].checked     = settings.stealth;
+			elements.stealth[1].className   = settings.stealth ? 'active' : 'inactive';
+
+			elements.connections[0].value   = settings.connections;
+			elements.cache[0].value         = settings.cache;
+
+			elements.cache_erase[0].value   = '';
+			elements.cache_erase[1].setAttribute('disabled', true);
+
+			element.className = 'active';
+
+		}, true);
+
+		component.addEventListener('leave', function(e) {
+			e.target.className = 'inactive';
+		}, true);
+
+	}
+
+})(document.currentScript.ownerDocument);
+</script>

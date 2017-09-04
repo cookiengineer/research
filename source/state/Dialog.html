@@ -149,31 +149,6 @@
 
 		}, true);
 
-		component.addEventListener('reset', function(e) {
-
-			let element = e.target;
-			let input   = element.querySelector('input.command');
-			let help    = element.querySelector('small');
-
-			input.value    = '';
-			help.className = 'inactive';
-
-			let suggestion = _SUGGESTIONS[(Math.random() * _SUGGESTIONS.length) | 0] || null;
-			if (suggestion !== null) {
-				input.setAttribute('placeholder', suggestion);
-			}
-
-
-			setTimeout(_ => {
-
-				if (input.value === '') {
-					help.className = 'active';
-				}
-
-			}, 5000);
-
-		}, true);
-
 		component.addEventListener('error', function(e) {
 
 			let element = e.target;
@@ -198,7 +173,28 @@
 		}, true);
 
 		component.addEventListener('enter', function(e) {
-			e.target.className = 'active';
+
+			let element = e.target;
+			let input   = element.querySelector('input.command');
+			let help    = element.querySelector('small');
+
+			input.value       = '';
+			help.className    = 'inactive';
+			element.className = 'active';
+
+			let suggestion = _SUGGESTIONS[(Math.random() * _SUGGESTIONS.length) | 0] || null;
+			if (suggestion !== null) {
+				input.setAttribute('placeholder', suggestion);
+			}
+
+			setTimeout(_ => {
+
+				if (input.value === '') {
+					help.className = 'active';
+				}
+
+			}, 5000);
+
 		}, true);
 
 		component.addEventListener('leave', function(e) {

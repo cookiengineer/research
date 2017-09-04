@@ -26,6 +26,11 @@
 <script>
 (function(doc) {
 
+	const _ERROR_TAB = [
+		'<h3>${code}: ${header}</h3>',
+		'<p>${message}</p>'
+	].join('\n');
+
 	const _EMPTY_TAB = [
 		'<h3>Empty Tab Page</h3>',
 		'<p>Please enter your command above.</p>'
@@ -55,17 +60,45 @@
 
 		}, true);
 
-		component.addEventListener('reset', function(e) {
+		component.addEventListener('error', function(e) {
+
+			let element  = e.target;
+			let message  = e.detail.message || 'Please rephrase command.';
+			let code     = e.detail.code    || 500;
+			let article  = element.querySelector('article');
+			let template = _ERROR_TAB;
+
+			template = template.split('${code}').join(code);
+			template = template.split('${header}').join(header);
+			template = template.split('${message}').join(message);
+
+			article.innerHTML = template;
+
+		}, true);
+
+		component.addEventListener('render', function(e) {
+
+			let element  = e.target;
+			let article  = element.querySelector('article');
+
+			let articles = e.detail.articles || [];
+			if (articles.length > 0) {
+				console.log(articles);
+				article.innerHTML = articles.map(token => token.toString()).join('\n');
+			} else {
+				article.innerHTML = _EMPTY_TAB;
+			}
+
+		}, true);
+
+		component.addEventListener('enter', function(e) {
 
 			let element = e.target;
 			let article = element.querySelector('article');
 
 			article.innerHTML = _EMPTY_TAB;
+			element.className = 'active';
 
-		}, true);
-
-		component.addEventListener('enter', function(e) {
-			e.target.className = 'active';
 		}, true);
 
 		component.addEventListener('leave', function(e) {

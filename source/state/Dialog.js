@@ -34,11 +34,12 @@ lychee.define('app.state.Dialog').includes([
 
 	let Composite = function(main) {
 
-		this.element    = _COMPONENT.create();
+		this.element = _COMPONENT.create();
+
 		this.__listener = null;
 
-		_main.appendChild(this.element);
 
+		_main.appendChild(this.element);
 		_State.call(this, main);
 
 	};
@@ -72,7 +73,7 @@ lychee.define('app.state.Dialog').includes([
 				_on_change.call(this, e.detail);
 			}.bind(this);
 
-			this.element.fireEventListener('reset', null);
+			this.element.fireEventListener('enter', null);
 			this.element.addEventListener('command', this.__listener, true);
 
 			_State.prototype.enter.call(this, oncomplete);
@@ -82,6 +83,7 @@ lychee.define('app.state.Dialog').includes([
 		leave: function(oncomplete) {
 
 			this.element.removeEventListener('command', this.__listener, true);
+			this.element.fireEventListener('leave', null);
 
 			this.__listener = null;
 

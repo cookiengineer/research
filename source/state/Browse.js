@@ -13,22 +13,6 @@ lychee.define('app.state.Browse').includes([
 	 * HELPERS
 	 */
 
-	const _get_500 = function(entry) {
-
-		let html = [];
-
-		html.push('<h3>No results</h3>');
-		html.push('<p>');
-		html.push('\tNo results matched your query.');
-		html.push('</p>');
-		html.push('<p>');
-		html.push('\tTry a different query.');
-		html.push('</p>');
-
-		return html.join('\n');
-
-	};
-
 	const _on_browse = function(results) {
 
 		let articles = [];
@@ -38,6 +22,7 @@ lychee.define('app.state.Browse').includes([
 			results.forEach(entry => {
 
 				if (typeof entry.html === 'string') {
+					// TODO: Remove legacy $.render() method
 					articles.push($.render('article', entry.html));
 				}
 
@@ -45,23 +30,22 @@ lychee.define('app.state.Browse').includes([
 
 		}
 
-		console.log('on browse', articles);
 
-		if (articles.length === 0) {
-			articles.push($.render('article', _get_500()));
+		if (articles.length > 0) {
+
+			this.element.fireEventListener('render', {
+				articles: articles
+			});
+
+		} else {
+
+			this.element.fireEventListener('error', {
+				code:    500,
+				header:  'Network Error',
+				message: 'Could not retrieve any matching data.'
+			});
+
 		}
-
-
-		// Array.from(_state.querySelectorAll('article')).forEach(other => other.parentNode.removeChild(other));
-
-		// _STATE.queries('article').forEach(other => _STATE.remove(other));
-		// articles.forEach(article => _STATE.add(article));
-
-
-		// if (_FOOTER !== null) {
-		// 	_STATE.remove(_FOOTER);
-		// 	_STATE.add(_FOOTER);
-		// }
 
 	};
 
@@ -94,11 +78,12 @@ lychee.define('app.state.Browse').includes([
 
 	let Composite = function(main) {
 
-		this.element    = _COMPONENT.create();
+		this.element = _COMPONENT.create();
+
 		this.__listener = null;
 
-		_main.appendChild(this.element);
 
+		_main.appendChild(this.element);
 		_State.call(this, main);
 
 	};
@@ -132,7 +117,7 @@ lychee.define('app.state.Browse').includes([
 				this.main.command(e.detail);
 			}.bind(this);
 
-			this.element.fireEventListener('reset', null);
+			this.element.fireEventListener('enter', null);
 			this.element.addEventListener('command', this.__listener, true);
 
 
@@ -145,6 +130,9 @@ lychee.define('app.state.Browse').includes([
 		leave: function(oncomplete) {
 
 			this.element.removeEventListener('command', this.__listener, true);
+			this.element.fireEventListener('leave', null);
+
+			this.__listener = null;
 
 			_State.prototype.leave.call(this, oncomplete);
 

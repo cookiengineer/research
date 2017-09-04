@@ -12,7 +12,7 @@ lychee.define('app.Main').requires([
 //	'app.state.Backup',
 //	'app.state.Browse',
 //	'app.state.Search',
-//	'app.state.Settings',
+	'app.state.Settings',
 	'lychee.Input'
 ]).includes([
 	'lychee.app.Main'
@@ -102,7 +102,7 @@ lychee.define('app.Main').requires([
 			this.setState('browse',   new _app.state.Browse(this));
 			// this.setState('help',     new _app.state.Help(this));
 			// this.setState('search',   new _app.state.Search(this));
-			// this.setState('settings', new _app.state.Settings(this));
+			this.setState('settings', new _app.state.Settings(this));
 
 			this.changeState('dialog');
 

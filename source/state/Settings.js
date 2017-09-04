@@ -3,35 +3,11 @@ lychee.define('app.state.Settings').includes([
 	'lychee.app.State'
 ]).exports(function(lychee, global, attachments) {
 
-	const _fs       = global.require('fs');
-	const _APPDATA  = lychee.import('nw').App.dataPath || lychee.ROOT.project;
-	const _STATE    = $.state('settings', attachments["html"], attachments["css"]);
-	const _ARTICLE  = _STATE.query('article');
-	const _FOOTER   = _STATE.query('footer');
-	const _State    = lychee.import('lychee.app.State');
-	const _ELEMENTS = {
-		tethering: [
-			_STATE.query('#settings-tethering input'),
-			_STATE.query('#settings-tethering p')
-		],
-		stealth: [
-			_STATE.query('#settings-stealth input'),
-			_STATE.query('#settings-stealth p')
-		],
-		connections: [
-			_STATE.query('#settings-connections input'),
-			_STATE.query('#settings-connections label.button:nth-of-type(1)'),
-			_STATE.query('#settings-connections label.button:nth-of-type(2)')
-		],
-		cache: [
-			_STATE.query('#settings-cache-folder input[type="text"]'),
-			_STATE.query('#settings-cache-folder input[type="file"]')
-		],
-		cache_erase: [
-			_STATE.query('#settings-cache-clear input'),
-			_STATE.query('#settings-cache-clear button')
-		]
-	};
+	const _State     = lychee.import('lychee.app.State');
+	const _COMPONENT = Polyfillr.import(attachments["html"].url, attachments["html"].buffer)['state-settings'];
+	const _main      = global.document.querySelector('main');
+	const _fs        = global.require('fs');
+	const _APPDATA   = lychee.import('nw').App.dataPath || lychee.ROOT.project;
 
 
 
@@ -39,28 +15,28 @@ lychee.define('app.state.Settings').includes([
 	 * FEATURE DETECTION
 	 */
 
-	(function(footer) {
+	// (function(footer) {
 
-		let link = footer.query('a');
-		if (link !== null) {
+	// 	let link = footer.query('a');
+	// 	if (link !== null) {
 
-			link.bind('click', function(value) {
+	// 		link.bind('click', function(value) {
 
-				let main = global.MAIN || null;
-				if (main !== null) {
+	// 			let main = global.MAIN || null;
+	// 			if (main !== null) {
 
-					main.changeState('browse', {
-						plugin: 'generic',
-						url:    value
-					});
+	// 				main.changeState('browse', {
+	// 					plugin: 'generic',
+	// 					url:    value
+	// 				});
 
-				}
+	// 			}
 
-			}, this);
+	// 		}, this);
 
-		}
+	// 	}
 
-	})(_FOOTER);
+	// })(_FOOTER);
 
 
 
@@ -68,101 +44,21 @@ lychee.define('app.state.Settings').includes([
 	 * HELPERS
 	 */
 
-	const _bind_elements = function() {
-
-		let settings = this.settings;
-
-		_ELEMENTS.tethering[0].bind('change', function(value) {
-			settings.tethering = value;
-			_ELEMENTS.tethering[1].state(value ? 'active' : 'inactive');
-		});
-
-		_ELEMENTS.stealth[0].bind('change', function(value) {
-			settings.stealth = value;
-			_ELEMENTS.stealth[1].state(value ? 'active' : 'inactive');
-		});
-
-		_ELEMENTS.connections[0].bind('change', function(value) {
-			_ELEMENTS.connections[0].value(value);
-			settings.connections = value;
-		});
-
-		_ELEMENTS.connections[1].bind('click', function() {
-
-			let value  = _ELEMENTS.connections[0].value() - 1;
-			let result = _ELEMENTS.connections[0].value(value);
-			if (result === true) {
-				settings.connections = value;
-			}
-
-		});
-
-		_ELEMENTS.connections[2].bind('click', function() {
-
-			let value  = _ELEMENTS.connections[0].value() + 1;
-			let result = _ELEMENTS.connections[0].value(value);
-			if (result === true) {
-				settings.connections = value;
-			}
-
-		});
-
-		_ELEMENTS.cache[0].bind('change', function(value) {
-
-			if (value.startsWith('~') || value.startsWith('/')) {
-
-				let check = value.split('/').filter(v => (v !== '.' && v !== '..')).join('/');
-				if (check === value) {
-					settings.cache = value;
-				} else {
-					_ELEMENTS.cache[0].value('~/Research');
-					settings.cache = '~/Research';
-				}
-
-			}
-
-		});
-
-		_ELEMENTS.cache[1].bind('change', function(value) {
-
-			if (value.startsWith('/home/')) {
-				value = '~/' + value.split('/').slice(3).join('/');
-			}
-
-			_ELEMENTS.cache[0].value(value);
-			settings.cache = value;
-
-		});
-
-		_ELEMENTS.cache_erase[1].attr('disabled', true);
-		_ELEMENTS.cache_erase[0].bind('change', function(value) {
-
-			if (value === 'Dashwood') {
-				_ELEMENTS.cache_erase[1].attr('disabled', false);
-			} else {
-				_ELEMENTS.cache_erase[0].value('');
-				_ELEMENTS.cache_erase[1].attr('disabled', true);
-			}
-
-		});
-
-		_ELEMENTS.cache_erase[1].bind('click', function() {
-			console.log('ERASE MEMORY NAO');
-		});
-
+	const _on_memory = function() {
+		console.warn('Clearing Cache and Knowledge now...');
 	};
 
-	const _unbind_elements = function() {
+	const _on_settings = function(settings) {
 
-		_ELEMENTS.tethering[0].unbind();
-		_ELEMENTS.stealth[0].unbind();
-		_ELEMENTS.connections[0].unbind();
-		_ELEMENTS.connections[1].unbind();
-		_ELEMENTS.connections[2].unbind();
-		_ELEMENTS.cache[0].unbind();
-		_ELEMENTS.cache[1].unbind();
-		_ELEMENTS.cache_erase[0].unbind();
-		_ELEMENTS.cache_erase[1].unbind();
+		// TODO: If this.settings.cache !== settings.cache, but
+		// this.settings.cache has files, then move folder contents...
+
+		this.settings.tethering   = settings.tethering;
+		this.settings.stealth     = settings.stealth;
+		this.settings.connections = settings.connections;
+		this.settings.cache       = settings.cache;
+
+		_save_settings.call(this);
 
 	};
 
@@ -213,10 +109,16 @@ lychee.define('app.state.Settings').includes([
 	let Composite = function(main) {
 
 		this.settings = main.settings;
+        this.element  = _COMPONENT.create();
+
+		this.__listener = {
+			memory:   null,
+			settings: null
+		};
 
 
+		_main.appendChild(this.element);
 		_State.call(this, main);
-		_read_settings.call(this);
 
 	};
 
@@ -240,21 +142,19 @@ lychee.define('app.state.Settings').includes([
 		enter: function(oncomplete, data) {
 
 			_read_settings.call(this);
-			_bind_elements.call(this);
-			_STATE.enter();
 
+			this.__listener.memory = function(e) {
+				_on_memory.call(this);
+			}.bind(this);
 
-			let settings = this.settings;
+			this.__listener.settings = function(e) {
+				_on_settings.call(this, e.detail);
+			}.bind(this);
 
-			_ELEMENTS.tethering[0].value(settings.tethering);
-			_ELEMENTS.tethering[1].state(settings.tethering ? 'active' : 'inactive');
-			_ELEMENTS.stealth[0].value(settings.stealth);
-			_ELEMENTS.stealth[1].state(settings.stealth ? 'active' : 'inactive');
-			_ELEMENTS.connections[0].value(settings.connections);
-			_ELEMENTS.cache[0].value(settings.cache);
-			_ELEMENTS.cache_erase[0].value('');
-			_ELEMENTS.cache_erase[1].attr('disabled', true);
+			this.element.fireEventListener('enter', this.settings);
 
+			this.element.addEventListener('settings', this.__listener.settings, true);
+			this.element.addEventListener('memory',   this.__listener.memory,   true);
 
 			_State.prototype.enter.call(this, oncomplete);
 
@@ -262,10 +162,15 @@ lychee.define('app.state.Settings').includes([
 
 		leave: function(oncomplete) {
 
-			_unbind_elements.call(this);
 			_save_settings.call(this);
-			_STATE.leave();
 
+			this.element.removeEventListener('memory',   this.__listener.memory,   true);
+			this.element.removeEventListener('settings', this.__listener.settings, true);
+
+			this.element.fireEventListener('leave', null);
+
+			this.__listener.memory   = null;
+			this.__listener.settings = null;
 
 			_State.prototype.leave.call(this, oncomplete);
 
