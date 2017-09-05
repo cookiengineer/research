@@ -1,0 +1,10 @@
+{
+  "name": "research",
+  "description": "Resarch (by Artificial Engineering)",
+  "main": "./index.html",
+  "homepage": "https://github.com/Artificial-Engineering/research",
+  "private": true,
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}

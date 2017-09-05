@@ -4,29 +4,6 @@
 	},
 	"build": {
 		"environments": {
-			"html/main": {
-				"build": "app.Main",
-				"debug": false,
-				"packages": [
-					[
-						"app",
-						"./lychee.pkg"
-					]
-				],
-				"sandbox": false,
-				"tags": {
-					"platform": [
-						"html"
-					]
-				},
-				"variant": "application",
-				"profile": {
-					"client": {
-						"host": "localhost",
-						"port": 13337
-					}
-				}
-			},
 			"html-nwjs/main": {
 				"build": "app.Main",
 				"debug": false,
@@ -45,37 +22,6 @@
 				},
 				"variant": "application",
 				"profile": {
-					"client": {
-						"host": "localhost",
-						"port": 13337
-					},
-					"server": {
-						"host": null,
-						"port": 13337
-					}
-				}
-			},
-			"node/main": {
-				"build": "app.Main",
-				"debug": false,
-				"packages": [
-					[
-						"app",
-						"./lychee.pkg"
-					]
-				],
-				"sandbox": false,
-				"tags": {
-					"platform": [
-						"node"
-					]
-				},
-				"variant": "application",
-				"profile": {
-					"server": {
-						"host": "localhost",
-						"port": 13337
-					}
 				}
 			}
 		},
@@ -87,11 +33,6 @@
 			"Main": [
 				"js"
 			],
-			"net": {
-				"Scraper": [
-					"js"
-				]
-			},
 			"interface": {
 				"Bot": [
 					"js"
@@ -99,6 +40,20 @@
 				"Intent": [
 					"js"
 				]
+			},
+			"net": {
+				"Scraper": [
+					"js"
+				]
+			},
+			"platform": {
+				"html-nwjs": {
+					"parser": {
+						"HTML": [
+							"js"
+						]
+					}
+				}
 			},
 			"plugin": {
 				"Reddit": [
@@ -134,9 +89,7 @@
 		},
 		"tags": {
 			"platform": {
-				"html": "platform/html",
-				"html-nwjs": "platform/html-nwjs",
-				"node": "platform/node"
+				"html-nwjs": "platform/html-nwjs"
 			}
 		}
 	}

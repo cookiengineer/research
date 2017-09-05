@@ -1,23 +1,26 @@
 {
-	"main":            "./index.html",
-	"name":            "research",
-	"description":     "Resarch (by Artificial Engineering)",
-	"version":         "${version}",
+	"main": "./index.html",
+	"name": "research",
+	"description": "Resarch (by Artificial Engineering)",
+	"version": "${version}",
 	"window": {
-		"title":       "Research (by Artificial Engineering)",
-		"icon":        "./design/icon.png",
-		"toolbar":     false,
-		"frame":       false,
-		"show":        true,
+		"title": "Research (by Artificial Engineering)",
+		"icon": "./design/icon.png",
+		"toolbar": false,
+		"frame": false,
+		"show": true,
 		"transparent": true,
-		"width":       1280,
-		"height":      800,
-		"position":    "center",
-		"min_width":   400,
-		"min_height":  512
+		"width": 1280,
+		"height": 800,
+		"position": "center",
+		"min_width": 400,
+		"min_height": 512
 	},
 	"webkit": {
 		"plugin": false
 	},
-	"nodejs": true
+	"nodejs": true,
+	"dependencies": {
+		"cheerio": "^1.0.0-rc.2"
+	}
 }
