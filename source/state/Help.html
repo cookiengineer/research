@@ -1,7 +1,45 @@
-<header>
-</header>
-<article>
-	<h3>Help</h3>
-</article>
-<footer>
-</footer>
+<!DOCTYPE html>
+<template id="template">
+	<style>
+		:host footer {
+			display: none;
+		}
+	</style>
+	<content>
+		<header>
+		</header>
+		<article>
+			<h3>Help</h3>
+		</article>
+		<footer>
+		</footer>
+	</content>
+</template>
+<script>
+(function(doc) {
+
+	let template  = doc.querySelector('#template');
+	let component = Polyfillr.define('state-help', template);
+	if (component !== null) {
+
+		component.addEventListener('destroy', function(e) {
+
+			let element = e.target;
+			if (element.parentNode !== null) {
+				element.parentNode.removeChild(element);
+			}
+
+		}, true);
+
+		component.addEventListener('enter', function(e) {
+			e.target.className = 'active';
+		}, true);
+
+		component.addEventListener('leave', function(e) {
+			e.target.className = 'inactive';
+		}, true);
+
+	}
+
+})(document.currentScript.ownerDocument);
+</script>

@@ -13,7 +13,7 @@ lychee.define('app.state.Dialog').includes([
 	 * HELPERS
 	 */
 
-	const _on_change = function(value) {
+	const _on_command = function(value) {
 
 		let result = this.main.command(value);
 		if (result === false) {
@@ -70,7 +70,7 @@ lychee.define('app.state.Dialog').includes([
 		enter: function(oncomplete) {
 
 			this.__listener = function(e) {
-				_on_change.call(this, e.detail);
+				_on_command.call(this, e.detail);
 			}.bind(this);
 
 			this.element.fireEventListener('enter', null);

@@ -5,11 +5,11 @@ lychee.define('app.state.Help').requires([
 	'lychee.app.State'
 ]).exports(function(lychee, global, attachments) {
 
-	const _Intent  = lychee.import('app.interface.Intent');
-	const _State   = lychee.import('lychee.app.State');
-	const _BLOB    = attachments["json"].buffer;
-	const _STATE   = $.state('help', attachments["html"], attachments["css"]);
-	const _ARTICLE = _STATE.query('article');
+	const _Intent    = lychee.import('app.interface.Intent');
+	const _State     = lychee.import('lychee.app.State');
+	const _BLOB      = attachments["json"].buffer;
+	const _COMPONENT = Polyfillr.import(attachments["html"].url, attachments["html"].buffer)['state-help'];
+	const _main      = global.document.querySelector('main');
 
 
 
@@ -19,9 +19,11 @@ lychee.define('app.state.Help').requires([
 
 	let Composite = function(main) {
 
-		this.bot = main.bot || null;
+		this.bot     = main.bot || null;
+		this.element = _COMPONENT.create();
 
 
+		_main.appendChild(this.element);
 		_State.call(this, main);
 
 		this.deserialize(_BLOB);
@@ -64,9 +66,7 @@ lychee.define('app.state.Help').requires([
 
 		enter: function(oncomplete, data) {
 
-			_STATE.enter();
-
-			console.log('HELP', data);
+			this.element.fireEventListener('enter', null);
 
 
 			_State.prototype.enter.call(this, oncomplete);
@@ -75,7 +75,7 @@ lychee.define('app.state.Help').requires([
 
 		leave: function(oncomplete) {
 
-			_STATE.leave();
+			this.element.fireEventListener('leave', null);
 
 
 			_State.prototype.leave.call(this, oncomplete);

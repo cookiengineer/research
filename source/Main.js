@@ -7,7 +7,7 @@ lychee.define('app.Main').requires([
 	'app.plugin.Reddit',
 	'app.state.Browse',
 	'app.state.Dialog',
-//	'app.state.Help',
+	'app.state.Help',
 //	'app.state.Archive',
 //	'app.state.Backup',
 //	'app.state.Browse',
@@ -100,7 +100,7 @@ lychee.define('app.Main').requires([
 
 			this.setState('dialog',   new _app.state.Dialog(this));
 			this.setState('browse',   new _app.state.Browse(this));
-			// this.setState('help',     new _app.state.Help(this));
+			this.setState('help',     new _app.state.Help(this));
 			// this.setState('search',   new _app.state.Search(this));
 			this.setState('settings', new _app.state.Settings(this));
 
