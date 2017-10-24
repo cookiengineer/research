@@ -13,29 +13,11 @@ lychee.define('app.state.Browse').includes([
 	 * HELPERS
 	 */
 
-	const _on_browse = function(results) {
+	const _on_browse = function(data) {
 
-		let articles = [];
+		if (data.length > 0) {
 
-		if (results.length > 0) {
-
-			results.forEach(entry => {
-
-				if (typeof entry.html === 'string') {
-					// TODO: Remove legacy $.render() method
-					articles.push($.render('article', entry.html));
-				}
-
-			});
-
-		}
-
-
-		if (articles.length > 0) {
-
-			this.element.fireEventListener('render', {
-				articles: articles
-			});
+			this.element.fireEventListener('render', data);
 
 		} else {
 

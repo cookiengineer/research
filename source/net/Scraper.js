@@ -1,5 +1,6 @@
 
-lychee.define('app.net.Scraper').requires([]).exports(function(lychee, global, attachments) {
+lychee.define('app.net.Scraper').requires([
+]).exports(function(lychee, global, attachments) {
 
 	const _https  = require('https');
 	const _http   = require('http');

@@ -81,12 +81,37 @@
 			let element  = e.target;
 			let article  = element.querySelector('article');
 
-			let articles = e.detail.articles || [];
-			if (articles.length > 0) {
-				console.log(articles);
-				article.innerHTML = articles.map(token => token.toString()).join('\n');
+
+			let views = e.detail || [];
+			if (views.length > 0) {
+
+				let html = '';
+
+				views.forEach(view => {
+
+					html += '<section>';
+
+					html += '<h3>' + view.query.title + '</h3>';
+
+					let rendered = view.rendered || [];
+					if (rendered.length > 0) {
+						html += rendered.join('\n');
+					} else {
+						html += '(no results)';
+					}
+
+					html += '</section>';
+
+				});
+
+				article.className = 'view-' + views.length;
+				article.innerHTML = html;
+
 			} else {
+
+				article.className = 'view-1';
 				article.innerHTML = _EMPTY_TAB;
+
 			}
 
 		}, true);
@@ -96,6 +121,7 @@
 			let element = e.target;
 			let article = element.querySelector('article');
 
+			article.className = 'view-1';
 			article.innerHTML = _EMPTY_TAB;
 			element.className = 'active';
 

@@ -231,7 +231,7 @@ lychee.define('app.plugin.Reddit').requires([
 
 		}
 
-		data.result = filtered;
+		data.filtered = filtered;
 
 		return data;
 
@@ -239,53 +239,54 @@ lychee.define('app.plugin.Reddit').requires([
 
 	const _render = function(data) {
 
-		let html = [];
+		let rendered = [];
 
-		html.push('<h3>' + data.query.title + '</h3>');
-		html.push('<ol>');
-
-		data.result.forEach(entry => {
+		data.filtered.forEach(entry => {
 
 			let chunk = [];
 
-			chunk.push('<li>');
-			chunk.push('<b>');
+			if (entry.type === 'link') {
 
-			let preview = entry.preview || null;
-			if (preview !== null) {
-				chunk.push('\t<img src="' + preview.url + '" width="' + preview.width + '" height="' + preview.height + '">');
+				let url         = entry.url         || null;
+				let description = entry.description || '(no description)';
+				let detail      = entry.detail      || null;
+				let preview     = entry.preview     || null;
+
+				chunk.push('<b>');
+
+				if (preview !== null) {
+					chunk.push('\t<img src="' + preview.url + '" width="' + preview.width + '" height="' + preview.height + '">');
+				}
+
+				if (url !== null) {
+					chunk.push('\t<a href="' + entry.url + '">' + entry.title + '</a>');
+				} else if (detail !== null) {
+					chunk.push('\t<a href="' + entry.detail + '">' + entry.title + '</a>');
+				} else {
+					chunk.push('\t' + entry.title);
+				}
+
+				chunk.push('</b>');
+
+				chunk.push('<p>');
+				chunk.push('\t' + description);
+				chunk.push('</p>');
+
+				chunk.push('<div>');
+				chunk.push('\t<small>relevance: ' + entry.relevance + '</small>');
+				chunk.push('\t<small>author: <a href="https://reddit.com/u/' + entry.author + '">' + entry.author + '</a></small>');
+				chunk.push('</div>');
+
 			}
 
-			if (entry.url !== null) {
-				chunk.push('\t<a href="' + entry.url + '">' + entry.title + '</a>');
-			} else if (entry.detail !== null) {
-				chunk.push('\t<a href="' + entry.detail + '">' + entry.title + '</a>');
-			} else {
-				chunk.push('\t' + entry.title);
-			}
-			chunk.push('</b>');
-
-			chunk.push('<p>');
-			chunk.push('\t' + (entry.description || '(no description)'));
-			chunk.push('</p>');
-
-			chunk.push('<div>');
-			chunk.push('\t<small>relevance: ' + entry.relevance + '</small>');
-			chunk.push('\t<small>author: <a href="https://www.reddit.com/u/' + entry.author + '">' + entry.author + '</a></small>');
-			chunk.push('</div>');
-
-			chunk.push('</li>');
-
-			html.push(chunk.join('\n'));
+			rendered.push(chunk.join('\n'));
 
 		});
 
-		html.push('</ol>');
 
+		data.rendered = rendered;
 
-		data.html = html.join('\n');
-
-		return data;
+		return rendered;
 
 	};
 
@@ -295,7 +296,7 @@ lychee.define('app.plugin.Reddit').requires([
 	 * IMPLEMENTATION
 	 */
 
-	let Composite = function(main) {
+	const Composite = function(main) {
 
 		this.main    = main         || null;
 		this.bot     = main.bot     || null;

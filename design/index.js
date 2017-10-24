@@ -270,6 +270,12 @@
 				return new _Wrapper(result);
 			}
 
+		},
+
+		toString: function() {
+
+			return this.element.innerHTML;
+
 		}
 
 	});
