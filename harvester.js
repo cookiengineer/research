@@ -1,6 +1,8 @@
 #!/usr/local/bin/lycheejs-helper env:node
 
-require('/opt/lycheejs/libraries/lychee/build/node/core.js')(__dirname);
+const _ROOT = process.env.LYCHEEJS_ROOT || '/opt/lycheejs';
+
+require(_ROOT + '/libraries/lychee/build/node/core.js')(__dirname);
 
 
 
@@ -21,14 +23,23 @@ require('/opt/lycheejs/libraries/lychee/build/node/core.js')(__dirname);
 		view:   (id) => global.MAIN.changeState(id)
 	};
 
+	lychee.pkg('build', 'node/main', function(environment, profile) {
 
-	lychee.pkginit('node/main', {
-		debug:   false,
-		sandbox: false
-	}, {
-		renderer: null,
-		client:   null
+		if (environment !== null) {
+
+			lychee.init(environment, {
+				debug:   false,
+				sandbox: false,
+				profile: {
+					renderer: null,
+					client:   null
+				}
+			});
+
+		}
+
 	});
+
 
 })(lychee, typeof global !== 'undefined' ? global : this);
 
