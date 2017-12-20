@@ -146,7 +146,7 @@ lychee.define('app.interface.Intent').exports(function(lychee, global, attachmen
 	 * IMPLEMENTATION
 	 */
 
-	let Composite = function(data) {
+	const Composite = function(data) {
 
 		let settings = Object.assign({}, data);
 
@@ -170,6 +170,8 @@ lychee.define('app.interface.Intent').exports(function(lychee, global, attachmen
 
 
 	Composite.prototype = {
+
+		// deserialize: function(blob) {},
 
 		/*
 		 * ENTITY API

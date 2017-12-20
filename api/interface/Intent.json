@@ -1,0 +1,290 @@
+{
+	"header": {
+		"identifier": "app.interface.Intent",
+		"attaches": {},
+		"tags": {},
+		"requires": [],
+		"includes": [],
+		"supports": {},
+		"type": "Composite"
+	},
+	"memory": {
+		"_push_word": {
+			"body": "function(name, word, weight) {\n\n\t\tname   = typeof name === 'string'   ? name   : null;\n\t\tword   = typeof word === 'string'   ? word   : null;\n\t\tweight = typeof weight === 'number' ? weight : 0.5;\n\n\n\t\tif (name !== null && word !== null) {\n\n\t\t\tif (this[name] === undefined) {\n\t\t\t\tthis[name] = [];\n\t\t\t}\n\n\t\t\tlet found = this[name].find(function(value) {\n\t\t\t\treturn value.word === word;\n\t\t\t}) || null;\n\n\t\t\tif (found === null) {\n\n\t\t\t\tthis[name].push({\n\t\t\t\t\tword:   word,\n\t\t\t\t\tweight: weight\n\t\t\t\t});\n\n\t\t\t}\n\n\t\t}\n\n\t}",
+			"hash": "2fc27883",
+			"parameters": [
+				{
+					"chunk": "typeof name === 'string'   ? name   : null",
+					"name": "name",
+					"type": "String",
+					"value": null
+				},
+				{
+					"chunk": "typeof word === 'string'   ? word   : null",
+					"name": "word",
+					"type": "String",
+					"value": null
+				},
+				{
+					"chunk": "typeof weight === 'number' ? weight : 0.5",
+					"name": "weight",
+					"type": "Number",
+					"value": 0.5
+				}
+			],
+			"values": []
+		},
+		"_parse_result": {
+			"body": "function() {\n\n\t\tif (this.format === null || this.sentence === null) {\n\t\t\treturn;\n\t\t}\n\n\n\t\tlet data   = Object.assign({}, this.data);\n\t\tlet format = this.format.split(' ');\n\t\tlet words  = this.sentence.split(' ');\n\t\tlet offset = 0;\n\n\t\tfor (let w = 0, wl = words.length; w < wl; w++) {\n\n\t\t\tlet temp = format[w + offset];\n\t\t\tlet word = words[w];\n\n\t\t\tif (temp === undefined) {\n\n\t\t\t\t// XXX: Nothing to parse\n\n\t\t\t} else if (temp === word) {\n\n\t\t\t\t// XXX: Nothing to parse\n\n\t\t\t} else if (temp.startsWith('<') && temp.endsWith('>')) {\n\n\t\t\t\tlet name = temp.split(/<|>/g)[1] || null;\n\t\t\t\tif (name !== null) {\n\t\t\t\t\t_push_word.call(data, name, word, 0.5);\n\t\t\t\t}\n\n\n\t\t\t\tlet next_temp = format[w + offset + 1];\n\t\t\t\tif (next_temp !== undefined) {\n\n\t\t\t\t\tif (next_temp.includes('<') === false && next_temp.includes('>') === false) {\n\n\t\t\t\t\t\tfor (let w2 = w + 1; w2 < wl; w2++) {\n\n\t\t\t\t\t\t\tlet next_word = words[w2];\n\t\t\t\t\t\t\tif (next_word === next_temp) {\n\n\t\t\t\t\t\t\t\tbreak;\n\n\t\t\t\t\t\t\t} else {\n\n\t\t\t\t\t\t\t\t_push_word.call(data, name, next_word, 0.5);\n\n\t\t\t\t\t\t\t\toffset--;\n\t\t\t\t\t\t\t\tw++;\n\n\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t}\n\n\t\t\t\t\t}\n\n\t\t\t\t} else if (words.length > format.length) {\n\n\t\t\t\t\tfor (let w2 = w + 1; w2 < wl; w2++) {\n\t\t\t\t\t\t_push_word.call(data, name, words[w2], 0.5);\n\t\t\t\t\t}\n\n\t\t\t\t\tbreak;\n\n\t\t\t\t}\n\n\t\t\t} else if (temp.includes('<') && temp.includes('>')) {\n\n\t\t\t\tif (temp.endsWith('>')) {\n\n\t\t\t\t\tlet prefix = temp.substr(0, temp.indexOf('<'));\n\t\t\t\t\tif (prefix === word.substr(0, prefix.length)) {\n\n\t\t\t\t\t\tlet name = temp.substr(temp.indexOf('<') + 1, temp.indexOf('>') - temp.indexOf('<') - 1) || null;\n\t\t\t\t\t\tif (name !== null) {\n\t\t\t\t\t\t\t_push_word.call(data, name, word.substr(prefix.length), 0.5);\n\t\t\t\t\t\t}\n\n\t\t\t\t\t}\n\n\t\t\t\t} else if (temp.startsWith('<')) {\n\n\t\t\t\t\tlet suffix = temp.substr(temp.indexOf('>') + 1);\n\t\t\t\t\tif (suffix === word.substr(-1 * suffix.length)) {\n\n\t\t\t\t\t\tlet name = temp.substr(temp.indexOf('<') + 1, temp.indexOf('>') - temp.indexOf('<') - 1) || null;\n\t\t\t\t\t\tif (name !== null) {\n\t\t\t\t\t\t\t_push_word.call(data, name, word.substr(0, word.length - suffix.length), 0.5);\n\t\t\t\t\t\t}\n\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\t\t\t}\n\n\t\t}\n\n\n\t\tthis._result = data;\n\n\t}",
+			"hash": "0374edac",
+			"parameters": [],
+			"values": []
+		}
+	},
+	"errors": [],
+	"result": {
+		"constructor": {
+			"body": "function(data) {\n\n\t\tlet settings = Object.assign({}, data);\n\n\n\t\tthis.action   = null;\n\t\tthis.data     = {};\n\t\tthis.format   = null;\n\t\tthis.sentence = '';\n\n\t\tthis._result  = {};\n\n\n\t\tthis.setAction(settings.action);\n\t\tthis.setData(settings.data);\n\t\tthis.setFormat(settings.format);\n\t\tthis.setSentence(settings.sentence);\n\n\t\tsettings = null;\n\n\t}",
+			"hash": "ba5be560",
+			"parameters": [
+				{
+					"chunk": null,
+					"name": "data",
+					"type": "Object"
+				}
+			]
+		},
+		"settings": {
+			"action": "setAction",
+			"data": "setData",
+			"format": "setFormat",
+			"sentence": "setSentence"
+		},
+		"properties": {
+			"action": {
+				"chunk": "this.action   = null;",
+				"value": {
+					"chunk": "null",
+					"type": "null",
+					"value": null
+				}
+			},
+			"data": {
+				"chunk": "this.data     = {};",
+				"value": {
+					"chunk": "{}",
+					"type": "Object",
+					"value": {}
+				}
+			},
+			"format": {
+				"chunk": "this.format   = null;",
+				"value": {
+					"chunk": "null",
+					"type": "null",
+					"value": null
+				}
+			},
+			"sentence": {
+				"chunk": "this.sentence = '';",
+				"value": {
+					"chunk": "''",
+					"type": "String",
+					"value": ""
+				}
+			},
+			"_result": {
+				"chunk": "this._result  = {};",
+				"value": {
+					"chunk": "{}",
+					"type": "Object",
+					"value": {}
+				}
+			}
+		},
+		"enums": {},
+		"events": {},
+		"methods": {
+			"deserialize": {
+				"body": "function(blob) {}",
+				"chunk": "function(blob) {",
+				"hash": "cf6d9c5f",
+				"parameters": [
+					{
+						"name": "blob",
+						"type": "SerializationBlob",
+						"value": {}
+					}
+				],
+				"values": [
+					{
+						"type": "undefined"
+					}
+				]
+			},
+			"serialize": {
+				"body": "function() {\n\n\t\t\tlet settings = {};\n\t\t\tlet blob     = {};\n\n\n\t\t\tif (this.action !== null)   settings.action   = this.action;\n\t\t\tif (this.data !== null)     settings.data     = Object.assign({}, this.data);\n\t\t\tif (this.format !== null)   settings.format   = this.format;\n\t\t\tif (this.sentence !== null) settings.sentence = this.sentence;\n\n\n\t\t\treturn {\n\t\t\t\t'constructor': 'app.interface.Intent',\n\t\t\t\t'arguments':   [ settings ],\n\t\t\t\t'blob':        Object.keys(blob).length > 0 ? blob : null\n\t\t\t};\n\n\t\t}",
+				"chunk": "\t\tserialize: function() {",
+				"hash": "36b6666a",
+				"parameters": [],
+				"values": [
+					{
+						"chunk": "{ 'constructor': 'app.interface.Intent',\n\t\t\t\t'arguments':   [ settings ],\n\t\t\t\t'blob':        Object.keys(blob).length > 0 ? blob : null\n\t\t\t}",
+						"type": "Object",
+						"value": {}
+					}
+				]
+			},
+			"analyze": {
+				"body": "function(sentence) {\n\n\t\t\tsentence = typeof sentence === 'string' ? sentence : null;\n\n\n\t\t\tlet probability = 0.0;\n\n\n\t\t\tif (sentence !== null) {\n\n\t\t\t\tlet count  = 0;\n\t\t\t\tlet format = this.format.split(' ');\n\t\t\t\tlet words  = sentence.split(' ');\n\t\t\t\tlet offset = 0;\n\n\t\t\t\tfor (let w = 0, wl = words.length; w < wl; w++) {\n\n\t\t\t\t\tlet temp = format[w + offset];\n\t\t\t\t\tlet word = words[w];\n\n\t\t\t\t\tif (temp === undefined) {\n\n\t\t\t\t\t\t// TODO: What to do when sentence has too much words?\n\t\t\t\t\t\t// console.error('not sure what to do', format, words);\n\n\t\t\t\t\t} else if (temp === word) {\n\n\t\t\t\t\t\tcount++;\n\n\t\t\t\t\t} else if (temp.startsWith('<') && temp.endsWith('>')) {\n\n\t\t\t\t\t\tcount++;\n\n\n\t\t\t\t\t\tlet next_temp = format[w + offset + 1];\n\t\t\t\t\t\tif (next_temp !== undefined) {\n\n\t\t\t\t\t\t\tif (next_temp.includes('<') === false && next_temp.includes('>') === false) {\n\n\t\t\t\t\t\t\t\tfor (let w2 = w + 1; w2 < wl; w2++) {\n\n\t\t\t\t\t\t\t\t\tlet next_word = words[w2];\n\t\t\t\t\t\t\t\t\tif (next_word === next_temp) {\n\n\t\t\t\t\t\t\t\t\t\tbreak;\n\n\t\t\t\t\t\t\t\t\t} else {\n\n\t\t\t\t\t\t\t\t\t\toffset--;\n\t\t\t\t\t\t\t\t\t\tcount += 0.5;\n\t\t\t\t\t\t\t\t\t\tw++;\n\n\t\t\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t} else {\n\n\t\t\t\t\t\t\tfor (let w2 = w + 1; w2 < wl; w2++) {\n\t\t\t\t\t\t\t\tcount += 0.5;\n\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t}\n\n\t\t\t\t\t} else if (temp.includes('<') && temp.includes('>')) {\n\n\t\t\t\t\t\tif (temp.endsWith('>')) {\n\n\t\t\t\t\t\t\tlet prefix = temp.substr(0, temp.indexOf('<'));\n\t\t\t\t\t\t\tif (prefix === word.substr(0, prefix.length)) {\n\t\t\t\t\t\t\t\tcount++;\n\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t} else if (temp.startsWith('<')) {\n\n\t\t\t\t\t\t\tlet suffix = temp.substr(temp.indexOf('>') + 1);\n\t\t\t\t\t\t\tif (suffix === word.substr(-1 * suffix.length)) {\n\t\t\t\t\t\t\t\tcount++;\n\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t}\n\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\n\t\t\t\tif (count > 0) {\n\t\t\t\t\tprobability = count / words.length;\n\t\t\t\t}\n\n\t\t\t}\n\n\n\t\t\treturn probability;\n\n\t\t}",
+				"chunk": "\t\tanalyze: function(sentence) {",
+				"hash": "5a1ddb50",
+				"parameters": [
+					{
+						"chunk": "typeof sentence === 'string' ? sentence : null",
+						"name": "sentence",
+						"type": "String",
+						"value": null
+					}
+				],
+				"values": [
+					{
+						"chunk": "0.0",
+						"type": "Number",
+						"value": 0
+					},
+					{
+						"chunk": "count / words.length",
+						"type": "Number",
+						"value": 1337
+					}
+				]
+			},
+			"clone": {
+				"body": "function(sentence) {\n\n\t\t\tsentence = typeof sentence === 'string' ? sentence : null;\n\n\n\t\t\tif (sentence !== null) {\n\n\t\t\t\treturn new Composite({\n\t\t\t\t\taction:   this.action,\n\t\t\t\t\tdata:     this.data,\n\t\t\t\t\tformat:   this.format,\n\t\t\t\t\tsentence: sentence\n\t\t\t\t});\n\n\t\t\t}\n\n\n\t\t\treturn null;\n\n\t\t}",
+				"chunk": "\t\tclone: function(sentence) {",
+				"hash": "707b2f3f",
+				"parameters": [
+					{
+						"chunk": "typeof sentence === 'string' ? sentence : null",
+						"name": "sentence",
+						"type": "String",
+						"value": null
+					}
+				],
+				"values": [
+					{
+						"chunk": "new Composite({ action:   this.action,\n\t\t\t\t\tdata:     this.data,\n\t\t\t\t\tformat:   this.format,\n\t\t\t\t\tsentence: sentence\n\t\t\t\t})",
+						"type": "Composite",
+						"value": "new Composite({ action:   this.action,\n\t\t\t\t\tdata:     this.data,\n\t\t\t\t\tformat:   this.format,\n\t\t\t\t\tsentence: sentence\n\t\t\t\t})"
+					},
+					{
+						"chunk": "null",
+						"type": "null",
+						"value": null
+					}
+				]
+			},
+			"setAction": {
+				"body": "function(action) {\n\n\t\t\taction = typeof action === 'string' ? action : null;\n\n\n\t\t\tif (action !== null) {\n\n\t\t\t\tthis.action = action;\n\n\t\t\t\treturn true;\n\n\t\t\t}\n\n\n\t\t\treturn false;\n\n\t\t}",
+				"chunk": "\t\tsetAction: function(action) {",
+				"hash": "9c4a0967",
+				"parameters": [
+					{
+						"chunk": "typeof action === 'string' ? action : null",
+						"name": "action",
+						"type": "String",
+						"value": null
+					}
+				],
+				"values": [
+					{
+						"chunk": "true",
+						"type": "Boolean",
+						"value": true
+					},
+					{
+						"chunk": "false",
+						"type": "Boolean",
+						"value": false
+					}
+				]
+			},
+			"setData": {
+				"body": "function(data) {\n\n\t\t\tdata = data instanceof Object ? data : null;\n\n\n\t\t\tif (data !== null) {\n\n\t\t\t\tthis.data = data;\n\t\t\t\t_parse_result.call(this);\n\n\t\t\t\treturn true;\n\n\t\t\t}\n\n\n\t\t\treturn false;\n\n\t\t}",
+				"chunk": "\t\tsetData: function(data) {",
+				"hash": "a0172c",
+				"parameters": [
+					{
+						"chunk": "data instanceof Object ? data : null",
+						"name": "data",
+						"type": "Object",
+						"value": null
+					}
+				],
+				"values": [
+					{
+						"chunk": "true",
+						"type": "Boolean",
+						"value": true
+					},
+					{
+						"chunk": "false",
+						"type": "Boolean",
+						"value": false
+					}
+				]
+			},
+			"setFormat": {
+				"body": "function(format) {\n\n\t\t\tformat = typeof format === 'string' ? format : null;\n\n\n\t\t\tif (format !== null) {\n\n\t\t\t\tthis.format = format;\n\n\t\t\t\treturn true;\n\n\t\t\t}\n\n\n\t\t\treturn false;\n\n\t\t}",
+				"chunk": "\t\tsetFormat: function(format) {",
+				"hash": "300734e1",
+				"parameters": [
+					{
+						"chunk": "typeof format === 'string' ? format : null",
+						"name": "format",
+						"type": "String",
+						"value": null
+					}
+				],
+				"values": [
+					{
+						"chunk": "true",
+						"type": "Boolean",
+						"value": true
+					},
+					{
+						"chunk": "false",
+						"type": "Boolean",
+						"value": false
+					}
+				]
+			},
+			"setSentence": {
+				"body": "function(sentence) {\n\n\t\t\tsentence = typeof sentence === 'string' ? sentence : null;\n\n\n\t\t\tif (sentence !== null) {\n\n\t\t\t\tthis.sentence = sentence;\n\t\t\t\t_parse_result.call(this);\n\n\t\t\t\treturn true;\n\n\t\t\t}\n\n\n\t\t\treturn false;\n\n\t\t}",
+				"chunk": "\t\tsetSentence: function(sentence) {",
+				"hash": "1ef6ab4e",
+				"parameters": [
+					{
+						"chunk": "typeof sentence === 'string' ? sentence : null",
+						"name": "sentence",
+						"type": "String",
+						"value": null
+					}
+				],
+				"values": [
+					{
+						"chunk": "true",
+						"type": "Boolean",
+						"value": true
+					},
+					{
+						"chunk": "false",
+						"type": "Boolean",
+						"value": false
+					}
+				]
+			}
+		}
+	}
+}

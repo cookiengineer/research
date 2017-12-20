@@ -1,6 +1,54 @@
 {
 	"api": {
-		"files": {}
+		"files": {
+			"Main": [
+				"json"
+			],
+			"interface": {
+				"Bot": [
+					"json"
+				],
+				"Intent": [
+					"json"
+				]
+			},
+			"net": {
+				"Scraper": [
+					"json"
+				]
+			},
+			"platform": {
+				"html-nwjs": {
+					"parser": {
+						"HTML": [
+							"json"
+						]
+					}
+				}
+			},
+			"plugin": {
+				"Reddit": [
+					"json"
+				]
+			},
+			"state": {
+				"Browse": [
+					"json"
+				],
+				"Dialog": [
+					"json"
+				],
+				"Help": [
+					"json"
+				],
+				"Search": [
+					"json"
+				],
+				"Settings": [
+					"json"
+				]
+			}
+		}
 	},
 	"build": {
 		"environments": {
@@ -9,6 +57,7 @@
 				"packages": {
 					"app": "./lychee.pkg"
 				},
+				"profile": {},
 				"sandbox": false,
 				"tags": {
 					"platform": [
@@ -17,12 +66,12 @@
 					]
 				},
 				"target": "app.Main",
-				"variant": "application",
-				"profile": {
-				}
+				"variant": "application"
 			}
-		},
-		"files": {}
+		}
+	},
+	"review": {
+		"environments": {}
 	},
 	"source": {
 		"environments": {},
@@ -60,26 +109,20 @@
 			},
 			"state": {
 				"Browse": [
-					"html",
 					"js"
 				],
 				"Dialog": [
-					"html",
 					"js"
 				],
 				"Help": [
-					"html",
 					"js",
 					"json"
 				],
 				"Search": [
-					"css",
-					"html",
 					"js",
 					"json"
 				],
 				"Settings": [
-					"html",
 					"js"
 				]
 			}

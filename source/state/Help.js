@@ -17,7 +17,7 @@ lychee.define('app.state.Help').requires([
 	 * IMPLEMENTATION
 	 */
 
-	let Composite = function(main) {
+	const Composite = function(main) {
 
 		this.bot     = main.bot || null;
 		this.element = _COMPONENT.create();
@@ -64,21 +64,28 @@ lychee.define('app.state.Help').requires([
 
 		},
 
-		enter: function(oncomplete, data) {
+		enter: function(oncomplete, intent) {
+
+			oncomplete = oncomplete instanceof Function ? oncomplete : null;
+			intent     = intent instanceof _Intent      ? intent     : null;
+
 
 			this.element.fireEventListener('enter', null);
 
 
-			_State.prototype.enter.call(this, oncomplete);
+			return _State.prototype.enter.call(this, oncomplete);
 
 		},
 
 		leave: function(oncomplete) {
 
+			oncomplete = oncomplete instanceof Function ? oncomplete : null;
+
+
 			this.element.fireEventListener('leave', null);
 
 
-			_State.prototype.leave.call(this, oncomplete);
+			return _State.prototype.leave.call(this, oncomplete);
 
 		}
 

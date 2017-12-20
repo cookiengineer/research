@@ -1,0 +1,223 @@
+{
+	"header": {
+		"identifier": "app.state.Settings",
+		"attaches": {},
+		"tags": {},
+		"requires": [
+			"app.interface.Intent"
+		],
+		"includes": [
+			"lychee.app.State"
+		],
+		"supports": {},
+		"type": "Composite"
+	},
+	"memory": {
+		"_Intent": {
+			"chunk": "lychee.import('app.interface.Intent')",
+			"type": "lychee.Definition",
+			"value": {
+				"reference": "app.interface.Intent",
+				"arguments": []
+			}
+		},
+		"_State": {
+			"chunk": "lychee.import('lychee.app.State')",
+			"type": "lychee.Definition",
+			"value": {
+				"reference": "lychee.app.State",
+				"arguments": []
+			}
+		},
+		"_COMPONENT": {
+			"chunk": "Polyfillr.import(attachments[\"html\"].url, attachments[\"html\"].buffer)['state-settings']",
+			"type": "undefined"
+		},
+		"_main": {
+			"chunk": "global.document.querySelector('main')",
+			"type": "undefined"
+		},
+		"_fs": {
+			"chunk": "{}",
+			"type": "Object",
+			"value": {}
+		},
+		"_APPDATA": {
+			"chunk": "lychee.import('nw').App.dataPath || lychee.ROOT.project",
+			"type": "lychee.Namespace",
+			"value": {
+				"reference": "nw",
+				"arguments": []
+			}
+		},
+		"_on_memory": {
+			"body": "function() {\n\t\tconsole.warn('Clearing Cache and Knowledge now...');\n\t}",
+			"hash": "49e05ca7",
+			"parameters": [],
+			"values": []
+		},
+		"_on_settings": {
+			"body": "function(settings) {\n\n\t\t// TODO: If this.settings.cache !== settings.cache, but\n\t\t// this.settings.cache has files, then move folder contents...\n\n\t\tthis.settings.tethering   = settings.tethering;\n\t\tthis.settings.stealth     = settings.stealth;\n\t\tthis.settings.connections = settings.connections;\n\t\tthis.settings.cache       = settings.cache;\n\n\t\t_save_settings.call(this);\n\n\t}",
+			"hash": "233c3aea",
+			"parameters": [
+				{
+					"chunk": null,
+					"name": "settings",
+					"type": "undefined"
+				}
+			],
+			"values": []
+		},
+		"_read_settings": {
+			"body": "function() {\n\n\t\tlet data     = null;\n\t\tlet settings = this.settings;\n\n\t\ttry {\n\t\t\tdata = JSON.parse(_fs.readFileSync(_APPDATA + '/research.json', 'utf8'));\n\t\t} catch (err) {\n\t\t}\n\n\t\tif (data !== null) {\n\n\t\t\tsettings.tethering   = typeof data.tethering === 'boolean'  ? data.tethering   : settings.tethering;\n\t\t\tsettings.stealth     = typeof data.stealth === 'boolean'    ? data.stealth     : settings.stealth;\n\t\t\tsettings.connections = typeof data.connections === 'number' ? data.connections : settings.connections;\n\t\t\tsettings.cache       = typeof data.cache === 'string'       ? data.cache       : settings.cache;\n\n\t\t}\n\n\t}",
+			"hash": "7c746f6b",
+			"parameters": [],
+			"values": []
+		},
+		"_save_settings": {
+			"body": "function() {\n\n\t\tlet settings = this.settings;\n\t\tlet data     = {\n\t\t\ttethering:   settings.tethering,\n\t\t\tstealth:     settings.stealth,\n\t\t\tconnections: settings.connections,\n\t\t\tcache:       settings.cache\n\t\t};\n\n\t\ttry {\n\t\t\t_fs.writeFileSync(_APPDATA + '/research.json', JSON.stringify(data, null, '\\t'), 'utf8');\n\t\t} catch (err) {\n\t\t}\n\n\t}",
+			"hash": "26843877",
+			"parameters": [],
+			"values": []
+		}
+	},
+	"errors": [
+		{
+			"url": "/projects/research/source/state/Settings.js",
+			"rule": "unguessable-property-value",
+			"reference": "settings",
+			"message": "Unguessable property \"settings\".",
+			"line": 114,
+			"column": 3
+		},
+		{
+			"url": "/projects/research/source/state/Settings.js",
+			"rule": "unguessable-property-value",
+			"reference": "element",
+			"message": "Unguessable property \"element\".",
+			"line": 115,
+			"column": 3
+		}
+	],
+	"result": {
+		"constructor": {
+			"body": "function(main) {\n\n\t\tthis.settings = main.settings;\n\t\tthis.element  = _COMPONENT.create();\n\n\t\tthis.__listener = {\n\t\t\tmemory:   null,\n\t\t\tsettings: null\n\t\t};\n\n\n\t\t_main.appendChild(this.element);\n\t\t_State.call(this, main);\n\n\t}",
+			"hash": "d6d4c1c5",
+			"parameters": [
+				{
+					"chunk": null,
+					"name": "main",
+					"type": "undefined"
+				}
+			]
+		},
+		"settings": {},
+		"properties": {
+			"settings": {
+				"chunk": "this.settings = main.settings;",
+				"value": {
+					"chunk": "main.settings",
+					"type": "undefined"
+				}
+			},
+			"element": {
+				"chunk": "this.element  = _COMPONENT.create();",
+				"value": {
+					"chunk": "_COMPONENT.create()",
+					"type": "undefined"
+				}
+			},
+			"__listener": {
+				"chunk": "this.__listener = {\n\t\t\tmemory:   null,\n\t\t\tsettings: null\n\t\t};",
+				"value": {
+					"chunk": "{\n\t\t\tmemory:   null,\n\t\t\tsettings: null\n\t\t}",
+					"type": "Object",
+					"value": {
+						"memory": null,
+						"settings": null
+					}
+				}
+			}
+		},
+		"enums": {},
+		"events": {},
+		"methods": {
+			"deserialize": {
+				"body": "function(blob) {}",
+				"chunk": "function(blob) {",
+				"hash": "cf6d9c5f",
+				"parameters": [
+					{
+						"name": "blob",
+						"type": "SerializationBlob",
+						"value": {}
+					}
+				],
+				"values": [
+					{
+						"type": "undefined"
+					}
+				]
+			},
+			"serialize": {
+				"body": "function() {\n\n\t\t\tlet data = _State.prototype.serialize.call(this);\n\t\t\tdata['constructor'] = 'app.state.Settings';\n\n\n\t\t\treturn data;\n\n\t\t}",
+				"chunk": "\t\tserialize: function() {",
+				"hash": "67f03c74",
+				"parameters": [],
+				"values": [
+					{
+						"chunk": "{ 'constructor': 'lychee.app.State',\n\t\t\t\t'arguments':   [ settings ],\n\t\t\t\t'blob':        Object.keys(blob).length > 0 ? blob : null\n\t\t\t}",
+						"type": "Object",
+						"value": {}
+					}
+				]
+			},
+			"enter": {
+				"body": "function(oncomplete, intent) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\t\t\tintent     = intent instanceof _Intent      ? intent     : null;\n\n\n\t\t\t_read_settings.call(this);\n\n\t\t\tthis.__listener.memory = function(e) {\n\t\t\t\t_on_memory.call(this);\n\t\t\t}.bind(this);\n\n\t\t\tthis.__listener.settings = function(e) {\n\t\t\t\t_on_settings.call(this, e.detail);\n\t\t\t}.bind(this);\n\n\t\t\tthis.element.fireEventListener('enter', this.settings);\n\n\t\t\tthis.element.addEventListener('settings', this.__listener.settings, true);\n\t\t\tthis.element.addEventListener('memory',   this.__listener.memory,   true);\n\n\n\t\t\treturn _State.prototype.enter.call(this, oncomplete);\n\n\t\t}",
+				"chunk": "\t\tenter: function(oncomplete, intent) {",
+				"hash": "b27dc87c",
+				"parameters": [
+					{
+						"chunk": "oncomplete instanceof Function ? oncomplete : null",
+						"name": "oncomplete",
+						"type": "Function",
+						"value": null
+					},
+					{
+						"chunk": "intent instanceof _Intent      ? intent     : null",
+						"name": "intent",
+						"type": "_Intent",
+						"value": null
+					}
+				],
+				"values": [
+					{
+						"chunk": "true",
+						"type": "Boolean",
+						"value": true
+					}
+				]
+			},
+			"leave": {
+				"body": "function(oncomplete) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\n\n\t\t\t_save_settings.call(this);\n\n\t\t\tthis.element.removeEventListener('memory',   this.__listener.memory,   true);\n\t\t\tthis.element.removeEventListener('settings', this.__listener.settings, true);\n\n\t\t\tthis.element.fireEventListener('leave', null);\n\n\t\t\tthis.__listener.memory   = null;\n\t\t\tthis.__listener.settings = null;\n\n\n\t\t\treturn _State.prototype.leave.call(this, oncomplete);\n\n\t\t}",
+				"chunk": "\t\tleave: function(oncomplete) {",
+				"hash": "30f89f93",
+				"parameters": [
+					{
+						"chunk": "oncomplete instanceof Function ? oncomplete : null",
+						"name": "oncomplete",
+						"type": "Function",
+						"value": null
+					}
+				],
+				"values": [
+					{
+						"chunk": "true",
+						"type": "Boolean",
+						"value": true
+					}
+				]
+			}
+		}
+	}
+}

@@ -1,0 +1,392 @@
+{
+	"/projects/research/api/Main.json": {
+		"identifier": "app.Main",
+		"timestamp": 1513795730389,
+		"knowledge": {
+			"settings": [],
+			"properties": [
+				"bot",
+				"scraper",
+				"plugins"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"cf6d9c5f"
+				],
+				[
+					"serialize",
+					"5c52f261"
+				],
+				[
+					"command",
+					"3d8a609d"
+				],
+				[
+					"changeState",
+					"23a53bdf"
+				],
+				[
+					"findPlugin",
+					"c39e9541"
+				],
+				[
+					"getPlugin",
+					"36d652b0"
+				],
+				[
+					"setPlugin",
+					"30c9ffd8"
+				]
+			]
+		}
+	},
+	"/projects/research/api/interface/Bot.json": {
+		"identifier": "app.interface.Bot",
+		"timestamp": 1513795730389,
+		"knowledge": {
+			"settings": [],
+			"properties": [
+				"intents"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"cf6d9c5f"
+				],
+				[
+					"serialize",
+					"39fddb99"
+				],
+				[
+					"command",
+					"d57c5f79"
+				],
+				[
+					"addIntent",
+					"29f54452"
+				],
+				[
+					"removeIntent",
+					"d87dddde"
+				]
+			]
+		}
+	},
+	"/projects/research/api/interface/Intent.json": {
+		"identifier": "app.interface.Intent",
+		"timestamp": 1513795730389,
+		"knowledge": {
+			"settings": [
+				"action",
+				"data",
+				"format",
+				"sentence"
+			],
+			"properties": [
+				"action",
+				"data",
+				"format",
+				"sentence",
+				"_result"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"cf6d9c5f"
+				],
+				[
+					"serialize",
+					"36b6666a"
+				],
+				[
+					"analyze",
+					"5a1ddb50"
+				],
+				[
+					"clone",
+					"707b2f3f"
+				],
+				[
+					"setAction",
+					"9c4a0967"
+				],
+				[
+					"setData",
+					"a0172c"
+				],
+				[
+					"setFormat",
+					"300734e1"
+				],
+				[
+					"setSentence",
+					"1ef6ab4e"
+				]
+			]
+		}
+	},
+	"/projects/research/api/net/Scraper.json": {
+		"identifier": "app.net.Scraper",
+		"timestamp": 1513795730389,
+		"knowledge": {
+			"settings": [],
+			"properties": [
+				"main"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"cf6d9c5f"
+				],
+				[
+					"serialize",
+					"0b537a74"
+				],
+				[
+					"query",
+					"2e35c3fb"
+				]
+			]
+		}
+	},
+	"/projects/research/api/platform/html-nwjs/parser/HTML.json": {
+		"identifier": "app.parser.HTML",
+		"timestamp": 1513795730389,
+		"knowledge": {
+			"settings": [],
+			"properties": [],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"cf6d9c5f"
+				],
+				[
+					"serialize",
+					"5e5c3d81"
+				],
+				[
+					"encode",
+					"fa5066a0"
+				],
+				[
+					"decode",
+					"11b724a3"
+				]
+			]
+		}
+	},
+	"/projects/research/api/plugin/Reddit.json": {
+		"identifier": "app.plugin.Reddit",
+		"timestamp": 1513795730389,
+		"knowledge": {
+			"settings": [],
+			"properties": [
+				"main",
+				"bot",
+				"scraper"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"8f2f5e8f"
+				],
+				[
+					"serialize",
+					"a857f0d1"
+				],
+				[
+					"can",
+					"3adeb64c"
+				],
+				[
+					"browse",
+					"9185638e"
+				],
+				[
+					"search",
+					"9185638e"
+				]
+			]
+		}
+	},
+	"/projects/research/api/state/Browse.json": {
+		"identifier": "app.state.Browse",
+		"timestamp": 1513795730389,
+		"knowledge": {
+			"settings": [],
+			"properties": [
+				"element",
+				"__listener"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"cf6d9c5f"
+				],
+				[
+					"serialize",
+					"07f88f54"
+				],
+				[
+					"update",
+					"f1c40675"
+				],
+				[
+					"enter",
+					"508f4f66"
+				],
+				[
+					"leave",
+					"b26efe27"
+				]
+			]
+		}
+	},
+	"/projects/research/api/state/Dialog.json": {
+		"identifier": "app.state.Dialog",
+		"timestamp": 1513795730389,
+		"knowledge": {
+			"settings": [],
+			"properties": [
+				"element",
+				"__listener"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"cf6d9c5f"
+				],
+				[
+					"serialize",
+					"338a4a6e"
+				],
+				[
+					"update",
+					"751c10a9"
+				],
+				[
+					"enter",
+					"a3ef356c"
+				],
+				[
+					"leave",
+					"b26efe27"
+				]
+			]
+		}
+	},
+	"/projects/research/api/state/Help.json": {
+		"identifier": "app.state.Help",
+		"timestamp": 1513795730389,
+		"knowledge": {
+			"settings": [],
+			"properties": [
+				"bot",
+				"element"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"serialize",
+					"4b38ab29"
+				],
+				[
+					"deserialize",
+					"86434b1c"
+				],
+				[
+					"enter",
+					"4c2f3efd"
+				],
+				[
+					"leave",
+					"b572afc8"
+				]
+			]
+		}
+	},
+	"/projects/research/api/state/Search.json": {
+		"identifier": "app.state.Search",
+		"timestamp": 1513795730389,
+		"knowledge": {
+			"settings": [],
+			"properties": [
+				"bot"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"serialize",
+					"6d43d41c"
+				],
+				[
+					"deserialize",
+					"86434b1c"
+				],
+				[
+					"update",
+					"75a06f30"
+				],
+				[
+					"enter",
+					"d042c0a2"
+				],
+				[
+					"leave",
+					"a6fd536e"
+				]
+			]
+		}
+	},
+	"/projects/research/api/state/Settings.json": {
+		"identifier": "app.state.Settings",
+		"timestamp": 1513795730389,
+		"knowledge": {
+			"settings": [],
+			"properties": [
+				"settings",
+				"element",
+				"__listener"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"cf6d9c5f"
+				],
+				[
+					"serialize",
+					"67f03c74"
+				],
+				[
+					"enter",
+					"b27dc87c"
+				],
+				[
+					"leave",
+					"30f89f93"
+				]
+			]
+		}
+	}
+}

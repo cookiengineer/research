@@ -50,7 +50,7 @@ lychee.define('app.state.Search').requires([
 	 * IMPLEMENTATION
 	 */
 
-	let Composite = function(main) {
+	const Composite = function(main) {
 
 		this.bot = main.bot || null;
 
@@ -103,6 +103,10 @@ lychee.define('app.state.Search').requires([
 
 		enter: function(oncomplete, intent) {
 
+			oncomplete = oncomplete instanceof Function ? oncomplete : null;
+			intent     = intent instanceof _Intent      ? intent     : null;
+
+
 			_STATE.enter();
 			_INPUT.value(intent.sentence);
 			_INPUT.bind('change', this.main.command, this.main);
@@ -110,18 +114,21 @@ lychee.define('app.state.Search').requires([
 			_search.call(this, intent._result);
 
 
-			_State.prototype.enter.call(this, oncomplete);
+			return _State.prototype.enter.call(this, oncomplete);
 
 		},
 
 		leave: function(oncomplete) {
+
+			oncomplete = oncomplete instanceof Function ? oncomplete : null;
+
 
 			_INPUT.unbind('change');
 			_INPUT.value('');
 			_STATE.leave();
 
 
-			_State.prototype.leave.call(this, oncomplete);
+			return _State.prototype.leave.call(this, oncomplete);
 
 		}
 

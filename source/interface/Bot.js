@@ -11,7 +11,7 @@ lychee.define('app.interface.Bot').requires([
 	 * IMPLEMENTATION
 	 */
 
-	let Composite = function() {
+	const Composite = function() {
 
 		this.intents = [];
 
@@ -19,6 +19,18 @@ lychee.define('app.interface.Bot').requires([
 
 
 	Composite.prototype = {
+
+		// deserialize: function(blob) {},
+
+		serialize: function() {
+
+			return {
+				'constructor': 'app.interface.Bot',
+				'arguments': []
+			};
+
+		},
+
 
 
 

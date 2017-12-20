@@ -1,0 +1,191 @@
+{
+	"header": {
+		"identifier": "app.state.Dialog",
+		"attaches": {},
+		"tags": {},
+		"requires": [
+			"app.interface.Intent"
+		],
+		"includes": [
+			"lychee.app.State"
+		],
+		"supports": {},
+		"type": "Composite"
+	},
+	"memory": {
+		"_Intent": {
+			"chunk": "lychee.import('app.interface.Intent')",
+			"type": "lychee.Definition",
+			"value": {
+				"reference": "app.interface.Intent",
+				"arguments": []
+			}
+		},
+		"_State": {
+			"chunk": "lychee.import('lychee.app.State')",
+			"type": "lychee.Definition",
+			"value": {
+				"reference": "lychee.app.State",
+				"arguments": []
+			}
+		},
+		"_COMPONENT": {
+			"chunk": "Polyfillr.import(attachments[\"html\"].url, attachments[\"html\"].buffer)['state-dialog']",
+			"type": "undefined"
+		},
+		"_main": {
+			"chunk": "global.document.querySelector('main')",
+			"type": "undefined"
+		},
+		"_on_command": {
+			"body": "function(value) {\n\n\t\tlet result = this.main.command(value);\n\t\tif (result === false) {\n\n\t\t\tthis.element.fireEventListener('error', {\n\t\t\t\tmessage: 'Please rephrase command.'\n\t\t\t});\n\n\t\t}\n\n\t}",
+			"hash": "1753fa33",
+			"parameters": [
+				{
+					"chunk": null,
+					"name": "value",
+					"type": "undefined"
+				}
+			],
+			"values": []
+		}
+	},
+	"errors": [
+		{
+			"url": "/projects/research/source/state/Dialog.js",
+			"rule": "unguessable-property-value",
+			"reference": "element",
+			"message": "Unguessable property \"element\".",
+			"line": 40,
+			"column": 3
+		}
+	],
+	"result": {
+		"constructor": {
+			"body": "function(main) {\n\n\t\tthis.element = _COMPONENT.create();\n\n\t\tthis.__listener = null;\n\n\n\t\t_main.appendChild(this.element);\n\t\t_State.call(this, main);\n\n\t}",
+			"hash": "c970f5e2",
+			"parameters": [
+				{
+					"chunk": null,
+					"name": "main",
+					"type": "undefined"
+				}
+			]
+		},
+		"settings": {},
+		"properties": {
+			"element": {
+				"chunk": "this.element = _COMPONENT.create();",
+				"value": {
+					"chunk": "_COMPONENT.create()",
+					"type": "undefined"
+				}
+			},
+			"__listener": {
+				"chunk": "this.__listener = null;",
+				"value": {
+					"chunk": "null",
+					"type": "null",
+					"value": null
+				}
+			}
+		},
+		"enums": {},
+		"events": {},
+		"methods": {
+			"deserialize": {
+				"body": "function(blob) {}",
+				"chunk": "function(blob) {",
+				"hash": "cf6d9c5f",
+				"parameters": [
+					{
+						"name": "blob",
+						"type": "SerializationBlob",
+						"value": {}
+					}
+				],
+				"values": [
+					{
+						"type": "undefined"
+					}
+				]
+			},
+			"serialize": {
+				"body": "function() {\n\n\t\t\tlet data = _State.prototype.serialize.call(this);\n\t\t\tdata['constructor'] = 'app.state.Dialog';\n\n\n\t\t\treturn data;\n\n\t\t}",
+				"chunk": "\t\tserialize: function() {",
+				"hash": "338a4a6e",
+				"parameters": [],
+				"values": [
+					{
+						"chunk": "{ 'constructor': 'lychee.app.State',\n\t\t\t\t'arguments':   [ settings ],\n\t\t\t\t'blob':        Object.keys(blob).length > 0 ? blob : null\n\t\t\t}",
+						"type": "Object",
+						"value": {}
+					}
+				]
+			},
+			"update": {
+				"body": "function(intent) {\n\n\t\t\t// XXX: Do nothing\n\n\t\t}",
+				"chunk": "\t\tupdate: function(intent) {",
+				"hash": "751c10a9",
+				"parameters": [
+					{
+						"chunk": null,
+						"name": "intent",
+						"type": "undefined"
+					}
+				],
+				"values": [
+					{
+						"type": "undefined"
+					}
+				]
+			},
+			"enter": {
+				"body": "function(oncomplete, intent) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\t\t\tintent     = intent instanceof _Intent      ? intent     : null;\n\n\n\t\t\tthis.__listener = function(e) {\n\t\t\t\t_on_command.call(this, e.detail);\n\t\t\t}.bind(this);\n\n\t\t\tthis.element.fireEventListener('enter', null);\n\t\t\tthis.element.addEventListener('command', this.__listener, true);\n\n\n\t\t\treturn _State.prototype.enter.call(this, oncomplete);\n\n\t\t}",
+				"chunk": "\t\tenter: function(oncomplete, intent) {",
+				"hash": "a3ef356c",
+				"parameters": [
+					{
+						"chunk": "oncomplete instanceof Function ? oncomplete : null",
+						"name": "oncomplete",
+						"type": "Function",
+						"value": null
+					},
+					{
+						"chunk": "intent instanceof _Intent      ? intent     : null",
+						"name": "intent",
+						"type": "_Intent",
+						"value": null
+					}
+				],
+				"values": [
+					{
+						"chunk": "true",
+						"type": "Boolean",
+						"value": true
+					}
+				]
+			},
+			"leave": {
+				"body": "function(oncomplete) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\n\n\t\t\tthis.element.removeEventListener('command', this.__listener, true);\n\t\t\tthis.element.fireEventListener('leave', null);\n\n\t\t\tthis.__listener = null;\n\n\n\t\t\treturn _State.prototype.leave.call(this, oncomplete);\n\n\t\t}",
+				"chunk": "\t\tleave: function(oncomplete) {",
+				"hash": "b26efe27",
+				"parameters": [
+					{
+						"chunk": "oncomplete instanceof Function ? oncomplete : null",
+						"name": "oncomplete",
+						"type": "Function",
+						"value": null
+					}
+				],
+				"values": [
+					{
+						"chunk": "true",
+						"type": "Boolean",
+						"value": true
+					}
+				]
+			}
+		}
+	}
+}

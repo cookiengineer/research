@@ -1,17 +1,17 @@
 
 lychee.define('app.Main').requires([
 	'app.interface.Bot',
-//	'app.net.Client',
-//	'app.net.Server',
+	// 'app.net.Client',
+	// 'app.net.Server',
 	'app.net.Scraper',
 	'app.plugin.Reddit',
 	'app.state.Browse',
 	'app.state.Dialog',
 	'app.state.Help',
-//	'app.state.Archive',
-//	'app.state.Backup',
-//	'app.state.Browse',
-//	'app.state.Search',
+	// 'app.state.Archive',
+	// 'app.state.Backup',
+	// 'app.state.Browse',
+	// 'app.state.Search',
 	'app.state.Settings',
 	'lychee.Input'
 ]).includes([
@@ -30,7 +30,7 @@ lychee.define('app.Main').requires([
 	 * IMPLEMENTATION
 	 */
 
-	let Composite = function(data) {
+	const Composite = function(data) {
 
 		let settings = Object.assign({
 			client:   null,
@@ -108,6 +108,9 @@ lychee.define('app.Main').requires([
 
 		}, this, true);
 
+
+		settings = null;
+
 	};
 
 
@@ -162,7 +165,7 @@ lychee.define('app.Main').requires([
 				if (bot !== null) {
 
 					let suggestions = bot.command(sentence.split(' ').map(function(word) {
-						return word.replace(/(\?|\!|\.)/g, '').trim();
+						return word.replace(/(\?|!|\.)/g, '').trim();
 					}).filter(function(word) {
 						return word !== '';
 					}).join(' '));
@@ -233,27 +236,42 @@ lychee.define('app.Main').requires([
 
 				}
 
+				return result;
+
 			}
+
+
+			return false;
 
 		},
 
 		findPlugin: function(url) {
 
-			let found = null;
+			url = typeof url === 'string' ? url : null;
 
-			for (let p in this.plugins) {
 
-				if (p === 'generic') continue;
+			if (url !== null) {
 
-				let plugin = this.plugins[p];
-				if (plugin.can(url) === true) {
-					found = p;
-					break;
+				let found = null;
+
+				for (let p in this.plugins) {
+
+					if (p === 'generic') continue;
+
+					let plugin = this.plugins[p];
+					if (plugin.can(url) === true) {
+						found = p;
+						break;
+					}
+
 				}
+
+				return found;
 
 			}
 
-			return found;
+
+			return null;
 
 		},
 

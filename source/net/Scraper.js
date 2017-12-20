@@ -1,6 +1,5 @@
 
-lychee.define('app.net.Scraper').requires([
-]).exports(function(lychee, global, attachments) {
+lychee.define('app.net.Scraper').exports(function(lychee, global, attachments) {
 
 	const _https  = require('https');
 	const _http   = require('http');
@@ -169,7 +168,7 @@ lychee.define('app.net.Scraper').requires([
 	 * IMPLEMENTATION
 	 */
 
-	let Composite = function(main) {
+	const Composite = function(main) {
 
 		this.main = main || null;
 
@@ -177,6 +176,18 @@ lychee.define('app.net.Scraper').requires([
 
 
 	Composite.prototype = {
+
+		// deserialize: function(blob) {},
+
+		serialize: function() {
+
+			return {
+				'constructor': 'app.net.Scraper',
+				'arguments': []
+			};
+
+		},
+
 
 
 

@@ -1,8 +1,11 @@
 
-lychee.define('app.state.Dialog').includes([
+lychee.define('app.state.Dialog').requires([
+	'app.interface.Intent'
+]).includes([
 	'lychee.app.State'
 ]).exports(function(lychee, global, attachments) {
 
+	const _Intent    = lychee.import('app.interface.Intent');
 	const _State     = lychee.import('lychee.app.State');
 	const _COMPONENT = Polyfillr.import(attachments["html"].url, attachments["html"].buffer)['state-dialog'];
 	const _main      = global.document.querySelector('main');
@@ -32,7 +35,7 @@ lychee.define('app.state.Dialog').includes([
 	 * IMPLEMENTATION
 	 */
 
-	let Composite = function(main) {
+	const Composite = function(main) {
 
 		this.element = _COMPONENT.create();
 
@@ -46,6 +49,8 @@ lychee.define('app.state.Dialog').includes([
 
 
 	Composite.prototype = {
+
+		// deserialize: function(blob) {},
 
 		/*
 		 * ENTITY API
@@ -67,7 +72,11 @@ lychee.define('app.state.Dialog').includes([
 
 		},
 
-		enter: function(oncomplete) {
+		enter: function(oncomplete, intent) {
+
+			oncomplete = oncomplete instanceof Function ? oncomplete : null;
+			intent     = intent instanceof _Intent      ? intent     : null;
+
 
 			this.__listener = function(e) {
 				_on_command.call(this, e.detail);
@@ -76,18 +85,23 @@ lychee.define('app.state.Dialog').includes([
 			this.element.fireEventListener('enter', null);
 			this.element.addEventListener('command', this.__listener, true);
 
-			_State.prototype.enter.call(this, oncomplete);
+
+			return _State.prototype.enter.call(this, oncomplete);
 
 		},
 
 		leave: function(oncomplete) {
+
+			oncomplete = oncomplete instanceof Function ? oncomplete : null;
+
 
 			this.element.removeEventListener('command', this.__listener, true);
 			this.element.fireEventListener('leave', null);
 
 			this.__listener = null;
 
-			_State.prototype.leave.call(this, oncomplete);
+
+			return _State.prototype.leave.call(this, oncomplete);
 
 		}
 

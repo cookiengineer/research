@@ -1,0 +1,203 @@
+{
+	"header": {
+		"identifier": "app.state.Browse",
+		"attaches": {},
+		"tags": {},
+		"requires": [
+			"app.interface.Intent"
+		],
+		"includes": [
+			"lychee.app.State"
+		],
+		"supports": {},
+		"type": "Composite"
+	},
+	"memory": {
+		"_Intent": {
+			"chunk": "lychee.import('app.interface.Intent')",
+			"type": "lychee.Definition",
+			"value": {
+				"reference": "app.interface.Intent",
+				"arguments": []
+			}
+		},
+		"_State": {
+			"chunk": "lychee.import('lychee.app.State')",
+			"type": "lychee.Definition",
+			"value": {
+				"reference": "lychee.app.State",
+				"arguments": []
+			}
+		},
+		"_COMPONENT": {
+			"chunk": "Polyfillr.import(attachments[\"html\"].url, attachments[\"html\"].buffer)['state-browse']",
+			"type": "undefined"
+		},
+		"_main": {
+			"chunk": "global.document.querySelector('main')",
+			"type": "undefined"
+		},
+		"_on_browse": {
+			"body": "function(data) {\n\n\t\tif (data.length > 0) {\n\n\t\t\tthis.element.fireEventListener('render', data);\n\n\t\t} else {\n\n\t\t\tthis.element.fireEventListener('error', {\n\t\t\t\tcode:    500,\n\t\t\t\theader:  'Network Error',\n\t\t\t\tmessage: 'Could not retrieve any matching data.'\n\t\t\t});\n\n\t\t}\n\n\t}",
+			"hash": "eaad5d96",
+			"parameters": [
+				{
+					"chunk": null,
+					"name": "data",
+					"type": "undefined"
+				}
+			],
+			"values": []
+		},
+		"_browse": {
+			"body": "function(intent) {\n\n\t\tlet data   = intent._result;\n\t\tlet main   = this.main;\n\t\tlet plugin = main.getPlugin(data.plugin || 'generic');\n\t\tif (plugin !== null) {\n\n\t\t\tplugin.browse(data).then(_on_browse.bind(this));\n\n\t\t} else if (typeof data.url === 'string') {\n\n\t\t\tplugin = main.getPlugin(main.findPlugin(data.url) || 'generic');\n\n\t\t\tif (plugin !== null) {\n\t\t\t\tplugin.browse(data).then(_on_browse.bind(this));\n\t\t\t}\n\n\t\t}\n\n\t}",
+			"hash": "5e01b090",
+			"parameters": [
+				{
+					"chunk": null,
+					"name": "intent",
+					"type": "undefined"
+				}
+			],
+			"values": []
+		}
+	},
+	"errors": [
+		{
+			"url": "/projects/research/source/state/Browse.js",
+			"rule": "unguessable-property-value",
+			"reference": "element",
+			"message": "Unguessable property \"element\".",
+			"line": 66,
+			"column": 3
+		}
+	],
+	"result": {
+		"constructor": {
+			"body": "function(main) {\n\n\t\tthis.element = _COMPONENT.create();\n\n\t\tthis.__listener = null;\n\n\n\t\t_main.appendChild(this.element);\n\t\t_State.call(this, main);\n\n\t}",
+			"hash": "c970f5e2",
+			"parameters": [
+				{
+					"chunk": null,
+					"name": "main",
+					"type": "undefined"
+				}
+			]
+		},
+		"settings": {},
+		"properties": {
+			"element": {
+				"chunk": "this.element = _COMPONENT.create();",
+				"value": {
+					"chunk": "_COMPONENT.create()",
+					"type": "undefined"
+				}
+			},
+			"__listener": {
+				"chunk": "this.__listener = null;",
+				"value": {
+					"chunk": "null",
+					"type": "null",
+					"value": null
+				}
+			}
+		},
+		"enums": {},
+		"events": {},
+		"methods": {
+			"deserialize": {
+				"body": "function(blob) {}",
+				"chunk": "function(blob) {",
+				"hash": "cf6d9c5f",
+				"parameters": [
+					{
+						"name": "blob",
+						"type": "SerializationBlob",
+						"value": {}
+					}
+				],
+				"values": [
+					{
+						"type": "undefined"
+					}
+				]
+			},
+			"serialize": {
+				"body": "function() {\n\n\t\t\tlet data = _State.prototype.serialize.call(this);\n\t\t\tdata['constructor'] = 'app.state.Browse';\n\n\n\t\t\treturn data;\n\n\t\t}",
+				"chunk": "\t\tserialize: function() {",
+				"hash": "07f88f54",
+				"parameters": [],
+				"values": [
+					{
+						"chunk": "{ 'constructor': 'lychee.app.State',\n\t\t\t\t'arguments':   [ settings ],\n\t\t\t\t'blob':        Object.keys(blob).length > 0 ? blob : null\n\t\t\t}",
+						"type": "Object",
+						"value": {}
+					}
+				]
+			},
+			"update": {
+				"body": "function(intent) {\n\n\t\t\t_browse.call(this, intent);\n\n\t\t}",
+				"chunk": "\t\tupdate: function(intent) {",
+				"hash": "f1c40675",
+				"parameters": [
+					{
+						"chunk": null,
+						"name": "intent",
+						"type": "undefined"
+					}
+				],
+				"values": [
+					{
+						"type": "undefined"
+					}
+				]
+			},
+			"enter": {
+				"body": "function(oncomplete, intent) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\t\t\tintent     = intent instanceof _Intent      ? intent     : null;\n\n\n\t\t\tthis.__listener = function(e) {\n\t\t\t\tthis.main.command(e.detail);\n\t\t\t}.bind(this);\n\n\t\t\tthis.element.fireEventListener('enter', null);\n\t\t\tthis.element.addEventListener('command', this.__listener, true);\n\n\n\t\t\t_browse.call(this, intent);\n\n\n\t\t\treturn _State.prototype.enter.call(this, oncomplete);\n\n\t\t}",
+				"chunk": "\t\tenter: function(oncomplete, intent) {",
+				"hash": "508f4f66",
+				"parameters": [
+					{
+						"chunk": "oncomplete instanceof Function ? oncomplete : null",
+						"name": "oncomplete",
+						"type": "Function",
+						"value": null
+					},
+					{
+						"chunk": "intent instanceof _Intent      ? intent     : null",
+						"name": "intent",
+						"type": "_Intent",
+						"value": null
+					}
+				],
+				"values": [
+					{
+						"chunk": "true",
+						"type": "Boolean",
+						"value": true
+					}
+				]
+			},
+			"leave": {
+				"body": "function(oncomplete) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\n\n\t\t\tthis.element.removeEventListener('command', this.__listener, true);\n\t\t\tthis.element.fireEventListener('leave', null);\n\n\t\t\tthis.__listener = null;\n\n\n\t\t\treturn _State.prototype.leave.call(this, oncomplete);\n\n\t\t}",
+				"chunk": "\t\tleave: function(oncomplete) {",
+				"hash": "b26efe27",
+				"parameters": [
+					{
+						"chunk": "oncomplete instanceof Function ? oncomplete : null",
+						"name": "oncomplete",
+						"type": "Function",
+						"value": null
+					}
+				],
+				"values": [
+					{
+						"chunk": "true",
+						"type": "Boolean",
+						"value": true
+					}
+				]
+			}
+		}
+	}
+}

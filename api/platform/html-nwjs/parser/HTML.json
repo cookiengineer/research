@@ -1,0 +1,171 @@
+{
+	"header": {
+		"identifier": "app.parser.HTML",
+		"attaches": {},
+		"tags": {
+			"platform": "html-nwjs"
+		},
+		"requires": [],
+		"includes": [],
+		"supports": {
+			"body": "function(lychee, global) {\n\n\tif (typeof global.require === 'function') {\n\n\t\ttry {\n\n\t\t\tglobal.require('cheerio');\n\n\t\t\treturn true;\n\n\t\t} catch (err) {\n\n\t\t}\n\n\t}\n\n\n\treturn false;\n\n}",
+			"hash": "347da238",
+			"parameters": [
+				{
+					"chunk": null,
+					"name": "lychee",
+					"type": "undefined"
+				},
+				{
+					"chunk": null,
+					"name": "global",
+					"type": "undefined"
+				}
+			]
+		},
+		"type": "Module"
+	},
+	"memory": {
+		"_cheerio": {
+			"chunk": "global.require('cheerio')",
+			"type": "undefined"
+		},
+		"_encode": {
+			"body": "function(tokens) {\n\n\t\tlet source = '';\n\n\n\t\treturn source;\n\n\t}",
+			"hash": "371d6e66",
+			"parameters": [
+				{
+					"chunk": null,
+					"name": "tokens",
+					"type": "undefined"
+				}
+			],
+			"values": [
+				{
+					"chunk": "''",
+					"type": "String",
+					"value": ""
+				}
+			]
+		},
+		"_decode": {
+			"body": "function(source) {\n\n\t\tlet tokens = [];\n\t\tlet token  = null;\n\t\tlet i0     = source.indexOf('<');\n\n\t\twhile (i0 !== -1) {\n\n\t\t\tlet i1 = source.indexOf('>', i0);\n\t\t\tif (i1 !== -1) {\n\n\t\t\t\tlet tmp = source.substr(i0, i1 - i0);\n\t\t\t\tif (tmp.startsWith('/')) {\n\t\t\t\t\t// TODO: Close token if token.children[...length -1] is same type!\n\t\t\t\t} else {\n\n\t\t\t\t\ttoken = {\n\t\t\t\t\t\ttype: 'TODO',\n\t\t\t\t\t\tcontent: '' || [], // this can be string or children\n\t\t\t\t\t\tid:    'whatever',\n\t\t\t\t\t\tclass: 'whatever'\n\t\t\t\t\t};\n\n\t\t\t\t\tlet attributes = tmp.split(' '); // or so?\n\t\t\t\t\t// TODO: Parse attributes\n\t\t\t\t\t// TODO: Parse <tmp>CONTENT</tmp>\n\n\t\t\t\t}\n\n\t\t\t} else {\n\t\t\t\tbreak;\n\t\t\t}\n\n\t\t\ti0 = source.indexOf('<', i1);\n\n\t\t}\n\n\n\t\treturn tokens;\n\n\t}",
+			"hash": "b08eb81b",
+			"parameters": [
+				{
+					"chunk": null,
+					"name": "source",
+					"type": "undefined"
+				}
+			],
+			"values": [
+				{
+					"chunk": "[]",
+					"type": "Array",
+					"value": []
+				}
+			]
+		}
+	},
+	"errors": [
+		{
+			"url": "/projects/research/source/platform/html-nwjs/parser/HTML.js",
+			"rule": "unguessable-return-value",
+			"reference": "encode",
+			"message": "Unguessable return value \"_encode(data)\" for method \"encode()\".",
+			"line": 112,
+			"column": 1
+		}
+	],
+	"result": {
+		"constructor": {},
+		"settings": {},
+		"properties": {},
+		"enums": {},
+		"events": {},
+		"methods": {
+			"deserialize": {
+				"body": "function(blob) {}",
+				"chunk": "function(blob) {",
+				"hash": "cf6d9c5f",
+				"parameters": [
+					{
+						"name": "blob",
+						"type": "SerializationBlob",
+						"value": {}
+					}
+				],
+				"values": [
+					{
+						"type": "undefined"
+					}
+				]
+			},
+			"serialize": {
+				"body": "function() {\n\n\t\t\treturn {\n\t\t\t\t'reference': 'app.parser.HTML',\n\t\t\t\t'blob':      null\n\t\t\t};\n\n\t\t}",
+				"chunk": "\t\tserialize: function() {",
+				"hash": "5e5c3d81",
+				"parameters": [],
+				"values": [
+					{
+						"chunk": "{ 'reference': 'app.parser.HTML',\n\t\t\t\t'blob':      null\n\t\t\t}",
+						"type": "Object",
+						"value": {
+							"reference": "app.parser.HTML",
+							"blob": null
+						}
+					}
+				]
+			},
+			"encode": {
+				"body": "function(data) {\n\n\t\t\tdata = data instanceof Object ? data : null;\n\n\n\t\t\tif (data !== null) {\n\n\t\t\t\tlet stream = _encode(data);\n\t\t\t\tif (stream !== null) {\n\t\t\t\t\treturn stream;\n\t\t\t\t}\n\n\t\t\t}\n\n\n\t\t\treturn null;\n\n\t\t}",
+				"chunk": "\t\tencode: function(data) {",
+				"hash": "fa5066a0",
+				"parameters": [
+					{
+						"chunk": "data instanceof Object ? data : null",
+						"name": "data",
+						"type": "Object",
+						"value": null
+					}
+				],
+				"values": [
+					{
+						"chunk": "_encode(data)",
+						"type": "undefined"
+					},
+					{
+						"chunk": "null",
+						"type": "null",
+						"value": null
+					}
+				]
+			},
+			"decode": {
+				"body": "function(data) {\n\n\t\t\tdata = data instanceof Buffer ? data.toString('utf8') : (data).toString();\n\n\n\t\t\tif (data.length > 0) {\n\n\t\t\t\tlet object = _decode(data);\n\t\t\t\tif (object !== undefined) {\n\t\t\t\t\treturn object;\n\t\t\t\t}\n\n\t\t\t}\n\n\n\t\t\treturn null;\n\n\t\t}",
+				"chunk": "\t\tdecode: function(data) {",
+				"hash": "11b724a3",
+				"parameters": [
+					{
+						"chunk": "data instanceof Buffer ? data.toString('utf8') : (data).toString()",
+						"name": "data",
+						"type": "String",
+						"value": "<string>"
+					}
+				],
+				"values": [
+					{
+						"chunk": "object",
+						"type": "Object",
+						"value": {}
+					},
+					{
+						"chunk": "null",
+						"type": "null",
+						"value": null
+					}
+				]
+			}
+		}
+	}
+}

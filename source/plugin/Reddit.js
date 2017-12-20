@@ -349,18 +349,28 @@ lychee.define('app.plugin.Reddit').requires([
 
 		can: function(url) {
 
-			let result = false;
+			url = typeof url === 'string' ? url : null;
 
-			for (let u = 0, ul = _URLS.length; u < ul; u++) {
 
-				if (url.startsWith(_URLS[u])) {
-					result = true;
-					break;
+			if (url !== null) {
+
+				let result = false;
+
+				for (let u = 0, ul = _URLS.length; u < ul; u++) {
+
+					if (url.startsWith(_URLS[u])) {
+						result = true;
+						break;
+					}
+
 				}
+
+				return result;
 
 			}
 
-			return result;
+
+			return false;
 
 		},
 
@@ -377,6 +387,7 @@ lychee.define('app.plugin.Reddit').requires([
 			promise.then(results => results.map(_parse));
 			promise.then(results => results.map(_filter));
 			promise.then(results => results.map(_render));
+
 
 			return promise;
 
@@ -395,6 +406,7 @@ lychee.define('app.plugin.Reddit').requires([
 			promise.then(results => results.map(_parse));
 			promise.then(results => results.map(_filter));
 			promise.then(results => results.map(_render));
+
 
 			return promise;
 
