@@ -108,16 +108,7 @@
 			"values": []
 		}
 	},
-	"errors": [
-		{
-			"url": "/projects/research/source/net/Scraper.js",
-			"rule": "no-return-value",
-			"reference": "query",
-			"message": "Invalid return value for method \"query()\".",
-			"line": 198,
-			"column": 1
-		}
-	],
+	"errors": [],
 	"result": {
 		"constructor": {
 			"body": "function(main) {\n\n\t\tthis.main = main || null;\n\n\t}",
@@ -194,7 +185,9 @@
 				],
 				"values": [
 					{
-						"type": "undefined"
+						"chunk": "new Promise(function(resolve, reject) { let url     = query.url     || null",
+						"type": "Promise",
+						"value": "new Promise(function(resolve, reject) { let url     = query.url     || null"
 					}
 				]
 			}

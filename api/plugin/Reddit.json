@@ -89,24 +89,7 @@
 			]
 		}
 	},
-	"errors": [
-		{
-			"url": "/projects/research/source/plugin/Reddit.js",
-			"rule": "no-return-value",
-			"reference": "browse",
-			"message": "Invalid return value for method \"browse()\".",
-			"line": 377,
-			"column": 1
-		},
-		{
-			"url": "/projects/research/source/plugin/Reddit.js",
-			"rule": "no-return-value",
-			"reference": "search",
-			"message": "Invalid return value for method \"search()\".",
-			"line": 396,
-			"column": 1
-		}
-	],
+	"errors": [],
 	"result": {
 		"constructor": {
 			"body": "function(main) {\n\n\t\tthis.main    = main         || null;\n\t\tthis.bot     = main.bot     || null;\n\t\tthis.scraper = main.scraper || null;\n\n\n\t\tthis.deserialize(_BLOB);\n\n\t}",
@@ -224,7 +207,9 @@
 				],
 				"values": [
 					{
-						"type": "undefined"
+						"chunk": "promise",
+						"type": "Promise",
+						"value": {}
 					}
 				]
 			},
@@ -242,7 +227,9 @@
 				],
 				"values": [
 					{
-						"type": "undefined"
+						"chunk": "promise",
+						"type": "Promise",
+						"value": {}
 					}
 				]
 			}
