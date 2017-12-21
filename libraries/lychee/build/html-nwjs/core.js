@@ -2079,9 +2079,55 @@ lychee.Definition = typeof lychee.Definition !== 'undefined' ? lychee.Definition
 	 * HELPERS
 	 */
 
-	const _WARNING_CACHE = {};
+	const _DETECTOR_CACHE = {};
+	const _WARNING_CACHE  = {};
 
-	const _create_detector = function(source, path) {
+	const _create_detector = function(platform) {
+
+		platform = typeof platform === 'string' ? platform : null;
+
+
+		if (platform !== null) {
+
+			let sandbox = _DETECTOR_CACHE[platform] || null;
+			if (sandbox === null) {
+
+				if (platform.includes('-') === true) {
+
+					let major = platform.split('-')[0];
+					let minor = platform.split('-')[1];
+					let clone = Object.assign({}, lychee.FEATURES[major], lychee.FEATURES[major + '-' + minor]);
+					let proxy = _create_proxy(clone);
+					if (proxy !== null) {
+						sandbox = proxy;
+					}
+
+				} else {
+
+					let clone = lychee.FEATURES[platform] || null;
+					let proxy = _create_proxy(clone);
+					if (proxy !== null) {
+						sandbox = proxy;
+					}
+
+				}
+
+
+				_DETECTOR_CACHE[platform] = sandbox;
+
+			}
+
+
+			return sandbox;
+
+		}
+
+
+		return null;
+
+	};
+
+	const _create_proxy = function(source, path) {
 
 		path = typeof path === 'string' ? path : 'global';
 
@@ -2108,7 +2154,7 @@ lychee.Definition = typeof lychee.Definition !== 'undefined' ? lychee.Definition
 						if (/boolean|number|string|function/g.test(type)) {
 							target[name] = source[name];
 						} else if (/object/g.test(type)) {
-							target[name] = _create_detector(source[name], path + '.' + name);
+							target[name] = _create_proxy(source[name], path + '.' + name);
 						} else if (/undefined/g.test(type)) {
 							target[name] = undefined;
 						}
@@ -2573,53 +2619,13 @@ lychee.Definition = typeof lychee.Definition !== 'undefined' ? lychee.Definition
 				let platform = this._tags.platform || null;
 				if (platform !== null) {
 
-					if (platform.includes('-') === true) {
-
-						let platform_major = platform.split('-')[0];
-						let platform_minor = platform.split('-')[1];
-
-						let detector = _create_detector(lychee.FEATURES[platform_major] || null);
-						if (detector !== null) {
-							supported = this._supports.call(detector, lychee, detector);
-							features  = JSON.parse(JSON.stringify(detector));
-							detector  = null;
-						}
-
-						if (supported === false) {
-
-							detector = _create_detector(lychee.FEATURES[platform_minor] || null);
-
-							if (detector !== null) {
-
-								supported = this._supports.call(detector, lychee, detector);
-
-								if (features instanceof Object) {
-									features = Object.assign(features, JSON.parse(JSON.stringify(detector)));
-								} else {
-									features = JSON.parse(JSON.stringify(detector));
-								}
-
-								detector = null;
-
-							} else {
-
-								supported = this._supports.call(global, lychee, global);
-
-							}
-
-						}
-
+					let detector = _create_detector(platform);
+					if (detector !== null) {
+						supported = this._supports.call(detector, lychee, detector);
+						features  = JSON.parse(JSON.stringify(detector));
+						detector  = null;
 					} else {
-
-						let detector = _create_detector(lychee.FEATURES[platform] || null);
-						if (detector !== null) {
-							supported = this._supports.call(detector, lychee, detector);
-							features  = JSON.parse(JSON.stringify(detector));
-							detector  = null;
-						} else {
-							supported = this._supports.call(global, lychee, global);
-						}
-
+						supported = this._supports.call(global, lychee, global);
 					}
 
 				} else {
