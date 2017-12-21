@@ -109,20 +109,25 @@
 			},
 			"state": {
 				"Browse": [
+					"html",
 					"js"
 				],
 				"Dialog": [
+					"html",
 					"js"
 				],
 				"Help": [
+					"html",
 					"js",
 					"json"
 				],
 				"Search": [
+					"html",
 					"js",
 					"json"
 				],
 				"Settings": [
+					"html",
 					"js"
 				]
 			}

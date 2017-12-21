@@ -53,37 +53,33 @@
 
 			lychee.inject(lychee.ENVIRONMENTS['/libraries/lychee/dist']);
 
+
 			if (typeof process !== 'undefined') {
 				lychee.ROOT.lychee  = '';
 				lychee.ROOT.project = '';
 			}
 
 
-			setTimeout(function() {
+			let ui = new Stuff('./design/index.js');
 
-				let ui = new Stuff('./design/index.js');
+			ui.onload = function() {
 
-				ui.onload = function() {
+				lychee.pkg('build', 'html-nwjs/main', function(environment, profile) {
 
-					lychee.pkg('build', 'html-nwjs/main', function(environment, profile) {
+					if (environment !== null) {
 
-						if (environment !== null) {
+						lychee.init(environment, {
+							debug:   false,
+							sandbox: false
+						});
 
-							lychee.init(environment, {
-								debug:   false,
-								sandbox: false,
-								profile: profile
-							});
+					}
 
-						}
+				});
 
-					});
+			};
 
-				};
-
-				ui.load();
-
-			}, 500);
+			ui.load();
 
 		})(lychee, typeof global !== 'undefined' ? global : this);
 	</script>

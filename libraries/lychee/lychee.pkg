@@ -1,4 +1,1360 @@
 {
-	"build": {},
-	"source": {}
+	"api": {
+		"files": {
+			"DIST": [
+				"json"
+			],
+			"ai": {
+				"Agent": [
+					"json"
+				],
+				"Genome": [
+					"json"
+				],
+				"Layer": [
+					"json"
+				],
+				"bnn": {
+					"Agent": [
+						"json"
+					],
+					"Brain": [
+						"json"
+					]
+				},
+				"enn": {
+					"Agent": [
+						"json"
+					],
+					"Brain": [
+						"json"
+					]
+				},
+				"neat": {
+					"Agent": [
+						"json"
+					],
+					"Brain": [
+						"json"
+					],
+					"Gene": [
+						"json"
+					],
+					"Genome": [
+						"json"
+					],
+					"Pool": [
+						"json"
+					]
+				}
+			},
+			"app": {
+				"Blueprint": [
+					"json"
+				],
+				"Element": [
+					"json"
+				],
+				"Entity": [
+					"json"
+				],
+				"Flow": [
+					"json"
+				],
+				"Jukebox": [
+					"json"
+				],
+				"Layer": [
+					"json"
+				],
+				"Loop": [
+					"json"
+				],
+				"Main": [
+					"json"
+				],
+				"Sprite": [
+					"json"
+				],
+				"State": [
+					"json"
+				],
+				"entity": {
+					"Label": [
+						"json"
+					],
+					"Text": [
+						"json"
+					]
+				},
+				"layer": {
+					"Table": [
+						"json"
+					]
+				},
+				"sprite": {
+					"Background": [
+						"json"
+					],
+					"Emblem": [
+						"json"
+					]
+				}
+			},
+			"codec": {
+				"BENCODE": [
+					"json"
+				],
+				"BITON": [
+					"json"
+				],
+				"DIXY": [
+					"json"
+				],
+				"JSON": [
+					"json"
+				]
+			},
+			"core": {
+				"Asset": [
+					"json"
+				],
+				"Debugger": [
+					"json"
+				],
+				"Definition": [
+					"json"
+				],
+				"Environment": [
+					"json"
+				],
+				"Package": [
+					"json"
+				],
+				"Simulation": [
+					"json"
+				],
+				"Specification": [
+					"json"
+				],
+				"lychee": [
+					"json"
+				]
+			},
+			"crypto": {
+				"CRC32": [
+					"json"
+				],
+				"MD5": [
+					"json"
+				],
+				"MURMUR": [
+					"json"
+				],
+				"SHA1": [
+					"json"
+				]
+			},
+			"data": {
+				"Tree": [
+					"json"
+				],
+				"tree": {
+					"Oct": [
+						"json"
+					],
+					"Quad": [
+						"json"
+					]
+				}
+			},
+			"effect": {
+				"Alpha": [
+					"json"
+				],
+				"Color": [
+					"json"
+				],
+				"Depth": [
+					"json"
+				],
+				"Event": [
+					"json"
+				],
+				"Height": [
+					"json"
+				],
+				"Music": [
+					"json"
+				],
+				"Offset": [
+					"json"
+				],
+				"Position": [
+					"json"
+				],
+				"Radius": [
+					"json"
+				],
+				"Shake": [
+					"json"
+				],
+				"Sound": [
+					"json"
+				],
+				"State": [
+					"json"
+				],
+				"Velocity": [
+					"json"
+				],
+				"Visible": [
+					"json"
+				],
+				"Width": [
+					"json"
+				]
+			},
+			"event": {
+				"Emitter": [
+					"json"
+				],
+				"Flow": [
+					"json"
+				],
+				"Queue": [
+					"json"
+				],
+				"Router": [
+					"json"
+				]
+			},
+			"math": {
+				"Matrix": [
+					"json"
+				],
+				"Mersenne": [
+					"json"
+				],
+				"Quaternion": [
+					"json"
+				],
+				"Vector3": [
+					"json"
+				],
+				"Vector4": [
+					"json"
+				]
+			},
+			"net": {
+				"Client": [
+					"json"
+				],
+				"Remote": [
+					"json"
+				],
+				"Service": [
+					"json"
+				],
+				"Tunnel": [
+					"json"
+				],
+				"client": {
+					"Chat": [
+						"json"
+					],
+					"Debugger": [
+						"json"
+					],
+					"Session": [
+						"json"
+					],
+					"Stash": [
+						"json"
+					],
+					"Storage": [
+						"json"
+					]
+				},
+				"protocol": {
+					"HTTP": [
+						"json"
+					],
+					"WS": [
+						"json"
+					]
+				},
+				"remote": {
+					"Chat": [
+						"json"
+					],
+					"Debugger": [
+						"json"
+					],
+					"Session": [
+						"json"
+					],
+					"Stash": [
+						"json"
+					],
+					"Storage": [
+						"json"
+					]
+				}
+			},
+			"platform": {
+				"html": {
+					"Input": [
+						"json"
+					],
+					"Renderer": [
+						"json"
+					],
+					"Stash": [
+						"json"
+					],
+					"Storage": [
+						"json"
+					],
+					"Viewport": [
+						"json"
+					],
+					"net": {
+						"Server": [
+							"json"
+						],
+						"socket": {
+							"HTTP": [
+								"json"
+							],
+							"WS": [
+								"json"
+							]
+						}
+					},
+					"ui": {
+						"entity": {
+							"Download": [
+								"json"
+							],
+							"Helper": [
+								"json"
+							],
+							"Upload": [
+								"json"
+							]
+						}
+					}
+				},
+				"html-nwjs": {
+					"Stash": [
+						"json"
+					],
+					"Storage": [
+						"json"
+					],
+					"net": {
+						"Server": [
+							"json"
+						],
+						"socket": {
+							"HTTP": [
+								"json"
+							],
+							"WS": [
+								"json"
+							]
+						}
+					},
+					"ui": {
+						"entity": {
+							"Download": [
+								"json"
+							],
+							"Helper": [
+								"json"
+							]
+						}
+					}
+				},
+				"node": {
+					"Input": [
+						"json"
+					],
+					"Renderer": [
+						"json"
+					],
+					"Stash": [
+						"json"
+					],
+					"Storage": [
+						"json"
+					],
+					"Viewport": [
+						"json"
+					],
+					"net": {
+						"Server": [
+							"json"
+						],
+						"socket": {
+							"HTTP": [
+								"json"
+							],
+							"WS": [
+								"json"
+							]
+						}
+					},
+					"ui": {
+						"entity": {
+							"Download": [
+								"json"
+							],
+							"Helper": [
+								"json"
+							],
+							"Upload": [
+								"json"
+							]
+						}
+					}
+				}
+			},
+			"policy": {
+				"Alpha": [
+					"json"
+				],
+				"Color": [
+					"json"
+				],
+				"Depth": [
+					"json"
+				],
+				"Height": [
+					"json"
+				],
+				"Music": [
+					"json"
+				],
+				"Offset": [
+					"json"
+				],
+				"Position": [
+					"json"
+				],
+				"Radius": [
+					"json"
+				],
+				"Shake": [
+					"json"
+				],
+				"Sound": [
+					"json"
+				],
+				"State": [
+					"json"
+				],
+				"Velocity": [
+					"json"
+				],
+				"Visible": [
+					"json"
+				],
+				"Width": [
+					"json"
+				]
+			},
+			"ui": {
+				"Blueprint": [
+					"json"
+				],
+				"Element": [
+					"json"
+				],
+				"Entity": [
+					"json"
+				],
+				"Layer": [
+					"json"
+				],
+				"Menu": [
+					"json"
+				],
+				"Notice": [
+					"json"
+				],
+				"Sprite": [
+					"json"
+				],
+				"State": [
+					"json"
+				],
+				"element": {
+					"Input": [
+						"json"
+					],
+					"Jukebox": [
+						"json"
+					],
+					"Network": [
+						"json"
+					],
+					"Search": [
+						"json"
+					],
+					"Stash": [
+						"json"
+					],
+					"Storage": [
+						"json"
+					],
+					"Viewport": [
+						"json"
+					]
+				},
+				"entity": {
+					"Button": [
+						"json"
+					],
+					"Input": [
+						"json"
+					],
+					"Joystick": [
+						"json"
+					],
+					"Label": [
+						"json"
+					],
+					"List": [
+						"json"
+					],
+					"Select": [
+						"json"
+					],
+					"Slider": [
+						"json"
+					],
+					"Switch": [
+						"json"
+					],
+					"Text": [
+						"json"
+					],
+					"Textarea": [
+						"json"
+					],
+					"Texture": [
+						"json"
+					]
+				},
+				"layer": {
+					"Table": [
+						"json"
+					]
+				},
+				"sprite": {
+					"Background": [
+						"json"
+					],
+					"Emblem": [
+						"json"
+					]
+				}
+			},
+			"verlet": {
+				"Constraint": [
+					"json"
+				],
+				"Entity": [
+					"json"
+				],
+				"Layer": [
+					"json"
+				]
+			}
+		}
+	},
+	"build": {
+		"environments": {
+			"html-nwjs/dist": {
+				"debug": false,
+				"packages": {
+					"lychee": "./lychee.pkg"
+				},
+				"sandbox": false,
+				"tags": {
+					"platform": [
+						"html-nwjs",
+						"html"
+					]
+				},
+				"target": "lychee.DIST",
+				"variant": "library"
+			},
+			"html-webview/dist": {
+				"debug": false,
+				"packages": {
+					"lychee": "./lychee.pkg"
+				},
+				"sandbox": false,
+				"tags": {
+					"platform": [
+						"html-webview",
+						"html"
+					]
+				},
+				"target": "lychee.DIST",
+				"variant": "library"
+			},
+			"html/dist": {
+				"debug": false,
+				"packages": {
+					"lychee": "./lychee.pkg"
+				},
+				"sandbox": false,
+				"tags": {
+					"platform": [
+						"html"
+					]
+				},
+				"target": "lychee.DIST",
+				"variant": "library"
+			},
+			"node-sdl/dist": {
+				"debug": false,
+				"packages": {
+					"lychee": "./lychee.pkg"
+				},
+				"sandbox": false,
+				"tags": {
+					"platform": [
+						"node-sdl",
+						"node"
+					]
+				},
+				"target": "lychee.DIST",
+				"variant": "library"
+			},
+			"node/dist": {
+				"debug": false,
+				"packages": {
+					"lychee": "./lychee.pkg"
+				},
+				"sandbox": false,
+				"tags": {
+					"platform": [
+						"node"
+					]
+				},
+				"target": "lychee.DIST",
+				"variant": "library"
+			}
+		},
+		"files": {
+			"html": {
+				"core": [
+					"js"
+				],
+				"dist": {
+					"index": [
+						"js"
+					]
+				}
+			},
+			"html-nwjs": {
+				"core": [
+					"js"
+				],
+				"dist": {
+					"index": [
+						"js"
+					]
+				}
+			},
+			"html-webview": {
+				"core": [
+					"js"
+				],
+				"dist": {
+					"index": [
+						"js"
+					]
+				}
+			},
+			"node": {
+				"core": [
+					"js"
+				],
+				"dist": {
+					"index": [
+						"js"
+					]
+				}
+			},
+			"node-sdl": {
+				"core": [
+					"js"
+				]
+			}
+		}
+	},
+	"review": {
+		"files": {
+			"core": {
+				"Definition": [
+					"js"
+				]
+			}
+		},
+		"environments": {}
+	},
+	"source": {
+		"environments": {},
+		"tags": {
+			"platform": {
+				"html": "platform/html",
+				"html-nwjs": "platform/html-nwjs",
+				"html-webview": "platform/html-webview",
+				"node": "platform/node",
+				"node-sdl": "platform/node-sdl"
+			}
+		},
+		"files": {
+			"DIST": [
+				"js"
+			],
+			"ai": {
+				"Agent": [
+					"js"
+				],
+				"Genome": [
+					"js"
+				],
+				"Layer": [
+					"js"
+				],
+				"bnn": {
+					"Agent": [
+						"js"
+					],
+					"Brain": [
+						"js"
+					]
+				},
+				"enn": {
+					"Agent": [
+						"js"
+					],
+					"Brain": [
+						"js"
+					]
+				},
+				"neat": {
+					"Agent": [
+						"js"
+					],
+					"Brain": [
+						"js"
+					],
+					"Gene": [
+						"js"
+					],
+					"Genome": [
+						"js"
+					],
+					"Pool": [
+						"js"
+					]
+				}
+			},
+			"app": {
+				"Blueprint": [
+					"js"
+				],
+				"Element": [
+					"js",
+					"label.fnt",
+					"order.fnt"
+				],
+				"Entity": [
+					"js"
+				],
+				"Flow": [
+					"js"
+				],
+				"Jukebox": [
+					"js"
+				],
+				"Layer": [
+					"js"
+				],
+				"Loop": [
+					"js"
+				],
+				"Main": [
+					"js"
+				],
+				"Sprite": [
+					"js"
+				],
+				"State": [
+					"js"
+				],
+				"entity": {
+					"Label": [
+						"fnt",
+						"js"
+					],
+					"Text": [
+						"fnt",
+						"js"
+					]
+				},
+				"layer": {
+					"Table": [
+						"fnt",
+						"js"
+					]
+				},
+				"sprite": {
+					"Background": [
+						"js"
+					],
+					"Emblem": [
+						"js",
+						"png"
+					]
+				}
+			},
+			"codec": {
+				"BENCODE": [
+					"js"
+				],
+				"BITON": [
+					"js"
+				],
+				"DIXY": [
+					"js"
+				],
+				"JSON": [
+					"js"
+				]
+			},
+			"core": {
+				"Asset": [
+					"js"
+				],
+				"Debugger": [
+					"js"
+				],
+				"Definition": [
+					"js"
+				],
+				"Environment": [
+					"js"
+				],
+				"Package": [
+					"js"
+				],
+				"Simulation": [
+					"js"
+				],
+				"Specification": [
+					"js"
+				],
+				"lychee": [
+					"js"
+				]
+			},
+			"crypto": {
+				"CRC32": [
+					"js"
+				],
+				"MD5": [
+					"js"
+				],
+				"MURMUR": [
+					"js"
+				],
+				"SHA1": [
+					"js"
+				]
+			},
+			"data": {
+				"Tree": [
+					"js"
+				],
+				"tree": {
+					"Oct": [
+						"js"
+					],
+					"Quad": [
+						"js"
+					]
+				}
+			},
+			"effect": {
+				"Alpha": [
+					"js"
+				],
+				"Color": [
+					"js"
+				],
+				"Depth": [
+					"js"
+				],
+				"Event": [
+					"js"
+				],
+				"Height": [
+					"js"
+				],
+				"Music": [
+					"js"
+				],
+				"Offset": [
+					"js"
+				],
+				"Position": [
+					"js"
+				],
+				"Radius": [
+					"js"
+				],
+				"Shake": [
+					"js"
+				],
+				"Sound": [
+					"js"
+				],
+				"State": [
+					"js"
+				],
+				"Velocity": [
+					"js"
+				],
+				"Visible": [
+					"js"
+				],
+				"Width": [
+					"js"
+				]
+			},
+			"event": {
+				"Emitter": [
+					"js"
+				],
+				"Flow": [
+					"js"
+				],
+				"Queue": [
+					"js"
+				],
+				"Router": [
+					"js"
+				]
+			},
+			"math": {
+				"Matrix": [
+					"js"
+				],
+				"Mersenne": [
+					"js"
+				],
+				"Quaternion": [
+					"js"
+				],
+				"Vector3": [
+					"js"
+				],
+				"Vector4": [
+					"js"
+				]
+			},
+			"net": {
+				"Client": [
+					"js"
+				],
+				"Remote": [
+					"js"
+				],
+				"Service": [
+					"js"
+				],
+				"Tunnel": [
+					"js"
+				],
+				"client": {
+					"Chat": [
+						"js"
+					],
+					"Debugger": [
+						"js"
+					],
+					"Session": [
+						"js"
+					],
+					"Stash": [
+						"js"
+					],
+					"Storage": [
+						"js"
+					]
+				},
+				"protocol": {
+					"HTTP": [
+						"js"
+					],
+					"WS": [
+						"js"
+					]
+				},
+				"remote": {
+					"Chat": [
+						"js"
+					],
+					"Debugger": [
+						"js"
+					],
+					"Session": [
+						"js"
+					],
+					"Stash": [
+						"js"
+					],
+					"Storage": [
+						"js"
+					]
+				}
+			},
+			"platform": {
+				"html": {
+					"Input": [
+						"js"
+					],
+					"Renderer": [
+						"js"
+					],
+					"Stash": [
+						"js"
+					],
+					"Storage": [
+						"js"
+					],
+					"Viewport": [
+						"js"
+					],
+					"bootstrap": [
+						"js"
+					],
+					"features": [
+						"js"
+					],
+					"net": {
+						"Server": [
+							"js"
+						],
+						"socket": {
+							"HTTP": [
+								"js"
+							],
+							"WS": [
+								"js"
+							]
+						}
+					},
+					"ui": {
+						"entity": {
+							"Download": [
+								"js"
+							],
+							"Helper": [
+								"js",
+								"json",
+								"png"
+							],
+							"Upload": [
+								"js"
+							]
+						}
+					}
+				},
+				"html-nwjs": {
+					"Stash": [
+						"js"
+					],
+					"Storage": [
+						"js"
+					],
+					"bootstrap": [
+						"js"
+					],
+					"features": [
+						"js"
+					],
+					"net": {
+						"Server": [
+							"js"
+						],
+						"socket": {
+							"HTTP": [
+								"js"
+							],
+							"WS": [
+								"js"
+							]
+						}
+					},
+					"ui": {
+						"entity": {
+							"Download": [
+								"js"
+							],
+							"Helper": [
+								"js",
+								"json",
+								"png"
+							]
+						}
+					}
+				},
+				"html-webview": {
+					"bootstrap": [
+						"js"
+					],
+					"features": [
+						"js"
+					]
+				},
+				"node": {
+					"Input": [
+						"js"
+					],
+					"Renderer": [
+						"js"
+					],
+					"Stash": [
+						"js"
+					],
+					"Storage": [
+						"js"
+					],
+					"Viewport": [
+						"js"
+					],
+					"bootstrap": [
+						"js"
+					],
+					"features": [
+						"js"
+					],
+					"net": {
+						"Server": [
+							"js"
+						],
+						"socket": {
+							"HTTP": [
+								"js"
+							],
+							"WS": [
+								"js"
+							]
+						}
+					},
+					"ui": {
+						"entity": {
+							"Download": [
+								"js"
+							],
+							"Helper": [
+								"js",
+								"json",
+								"png"
+							],
+							"Upload": [
+								"js"
+							]
+						}
+					}
+				},
+				"node-sdl": {
+					"bootstrap": [
+						"js"
+					],
+					"features": [
+						"js"
+					]
+				}
+			},
+			"policy": {
+				"Alpha": [
+					"js"
+				],
+				"Color": [
+					"js"
+				],
+				"Depth": [
+					"js"
+				],
+				"Height": [
+					"js"
+				],
+				"Music": [
+					"js"
+				],
+				"Offset": [
+					"js"
+				],
+				"Position": [
+					"js"
+				],
+				"Radius": [
+					"js"
+				],
+				"Shake": [
+					"js"
+				],
+				"Sound": [
+					"js"
+				],
+				"State": [
+					"js"
+				],
+				"Velocity": [
+					"js"
+				],
+				"Visible": [
+					"js"
+				],
+				"Width": [
+					"js"
+				]
+			},
+			"ui": {
+				"Blueprint": [
+					"js"
+				],
+				"Element": [
+					"js",
+					"label.fnt",
+					"order.fnt"
+				],
+				"Entity": [
+					"js"
+				],
+				"Layer": [
+					"js"
+				],
+				"Menu": [
+					"fnt",
+					"js"
+				],
+				"Notice": [
+					"fnt",
+					"js"
+				],
+				"Sprite": [
+					"js"
+				],
+				"State": [
+					"js",
+					"json"
+				],
+				"element": {
+					"Input": [
+						"js"
+					],
+					"Jukebox": [
+						"js"
+					],
+					"Network": [
+						"js"
+					],
+					"Search": [
+						"js"
+					],
+					"Stash": [
+						"js"
+					],
+					"Storage": [
+						"js"
+					],
+					"Viewport": [
+						"js"
+					]
+				},
+				"entity": {
+					"Button": [
+						"fnt",
+						"js"
+					],
+					"Input": [
+						"fnt",
+						"js"
+					],
+					"Joystick": [
+						"js"
+					],
+					"Label": [
+						"fnt",
+						"js"
+					],
+					"List": [
+						"fnt",
+						"js"
+					],
+					"Select": [
+						"fnt",
+						"js"
+					],
+					"Slider": [
+						"fnt",
+						"js"
+					],
+					"Switch": [
+						"fnt",
+						"js"
+					],
+					"Text": [
+						"fnt",
+						"js"
+					],
+					"Textarea": [
+						"fnt",
+						"js"
+					],
+					"Texture": [
+						"js"
+					]
+				},
+				"layer": {
+					"Table": [
+						"fnt",
+						"js"
+					]
+				},
+				"sprite": {
+					"Background": [
+						"js"
+					],
+					"Emblem": [
+						"js",
+						"png"
+					]
+				}
+			},
+			"verlet": {
+				"Constraint": [
+					"js"
+				],
+				"Entity": [
+					"js"
+				],
+				"Layer": [
+					"js"
+				]
+			}
+		}
+	}
 }
