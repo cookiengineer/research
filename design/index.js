@@ -253,7 +253,7 @@
 			let result = Array.from(this.element.querySelectorAll(query));
 			if (result.length > 0) {
 
-				result.forEach(element => {
+				result.forEach(function(element) {
 					filtered.push(new _Wrapper(element));
 				});
 
@@ -281,8 +281,6 @@
 	});
 
 
-
-	let _id = 0;
 
 	const $ = {
 

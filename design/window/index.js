@@ -119,7 +119,7 @@
 	 * OS GUI INTEGRATION
 	 */
 
-	global.addEventListener('load', (e) => {
+	global.addEventListener('load', function() {
 
 		if (typeof require === 'function') {
 
@@ -134,10 +134,15 @@
 
 			if (buttons.minimize !== null) {
 
-				win.on('minimize', (e) => (state = 'minimize'));
-				win.on('restore',  (e) => (state = 'normal'));
+				win.on('minimize', function() {
+					state = 'minimize';
+				});
 
-				buttons.minimize.onclick = (e) => {
+				win.on('restore', function() {
+					state = 'normal';
+				});
+
+				buttons.minimize.onclick = function() {
 					win.minimize();
 				};
 
@@ -145,9 +150,11 @@
 
 			if (buttons.maximize !== null) {
 
-				win.on('maximize', (e) => (state = 'maximize'));
+				win.on('maximize', function() {
+					state = 'maximize';
+				});
 
-				buttons.maximize.onclick = (e) => {
+				buttons.maximize.onclick = function() {
 
 					if (state !== 'maximize') {
 						win.maximize();
@@ -163,7 +170,7 @@
 
 			if (buttons.close !== null) {
 
-				buttons.close.onclick = (e) => {
+				buttons.close.onclick = function() {
 					win.close();
 				};
 
@@ -175,8 +182,13 @@
 		let header = document.querySelector('header#wm');
 		if (header !== null) {
 
-			global.addEventListener('focus', (e) => (header.className = 'active'));
-			global.addEventListener('blur',  (e) => (header.className = 'inactive'));
+			global.addEventListener('focus', function() {
+				header.className = 'active';
+			});
+
+			global.addEventListener('blur', function() {
+				header.className = 'inactive';
+			});
 
 		}
 
@@ -218,6 +230,8 @@
 				let main = global.MAIN;
 				if (main.state !== main.__states.settings) {
 					main.changeState('settings', null, true);
+				} else {
+					main.changeState('dialog', null, true);
 				}
 
 				_set_active_tab(null);

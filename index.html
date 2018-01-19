@@ -14,13 +14,10 @@
 	<script src="./design/content/index.js"></script>
 
 	<!-- BOOTSTRAP -->
-	<script src="./bower_components/jquery/dist/jquery.js"></script>
-
 	<script src="./libraries/lychee/build/html-nwjs/core.js"></script>
 	<script src="./libraries/lychee/build/html-nwjs/dist/index.js"></script>
 	<script src="./libraries/polyfillr/html/ecmascript.es6.js"></script>
 	<script src="./libraries/polyfillr/html/components.es6.js"></script>
-
 
 	<!-- APP DESIGN -->
 	<link rel="stylesheet" href="./design/index.css">
@@ -44,42 +41,76 @@
 			</div>
 		</div>
 	</header>
-
 	<main><!-- APP STATES --></main>
-
 	<script>
-
 		(function(lychee, global) {
 
 			lychee.inject(lychee.ENVIRONMENTS['/libraries/lychee/dist']);
 
 
-			if (typeof process !== 'undefined') {
+			setTimeout(function() {
+
+				let ui = new Stuff('./design/index.js');
+
+				ui.onload = function() {
+
+					lychee.pkg('build', 'html-nwjs/main', function(environment, profile) {
+
+						if (environment !== null) {
+
+							lychee.init(environment, {
+								debug:   false,
+								sandbox: false
+							});
+
+						}
+
+					});
+
+				};
+
+				ui.load();
+
+			}, 500);
+
+
+			if (typeof nw !== 'undefined') {
+
 				lychee.ROOT.lychee  = '';
 				lychee.ROOT.project = '';
-			}
 
 
-			let ui = new Stuff('./design/index.js');
+				setTimeout(function() {
 
-			ui.onload = function() {
+					let screens = nw.Screen.screens;
+					if (screens.length > 1) {
 
-				lychee.pkg('build', 'html-nwjs/main', function(environment, profile) {
+						let window = nw.Window.get();
+						let min_x  = Infinity;
+						let screen = nw.Screen.screens.map(function(obj) {
 
-					if (environment !== null) {
+							min_x = Math.min(obj.work_area.x, min_x);
 
-						lychee.init(environment, {
-							debug:   false,
-							sandbox: false
-						});
+							return {
+								x: obj.work_area.x,
+								y: obj.work_area.y,
+								w: obj.work_area.width,
+								h: obj.work_area.height
+							};
+
+						}).find(function(obj) {
+							return obj.x === min_x;
+						}) || null;
+
+						if (screen !== null && window !== null) {
+							window.moveTo(screen.x, screen.y);
+						}
 
 					}
 
-				});
+				}, 2500);
 
-			};
-
-			ui.load();
+			}
 
 		})(lychee, typeof global !== 'undefined' ? global : this);
 	</script>

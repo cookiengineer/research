@@ -41,9 +41,6 @@
 				"Help": [
 					"json"
 				],
-				"Search": [
-					"json"
-				],
 				"Settings": [
 					"json"
 				]
@@ -117,11 +114,6 @@
 					"js"
 				],
 				"Help": [
-					"html",
-					"js",
-					"json"
-				],
-				"Search": [
 					"html",
 					"js",
 					"json"

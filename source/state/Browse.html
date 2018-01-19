@@ -42,12 +42,16 @@
 
 		component.addEventListener('create', function(e) {
 
-			let element = e.target;
-			let input   = element.querySelector('input.command');
+			e.target.className = 'inactive';
 
-			input.onchange = function() {
-				this.fireEventListener('command', input.value);
-			}.bind(this);
+			let input = e.target.querySelector('input.command');
+			if (input !== null) {
+
+				input.onchange = function() {
+					this.fireEventListener('command', input.value);
+				}.bind(this);
+
+			}
 
 		}, true);
 

@@ -1,11 +1,12 @@
 
 button,
 label.button {
+	box-sizing: border-box;
 	display: inline-block;
 	margin: 0px;
 	padding: 0px 8px;
 	height: 28px;
-	line-height: 28px;
+	line-height: 26px;
 	vertical-align: middle;
 	border: 1px solid #2b2e39;
 	border-radius: 4px;

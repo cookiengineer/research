@@ -72,6 +72,10 @@
 			padding: 0px 0px 0px 32px;
 		}
 
+		:host fieldset p > label.button {
+			margin: 0px 4px 0px 0px;
+		}
+
 		:host fieldset ul {
 			display: block;
 			position: static;
@@ -256,6 +260,9 @@
 	if (component !== null) {
 
 		component.addEventListener('create', function(e) {
+
+			e.target.className = 'inactive';
+
 
 			let element  = e.target;
 			let elements = _get_elements(element);

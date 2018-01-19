@@ -22,6 +22,14 @@
 	let component = Polyfillr.define('state-help', template);
 	if (component !== null) {
 
+		component.addEventListener('create', function(e) {
+			e.target.className = 'inactive';
+		}, true);
+
+		component.addEventListener('render', function(e) {
+			// TODO: Implement render event
+		}, true);
+
 		component.addEventListener('destroy', function(e) {
 
 			let element = e.target;
