@@ -64,8 +64,9 @@
 	"errors": [],
 	"result": {
 		"constructor": {
-			"body": "function(data) {\n\n\t\tlet settings = Object.assign({\n\t\t\tclient:   null,\n\t\t\tserver:   null,\n\n\t\t\tinput:    null,\n\t\t\tjukebox:  null,\n\t\t\trenderer: null,\n\t\t\tviewport: null,\n\n\t\t\t// Custom Settings\n\t\t\ttethering:   false,\n\t\t\tstealth:     true,\n\t\t\tconnections: 8,\n\t\t\tcache:       '~/Research'\n\n\t\t}, data);\n\n\n\t\tthis.bot     = new _Bot();\n\t\tthis.scraper = new _Scraper(this);\n\t\tthis.plugins = {};\n\n\n\t\t_Main.call(this, settings);\n\n\n\n\t\t/*\n\t\t * INITIALIZATION\n\t\t */\n\n\t\tthis.bind('load', function(oncomplete) {\n\n\t\t\tthis.settings.appserver = this.settings.server;\n\t\t\tthis.settings.server    = null;\n\n\t\t\tthis.settings.appclient = this.settings.client;\n\t\t\tthis.settings.client    = null;\n\n\n\t\t\toncomplete(true);\n\n\t\t}, this, true);\n\n\t\tthis.bind('init', function() {\n\n\t\t\t// let appserver = this.settings.appserver || null;\n\t\t\t// if (appserver !== null) {\n\t\t\t// \tthis.server = new _app.net.Server(appserver);\n\t\t\t// }\n\n\t\t\t// let appclient = this.settings.appclient || null;\n\t\t\t// if (appclient !== null) {\n\t\t\t// \tthis.client = new _app.net.Client(appclient);\n\t\t\t// }\n\n\t\t\tlet loop = this.loop;\n\t\t\tif (loop !== null) {\n\t\t\t\tloop.unbind('render');\n\t\t\t\tloop.unbind('update');\n\t\t\t}\n\n\n\t\t\tthis.setPlugin('reddit', new _app.plugin.Reddit(this));\n\n\n\t\t\tthis.setState('dialog',   new _app.state.Dialog(this));\n\t\t\tthis.setState('browse',   new _app.state.Browse(this));\n\t\t\tthis.setState('help',     new _app.state.Help(this));\n\t\t\t// this.setState('search',   new _app.state.Search(this));\n\t\t\tthis.setState('settings', new _app.state.Settings(this));\n\n\t\t\tthis.changeState('dialog');\n\n\t\t}, this, true);\n\n\n\t\tsettings = null;\n\n\t}",
-			"hash": "3b55fbac",
+			"type": "function",
+			"body": "function(data) {\n\n\t\tlet states = Object.assign({\n\t\t\tclient:   null,\n\t\t\tserver:   null,\n\n\t\t\tinput:    null,\n\t\t\tjukebox:  null,\n\t\t\trenderer: null,\n\t\t\tviewport: null,\n\n\t\t\t// Custom Settings\n\t\t\ttethering:   false,\n\t\t\tstealth:     true,\n\t\t\tconnections: 8,\n\t\t\tcache:       '~/Research'\n\n\t\t}, data);\n\n\n\t\tthis.bot     = new _Bot();\n\t\tthis.scraper = new _Scraper(this);\n\t\tthis.plugins = {};\n\n\n\t\t_Main.call(this, states);\n\n\t\tstates = null;\n\n\n\n\t\t/*\n\t\t * INITIALIZATION\n\t\t */\n\n\t\tthis.bind('load', function(oncomplete) {\n\n\t\t\tthis.settings.appserver = this.settings.server;\n\t\t\tthis.settings.server    = null;\n\n\t\t\tthis.settings.appclient = this.settings.client;\n\t\t\tthis.settings.client    = null;\n\n\n\t\t\toncomplete(true);\n\n\t\t}, this, true);\n\n\t\tthis.bind('init', function() {\n\n\t\t\t// let appserver = this.settings.appserver || null;\n\t\t\t// if (appserver !== null) {\n\t\t\t// \tthis.server = new _app.net.Server(appserver);\n\t\t\t// }\n\n\t\t\t// let appclient = this.settings.appclient || null;\n\t\t\t// if (appclient !== null) {\n\t\t\t// \tthis.client = new _app.net.Client(appclient);\n\t\t\t// }\n\n\t\t\tlet loop = this.loop;\n\t\t\tif (loop !== null) {\n\t\t\t\tloop.unbind('render');\n\t\t\t\tloop.unbind('update');\n\t\t\t}\n\n\n\t\t\tthis.setPlugin('reddit', new _app.plugin.Reddit(this));\n\n\n\t\t\tthis.setState('dialog',   new _app.state.Dialog(this));\n\t\t\tthis.setState('browse',   new _app.state.Browse(this));\n\t\t\tthis.setState('help',     new _app.state.Help(this));\n\t\t\tthis.setState('settings', new _app.state.Settings(this));\n\n\t\t\tthis.changeState('dialog');\n\n\t\t}, this, true);\n\n\t}",
+			"hash": "b707932e",
 			"parameters": [
 				{
 					"chunk": null,
@@ -74,7 +75,7 @@
 				}
 			]
 		},
-		"settings": {},
+		"states": {},
 		"properties": {
 			"bot": {
 				"chunk": "this.bot     = new _Bot();",
@@ -103,6 +104,7 @@
 		"events": {},
 		"methods": {
 			"deserialize": {
+				"type": "function",
 				"body": "function(blob) {}",
 				"chunk": "function(blob) {",
 				"hash": "cf6d9c5f",
@@ -120,8 +122,8 @@
 				]
 			},
 			"serialize": {
-				"body": "function() {\n\n\t\t\tlet data = _Main.prototype.serialize.call(this);\n\t\t\tdata['constructor'] = 'app.Main';\n\n\n\t\t\tlet settings = data['arguments'][0] || {};\n\t\t\tlet blob     = data['blob'] || {};\n\n\n\t\t\tif (this.settings.appclient !== null) settings.client = this.defaults.client;\n\t\t\tif (this.settings.appserver !== null) settings.server = this.defaults.server;\n\n\n\t\t\tif (this.bot !== null)     blob.bot     = lychee.serialize(this.bot);\n\t\t\tif (this.scraper !== null) blob.scraper = lychee.serialize(this.scraper);\n\n\n\t\t\tdata['arguments'][0] = settings;\n\t\t\tdata['blob']         = Object.keys(blob).length > 0 ? blob : null;\n\n\n\t\t\treturn data;\n\n\t\t}",
-				"chunk": "\t\tserialize: function() {",
+				"chunk": "function() {\n\n\t\t\tlet data = _Main.prototype.serialize.call(this);\n\t\t\tdata['constructor'] = 'app.Main';\n\n\n\t\t\tlet settings = data['arguments'][0] || {};\n\t\t\tlet blob     = data['blob'] || {};\n\n\n\t\t\tif (this.settings.appclient !== null) settings.client = this.defaults.client;\n\t\t\tif (this.settings.appserver !== null) settings.server = this.defaults.server;\n\n\n\t\t\tif (this.bot !== null)     blob.bot     = lychee.serialize(this.bot);\n\t\t\tif (this.scraper !== null) blob.scraper = lychee.serialize(this.scraper);\n\n\n\t\t\tdata['arguments'][0] = settings;\n\t\t\tdata['blob']         = Object.keys(blob).length > 0 ? blob : null;\n\n\n\t\t\treturn data;\n\n\t\t}",
+				"type": "function",
 				"hash": "5c52f261",
 				"parameters": [],
 				"values": [
@@ -133,8 +135,8 @@
 				]
 			},
 			"command": {
-				"body": "function(sentence) {\n\n\t\t\tsentence = typeof sentence === 'string' ? sentence : null;\n\n\n\t\t\tif (sentence !== null) {\n\n\t\t\t\tlet bot = this.bot;\n\t\t\t\tif (bot !== null) {\n\n\t\t\t\t\tlet suggestions = bot.command(sentence.split(' ').map(function(word) {\n\t\t\t\t\t\treturn word.replace(/(\\?|!|\\.)/g, '').trim();\n\t\t\t\t\t}).filter(function(word) {\n\t\t\t\t\t\treturn word !== '';\n\t\t\t\t\t}).join(' '));\n\n\t\t\t\t\tif (suggestions !== null) {\n\n\t\t\t\t\t\tlet result = false;\n\n\t\t\t\t\t\tfor (let s = 0, sl = suggestions.length; s < sl; s++) {\n\n\t\t\t\t\t\t\tlet suggestion  = suggestions[s];\n\t\t\t\t\t\t\tlet intent      = suggestion.intent;\n\n\t\t\t\t\t\t\tlet action = intent.action || null;\n\t\t\t\t\t\t\tif (action !== null) {\n\n\t\t\t\t\t\t\t\tlet state = this.__states[action] || null;\n\t\t\t\t\t\t\t\tif (state !== null) {\n\n\t\t\t\t\t\t\t\t\tif (state !== this.state) {\n\n\t\t\t\t\t\t\t\t\t\tresult = this.changeState(action, intent);\n\n\t\t\t\t\t\t\t\t\t\tbreak;\n\n\t\t\t\t\t\t\t\t\t} else if (state === this.state) {\n\n\t\t\t\t\t\t\t\t\t\tresult = this.state.update(intent);\n\n\t\t\t\t\t\t\t\t\t\tbreak;\n\n\t\t\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t}\n\n\t\t\t\t\t\treturn result;\n\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\t\t\t}\n\n\n\t\t\treturn false;\n\n\t\t}",
-				"chunk": "\t\tcommand: function(sentence) {",
+				"chunk": "function(sentence) {\n\n\t\t\tsentence = typeof sentence === 'string' ? sentence : null;\n\n\n\t\t\tif (sentence !== null) {\n\n\t\t\t\tlet bot = this.bot;\n\t\t\t\tif (bot !== null) {\n\n\t\t\t\t\tlet suggestions = bot.command(sentence.split(' ').map(function(word) {\n\t\t\t\t\t\treturn word.replace(/(\\?|!|\\.)/g, '').trim();\n\t\t\t\t\t}).filter(function(word) {\n\t\t\t\t\t\treturn word !== '';\n\t\t\t\t\t}).join(' '));\n\n\t\t\t\t\tif (suggestions !== null) {\n\n\t\t\t\t\t\tlet result = false;\n\n\t\t\t\t\t\tfor (let s = 0, sl = suggestions.length; s < sl; s++) {\n\n\t\t\t\t\t\t\tlet suggestion  = suggestions[s];\n\t\t\t\t\t\t\tlet intent      = suggestion.intent;\n\n\t\t\t\t\t\t\tlet action = intent.action || null;\n\t\t\t\t\t\t\tif (action !== null) {\n\n\t\t\t\t\t\t\t\tlet state = this.__states[action] || null;\n\t\t\t\t\t\t\t\tif (state !== null) {\n\n\t\t\t\t\t\t\t\t\tif (state !== this.state) {\n\n\t\t\t\t\t\t\t\t\t\tresult = this.changeState(action, intent);\n\n\t\t\t\t\t\t\t\t\t\tbreak;\n\n\t\t\t\t\t\t\t\t\t} else if (state === this.state) {\n\n\t\t\t\t\t\t\t\t\t\tresult = this.state.update(intent);\n\n\t\t\t\t\t\t\t\t\t\tbreak;\n\n\t\t\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t}\n\n\t\t\t\t\t\treturn result;\n\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\t\t\t}\n\n\n\t\t\treturn false;\n\n\t\t}",
+				"type": "function",
 				"hash": "3d8a609d",
 				"parameters": [
 					{
@@ -158,8 +160,8 @@
 				]
 			},
 			"changeState": {
-				"body": "function(id, data, silent) {\n\n\t\t\tid     = typeof id === 'string' ? id   : null;\n\t\t\tdata   = data !== undefined     ? data : null;\n\t\t\tsilent = silent === true;\n\n\n\t\t\tif (id !== null) {\n\n\t\t\t\tlet result = _Main.prototype.changeState.call(this, id, data);\n\t\t\t\tif (result === true && silent === false) {\n\n\t\t\t\t\tif (_WM !== null) {\n\t\t\t\t\t\t_WM.changeState(id, data);\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\t\t\t\treturn result;\n\n\t\t\t}\n\n\n\t\t\treturn false;\n\n\t\t}",
-				"chunk": "\t\tchangeState: function(id, data, silent) {",
+				"chunk": "function(id, data, silent) {\n\n\t\t\tid     = typeof id === 'string' ? id   : null;\n\t\t\tdata   = data !== undefined     ? data : null;\n\t\t\tsilent = silent === true;\n\n\n\t\t\tif (id !== null) {\n\n\t\t\t\tlet result = _Main.prototype.changeState.call(this, id, data);\n\t\t\t\tif (result === true && silent === false) {\n\n\t\t\t\t\tif (_WM !== null) {\n\t\t\t\t\t\t_WM.changeState(id, data);\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\t\t\t\treturn result;\n\n\t\t\t}\n\n\n\t\t\treturn false;\n\n\t\t}",
+				"type": "function",
 				"hash": "23a53bdf",
 				"parameters": [
 					{
@@ -195,8 +197,8 @@
 				]
 			},
 			"findPlugin": {
-				"body": "function(url) {\n\n\t\t\turl = typeof url === 'string' ? url : null;\n\n\n\t\t\tif (url !== null) {\n\n\t\t\t\tlet found = null;\n\n\t\t\t\tfor (let p in this.plugins) {\n\n\t\t\t\t\tif (p === 'generic') continue;\n\n\t\t\t\t\tlet plugin = this.plugins[p];\n\t\t\t\t\tif (plugin.can(url) === true) {\n\t\t\t\t\t\tfound = p;\n\t\t\t\t\t\tbreak;\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\t\t\t\treturn found;\n\n\t\t\t}\n\n\n\t\t\treturn null;\n\n\t\t}",
-				"chunk": "\t\tfindPlugin: function(url) {",
+				"chunk": "function(url) {\n\n\t\t\turl = typeof url === 'string' ? url : null;\n\n\n\t\t\tif (url !== null) {\n\n\t\t\t\tlet found = null;\n\n\t\t\t\tfor (let p in this.plugins) {\n\n\t\t\t\t\tif (p === 'generic') continue;\n\n\t\t\t\t\tlet plugin = this.plugins[p];\n\t\t\t\t\tif (plugin.can(url) === true) {\n\t\t\t\t\t\tfound = p;\n\t\t\t\t\t\tbreak;\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\t\t\t\treturn found;\n\n\t\t\t}\n\n\n\t\t\treturn null;\n\n\t\t}",
+				"type": "function",
 				"hash": "c39e9541",
 				"parameters": [
 					{
@@ -215,8 +217,8 @@
 				]
 			},
 			"getPlugin": {
-				"body": "function(id) {\n\n\t\t\tid = typeof id === 'string' ? id : null;\n\n\n\t\t\tif (id !== null && this.plugins[id] !== undefined) {\n\n\t\t\t\treturn this.plugins[id];\n\n\t\t\t}\n\n\n\t\t\treturn null;\n\n\t\t}",
-				"chunk": "\t\tgetPlugin: function(id) {",
+				"chunk": "function(id) {\n\n\t\t\tid = typeof id === 'string' ? id : null;\n\n\n\t\t\tif (id !== null && this.plugins[id] !== undefined) {\n\n\t\t\t\treturn this.plugins[id];\n\n\t\t\t}\n\n\n\t\t\treturn null;\n\n\t\t}",
+				"type": "function",
 				"hash": "36d652b0",
 				"parameters": [
 					{
@@ -243,8 +245,8 @@
 				]
 			},
 			"setPlugin": {
-				"body": "function(id, plugin) {\n\n\t\t\tid     = typeof id === 'string'   ? id     : null;\n\t\t\tplugin = plugin instanceof Object ? plugin : null;\n\n\n\t\t\tif (id !== null) {\n\n\t\t\t\tthis.plugins[id] = plugin;\n\n\t\t\t\treturn true;\n\n\t\t\t}\n\n\n\t\t\treturn false;\n\n\t\t}",
-				"chunk": "\t\tsetPlugin: function(id, plugin) {",
+				"chunk": "function(id, plugin) {\n\n\t\t\tid     = typeof id === 'string'   ? id     : null;\n\t\t\tplugin = plugin instanceof Object ? plugin : null;\n\n\n\t\t\tif (id !== null) {\n\n\t\t\t\tthis.plugins[id] = plugin;\n\n\t\t\t\treturn true;\n\n\t\t\t}\n\n\n\t\t\treturn false;\n\n\t\t}",
+				"type": "function",
 				"hash": "30c9ffd8",
 				"parameters": [
 					{

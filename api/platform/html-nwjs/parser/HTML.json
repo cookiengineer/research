@@ -31,7 +31,8 @@
 			"type": "undefined"
 		},
 		"_encode": {
-			"body": "function(tokens) {\n\n\t\tlet source = '';\n\n\n\t\treturn source;\n\n\t}",
+			"chunk": "function(tokens) {\n\n\t\tlet source = '';\n\n\n\t\treturn source;\n\n\t}",
+			"type": "function",
 			"hash": "371d6e66",
 			"parameters": [
 				{
@@ -49,7 +50,8 @@
 			]
 		},
 		"_decode": {
-			"body": "function(source) {\n\n\t\tlet tokens = [];\n\t\tlet token  = null;\n\t\tlet i0     = source.indexOf('<');\n\n\t\twhile (i0 !== -1) {\n\n\t\t\tlet i1 = source.indexOf('>', i0);\n\t\t\tif (i1 !== -1) {\n\n\t\t\t\tlet tmp = source.substr(i0, i1 - i0);\n\t\t\t\tif (tmp.startsWith('/')) {\n\t\t\t\t\t// TODO: Close token if token.children[...length -1] is same type!\n\t\t\t\t} else {\n\n\t\t\t\t\ttoken = {\n\t\t\t\t\t\ttype: 'TODO',\n\t\t\t\t\t\tcontent: '' || [], // this can be string or children\n\t\t\t\t\t\tid:    'whatever',\n\t\t\t\t\t\tclass: 'whatever'\n\t\t\t\t\t};\n\n\t\t\t\t\tlet attributes = tmp.split(' '); // or so?\n\t\t\t\t\t// TODO: Parse attributes\n\t\t\t\t\t// TODO: Parse <tmp>CONTENT</tmp>\n\n\t\t\t\t}\n\n\t\t\t} else {\n\t\t\t\tbreak;\n\t\t\t}\n\n\t\t\ti0 = source.indexOf('<', i1);\n\n\t\t}\n\n\n\t\treturn tokens;\n\n\t}",
+			"chunk": "function(source) {\n\n\t\tlet tokens = [];\n\t\tlet token  = null;\n\t\tlet i0     = source.indexOf('<');\n\n\t\twhile (i0 !== -1) {\n\n\t\t\tlet i1 = source.indexOf('>', i0);\n\t\t\tif (i1 !== -1) {\n\n\t\t\t\tlet tmp = source.substr(i0, i1 - i0);\n\t\t\t\tif (tmp.startsWith('/')) {\n\t\t\t\t\t// TODO: Close token if token.children[...length -1] is same type!\n\t\t\t\t} else {\n\n\t\t\t\t\ttoken = {\n\t\t\t\t\t\ttype: 'TODO',\n\t\t\t\t\t\tcontent: '' || [], // this can be string or children\n\t\t\t\t\t\tid:    'whatever',\n\t\t\t\t\t\tclass: 'whatever'\n\t\t\t\t\t};\n\n\t\t\t\t\tlet attributes = tmp.split(' '); // or so?\n\t\t\t\t\t// TODO: Parse attributes\n\t\t\t\t\t// TODO: Parse <tmp>CONTENT</tmp>\n\n\t\t\t\t}\n\n\t\t\t} else {\n\t\t\t\tbreak;\n\t\t\t}\n\n\t\t\ti0 = source.indexOf('<', i1);\n\n\t\t}\n\n\n\t\treturn tokens;\n\n\t}",
+			"type": "function",
 			"hash": "b08eb81b",
 			"parameters": [
 				{
@@ -73,18 +75,19 @@
 			"rule": "unguessable-return-value",
 			"reference": "encode",
 			"message": "Unguessable return value \"_encode(data)\" for method \"encode()\".",
-			"line": 112,
-			"column": 1
+			"line": 0,
+			"column": 0
 		}
 	],
 	"result": {
 		"constructor": {},
-		"settings": {},
+		"states": {},
 		"properties": {},
 		"enums": {},
 		"events": {},
 		"methods": {
 			"deserialize": {
+				"type": "function",
 				"body": "function(blob) {}",
 				"chunk": "function(blob) {",
 				"hash": "cf6d9c5f",
@@ -102,8 +105,8 @@
 				]
 			},
 			"serialize": {
-				"body": "function() {\n\n\t\t\treturn {\n\t\t\t\t'reference': 'app.parser.HTML',\n\t\t\t\t'blob':      null\n\t\t\t};\n\n\t\t}",
-				"chunk": "\t\tserialize: function() {",
+				"chunk": "function() {\n\n\t\t\treturn {\n\t\t\t\t'reference': 'app.parser.HTML',\n\t\t\t\t'blob':      null\n\t\t\t};\n\n\t\t}",
+				"type": "function",
 				"hash": "5e5c3d81",
 				"parameters": [],
 				"values": [
@@ -118,8 +121,8 @@
 				]
 			},
 			"encode": {
-				"body": "function(data) {\n\n\t\t\tdata = data instanceof Object ? data : null;\n\n\n\t\t\tif (data !== null) {\n\n\t\t\t\tlet stream = _encode(data);\n\t\t\t\tif (stream !== null) {\n\t\t\t\t\treturn stream;\n\t\t\t\t}\n\n\t\t\t}\n\n\n\t\t\treturn null;\n\n\t\t}",
-				"chunk": "\t\tencode: function(data) {",
+				"chunk": "function(data) {\n\n\t\t\tdata = data instanceof Object ? data : null;\n\n\n\t\t\tif (data !== null) {\n\n\t\t\t\tlet stream = _encode(data);\n\t\t\t\tif (stream !== null) {\n\t\t\t\t\treturn stream;\n\t\t\t\t}\n\n\t\t\t}\n\n\n\t\t\treturn null;\n\n\t\t}",
+				"type": "function",
 				"hash": "fa5066a0",
 				"parameters": [
 					{
@@ -142,8 +145,8 @@
 				]
 			},
 			"decode": {
-				"body": "function(data) {\n\n\t\t\tdata = data instanceof Buffer ? data.toString('utf8') : (data).toString();\n\n\n\t\t\tif (data.length > 0) {\n\n\t\t\t\tlet object = _decode(data);\n\t\t\t\tif (object !== undefined) {\n\t\t\t\t\treturn object;\n\t\t\t\t}\n\n\t\t\t}\n\n\n\t\t\treturn null;\n\n\t\t}",
-				"chunk": "\t\tdecode: function(data) {",
+				"chunk": "function(data) {\n\n\t\t\tdata = data instanceof Buffer ? data.toString('utf8') : (data).toString();\n\n\n\t\t\tif (data.length > 0) {\n\n\t\t\t\tlet object = _decode(data);\n\t\t\t\tif (object !== undefined) {\n\t\t\t\t\treturn object;\n\t\t\t\t}\n\n\t\t\t}\n\n\n\t\t\treturn null;\n\n\t\t}",
+				"type": "function",
 				"hash": "11b724a3",
 				"parameters": [
 					{

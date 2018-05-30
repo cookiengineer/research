@@ -54,6 +54,7 @@
 	],
 	"result": {
 		"constructor": {
+			"type": "function",
 			"body": "function(main) {\n\n\t\tthis.bot     = main.bot || null;\n\t\tthis.element = _COMPONENT.create();\n\n\n\t\t_main.appendChild(this.element);\n\t\t_State.call(this, main);\n\n\t\tthis.deserialize(_BLOB);\n\n\t}",
 			"hash": "0ad0cd6f",
 			"parameters": [
@@ -64,7 +65,7 @@
 				}
 			]
 		},
-		"settings": {},
+		"states": {},
 		"properties": {
 			"bot": {
 				"chunk": "this.bot     = main.bot || null;",
@@ -86,21 +87,21 @@
 		"events": {},
 		"methods": {
 			"serialize": {
-				"body": "function() {\n\n\t\t\tlet data = _State.prototype.serialize.call(this);\n\t\t\tdata['constructor'] = 'app.state.Help';\n\n\n\t\t\treturn data;\n\n\t\t}",
-				"chunk": "\t\tserialize: function() {",
+				"chunk": "function() {\n\n\t\t\tlet data = _State.prototype.serialize.call(this);\n\t\t\tdata['constructor'] = 'app.state.Help';\n\n\n\t\t\treturn data;\n\n\t\t}",
+				"type": "function",
 				"hash": "4b38ab29",
 				"parameters": [],
 				"values": [
 					{
-						"chunk": "{ 'constructor': 'lychee.app.State',\n\t\t\t\t'arguments':   [ settings ],\n\t\t\t\t'blob':        Object.keys(blob).length > 0 ? blob : null\n\t\t\t}",
+						"chunk": "{ 'constructor': 'lychee.app.State',\n\t\t\t\t'arguments':   [ main ],\n\t\t\t\t'blob':        Object.keys(blob).length > 0 ? blob : null\n\t\t\t}",
 						"type": "Object",
 						"value": {}
 					}
 				]
 			},
 			"deserialize": {
-				"body": "function(blob) {\n\n\t\t\tif (blob.intents instanceof Array) {\n\n\t\t\t\tlet bot = this.bot || null;\n\t\t\t\tif (bot !== null) {\n\n\t\t\t\t\tfor (let i = 0, il = blob.intents.length; i < il; i++) {\n\t\t\t\t\t\tbot.addIntent(new _Intent(blob.intents[i]));\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\t\t\t}\n\n\t\t}",
-				"chunk": "\t\tdeserialize: function(blob) {",
+				"chunk": "function(blob) {\n\n\t\t\tif (blob.intents instanceof Array) {\n\n\t\t\t\tlet bot = this.bot || null;\n\t\t\t\tif (bot !== null) {\n\n\t\t\t\t\tfor (let i = 0, il = blob.intents.length; i < il; i++) {\n\t\t\t\t\t\tbot.addIntent(new _Intent(blob.intents[i]));\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\t\t\t}\n\n\t\t}",
+				"type": "function",
 				"hash": "86434b1c",
 				"parameters": [
 					{
@@ -116,8 +117,8 @@
 				]
 			},
 			"enter": {
-				"body": "function(oncomplete, intent) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\t\t\tintent     = intent instanceof _Intent      ? intent     : null;\n\n\n\t\t\tthis.element.fireEventListener('enter', null);\n\n\n\t\t\treturn _State.prototype.enter.call(this, oncomplete);\n\n\t\t}",
-				"chunk": "\t\tenter: function(oncomplete, intent) {",
+				"chunk": "function(oncomplete, intent) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\t\t\tintent     = intent instanceof _Intent      ? intent     : null;\n\n\n\t\t\tthis.element.fireEventListener('enter', null);\n\n\n\t\t\treturn _State.prototype.enter.call(this, oncomplete);\n\n\t\t}",
+				"type": "function",
 				"hash": "4c2f3efd",
 				"parameters": [
 					{
@@ -142,8 +143,8 @@
 				]
 			},
 			"leave": {
-				"body": "function(oncomplete) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\n\n\t\t\tthis.element.fireEventListener('leave', null);\n\n\n\t\t\treturn _State.prototype.leave.call(this, oncomplete);\n\n\t\t}",
-				"chunk": "\t\tleave: function(oncomplete) {",
+				"chunk": "function(oncomplete) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\n\n\t\t\tthis.element.fireEventListener('leave', null);\n\n\n\t\t\treturn _State.prototype.leave.call(this, oncomplete);\n\n\t\t}",
+				"type": "function",
 				"hash": "b572afc8",
 				"parameters": [
 					{

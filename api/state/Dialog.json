@@ -38,7 +38,8 @@
 			"type": "undefined"
 		},
 		"_on_command": {
-			"body": "function(value) {\n\n\t\tlet result = this.main.command(value);\n\t\tif (result === false) {\n\n\t\t\tthis.element.fireEventListener('error', {\n\t\t\t\tmessage: 'Please rephrase command.'\n\t\t\t});\n\n\t\t}\n\n\t}",
+			"chunk": "function(value) {\n\n\t\tlet result = this.main.command(value);\n\t\tif (result === false) {\n\n\t\t\tthis.element.fireEventListener('error', {\n\t\t\t\tmessage: 'Please rephrase command.'\n\t\t\t});\n\n\t\t}\n\n\t}",
+			"type": "function",
 			"hash": "1753fa33",
 			"parameters": [
 				{
@@ -62,6 +63,7 @@
 	],
 	"result": {
 		"constructor": {
+			"type": "function",
 			"body": "function(main) {\n\n\t\tthis.element = _COMPONENT.create();\n\n\t\tthis.__listener = null;\n\n\n\t\t_main.appendChild(this.element);\n\t\t_State.call(this, main);\n\n\t}",
 			"hash": "c970f5e2",
 			"parameters": [
@@ -72,7 +74,7 @@
 				}
 			]
 		},
-		"settings": {},
+		"states": {},
 		"properties": {
 			"element": {
 				"chunk": "this.element = _COMPONENT.create();",
@@ -94,6 +96,7 @@
 		"events": {},
 		"methods": {
 			"deserialize": {
+				"type": "function",
 				"body": "function(blob) {}",
 				"chunk": "function(blob) {",
 				"hash": "cf6d9c5f",
@@ -111,21 +114,21 @@
 				]
 			},
 			"serialize": {
-				"body": "function() {\n\n\t\t\tlet data = _State.prototype.serialize.call(this);\n\t\t\tdata['constructor'] = 'app.state.Dialog';\n\n\n\t\t\treturn data;\n\n\t\t}",
-				"chunk": "\t\tserialize: function() {",
+				"chunk": "function() {\n\n\t\t\tlet data = _State.prototype.serialize.call(this);\n\t\t\tdata['constructor'] = 'app.state.Dialog';\n\n\n\t\t\treturn data;\n\n\t\t}",
+				"type": "function",
 				"hash": "338a4a6e",
 				"parameters": [],
 				"values": [
 					{
-						"chunk": "{ 'constructor': 'lychee.app.State',\n\t\t\t\t'arguments':   [ settings ],\n\t\t\t\t'blob':        Object.keys(blob).length > 0 ? blob : null\n\t\t\t}",
+						"chunk": "{ 'constructor': 'lychee.app.State',\n\t\t\t\t'arguments':   [ main ],\n\t\t\t\t'blob':        Object.keys(blob).length > 0 ? blob : null\n\t\t\t}",
 						"type": "Object",
 						"value": {}
 					}
 				]
 			},
 			"update": {
-				"body": "function(intent) {\n\n\t\t\t// XXX: Do nothing\n\n\t\t}",
-				"chunk": "\t\tupdate: function(intent) {",
+				"chunk": "function(intent) {\n\n\t\t\t// XXX: Do nothing\n\n\t\t}",
+				"type": "function",
 				"hash": "751c10a9",
 				"parameters": [
 					{
@@ -141,8 +144,8 @@
 				]
 			},
 			"enter": {
-				"body": "function(oncomplete, intent) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\t\t\tintent     = intent instanceof _Intent      ? intent     : null;\n\n\n\t\t\tthis.__listener = function(e) {\n\t\t\t\t_on_command.call(this, e.detail);\n\t\t\t}.bind(this);\n\n\t\t\tthis.element.fireEventListener('enter', null);\n\t\t\tthis.element.addEventListener('command', this.__listener, true);\n\n\n\t\t\treturn _State.prototype.enter.call(this, oncomplete);\n\n\t\t}",
-				"chunk": "\t\tenter: function(oncomplete, intent) {",
+				"chunk": "function(oncomplete, intent) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\t\t\tintent     = intent instanceof _Intent      ? intent     : null;\n\n\n\t\t\tthis.__listener = function(e) {\n\t\t\t\t_on_command.call(this, e.detail);\n\t\t\t}.bind(this);\n\n\t\t\tthis.element.fireEventListener('enter', null);\n\t\t\tthis.element.addEventListener('command', this.__listener, true);\n\n\n\t\t\treturn _State.prototype.enter.call(this, oncomplete);\n\n\t\t}",
+				"type": "function",
 				"hash": "a3ef356c",
 				"parameters": [
 					{
@@ -167,8 +170,8 @@
 				]
 			},
 			"leave": {
-				"body": "function(oncomplete) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\n\n\t\t\tthis.element.removeEventListener('command', this.__listener, true);\n\t\t\tthis.element.fireEventListener('leave', null);\n\n\t\t\tthis.__listener = null;\n\n\n\t\t\treturn _State.prototype.leave.call(this, oncomplete);\n\n\t\t}",
-				"chunk": "\t\tleave: function(oncomplete) {",
+				"chunk": "function(oncomplete) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\n\n\t\t\tthis.element.removeEventListener('command', this.__listener, true);\n\t\t\tthis.element.fireEventListener('leave', null);\n\n\t\t\tthis.__listener = null;\n\n\n\t\t\treturn _State.prototype.leave.call(this, oncomplete);\n\n\t\t}",
+				"type": "function",
 				"hash": "b26efe27",
 				"parameters": [
 					{

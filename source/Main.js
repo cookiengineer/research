@@ -31,7 +31,7 @@ lychee.define('app.Main').requires([
 
 	const Composite = function(data) {
 
-		let settings = Object.assign({
+		let states = Object.assign({
 			client:   null,
 			server:   null,
 
@@ -54,7 +54,9 @@ lychee.define('app.Main').requires([
 		this.plugins = {};
 
 
-		_Main.call(this, settings);
+		_Main.call(this, states);
+
+		states = null;
 
 
 
@@ -105,9 +107,6 @@ lychee.define('app.Main').requires([
 			this.changeState('dialog');
 
 		}, this, true);
-
-
-		settings = null;
 
 	};
 

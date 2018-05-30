@@ -23,11 +23,12 @@
 	"errors": [],
 	"result": {
 		"constructor": {
+			"type": "function",
 			"body": "function() {\n\n\t\tthis.intents = [];\n\n\t}",
 			"hash": "34ff2a76",
 			"parameters": []
 		},
-		"settings": {},
+		"states": {},
 		"properties": {
 			"intents": {
 				"chunk": "this.intents = [];",
@@ -42,6 +43,7 @@
 		"events": {},
 		"methods": {
 			"deserialize": {
+				"type": "function",
 				"body": "function(blob) {}",
 				"chunk": "function(blob) {",
 				"hash": "cf6d9c5f",
@@ -59,8 +61,8 @@
 				]
 			},
 			"serialize": {
-				"body": "function() {\n\n\t\t\treturn {\n\t\t\t\t'constructor': 'app.interface.Bot',\n\t\t\t\t'arguments': []\n\t\t\t};\n\n\t\t}",
-				"chunk": "\t\tserialize: function() {",
+				"chunk": "function() {\n\n\t\t\treturn {\n\t\t\t\t'constructor': 'app.interface.Bot',\n\t\t\t\t'arguments': []\n\t\t\t};\n\n\t\t}",
+				"type": "function",
 				"hash": "39fddb99",
 				"parameters": [],
 				"values": [
@@ -75,8 +77,8 @@
 				]
 			},
 			"command": {
-				"body": "function(sentence) {\n\n\t\t\tsentence = typeof sentence === 'string' ? sentence : null;\n\n\n\t\t\tif (sentence !== null) {\n\n\t\t\t\tlet filtered = [];\n\t\t\t\tlet intents  = this.intents;\n\n\t\t\t\tfor (let i = 0, il = intents.length; i < il; i++) {\n\n\t\t\t\t\tlet intent      = intents[i];\n\t\t\t\t\tlet probability = intent.analyze(sentence);\n\t\t\t\t\tif (probability > 0.5) {\n\n\t\t\t\t\t\tfiltered.push({\n\t\t\t\t\t\t\tprobability: probability,\n\t\t\t\t\t\t\tintent:      intent.clone(sentence)\n\t\t\t\t\t\t});\n\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\n\t\t\t\tfiltered.sort(function(a, b) {\n\n\t\t\t\t\tif (a.probability > b.probability) return -1;\n\t\t\t\t\tif (b.probability > a.probability) return  1;\n\t\t\t\t\treturn 0;\n\n\t\t\t\t});\n\n\n\t\t\t\tif (filtered.length > 0) {\n\n\t\t\t\t\t// XXX: If first intent is likely, skip the rest\n\t\t\t\t\tif (filtered[0].probability > 0.9) {\n\t\t\t\t\t\treturn filtered.slice(0, 1);\n\t\t\t\t\t} else {\n\t\t\t\t\t\treturn filtered;\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\t\t\t}\n\n\t\t\treturn null;\n\n\t\t}",
-				"chunk": "\t\tcommand: function(sentence) {",
+				"chunk": "function(sentence) {\n\n\t\t\tsentence = typeof sentence === 'string' ? sentence : null;\n\n\n\t\t\tif (sentence !== null) {\n\n\t\t\t\tlet filtered = [];\n\t\t\t\tlet intents  = this.intents;\n\n\t\t\t\tfor (let i = 0, il = intents.length; i < il; i++) {\n\n\t\t\t\t\tlet intent      = intents[i];\n\t\t\t\t\tlet probability = intent.analyze(sentence);\n\t\t\t\t\tif (probability > 0.5) {\n\n\t\t\t\t\t\tfiltered.push({\n\t\t\t\t\t\t\tprobability: probability,\n\t\t\t\t\t\t\tintent:      intent.clone(sentence)\n\t\t\t\t\t\t});\n\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\n\t\t\t\tfiltered.sort(function(a, b) {\n\n\t\t\t\t\tif (a.probability > b.probability) return -1;\n\t\t\t\t\tif (b.probability > a.probability) return  1;\n\t\t\t\t\treturn 0;\n\n\t\t\t\t});\n\n\n\t\t\t\tif (filtered.length > 0) {\n\n\t\t\t\t\t// XXX: If first intent is likely, skip the rest\n\t\t\t\t\tif (filtered[0].probability > 0.9) {\n\t\t\t\t\t\treturn filtered.slice(0, 1);\n\t\t\t\t\t} else {\n\t\t\t\t\t\treturn filtered;\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\t\t\t}\n\n\t\t\treturn null;\n\n\t\t}",
+				"type": "function",
 				"hash": "d57c5f79",
 				"parameters": [
 					{
@@ -100,8 +102,8 @@
 				]
 			},
 			"addIntent": {
-				"body": "function(intent) {\n\n\t\t\tintent = intent instanceof _Intent ? intent : null;\n\n\n\t\t\tif (intent !== null) {\n\n\t\t\t\tthis.intents.push(intent);\n\n\t\t\t\treturn true;\n\n\t\t\t}\n\n\n\t\t\treturn false;\n\n\t\t}",
-				"chunk": "\t\taddIntent: function(intent) {",
+				"chunk": "function(intent) {\n\n\t\t\tintent = intent instanceof _Intent ? intent : null;\n\n\n\t\t\tif (intent !== null) {\n\n\t\t\t\tthis.intents.push(intent);\n\n\t\t\t\treturn true;\n\n\t\t\t}\n\n\n\t\t\treturn false;\n\n\t\t}",
+				"type": "function",
 				"hash": "29f54452",
 				"parameters": [
 					{
@@ -125,8 +127,8 @@
 				]
 			},
 			"removeIntent": {
-				"body": "function(intent) {\n\n\t\t\tintent = intent instanceof _Intent ? intent : null;\n\n\n\t\t\tif (intent !== null) {\n\n\t\t\t\tlet index = this.intents.indexOf(intent);\n\t\t\t\tif (index !== -1) {\n\t\t\t\t\tthis.intents.splice(index, 1);\n\t\t\t\t}\n\n\t\t\t\treturn true;\n\n\t\t\t}\n\n\n\t\t\treturn false;\n\n\t\t}",
-				"chunk": "\t\tremoveIntent: function(intent) {",
+				"chunk": "function(intent) {\n\n\t\t\tintent = intent instanceof _Intent ? intent : null;\n\n\n\t\t\tif (intent !== null) {\n\n\t\t\t\tlet index = this.intents.indexOf(intent);\n\t\t\t\tif (index !== -1) {\n\t\t\t\t\tthis.intents.splice(index, 1);\n\t\t\t\t}\n\n\t\t\t\treturn true;\n\n\t\t\t}\n\n\n\t\t\treturn false;\n\n\t\t}",
+				"type": "function",
 				"hash": "d87dddde",
 				"parameters": [
 					{

@@ -148,7 +148,7 @@ lychee.define('app.interface.Intent').exports(function(lychee, global, attachmen
 
 	const Composite = function(data) {
 
-		let settings = Object.assign({}, data);
+		let states = Object.assign({}, data);
 
 
 		this.action   = null;
@@ -159,12 +159,13 @@ lychee.define('app.interface.Intent').exports(function(lychee, global, attachmen
 		this._result  = {};
 
 
-		this.setAction(settings.action);
-		this.setData(settings.data);
-		this.setFormat(settings.format);
-		this.setSentence(settings.sentence);
+		this.setAction(states.action);
+		this.setData(states.data);
+		this.setFormat(states.format);
+		this.setSentence(states.sentence);
 
-		settings = null;
+
+		states = null;
 
 	};
 
@@ -179,19 +180,19 @@ lychee.define('app.interface.Intent').exports(function(lychee, global, attachmen
 
 		serialize: function() {
 
-			let settings = {};
-			let blob     = {};
+			let states = {};
+			let blob   = {};
 
 
-			if (this.action !== null)   settings.action   = this.action;
-			if (this.data !== null)     settings.data     = Object.assign({}, this.data);
-			if (this.format !== null)   settings.format   = this.format;
-			if (this.sentence !== null) settings.sentence = this.sentence;
+			if (this.action !== null)   states.action   = this.action;
+			if (this.data !== null)     states.data     = Object.assign({}, this.data);
+			if (this.format !== null)   states.format   = this.format;
+			if (this.sentence !== null) states.sentence = this.sentence;
 
 
 			return {
 				'constructor': 'app.interface.Intent',
-				'arguments':   [ settings ],
+				'arguments':   [ states ],
 				'blob':        Object.keys(blob).length > 0 ? blob : null
 			};
 

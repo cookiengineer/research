@@ -1,9 +1,9 @@
 {
 	"/projects/research/api/Main.json": {
 		"identifier": "app.Main",
-		"timestamp": 1516398623020,
+		"timestamp": 1527689061234,
 		"knowledge": {
-			"settings": [],
+			"states": [],
 			"properties": [
 				"bot",
 				"scraper",
@@ -45,9 +45,9 @@
 	},
 	"/projects/research/api/interface/Bot.json": {
 		"identifier": "app.interface.Bot",
-		"timestamp": 1516398623020,
+		"timestamp": 1527689061234,
 		"knowledge": {
-			"settings": [],
+			"states": [],
 			"properties": [
 				"intents"
 			],
@@ -79,7 +79,321 @@
 	},
 	"/projects/research/api/interface/Intent.json": {
 		"identifier": "app.interface.Intent",
-		"timestamp": 1516401456041,
+		"timestamp": 1527689061234,
+		"knowledge": {
+			"states": [
+				"action",
+				"data",
+				"format",
+				"sentence"
+			],
+			"properties": [
+				"action",
+				"data",
+				"format",
+				"sentence",
+				"_result"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"cf6d9c5f"
+				],
+				[
+					"serialize",
+					"449fc5c2"
+				],
+				[
+					"analyze",
+					"5a1ddb50"
+				],
+				[
+					"clone",
+					"707b2f3f"
+				],
+				[
+					"setAction",
+					"9c4a0967"
+				],
+				[
+					"setData",
+					"a0172c"
+				],
+				[
+					"setFormat",
+					"300734e1"
+				],
+				[
+					"setSentence",
+					"1ef6ab4e"
+				]
+			]
+		}
+	},
+	"/projects/research/api/state/Browse.json": {
+		"identifier": "app.state.Browse",
+		"timestamp": 1527689061234,
+		"knowledge": {
+			"states": [],
+			"properties": [
+				"element",
+				"__listener"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"cf6d9c5f"
+				],
+				[
+					"serialize",
+					"07f88f54"
+				],
+				[
+					"update",
+					"f1c40675"
+				],
+				[
+					"enter",
+					"508f4f66"
+				],
+				[
+					"leave",
+					"b26efe27"
+				]
+			]
+		}
+	},
+	"/projects/research/api/state/Dialog.json": {
+		"identifier": "app.state.Dialog",
+		"timestamp": 1527689061234,
+		"knowledge": {
+			"states": [],
+			"properties": [
+				"element",
+				"__listener"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"cf6d9c5f"
+				],
+				[
+					"serialize",
+					"338a4a6e"
+				],
+				[
+					"update",
+					"751c10a9"
+				],
+				[
+					"enter",
+					"a3ef356c"
+				],
+				[
+					"leave",
+					"b26efe27"
+				]
+			]
+		}
+	},
+	"/projects/research/api/state/Help.json": {
+		"identifier": "app.state.Help",
+		"timestamp": 1527689061234,
+		"knowledge": {
+			"states": [],
+			"properties": [
+				"bot",
+				"element"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"serialize",
+					"4b38ab29"
+				],
+				[
+					"deserialize",
+					"86434b1c"
+				],
+				[
+					"enter",
+					"4c2f3efd"
+				],
+				[
+					"leave",
+					"b572afc8"
+				]
+			]
+		}
+	},
+	"/projects/research/api/net/Scraper.json": {
+		"identifier": "app.net.Scraper",
+		"timestamp": 1527689061234,
+		"knowledge": {
+			"states": [],
+			"properties": [
+				"main"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"cf6d9c5f"
+				],
+				[
+					"serialize",
+					"0b537a74"
+				],
+				[
+					"query",
+					"2e35c3fb"
+				]
+			]
+		}
+	},
+	"/projects/research/api/plugin/Reddit.json": {
+		"identifier": "app.plugin.Reddit",
+		"timestamp": 1527689061234,
+		"knowledge": {
+			"states": [],
+			"properties": [
+				"main",
+				"bot",
+				"scraper"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"8f2f5e8f"
+				],
+				[
+					"serialize",
+					"a857f0d1"
+				],
+				[
+					"can",
+					"3adeb64c"
+				],
+				[
+					"browse",
+					"9185638e"
+				],
+				[
+					"search",
+					"9185638e"
+				]
+			]
+		}
+	},
+	"/projects/research/api/state/Settings.json": {
+		"identifier": "app.state.Settings",
+		"timestamp": 1527689061234,
+		"knowledge": {
+			"states": [],
+			"properties": [
+				"settings",
+				"element",
+				"__listener"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"cf6d9c5f"
+				],
+				[
+					"serialize",
+					"67f03c74"
+				],
+				[
+					"enter",
+					"b27dc87c"
+				],
+				[
+					"leave",
+					"30f89f93"
+				]
+			]
+		}
+	},
+	"/projects/research/api/platform/html-nwjs/parser/HTML.json": {
+		"identifier": "app.parser.HTML",
+		"timestamp": 1527689061234,
+		"knowledge": {
+			"states": [],
+			"properties": [],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"cf6d9c5f"
+				],
+				[
+					"serialize",
+					"5e5c3d81"
+				],
+				[
+					"encode",
+					"fa5066a0"
+				],
+				[
+					"decode",
+					"11b724a3"
+				]
+			]
+		}
+	},
+	"/home/cookiengineer/Software/Artificial-Engineering/research/api/plugin/Reddit.json": {
+		"identifier": "app.plugin.Reddit",
+		"timestamp": 1523707887171,
+		"knowledge": {
+			"settings": [],
+			"properties": [
+				"main",
+				"bot",
+				"scraper"
+			],
+			"enums": [],
+			"events": [],
+			"methods": [
+				[
+					"deserialize",
+					"8f2f5e8f"
+				],
+				[
+					"serialize",
+					"a857f0d1"
+				],
+				[
+					"can",
+					"3adeb64c"
+				],
+				[
+					"browse",
+					"9185638e"
+				],
+				[
+					"search",
+					"9185638e"
+				]
+			]
+		}
+	},
+	"/home/cookiengineer/Software/Artificial-Engineering/research/api/interface/Intent.json": {
+		"identifier": "app.interface.Intent",
+		"timestamp": 1523707887171,
 		"knowledge": {
 			"settings": [
 				"action",
@@ -132,110 +446,9 @@
 			]
 		}
 	},
-	"/projects/research/api/state/Browse.json": {
-		"identifier": "app.state.Browse",
-		"timestamp": 1516401456041,
-		"knowledge": {
-			"settings": [],
-			"properties": [
-				"element",
-				"__listener"
-			],
-			"enums": [],
-			"events": [],
-			"methods": [
-				[
-					"deserialize",
-					"cf6d9c5f"
-				],
-				[
-					"serialize",
-					"07f88f54"
-				],
-				[
-					"update",
-					"f1c40675"
-				],
-				[
-					"enter",
-					"508f4f66"
-				],
-				[
-					"leave",
-					"b26efe27"
-				]
-			]
-		}
-	},
-	"/projects/research/api/state/Dialog.json": {
-		"identifier": "app.state.Dialog",
-		"timestamp": 1516398623020,
-		"knowledge": {
-			"settings": [],
-			"properties": [
-				"element",
-				"__listener"
-			],
-			"enums": [],
-			"events": [],
-			"methods": [
-				[
-					"deserialize",
-					"cf6d9c5f"
-				],
-				[
-					"serialize",
-					"338a4a6e"
-				],
-				[
-					"update",
-					"751c10a9"
-				],
-				[
-					"enter",
-					"a3ef356c"
-				],
-				[
-					"leave",
-					"b26efe27"
-				]
-			]
-		}
-	},
-	"/projects/research/api/state/Help.json": {
-		"identifier": "app.state.Help",
-		"timestamp": 1516398623020,
-		"knowledge": {
-			"settings": [],
-			"properties": [
-				"bot",
-				"element"
-			],
-			"enums": [],
-			"events": [],
-			"methods": [
-				[
-					"serialize",
-					"4b38ab29"
-				],
-				[
-					"deserialize",
-					"86434b1c"
-				],
-				[
-					"enter",
-					"4c2f3efd"
-				],
-				[
-					"leave",
-					"b572afc8"
-				]
-			]
-		}
-	},
-	"/projects/research/api/net/Scraper.json": {
+	"/home/cookiengineer/Software/Artificial-Engineering/research/api/net/Scraper.json": {
 		"identifier": "app.net.Scraper",
-		"timestamp": 1516398623020,
+		"timestamp": 1523707912791,
 		"knowledge": {
 			"settings": [],
 			"properties": [
@@ -255,102 +468,6 @@
 				[
 					"query",
 					"2e35c3fb"
-				]
-			]
-		}
-	},
-	"/projects/research/api/plugin/Reddit.json": {
-		"identifier": "app.plugin.Reddit",
-		"timestamp": 1516398623020,
-		"knowledge": {
-			"settings": [],
-			"properties": [
-				"main",
-				"bot",
-				"scraper"
-			],
-			"enums": [],
-			"events": [],
-			"methods": [
-				[
-					"deserialize",
-					"8f2f5e8f"
-				],
-				[
-					"serialize",
-					"a857f0d1"
-				],
-				[
-					"can",
-					"3adeb64c"
-				],
-				[
-					"browse",
-					"9185638e"
-				],
-				[
-					"search",
-					"9185638e"
-				]
-			]
-		}
-	},
-	"/projects/research/api/state/Settings.json": {
-		"identifier": "app.state.Settings",
-		"timestamp": 1516398623020,
-		"knowledge": {
-			"settings": [],
-			"properties": [
-				"settings",
-				"element",
-				"__listener"
-			],
-			"enums": [],
-			"events": [],
-			"methods": [
-				[
-					"deserialize",
-					"cf6d9c5f"
-				],
-				[
-					"serialize",
-					"67f03c74"
-				],
-				[
-					"enter",
-					"b27dc87c"
-				],
-				[
-					"leave",
-					"30f89f93"
-				]
-			]
-		}
-	},
-	"/projects/research/api/platform/html-nwjs/parser/HTML.json": {
-		"identifier": "app.parser.HTML",
-		"timestamp": 1515851580265,
-		"knowledge": {
-			"settings": [],
-			"properties": [],
-			"enums": [],
-			"events": [],
-			"methods": [
-				[
-					"deserialize",
-					"cf6d9c5f"
-				],
-				[
-					"serialize",
-					"5e5c3d81"
-				],
-				[
-					"encode",
-					"fa5066a0"
-				],
-				[
-					"decode",
-					"11b724a3"
 				]
 			]
 		}

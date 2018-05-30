@@ -17,7 +17,7 @@ fi;
 if [ "$LYCHEEJS_HELPER" != "" ] && [ "$LYCHEEJS_FERTILIZER" != "" ]; then
 
 	cd $PROJECT_ROOT;
-	nw .;
+	nwjs-sdk .;
 
 	exit $?;
 

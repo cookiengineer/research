@@ -34,12 +34,12 @@
 			}
 		},
 		"_AGENTS": {
-			"chunk": "[",
-			"type": "Array",
-			"value": []
+			"chunk": "undefined",
+			"type": "undefined"
 		},
 		"_get_useragent": {
-			"body": "function() {\n\t\treturn _AGENTS[(Math.random() * _AGENTS.length) | 0];\n\t}",
+			"chunk": "function() {\n\t\treturn _AGENTS[(Math.random() * _AGENTS.length) | 0];\n\t}",
+			"type": "function",
 			"hash": "4f749c36",
 			"parameters": [],
 			"values": [
@@ -51,7 +51,8 @@
 			]
 		},
 		"_get_headers": {
-			"body": "function(url, method) {\n\n\t\tlet headers = {\n\t\t\t'content-type': 'text/html'\n\t\t};\n\n\n\t\tlet stealth = this.main.settings.stealth === true;\n\t\tif (stealth === true) {\n\t\t\theaders['user-agent'] = _get_useragent();\n\t\t} else {\n\t\t\theaders['user-agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Samaritan/13.37';\n\t\t}\n\n\n\t\tlet file = url.split('/').pop().split('?')[0];\n\t\tif (file.endsWith('.json')) {\n\t\t\theaders['content-type'] = 'application/json';\n\t\t} else if (file.endsWith('.txt')) {\n\t\t\theaders['content-type'] = 'text/plain';\n\t\t}\n\n\n\t\treturn headers;\n\n\t}",
+			"chunk": "function(url, method) {\n\n\t\tlet headers = {\n\t\t\t'content-type': 'text/html'\n\t\t};\n\n\n\t\tlet stealth = this.main.settings.stealth === true;\n\t\tif (stealth === true) {\n\t\t\theaders['user-agent'] = _get_useragent();\n\t\t} else {\n\t\t\theaders['user-agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Samaritan/13.37';\n\t\t}\n\n\n\t\tlet file = url.split('/').pop().split('?')[0];\n\t\tif (file.endsWith('.json')) {\n\t\t\theaders['content-type'] = 'application/json';\n\t\t} else if (file.endsWith('.txt')) {\n\t\t\theaders['content-type'] = 'text/plain';\n\t\t}\n\n\n\t\treturn headers;\n\n\t}",
+			"type": "function",
 			"hash": "62d4554e",
 			"parameters": [
 				{
@@ -76,7 +77,8 @@
 			]
 		},
 		"_request": {
-			"body": "function(url, method, headers, params, callback) {\n\n\t\tlet tmp      = _url.parse(url);\n\t\tlet type     = headers['content-type'];\n\t\tlet encoding = /^(application\\/json|text\\/html|text\\/plain)$/g.test(type) ? 'utf8' : 'binary';\n\t\tlet options  = {\n\t\t\tmethod:   method,\n\t\t\thostname: tmp.hostname,\n\t\t\theaders:  headers,\n\t\t\tpath:     tmp.path\n\t\t};\n\n\t\tlet request = null;\n\n\t\tif (method === 'GET') {\n\t\t\toptions.query = _QS.stringify(params);\n\t\t}\n\n\n\t\tif (url.startsWith('https:')) {\n\n\t\t\trequest = _https.request(options, response => {\n\n\t\t\t\tlet chunks = [];\n\n\t\t\t\tresponse.setEncoding(encoding);\n\t\t\t\tresponse.on('data', chunk => chunks.push(chunk));\n\t\t\t\tresponse.on('end', _ => {\n\n\t\t\t\t\tif (encoding === 'utf8') {\n\t\t\t\t\t\tcallback(chunks.join(''));\n\t\t\t\t\t} else {\n\t\t\t\t\t\tcallback(Buffer.concat(chunks));\n\t\t\t\t\t}\n\n\t\t\t\t});\n\n\t\t\t});\n\n\n\t\t} else if (url.startsWith('http:')) {\n\n\t\t\trequest = _https.request(options, response => {\n\n\t\t\t\tlet chunks = [];\n\n\t\t\t\tresponse.setEncoding(encoding);\n\t\t\t\tresponse.on('data', chunk => chunks.push(chunk));\n\t\t\t\tresponse.on('end', _ => {\n\n\t\t\t\t\tconsole.log('response end', chunks);\n\n\t\t\t\t\tif (encoding === 'utf8') {\n\t\t\t\t\t\tcallback(chunks.join(''));\n\t\t\t\t\t} else {\n\t\t\t\t\t\tcallback(Buffer.concat(chunks));\n\t\t\t\t\t}\n\n\t\t\t\t});\n\n\t\t\t});\n\n\t\t}\n\n\n\t\tif (request !== null) {\n\n\t\t\trequest.on('error', err => {\n\t\t\t\tcallback(null);\n\t\t\t});\n\n\t\t\tif (method !== 'GET') {\n\t\t\t\trequest.write(JSON.stringify(params));\n\t\t\t}\n\n\t\t\trequest.end();\n\n\t\t}\n\n\t}",
+			"chunk": "function(url, method, headers, params, callback) {\n\n\t\tlet tmp      = _url.parse(url);\n\t\tlet type     = headers['content-type'];\n\t\tlet encoding = /^(application\\/json|text\\/html|text\\/plain)$/g.test(type) ? 'utf8' : 'binary';\n\t\tlet options  = {\n\t\t\tmethod:   method,\n\t\t\thostname: tmp.hostname,\n\t\t\theaders:  headers,\n\t\t\tpath:     tmp.path\n\t\t};\n\n\t\tlet request = null;\n\n\t\tif (method === 'GET') {\n\t\t\toptions.query = _QS.stringify(params);\n\t\t}\n\n\n\t\tif (url.startsWith('https:')) {\n\n\t\t\trequest = _https.request(options, response => {\n\n\t\t\t\tlet chunks = [];\n\n\t\t\t\tresponse.setEncoding(encoding);\n\t\t\t\tresponse.on('data', chunk => chunks.push(chunk));\n\t\t\t\tresponse.on('end', _ => {\n\n\t\t\t\t\tif (encoding === 'utf8') {\n\t\t\t\t\t\tcallback(chunks.join(''));\n\t\t\t\t\t} else {\n\t\t\t\t\t\tcallback(Buffer.concat(chunks));\n\t\t\t\t\t}\n\n\t\t\t\t});\n\n\t\t\t});\n\n\n\t\t} else if (url.startsWith('http:')) {\n\n\t\t\trequest = _https.request(options, response => {\n\n\t\t\t\tlet chunks = [];\n\n\t\t\t\tresponse.setEncoding(encoding);\n\t\t\t\tresponse.on('data', chunk => chunks.push(chunk));\n\t\t\t\tresponse.on('end', _ => {\n\n\t\t\t\t\tconsole.log('response end', chunks);\n\n\t\t\t\t\tif (encoding === 'utf8') {\n\t\t\t\t\t\tcallback(chunks.join(''));\n\t\t\t\t\t} else {\n\t\t\t\t\t\tcallback(Buffer.concat(chunks));\n\t\t\t\t\t}\n\n\t\t\t\t});\n\n\t\t\t});\n\n\t\t}\n\n\n\t\tif (request !== null) {\n\n\t\t\trequest.on('error', err => {\n\t\t\t\tcallback(null);\n\t\t\t});\n\n\t\t\tif (method !== 'GET') {\n\t\t\t\trequest.write(JSON.stringify(params));\n\t\t\t}\n\n\t\t\trequest.end();\n\n\t\t}\n\n\t}",
+			"type": "function",
 			"hash": "b5ab251f",
 			"parameters": [
 				{
@@ -111,6 +113,7 @@
 	"errors": [],
 	"result": {
 		"constructor": {
+			"type": "function",
 			"body": "function(main) {\n\n\t\tthis.main = main || null;\n\n\t}",
 			"hash": "3063f1ba",
 			"parameters": [
@@ -121,7 +124,7 @@
 				}
 			]
 		},
-		"settings": {},
+		"states": {},
 		"properties": {
 			"main": {
 				"chunk": "this.main = main || null;",
@@ -139,6 +142,7 @@
 		"events": {},
 		"methods": {
 			"deserialize": {
+				"type": "function",
 				"body": "function(blob) {}",
 				"chunk": "function(blob) {",
 				"hash": "cf6d9c5f",
@@ -156,8 +160,8 @@
 				]
 			},
 			"serialize": {
-				"body": "function() {\n\n\t\t\treturn {\n\t\t\t\t'constructor': 'app.net.Scraper',\n\t\t\t\t'arguments': []\n\t\t\t};\n\n\t\t}",
-				"chunk": "\t\tserialize: function() {",
+				"chunk": "function() {\n\n\t\t\treturn {\n\t\t\t\t'constructor': 'app.net.Scraper',\n\t\t\t\t'arguments': []\n\t\t\t};\n\n\t\t}",
+				"type": "function",
 				"hash": "0b537a74",
 				"parameters": [],
 				"values": [
@@ -172,8 +176,8 @@
 				]
 			},
 			"query": {
-				"body": "function(query) {\n\n\t\t\tquery = query instanceof Object ? query : {};\n\n\n\t\t\treturn new Promise(function(resolve, reject) {\n\n\t\t\t\tlet url     = query.url     || null;\n\t\t\t\tlet method  = query.method  || 'GET';\n\t\t\t\tlet headers = query.headers || _get_headers.call(this, url, method);\n\t\t\t\tlet params  = query.params  || {};\n\n\t\t\t\tif (url !== null) {\n\n\t\t\t\t\t_request(url, method, headers, params, function(result) {\n\n\t\t\t\t\t\tresolve({\n\t\t\t\t\t\t\tquery:  query,\n\t\t\t\t\t\t\tresult: result\n\t\t\t\t\t\t});\n\n\t\t\t\t\t});\n\n\t\t\t\t} else {\n\n\t\t\t\t\treject(null);\n\n\t\t\t\t}\n\n\t\t\t}.bind(this));\n\n\t\t}",
-				"chunk": "\t\tquery: function(query) {",
+				"chunk": "function(query) {\n\n\t\t\tquery = query instanceof Object ? query : {};\n\n\n\t\t\treturn new Promise(function(resolve, reject) {\n\n\t\t\t\tlet url     = query.url     || null;\n\t\t\t\tlet method  = query.method  || 'GET';\n\t\t\t\tlet headers = query.headers || _get_headers.call(this, url, method);\n\t\t\t\tlet params  = query.params  || {};\n\n\t\t\t\tif (url !== null) {\n\n\t\t\t\t\t_request(url, method, headers, params, function(result) {\n\n\t\t\t\t\t\tresolve({\n\t\t\t\t\t\t\tquery:  query,\n\t\t\t\t\t\t\tresult: result\n\t\t\t\t\t\t});\n\n\t\t\t\t\t});\n\n\t\t\t\t} else {\n\n\t\t\t\t\treject(null);\n\n\t\t\t\t}\n\n\t\t\t}.bind(this));\n\n\t\t}",
+				"type": "function",
 				"hash": "2e35c3fb",
 				"parameters": [
 					{

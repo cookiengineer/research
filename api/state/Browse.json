@@ -38,7 +38,8 @@
 			"type": "undefined"
 		},
 		"_on_browse": {
-			"body": "function(data) {\n\n\t\tif (data.length > 0) {\n\n\t\t\tthis.element.fireEventListener('render', data);\n\n\t\t} else {\n\n\t\t\tthis.element.fireEventListener('error', {\n\t\t\t\tcode:    500,\n\t\t\t\theader:  'Network Error',\n\t\t\t\tmessage: 'Could not retrieve any matching data.'\n\t\t\t});\n\n\t\t}\n\n\t}",
+			"chunk": "function(data) {\n\n\t\tif (data.length > 0) {\n\n\t\t\tthis.element.fireEventListener('render', data);\n\n\t\t} else {\n\n\t\t\tthis.element.fireEventListener('error', {\n\t\t\t\tcode:    500,\n\t\t\t\theader:  'Network Error',\n\t\t\t\tmessage: 'Could not retrieve any matching data.'\n\t\t\t});\n\n\t\t}\n\n\t}",
+			"type": "function",
 			"hash": "eaad5d96",
 			"parameters": [
 				{
@@ -50,7 +51,8 @@
 			"values": []
 		},
 		"_browse": {
-			"body": "function(intent) {\n\n\t\tlet data   = intent._result;\n\t\tlet main   = this.main;\n\t\tlet plugin = main.getPlugin(data.plugin || 'generic');\n\t\tif (plugin !== null) {\n\n\t\t\tplugin.browse(data).then(_on_browse.bind(this));\n\n\t\t} else if (typeof data.url === 'string') {\n\n\t\t\tplugin = main.getPlugin(main.findPlugin(data.url) || 'generic');\n\n\t\t\tif (plugin !== null) {\n\t\t\t\tplugin.browse(data).then(_on_browse.bind(this));\n\t\t\t}\n\n\t\t}\n\n\t}",
+			"chunk": "function(intent) {\n\n\t\tlet data   = intent._result;\n\t\tlet main   = this.main;\n\t\tlet plugin = main.getPlugin(data.plugin || 'generic');\n\t\tif (plugin !== null) {\n\n\t\t\tplugin.browse(data).then(_on_browse.bind(this));\n\n\t\t} else if (typeof data.url === 'string') {\n\n\t\t\tplugin = main.getPlugin(main.findPlugin(data.url) || 'generic');\n\n\t\t\tif (plugin !== null) {\n\t\t\t\tplugin.browse(data).then(_on_browse.bind(this));\n\t\t\t}\n\n\t\t}\n\n\t}",
+			"type": "function",
 			"hash": "5e01b090",
 			"parameters": [
 				{
@@ -74,6 +76,7 @@
 	],
 	"result": {
 		"constructor": {
+			"type": "function",
 			"body": "function(main) {\n\n\t\tthis.element = _COMPONENT.create();\n\n\t\tthis.__listener = null;\n\n\n\t\t_main.appendChild(this.element);\n\t\t_State.call(this, main);\n\n\t}",
 			"hash": "c970f5e2",
 			"parameters": [
@@ -84,7 +87,7 @@
 				}
 			]
 		},
-		"settings": {},
+		"states": {},
 		"properties": {
 			"element": {
 				"chunk": "this.element = _COMPONENT.create();",
@@ -106,6 +109,7 @@
 		"events": {},
 		"methods": {
 			"deserialize": {
+				"type": "function",
 				"body": "function(blob) {}",
 				"chunk": "function(blob) {",
 				"hash": "cf6d9c5f",
@@ -123,21 +127,21 @@
 				]
 			},
 			"serialize": {
-				"body": "function() {\n\n\t\t\tlet data = _State.prototype.serialize.call(this);\n\t\t\tdata['constructor'] = 'app.state.Browse';\n\n\n\t\t\treturn data;\n\n\t\t}",
-				"chunk": "\t\tserialize: function() {",
+				"chunk": "function() {\n\n\t\t\tlet data = _State.prototype.serialize.call(this);\n\t\t\tdata['constructor'] = 'app.state.Browse';\n\n\n\t\t\treturn data;\n\n\t\t}",
+				"type": "function",
 				"hash": "07f88f54",
 				"parameters": [],
 				"values": [
 					{
-						"chunk": "{ 'constructor': 'lychee.app.State',\n\t\t\t\t'arguments':   [ settings ],\n\t\t\t\t'blob':        Object.keys(blob).length > 0 ? blob : null\n\t\t\t}",
+						"chunk": "{ 'constructor': 'lychee.app.State',\n\t\t\t\t'arguments':   [ main ],\n\t\t\t\t'blob':        Object.keys(blob).length > 0 ? blob : null\n\t\t\t}",
 						"type": "Object",
 						"value": {}
 					}
 				]
 			},
 			"update": {
-				"body": "function(intent) {\n\n\t\t\t_browse.call(this, intent);\n\n\t\t}",
-				"chunk": "\t\tupdate: function(intent) {",
+				"chunk": "function(intent) {\n\n\t\t\t_browse.call(this, intent);\n\n\t\t}",
+				"type": "function",
 				"hash": "f1c40675",
 				"parameters": [
 					{
@@ -153,8 +157,8 @@
 				]
 			},
 			"enter": {
-				"body": "function(oncomplete, intent) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\t\t\tintent     = intent instanceof _Intent      ? intent     : null;\n\n\n\t\t\tthis.__listener = function(e) {\n\t\t\t\tthis.main.command(e.detail);\n\t\t\t}.bind(this);\n\n\t\t\tthis.element.fireEventListener('enter', null);\n\t\t\tthis.element.addEventListener('command', this.__listener, true);\n\n\n\t\t\t_browse.call(this, intent);\n\n\n\t\t\treturn _State.prototype.enter.call(this, oncomplete);\n\n\t\t}",
-				"chunk": "\t\tenter: function(oncomplete, intent) {",
+				"chunk": "function(oncomplete, intent) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\t\t\tintent     = intent instanceof _Intent      ? intent     : null;\n\n\n\t\t\tthis.__listener = function(e) {\n\t\t\t\tthis.main.command(e.detail);\n\t\t\t}.bind(this);\n\n\t\t\tthis.element.fireEventListener('enter', null);\n\t\t\tthis.element.addEventListener('command', this.__listener, true);\n\n\n\t\t\t_browse.call(this, intent);\n\n\n\t\t\treturn _State.prototype.enter.call(this, oncomplete);\n\n\t\t}",
+				"type": "function",
 				"hash": "508f4f66",
 				"parameters": [
 					{
@@ -179,8 +183,8 @@
 				]
 			},
 			"leave": {
-				"body": "function(oncomplete) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\n\n\t\t\tthis.element.removeEventListener('command', this.__listener, true);\n\t\t\tthis.element.fireEventListener('leave', null);\n\n\t\t\tthis.__listener = null;\n\n\n\t\t\treturn _State.prototype.leave.call(this, oncomplete);\n\n\t\t}",
-				"chunk": "\t\tleave: function(oncomplete) {",
+				"chunk": "function(oncomplete) {\n\n\t\t\toncomplete = oncomplete instanceof Function ? oncomplete : null;\n\n\n\t\t\tthis.element.removeEventListener('command', this.__listener, true);\n\t\t\tthis.element.fireEventListener('leave', null);\n\n\t\t\tthis.__listener = null;\n\n\n\t\t\treturn _State.prototype.leave.call(this, oncomplete);\n\n\t\t}",
+				"type": "function",
 				"hash": "b26efe27",
 				"parameters": [
 					{

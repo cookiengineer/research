@@ -24,12 +24,12 @@
 			"type": "undefined"
 		},
 		"_URLS": {
-			"chunk": "[",
-			"type": "Array",
-			"value": []
+			"chunk": "undefined",
+			"type": "undefined"
 		},
 		"_queries": {
-			"body": "function(data) {\n\n\t\tlet queries = [];\n\n\t\tif (typeof data.url === 'string') {\n\n\t\t\tqueries.push({\n\t\t\t\ttitle:  data.url,\n\t\t\t\turl:    data.url,\n\t\t\t\tmethod: 'GET',\n\t\t\t\tparams: {}\n\t\t\t});\n\n\t\t} else {\n\n\t\t\tlet topics  = data.topic  || [];\n\t\t\tlet inputs  = data.input  || [];\n\t\t\tlet persons = data.person || [];\n\n\t\t\tif (topics.length > 0) {\n\n\t\t\t\ttopics.forEach(topic => {\n\n\t\t\t\t\tlet url = 'https://www.reddit.com/r/' + topic.word;\n\n\t\t\t\t\tif (inputs.length > 0) {\n\n\t\t\t\t\t\tqueries.push({\n\t\t\t\t\t\t\ttitle:  '/r/' + topic.word,\n\t\t\t\t\t\t\turl:    url + '/search.json',\n\t\t\t\t\t\t\tmethod: 'GET',\n\t\t\t\t\t\t\tparams: {\n\t\t\t\t\t\t\t\tq:           '\"' + inputs.map(input => input.word).join('+') + '\"',\n\t\t\t\t\t\t\t\trestrict_sr: 'on',\n\t\t\t\t\t\t\t\tsort:        'top',\n\t\t\t\t\t\t\t\tt:           'all'\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t});\n\n\t\t\t\t\t} else {\n\n\t\t\t\t\t\tqueries.push({\n\t\t\t\t\t\t\ttitle:  '/r/' + topic.word,\n\t\t\t\t\t\t\turl:    url + '.json',\n\t\t\t\t\t\t\tmethod: 'GET',\n\t\t\t\t\t\t\tparams: {}\n\t\t\t\t\t\t});\n\n\t\t\t\t\t}\n\n\n\t\t\t\t});\n\n\t\t\t} else if (persons.length > 0) {\n\n\t\t\t\tpersons.map(person => {\n\t\t\t\t\tperson.word = person.word.startsWith('@') ? person.word.substr(1) : person.word;\n\t\t\t\t\treturn person;\n\t\t\t\t}).forEach(person => {\n\n\t\t\t\t\tqueries.push({\n\t\t\t\t\t\ttitle:  '/u/' + person.word + '\\'s links',\n\t\t\t\t\t\turl:    'https://www.reddit.com/user/' + person.word + '/submitted.json',\n\t\t\t\t\t\tmethod: 'GET',\n\t\t\t\t\t\tparams: {\n\t\t\t\t\t\t\tlimit: 100,\n\t\t\t\t\t\t\tt:     'all'\n\t\t\t\t\t\t}\n\t\t\t\t\t});\n\n\t\t\t\t\tqueries.push({\n\t\t\t\t\t\ttitle:  '/u/' + person.word + '\\'s comments',\n\t\t\t\t\t\turl:    'https://www.reddit.com/user/' + person.word + '/comments.json',\n\t\t\t\t\t\tmethod: 'GET',\n\t\t\t\t\t\tparams: {\n\t\t\t\t\t\t\tlimit: 100,\n\t\t\t\t\t\t\tt:     'all'\n\t\t\t\t\t\t}\n\t\t\t\t\t});\n\n\t\t\t\t});\n\n\t\t\t} else {\n\n\t\t\t\tlet url = 'https://www.reddit.com/r/all';\n\n\t\t\t\tif (inputs.length > 0) {\n\n\t\t\t\t\tqueries.push({\n\t\t\t\t\t\ttitle:  '/r/all',\n\t\t\t\t\t\turl:    url + '/search.json',\n\t\t\t\t\t\tmethod: 'GET',\n\t\t\t\t\t\tparams: {\n\t\t\t\t\t\t\tq:    '\"' + inputs.map(input => input.word).join('+') + '\"',\n\t\t\t\t\t\t\tsort: 'top',\n\t\t\t\t\t\t\tt:    'all'\n\t\t\t\t\t\t}\n\t\t\t\t\t});\n\n\t\t\t\t}\n\n\t\t\t}\n\n\t\t}\n\n\n\t\treturn queries;\n\n\t}",
+			"chunk": "function(data) {\n\n\t\tlet queries = [];\n\n\t\tif (typeof data.url === 'string') {\n\n\t\t\tqueries.push({\n\t\t\t\ttitle:  data.url,\n\t\t\t\turl:    data.url,\n\t\t\t\tmethod: 'GET',\n\t\t\t\tparams: {}\n\t\t\t});\n\n\t\t} else {\n\n\t\t\tlet topics  = data.topic  || [];\n\t\t\tlet inputs  = data.input  || [];\n\t\t\tlet persons = data.person || [];\n\n\t\t\tif (topics.length > 0) {\n\n\t\t\t\ttopics.forEach(topic => {\n\n\t\t\t\t\tlet url = 'https://www.reddit.com/r/' + topic.word;\n\n\t\t\t\t\tif (inputs.length > 0) {\n\n\t\t\t\t\t\tqueries.push({\n\t\t\t\t\t\t\ttitle:  '/r/' + topic.word,\n\t\t\t\t\t\t\turl:    url + '/search.json',\n\t\t\t\t\t\t\tmethod: 'GET',\n\t\t\t\t\t\t\tparams: {\n\t\t\t\t\t\t\t\tq:           '\"' + inputs.map(input => input.word).join('+') + '\"',\n\t\t\t\t\t\t\t\trestrict_sr: 'on',\n\t\t\t\t\t\t\t\tsort:        'top',\n\t\t\t\t\t\t\t\tt:           'all'\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t});\n\n\t\t\t\t\t} else {\n\n\t\t\t\t\t\tqueries.push({\n\t\t\t\t\t\t\ttitle:  '/r/' + topic.word,\n\t\t\t\t\t\t\turl:    url + '.json',\n\t\t\t\t\t\t\tmethod: 'GET',\n\t\t\t\t\t\t\tparams: {}\n\t\t\t\t\t\t});\n\n\t\t\t\t\t}\n\n\n\t\t\t\t});\n\n\t\t\t} else if (persons.length > 0) {\n\n\t\t\t\tpersons.map(person => {\n\t\t\t\t\tperson.word = person.word.startsWith('@') ? person.word.substr(1) : person.word;\n\t\t\t\t\treturn person;\n\t\t\t\t}).forEach(person => {\n\n\t\t\t\t\tqueries.push({\n\t\t\t\t\t\ttitle:  '/u/' + person.word + '\\'s links',\n\t\t\t\t\t\turl:    'https://www.reddit.com/user/' + person.word + '/submitted.json',\n\t\t\t\t\t\tmethod: 'GET',\n\t\t\t\t\t\tparams: {\n\t\t\t\t\t\t\tlimit: 100,\n\t\t\t\t\t\t\tt:     'all'\n\t\t\t\t\t\t}\n\t\t\t\t\t});\n\n\t\t\t\t\tqueries.push({\n\t\t\t\t\t\ttitle:  '/u/' + person.word + '\\'s comments',\n\t\t\t\t\t\turl:    'https://www.reddit.com/user/' + person.word + '/comments.json',\n\t\t\t\t\t\tmethod: 'GET',\n\t\t\t\t\t\tparams: {\n\t\t\t\t\t\t\tlimit: 100,\n\t\t\t\t\t\t\tt:     'all'\n\t\t\t\t\t\t}\n\t\t\t\t\t});\n\n\t\t\t\t});\n\n\t\t\t} else {\n\n\t\t\t\tlet url = 'https://www.reddit.com/r/all';\n\n\t\t\t\tif (inputs.length > 0) {\n\n\t\t\t\t\tqueries.push({\n\t\t\t\t\t\ttitle:  '/r/all',\n\t\t\t\t\t\turl:    url + '/search.json',\n\t\t\t\t\t\tmethod: 'GET',\n\t\t\t\t\t\tparams: {\n\t\t\t\t\t\t\tq:    '\"' + inputs.map(input => input.word).join('+') + '\"',\n\t\t\t\t\t\t\tsort: 'top',\n\t\t\t\t\t\t\tt:    'all'\n\t\t\t\t\t\t}\n\t\t\t\t\t});\n\n\t\t\t\t}\n\n\t\t\t}\n\n\t\t}\n\n\n\t\treturn queries;\n\n\t}",
+			"type": "function",
 			"hash": "6dcdf91a",
 			"parameters": [
 				{
@@ -47,7 +47,8 @@
 			]
 		},
 		"_parse": {
-			"body": "function(data) {\n\n\t\tlet file = data.query.url.split('/').pop().split('?')[0];\n\t\tif (file.endsWith('.json')) {\n\n\t\t\tlet json = null;\n\n\t\t\ttry {\n\t\t\t\tjson = JSON.parse(data.result);\n\t\t\t} catch (err) {\n\t\t\t\tjson = null;\n\t\t\t}\n\n\t\t\tif (json !== null) {\n\t\t\t\tdata.result = json;\n\t\t\t}\n\n\t\t}\n\n\t\treturn data;\n\n\t}",
+			"chunk": "function(data) {\n\n\t\tlet file = data.query.url.split('/').pop().split('?')[0];\n\t\tif (file.endsWith('.json')) {\n\n\t\t\tlet json = null;\n\n\t\t\ttry {\n\t\t\t\tjson = JSON.parse(data.result);\n\t\t\t} catch (err) {\n\t\t\t\tjson = null;\n\t\t\t}\n\n\t\t\tif (json !== null) {\n\t\t\t\tdata.result = json;\n\t\t\t}\n\n\t\t}\n\n\t\treturn data;\n\n\t}",
+			"type": "function",
 			"hash": "d92bd777",
 			"parameters": [
 				{
@@ -59,7 +60,8 @@
 			"values": []
 		},
 		"_filter": {
-			"body": "function(data) {\n\n\t\tlet filtered = [];\n\t\tlet children = JSON.query(data.result, 'data > children');\n\n\t\tif (children !== null) {\n\n\t\t\tchildren.map(function(entry) {\n\n\t\t\t\tlet kind = entry.kind || null;\n\t\t\t\tif (kind === 't1') {\n\n\t\t\t\t\treturn {\n\t\t\t\t\t\ttype:        'comment',\n\t\t\t\t\t\ttitle:       'Comment',\n\t\t\t\t\t\turl:         null,\n\t\t\t\t\t\tauthor:      (entry.data.author         || '').trim(),\n\t\t\t\t\t\tdescription: (entry.data.body           || '').trim(),\n\t\t\t\t\t\trelevance:   (entry.data.score          || 0),\n\t\t\t\t\t\ttime:        (entry.data.created_utc    || null),\n\t\t\t\t\t\tdetail:      (entry.data.link_permalink || null),\n\t\t\t\t\t\tpreview:     null\n\t\t\t\t\t};\n\n\t\t\t\t} else if (kind === 't3') {\n\n\t\t\t\t\tlet img = null;\n\t\t\t\t\tlet url = entry.data.thumbnail || '';\n\n\t\t\t\t\tif (url.startsWith('https://') || url.startsWith('http://')) {\n\n\t\t\t\t\t\timg = {\n\t\t\t\t\t\t\turl:    url,\n\t\t\t\t\t\t\twidth:  entry.data.thumbnail_width  || 128,\n\t\t\t\t\t\t\theight: entry.data.thumbnail_height || 128\n\t\t\t\t\t\t};\n\n\t\t\t\t\t}\n\n\t\t\t\t\treturn {\n\t\t\t\t\t\ttype:        'link',\n\t\t\t\t\t\ttitle:       (entry.data.title       || '').trim(),\n\t\t\t\t\t\turl:         (entry.data.url         || null),\n\t\t\t\t\t\tauthor:      (entry.data.author      || '').trim(),\n\t\t\t\t\t\tdescription: (entry.data.selftext    || '').trim(),\n\t\t\t\t\t\trelevance:   (entry.data.score       || 0),\n\t\t\t\t\t\ttime:        (entry.data.created_utc || null),\n\t\t\t\t\t\tdetail:      (entry.data.permalink   || null),\n\t\t\t\t\t\tpreview:     img\n\t\t\t\t\t};\n\n\t\t\t\t}\n\n\t\t\t}).filter(function(entry) {\n\n\t\t\t\tif (entry.url !== null) {\n\n\t\t\t\t\tlet found = filtered.find(other => other.url === entry.url);\n\t\t\t\t\tif (found === undefined) {\n\t\t\t\t\t\tfiltered.push(entry);\n\t\t\t\t\t}\n\n\t\t\t\t} else {\n\n\t\t\t\t\tfiltered.push(entry);\n\n\t\t\t\t}\n\n\t\t\t});\n\n\t\t}\n\n\t\tdata.filtered = filtered;\n\n\t\treturn data;\n\n\t}",
+			"chunk": "function(data) {\n\n\t\tlet filtered = [];\n\t\tlet children = JSON.query(data.result, 'data > children');\n\n\t\tif (children !== null) {\n\n\t\t\tchildren.map(function(entry) {\n\n\t\t\t\tlet kind = entry.kind || null;\n\t\t\t\tif (kind === 't1') {\n\n\t\t\t\t\treturn {\n\t\t\t\t\t\ttype:        'comment',\n\t\t\t\t\t\ttitle:       'Comment',\n\t\t\t\t\t\turl:         null,\n\t\t\t\t\t\tauthor:      (entry.data.author         || '').trim(),\n\t\t\t\t\t\tdescription: (entry.data.body           || '').trim(),\n\t\t\t\t\t\trelevance:   (entry.data.score          || 0),\n\t\t\t\t\t\ttime:        (entry.data.created_utc    || null),\n\t\t\t\t\t\tdetail:      (entry.data.link_permalink || null),\n\t\t\t\t\t\tpreview:     null\n\t\t\t\t\t};\n\n\t\t\t\t} else if (kind === 't3') {\n\n\t\t\t\t\tlet img = null;\n\t\t\t\t\tlet url = entry.data.thumbnail || '';\n\n\t\t\t\t\tif (url.startsWith('https://') || url.startsWith('http://')) {\n\n\t\t\t\t\t\timg = {\n\t\t\t\t\t\t\turl:    url,\n\t\t\t\t\t\t\twidth:  entry.data.thumbnail_width  || 128,\n\t\t\t\t\t\t\theight: entry.data.thumbnail_height || 128\n\t\t\t\t\t\t};\n\n\t\t\t\t\t}\n\n\t\t\t\t\treturn {\n\t\t\t\t\t\ttype:        'link',\n\t\t\t\t\t\ttitle:       (entry.data.title       || '').trim(),\n\t\t\t\t\t\turl:         (entry.data.url         || null),\n\t\t\t\t\t\tauthor:      (entry.data.author      || '').trim(),\n\t\t\t\t\t\tdescription: (entry.data.selftext    || '').trim(),\n\t\t\t\t\t\trelevance:   (entry.data.score       || 0),\n\t\t\t\t\t\ttime:        (entry.data.created_utc || null),\n\t\t\t\t\t\tdetail:      (entry.data.permalink   || null),\n\t\t\t\t\t\tpreview:     img\n\t\t\t\t\t};\n\n\t\t\t\t}\n\n\t\t\t}).filter(function(entry) {\n\n\t\t\t\tif (entry.url !== null) {\n\n\t\t\t\t\tlet found = filtered.find(other => other.url === entry.url);\n\t\t\t\t\tif (found === undefined) {\n\t\t\t\t\t\tfiltered.push(entry);\n\t\t\t\t\t}\n\n\t\t\t\t} else {\n\n\t\t\t\t\tfiltered.push(entry);\n\n\t\t\t\t}\n\n\t\t\t});\n\n\t\t}\n\n\t\tdata.filtered = filtered;\n\n\t\treturn data;\n\n\t}",
+			"type": "function",
 			"hash": "ae99f667",
 			"parameters": [
 				{
@@ -71,7 +73,8 @@
 			"values": []
 		},
 		"_render": {
-			"body": "function(data) {\n\n\t\tlet rendered = [];\n\n\t\tdata.filtered.forEach(entry => {\n\n\t\t\tlet chunk = [];\n\n\t\t\tif (entry.type === 'link') {\n\n\t\t\t\tlet url         = entry.url         || null;\n\t\t\t\tlet description = entry.description || '(no description)';\n\t\t\t\tlet detail      = entry.detail      || null;\n\t\t\t\tlet preview     = entry.preview     || null;\n\n\t\t\t\tchunk.push('<b>');\n\n\t\t\t\tif (preview !== null) {\n\t\t\t\t\tchunk.push('\\t<img src=\"' + preview.url + '\" width=\"' + preview.width + '\" height=\"' + preview.height + '\">');\n\t\t\t\t}\n\n\t\t\t\tif (url !== null) {\n\t\t\t\t\tchunk.push('\\t<a href=\"' + entry.url + '\">' + entry.title + '</a>');\n\t\t\t\t} else if (detail !== null) {\n\t\t\t\t\tchunk.push('\\t<a href=\"' + entry.detail + '\">' + entry.title + '</a>');\n\t\t\t\t} else {\n\t\t\t\t\tchunk.push('\\t' + entry.title);\n\t\t\t\t}\n\n\t\t\t\tchunk.push('</b>');\n\n\t\t\t\tchunk.push('<p>');\n\t\t\t\tchunk.push('\\t' + description);\n\t\t\t\tchunk.push('</p>');\n\n\t\t\t\tchunk.push('<div>');\n\t\t\t\tchunk.push('\\t<small>relevance: ' + entry.relevance + '</small>');\n\t\t\t\tchunk.push('\\t<small>author: <a href=\"https://reddit.com/u/' + entry.author + '\">' + entry.author + '</a></small>');\n\t\t\t\tchunk.push('</div>');\n\n\t\t\t}\n\n\t\t\trendered.push(chunk.join('\\n'));\n\n\t\t});\n\n\n\t\tdata.rendered = rendered;\n\n\t\treturn rendered;\n\n\t}",
+			"chunk": "function(data) {\n\n\t\tlet rendered = [];\n\n\t\tdata.filtered.forEach(entry => {\n\n\t\t\tlet chunk = [];\n\n\t\t\tif (entry.type === 'link') {\n\n\t\t\t\tlet url         = entry.url         || null;\n\t\t\t\tlet description = entry.description || '(no description)';\n\t\t\t\tlet detail      = entry.detail      || null;\n\t\t\t\tlet preview     = entry.preview     || null;\n\n\t\t\t\tchunk.push('<b>');\n\n\t\t\t\tif (preview !== null) {\n\t\t\t\t\tchunk.push('\\t<img src=\"' + preview.url + '\" width=\"' + preview.width + '\" height=\"' + preview.height + '\">');\n\t\t\t\t}\n\n\t\t\t\tif (url !== null) {\n\t\t\t\t\tchunk.push('\\t<a href=\"' + entry.url + '\">' + entry.title + '</a>');\n\t\t\t\t} else if (detail !== null) {\n\t\t\t\t\tchunk.push('\\t<a href=\"' + entry.detail + '\">' + entry.title + '</a>');\n\t\t\t\t} else {\n\t\t\t\t\tchunk.push('\\t' + entry.title);\n\t\t\t\t}\n\n\t\t\t\tchunk.push('</b>');\n\n\t\t\t\tchunk.push('<p>');\n\t\t\t\tchunk.push('\\t' + description);\n\t\t\t\tchunk.push('</p>');\n\n\t\t\t\tchunk.push('<div>');\n\t\t\t\tchunk.push('\\t<small>relevance: ' + entry.relevance + '</small>');\n\t\t\t\tchunk.push('\\t<small>author: <a href=\"https://reddit.com/u/' + entry.author + '\">' + entry.author + '</a></small>');\n\t\t\t\tchunk.push('</div>');\n\n\t\t\t}\n\n\t\t\trendered.push(chunk.join('\\n'));\n\n\t\t});\n\n\n\t\tdata.rendered = rendered;\n\n\t\treturn rendered;\n\n\t}",
+			"type": "function",
 			"hash": "e63875ba",
 			"parameters": [
 				{
@@ -92,6 +95,7 @@
 	"errors": [],
 	"result": {
 		"constructor": {
+			"type": "function",
 			"body": "function(main) {\n\n\t\tthis.main    = main         || null;\n\t\tthis.bot     = main.bot     || null;\n\t\tthis.scraper = main.scraper || null;\n\n\n\t\tthis.deserialize(_BLOB);\n\n\t}",
 			"hash": "265646b6",
 			"parameters": [
@@ -102,7 +106,7 @@
 				}
 			]
 		},
-		"settings": {},
+		"states": {},
 		"properties": {
 			"main": {
 				"chunk": "this.main    = main         || null;",
@@ -136,8 +140,8 @@
 		"events": {},
 		"methods": {
 			"deserialize": {
-				"body": "function(blob) {\n\n\t\t\tif (blob.intents instanceof Array) {\n\n\t\t\t\tlet bot = this.bot || null;\n\t\t\t\tif (bot !== null) {\n\n\t\t\t\t\tfor (let i = 0, il = blob.intents.length; i < il; i++) {\n\t\t\t\t\t\tbot.addIntent(new _Intent(blob.intents[i]));\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\t\t\t}\n\n\n\t\t}",
-				"chunk": "\t\tdeserialize: function(blob) {",
+				"chunk": "function(blob) {\n\n\t\t\tif (blob.intents instanceof Array) {\n\n\t\t\t\tlet bot = this.bot || null;\n\t\t\t\tif (bot !== null) {\n\n\t\t\t\t\tfor (let i = 0, il = blob.intents.length; i < il; i++) {\n\t\t\t\t\t\tbot.addIntent(new _Intent(blob.intents[i]));\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\t\t\t}\n\n\n\t\t}",
+				"type": "function",
 				"hash": "8f2f5e8f",
 				"parameters": [
 					{
@@ -153,8 +157,8 @@
 				]
 			},
 			"serialize": {
-				"body": "function() {\n\n\t\t\treturn {\n\t\t\t\t'constructor': 'app.plugin.Reddit',\n\t\t\t\t'arguments':   []\n\t\t\t};\n\n\t\t}",
-				"chunk": "\t\tserialize: function() {",
+				"chunk": "function() {\n\n\t\t\treturn {\n\t\t\t\t'constructor': 'app.plugin.Reddit',\n\t\t\t\t'arguments':   []\n\t\t\t};\n\n\t\t}",
+				"type": "function",
 				"hash": "a857f0d1",
 				"parameters": [],
 				"values": [
@@ -169,8 +173,8 @@
 				]
 			},
 			"can": {
-				"body": "function(url) {\n\n\t\t\turl = typeof url === 'string' ? url : null;\n\n\n\t\t\tif (url !== null) {\n\n\t\t\t\tlet result = false;\n\n\t\t\t\tfor (let u = 0, ul = _URLS.length; u < ul; u++) {\n\n\t\t\t\t\tif (url.startsWith(_URLS[u])) {\n\t\t\t\t\t\tresult = true;\n\t\t\t\t\t\tbreak;\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\t\t\t\treturn result;\n\n\t\t\t}\n\n\n\t\t\treturn false;\n\n\t\t}",
-				"chunk": "\t\tcan: function(url) {",
+				"chunk": "function(url) {\n\n\t\t\turl = typeof url === 'string' ? url : null;\n\n\n\t\t\tif (url !== null) {\n\n\t\t\t\tlet result = false;\n\n\t\t\t\tfor (let u = 0, ul = _URLS.length; u < ul; u++) {\n\n\t\t\t\t\tif (url.startsWith(_URLS[u])) {\n\t\t\t\t\t\tresult = true;\n\t\t\t\t\t\tbreak;\n\t\t\t\t\t}\n\n\t\t\t\t}\n\n\t\t\t\treturn result;\n\n\t\t\t}\n\n\n\t\t\treturn false;\n\n\t\t}",
+				"type": "function",
 				"hash": "3adeb64c",
 				"parameters": [
 					{
@@ -194,8 +198,8 @@
 				]
 			},
 			"browse": {
-				"body": "function(data) {\n\n\t\t\tdata = data instanceof Object ? data : {};\n\n\n\t\t\tlet scraper = this.scraper;\n\t\t\tlet promise = Promise.all(_queries(data).map(function(query) {\n\t\t\t\treturn scraper.query(query);\n\t\t\t}));\n\n\t\t\tpromise.then(results => results.map(_parse));\n\t\t\tpromise.then(results => results.map(_filter));\n\t\t\tpromise.then(results => results.map(_render));\n\n\n\t\t\treturn promise;\n\n\t\t}",
-				"chunk": "\t\tbrowse: function(data) {",
+				"chunk": "function(data) {\n\n\t\t\tdata = data instanceof Object ? data : {};\n\n\n\t\t\tlet scraper = this.scraper;\n\t\t\tlet promise = Promise.all(_queries(data).map(function(query) {\n\t\t\t\treturn scraper.query(query);\n\t\t\t}));\n\n\t\t\tpromise.then(results => results.map(_parse));\n\t\t\tpromise.then(results => results.map(_filter));\n\t\t\tpromise.then(results => results.map(_render));\n\n\n\t\t\treturn promise;\n\n\t\t}",
+				"type": "function",
 				"hash": "9185638e",
 				"parameters": [
 					{
@@ -214,8 +218,8 @@
 				]
 			},
 			"search": {
-				"body": "function(data) {\n\n\t\t\tdata = data instanceof Object ? data : {};\n\n\n\t\t\tlet scraper = this.scraper;\n\t\t\tlet promise = Promise.all(_queries(data).map(function(query) {\n\t\t\t\treturn scraper.query(query);\n\t\t\t}));\n\n\t\t\tpromise.then(results => results.map(_parse));\n\t\t\tpromise.then(results => results.map(_filter));\n\t\t\tpromise.then(results => results.map(_render));\n\n\n\t\t\treturn promise;\n\n\t\t}",
-				"chunk": "\t\tsearch: function(data) {",
+				"chunk": "function(data) {\n\n\t\t\tdata = data instanceof Object ? data : {};\n\n\n\t\t\tlet scraper = this.scraper;\n\t\t\tlet promise = Promise.all(_queries(data).map(function(query) {\n\t\t\t\treturn scraper.query(query);\n\t\t\t}));\n\n\t\t\tpromise.then(results => results.map(_parse));\n\t\t\tpromise.then(results => results.map(_filter));\n\t\t\tpromise.then(results => results.map(_render));\n\n\n\t\t\treturn promise;\n\n\t\t}",
+				"type": "function",
 				"hash": "9185638e",
 				"parameters": [
 					{
