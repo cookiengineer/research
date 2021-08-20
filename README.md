@@ -1,9 +1,10 @@
 
-# Research (Work in Progress)
+# Research (Prototype)
 
-brought to you as libre software with joy and pride by [Artificial Engineering](http://artificial.engineering).
+This prototype is now out-of-date, archived and will not be maintained
+anymore. The learnings of this project have evolved into the peer-to-peer
+[Tholian Stealth Browser](https://github.com/tholian-network/stealth).
 
-Support our libre Bot Cloud via BTC [1CamMuvrFU1QAMebPoDsL3JrioVDoxezY2](bitcoin:1CamMuvrFU1QAMebPoDsL3JrioVDoxezY2?amount=0.5&label=lychee.js%20Support).
 
 
 
@@ -48,11 +49,6 @@ and has a zero-unnecessary-dependency philosophy.
 
 ## Installation
 
-For now, we don't have ready-to-use binaries. This project is still in
-alpha, but soon we may have some ready for you in the
-[releases](https://github.com/Artificial-Engineering/research/releases)
-section.
-
 Research is a project made with [lychee.js](https://lychee.js.org).
 
 It is automatically built and deployed to GitHub using the following
@@ -93,7 +89,7 @@ nw.js SDK and execute it in Project Research's root folder:
 - Do this in your Terminal:
 
 ```bash
-git clone https://github.com/Artificial-Engineering/research.git;
+git clone https://github.com/cookiengineer/research.git;
 
 cd ./research;
 nw .;
@@ -112,17 +108,6 @@ nw .;
 - `sort by relevance`
 - `sort by votes` or `sort by likes`
 - `sort by time` or `sort by date`
-
-
-## TODO
-
-- app.interface.Intent needs `time` support (from x to y? from the last x weeks/days/months?)
-- app.plugin.Reddit needs `time` support
-- Figure out how to influence Rendering
-
-- Browse State > Reddit Plugin > Reddit Result?
-- Maybe some article class="reddit" or so?
-- Better architecture would be using Polyfillr Components, so `<reddit-article>` would just inherit correctly
 
 
 ## License
